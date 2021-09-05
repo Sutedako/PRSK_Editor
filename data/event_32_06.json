@@ -1,0 +1,7154 @@
+{
+  "m_GameObject": null,
+  "m_Enabled": 1,
+  "m_Script": "ObjectPointer(file_id=0, path_id=351856902256450410)",
+  "m_Name": "event_32_06",
+  "ScenarioId": "event_32_06",
+  "AppearCharacters": [
+    {
+      "Character2dId": 13,
+      "CostumeType": "13tsukasa_unit"
+    },
+    {
+      "Character2dId": 14,
+      "CostumeType": "14emu_unit"
+    },
+    {
+      "Character2dId": 15,
+      "CostumeType": "15nene_unit"
+    },
+    {
+      "Character2dId": 16,
+      "CostumeType": "16rui_unit"
+    },
+    {
+      "Character2dId": 142,
+      "CostumeType": "sub_yuuka"
+    },
+    {
+      "Character2dId": 142,
+      "CostumeType": "sub_yuukablack"
+    },
+    {
+      "Character2dId": 71,
+      "CostumeType": "sub_nenedayo"
+    }
+  ],
+  "FirstLayout": [],
+  "FirstBgm": "bgm00021",
+  "FirstBackground": "bg_d001501",
+  "Snippets": [
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 0,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 0,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 1,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 2,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 3,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 1,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 2,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 4,
+      "Delay": 3.5
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 5,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 6,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 7,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 3,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 4,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 8,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 9,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 5,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 6,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 10,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 11,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 7,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 12,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 13,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 14,
+      "Delay": 0.5
+    },
+    {
+      "Action": 6,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 0,
+      "Delay": 0.0
+    },
+    {
+      "Action": 6,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 1,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 15,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 16,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 8,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 17,
+      "Delay": 5.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 9,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 18,
+      "Delay": 4.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 19,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 20,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 21,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 10,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 11,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 22,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 23,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 12,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 13,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 24,
+      "Delay": 4.5
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 25,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 26,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 14,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 15,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 27,
+      "Delay": 6.5
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 28,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 29,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 30,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 16,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 17,
+      "Delay": 0.0
+    },
+    {
+      "Action": 7,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 0,
+      "Delay": 0.0
+    },
+    {
+      "Action": 6,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 2,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 31,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 32,
+      "Delay": 0.0
+    },
+    {
+      "Action": 6,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 3,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 33,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 18,
+      "Delay": 0.0
+    },
+    {
+      "Action": 7,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 1,
+      "Delay": 0.5
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 19,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 20,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 21,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 22,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 23,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 24,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 25,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 34,
+      "Delay": 4.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 26,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 35,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 27,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 28,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 36,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 29,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 30,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 37,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 38,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 31,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 39,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 40,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 32,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 33,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 34,
+      "Delay": 0.0
+    },
+    {
+      "Action": 7,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 2,
+      "Delay": 0.0
+    },
+    {
+      "Action": 6,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 4,
+      "Delay": 0.0
+    },
+    {
+      "Action": 7,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 3,
+      "Delay": 0.0
+    },
+    {
+      "Action": 6,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 5,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 41,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 42,
+      "Delay": 0.0
+    },
+    {
+      "Action": 6,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 6,
+      "Delay": 0.0
+    },
+    {
+      "Action": 6,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 7,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 35,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 43,
+      "Delay": 6.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 36,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 44,
+      "Delay": 3.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 37,
+      "Delay": 0.0
+    },
+    {
+      "Action": 6,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 8,
+      "Delay": 0.0
+    },
+    {
+      "Action": 6,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 9,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 45,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 46,
+      "Delay": 0.0
+    },
+    {
+      "Action": 6,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 10,
+      "Delay": 0.0
+    },
+    {
+      "Action": 6,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 11,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 38,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 39,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 47,
+      "Delay": 1.5
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 40,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 48,
+      "Delay": 9.5
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 41,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 49,
+      "Delay": 5.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 42,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 43,
+      "Delay": 0.0
+    },
+    {
+      "Action": 7,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 4,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 44,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 50,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 51,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 45,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 52,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 53,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 54,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 46,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 55,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 56,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 47,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 57,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 48,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 49,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 58,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 59,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 50,
+      "Delay": 0.0
+    },
+    {
+      "Action": 6,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 12,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 60,
+      "Delay": 0.0
+    },
+    {
+      "Action": 6,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 13,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 61,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 62,
+      "Delay": 0.0
+    },
+    {
+      "Action": 6,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 14,
+      "Delay": 0.20000000298023224
+    },
+    {
+      "Action": 7,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 5,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 63,
+      "Delay": 0.0
+    },
+    {
+      "Action": 7,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 6,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 64,
+      "Delay": 2.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 65,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 51,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 52,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 66,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 67,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 53,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 68,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 69,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 70,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 54,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 55,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 71,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 72,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 73,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 56,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 74,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 75,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 57,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 58,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 59,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 76,
+      "Delay": 5.0
+    },
+    {
+      "Action": 7,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 7,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 60,
+      "Delay": 1.5
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 61,
+      "Delay": 0.0
+    },
+    {
+      "Action": 7,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 8,
+      "Delay": 0.0
+    },
+    {
+      "Action": 6,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 15,
+      "Delay": 0.0
+    },
+    {
+      "Action": 7,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 9,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 77,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 78,
+      "Delay": 0.0
+    },
+    {
+      "Action": 6,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 16,
+      "Delay": 1.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 62,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 79,
+      "Delay": 3.0
+    },
+    {
+      "Action": 6,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 17,
+      "Delay": 3.0
+    },
+    {
+      "Action": 7,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 10,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 63,
+      "Delay": 2.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 80,
+      "Delay": 5.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 81,
+      "Delay": 9.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 82,
+      "Delay": 0.0
+    },
+    {
+      "Action": 6,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 18,
+      "Delay": 0.0
+    },
+    {
+      "Action": 7,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 11,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 83,
+      "Delay": 0.4000000059604645
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 84,
+      "Delay": 1.0
+    },
+    {
+      "Action": 7,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 12,
+      "Delay": 1.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 85,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 64,
+      "Delay": 0.0
+    },
+    {
+      "Action": 7,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 13,
+      "Delay": 0.0
+    },
+    {
+      "Action": 6,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 19,
+      "Delay": 2.0
+    },
+    {
+      "Action": 6,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 20,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 86,
+      "Delay": 0.0
+    },
+    {
+      "Action": 6,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 21,
+      "Delay": 0.0
+    },
+    {
+      "Action": 6,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 22,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 87,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 65,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 88,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 89,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 66,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 90,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 91,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 92,
+      "Delay": 0.20000000298023224
+    },
+    {
+      "Action": 6,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 23,
+      "Delay": 0.30000001192092896
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 93,
+      "Delay": 0.4000000059604645
+    },
+    {
+      "Action": 7,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 14,
+      "Delay": 0.30000001192092896
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 67,
+      "Delay": 0.0
+    },
+    {
+      "Action": 7,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 15,
+      "Delay": 0.5
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 68,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 94,
+      "Delay": 2.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 95,
+      "Delay": 3.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 96,
+      "Delay": 6.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 97,
+      "Delay": 7.5
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 69,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 98,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 99,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 100,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 70,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 101,
+      "Delay": 3.5
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 102,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 103,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 71,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 104,
+      "Delay": 4.5
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 72,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 105,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 106,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 73,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 107,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 108,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 109,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 74,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 110,
+      "Delay": 5.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 111,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 112,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 75,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 113,
+      "Delay": 2.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 114,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 115,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 76,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 116,
+      "Delay": 4.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 117,
+      "Delay": 7.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 118,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 119,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 120,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 77,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 78,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 121,
+      "Delay": 0.0
+    },
+    {
+      "Action": 7,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 16,
+      "Delay": 0.0
+    },
+    {
+      "Action": 7,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 17,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 122,
+      "Delay": 3.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 79,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 123,
+      "Delay": 3.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 124,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 125,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 126,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 80,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 127,
+      "Delay": 3.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 128,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 129,
+      "Delay": 0.0
+    },
+    {
+      "Action": 7,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 18,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 130,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 131,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 81,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 82,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 132,
+      "Delay": 3.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 133,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 134,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 135,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 136,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 83,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 84,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 137,
+      "Delay": 4.5
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 85,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 138,
+      "Delay": 5.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 139,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 140,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 141,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 142,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 86,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 143,
+      "Delay": 3.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 87,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 144,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 145,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 146,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 88,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 147,
+      "Delay": 3.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 148,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 149,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 89,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 150,
+      "Delay": 1.2999999523162842
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 151,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 152,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 153,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 90,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 91,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 92,
+      "Delay": 0.0
+    },
+    {
+      "Action": 7,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 19,
+      "Delay": 1.0
+    },
+    {
+      "Action": 6,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 24,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 154,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 155,
+      "Delay": 0.0
+    }
+  ],
+  "TalkData": [
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 13
+        }
+      ],
+      "WindowDisplayName": "\u4eba\u9b5a\u738b\u5b50",
+      "Body": "\u300e\u3046\u3046\u2026\u2026\u307e\u3055\u304b\u30aa\u30ec\u9054\u304c\u4eba\u9593\u306b\u6355\u307e\u3063\u3066\u3057\u307e\u3046\u3068\u306f\u300f",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [],
+      "Voices": [
+        {
+          "Character2dId": 13,
+          "VoiceId": "voice_sc_ev_wonder_05_06_01_13",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 14
+        }
+      ],
+      "WindowDisplayName": "\u4e0b\u306e\u4eba\u9b5a\u59eb",
+      "Body": "\u300e\u3046\u3048\uff5e\u3093\uff01\u3000\u3069\u3046\u3057\u3088\u3046\uff01\u300f",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [],
+      "Voices": [
+        {
+          "Character2dId": 14,
+          "VoiceId": "voice_sc_ev_wonder_05_06_02_14",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 13
+        }
+      ],
+      "WindowDisplayName": "\u4eba\u9b5a\u738b\u5b50",
+      "Body": "\u300e\u306a\u3093\u3068\u304b\u8131\u51fa\u3059\u308b\u65b9\u6cd5\u3092\u8003\u3048\u306a\u304f\u3066\u306f\u2026\u2026\uff01\n\u305d\u3046\u3060\u3001\u3042\u3063\u3061\u306e\u7a93\u304c\u3042\u308b\u307b\u3046\u306b\u9019\u3063\u3066\u884c\u3063\u3066\u307f\u3088\u3046\uff01\u300f",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 13,
+          "MotionName": "m-tsukasa-nod04",
+          "FacialName": "face_angry_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 13,
+          "VoiceId": "voice_sc_ev_wonder_05_06_03_13",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 13
+        }
+      ],
+      "WindowDisplayName": "\u53f8",
+      "Body": "\uff08\u2026\u2026\u3093\uff1f\n\u3053\u3053\u3067\u5be7\u3005\u306e\u30b7\u30fc\u30f3\u306b\u5207\u308a\u66ff\u308f\u308b\u306f\u305a\u3060\u304c\u3001\n\u51fa\u3066\u3053\u306a\u3044\u305e\u2026\u2026\uff1f\uff09",
+      "TalkTention": 0,
+      "LipSync": 2,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 13,
+          "MotionName": "m-tsukasa-tilthead01",
+          "FacialName": "face_smallmouth_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 13,
+          "VoiceId": "voice_sc_ev_wonder_05_06_04_13",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 13
+        }
+      ],
+      "WindowDisplayName": "\u53f8",
+      "Body": "\uff08\u307e\u3055\u304b\u3001\u4f55\u304b\u30c8\u30e9\u30d6\u30eb\u304b\u2026\u2026\uff01\uff1f\uff09",
+      "TalkTention": 0,
+      "LipSync": 2,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 13,
+          "MotionName": "m-tsukasa-angry01",
+          "FacialName": "face_smallmouth_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 13,
+          "VoiceId": "voice_sc_ev_wonder_05_06_05_13",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 15
+        }
+      ],
+      "WindowDisplayName": "\u4eba\u9b5a\u59eb",
+      "Body": "\u300e\u2026\u2026\u306f\u3041\u3001\u306f\u3041\u3001\u306f\u3041\u300f",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [],
+      "Voices": [
+        {
+          "Character2dId": 15,
+          "VoiceId": "voice_sc_ev_wonder_05_06_06_15",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 15
+        }
+      ],
+      "WindowDisplayName": "\u4eba\u9b5a\u59eb",
+      "Body": "\u300e\u3069\u3046\u3057\u3088\u3046\u3001\u3075\u305f\u308a\u3068\u3082\u3001\u6355\u307e\u3063\u3061\u3083\u3063\u305f\u2026\u2026\uff01\uff01\u300f",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 15,
+          "MotionName": "w-normal-trouble01",
+          "FacialName": "face_sad_02",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 15,
+          "VoiceId": "voice_sc_ev_wonder_05_06_07_15",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 13
+        }
+      ],
+      "WindowDisplayName": "\u53f8",
+      "Body": "\uff08\u304a\u304a\u3001\u51fa\u3066\u6765\u305f\u304b\uff01\n\u3088\u3057\u3001\u30aa\u30ec\u9054\u306f\u4e0a\u624b\u306b\u30cf\u30b1\u3066\u2026\u2026\uff09",
+      "TalkTention": 0,
+      "LipSync": 2,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 13,
+          "MotionName": "m-tsukasa-nod01",
+          "FacialName": "face_smile_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 13,
+          "VoiceId": "voice_sc_ev_wonder_05_06_08_13",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 1,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 14
+        }
+      ],
+      "WindowDisplayName": "\u3048\u3080",
+      "Body": "\u3042\u308c\u308c\uff1f\u3000\u985e\u304f\u3093\u3001\u30cd\u30cd\u30ed\u30dc\u3061\u3083\u3093\u306a\u3093\u3067\u3053\u3053\u306b\u3044\u308b\u306e\uff1f\n\u6b21\u306e\u30b7\u30fc\u30f3\u306e\u6e96\u5099\u3057\u306a\u3044\u3068\u2026\u2026",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 14,
+          "MotionName": "w-cute-tilthead08",
+          "FacialName": "face_ncsmallmouth_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 14,
+          "VoiceId": "voice_sc_ev_wonder_05_06_09_14",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 16
+        }
+      ],
+      "WindowDisplayName": "\u985e",
+      "Body": "\u305d\u308c\u304c\u3001\u5c11\u3057\u56f0\u3063\u305f\u3053\u3068\u306b\u306a\u3063\u3066\u3057\u307e\u3063\u3066\u306d\u3002\n\u5b50\u4f9b\u306e\u3044\u305f\u305a\u3089\u3067\u3001\u30cd\u30cd\u30ed\u30dc\u304c\u4f5c\u52d5\u3057\u306a\u304f\u306a\u3063\u3066\u3057\u307e\u3063\u305f\u3093\u3060",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 16,
+          "MotionName": "m-cool-nod01",
+          "FacialName": "face_trouble_02",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 16,
+          "VoiceId": "voice_sc_ev_wonder_05_06_10_16",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 13
+        }
+      ],
+      "WindowDisplayName": "\u53f8",
+      "Body": "\u4f55\u3043\uff01\uff1f",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [],
+      "Voices": [
+        {
+          "Character2dId": 13,
+          "VoiceId": "voice_sc_ev_wonder_05_06_11_13",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 13
+        }
+      ],
+      "WindowDisplayName": "\u53f8",
+      "Body": "\u3069\u3001\u3069\u3046\u3059\u308b\u3093\u3060\uff01\uff1f\n\u6700\u5f8c\u306e\u30b7\u30fc\u30f3\u306f\u30cd\u30cd\u30ed\u30dc\u304c\u3044\u306a\u3051\u308c\u3070\u2026\u2026",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 13,
+          "MotionName": "m-tsukasa-tilthead03",
+          "FacialName": "face_surprise_02",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 13,
+          "VoiceId": "voice_sc_ev_wonder_05_06_12_13",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 16
+        }
+      ],
+      "WindowDisplayName": "\u985e",
+      "Body": "\u5be7\u3005\u304c\u4fee\u7406\u306e\u3042\u3044\u3060\u3001\u30b7\u30fc\u30f3\u3092\u3064\u306a\u3050\u3068\u8a00\u3063\u3066\u304f\u308c\u305f",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 16,
+          "MotionName": "m-cool-nod01",
+          "FacialName": "face_sharp_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 16,
+          "VoiceId": "voice_sc_ev_wonder_05_06_13_16",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 16
+        }
+      ],
+      "WindowDisplayName": "\u985e",
+      "Body": "\u50d5\u306f\u6700\u901f\u3067\u7d42\u308f\u308b\u3088\u3046\u4fee\u7406\u3092\u9032\u3081\u308b\u304b\u3089\u3001\n\u3075\u305f\u308a\u3068\u3082\u3001\u3067\u304d\u308b\u9650\u308a\u5be7\u3005\u306e\u30b5\u30dd\u30fc\u30c8\u3092\u3057\u3066\u3042\u3052\u3066\u307b\u3057\u3044",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 16,
+          "MotionName": "m-tsukasa-nod02",
+          "FacialName": "face_sharp_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 16,
+          "VoiceId": "voice_sc_ev_wonder_05_06_14_16",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 14
+        }
+      ],
+      "WindowDisplayName": "\u3048\u3080",
+      "Body": "\u3046\u3093\u3063\uff01\u3000\u308f\u304b\u3063\u305f\u3063\uff01",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 14,
+          "MotionName": "w-cute-glad06",
+          "FacialName": "face_smile_04",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 14,
+          "VoiceId": "voice_sc_ev_wonder_05_06_15_14",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 14
+        }
+      ],
+      "WindowDisplayName": "\u3048\u3080",
+      "Body": "\u3067\u3001\u3067\u3082\u3067\u3082\u3069\u3046\u3057\u3088\u3046\uff01\n\u3042\u305f\u3057\u9054\u306e\u51fa\u756a\u306f\u5be7\u3005\u3061\u3083\u3093\u306e\u30b7\u30fc\u30f3\u306e\u3042\u3068\u3060\u304b\u3089\u3001\n\u4eca\u51fa\u3066\u3044\u3063\u3061\u3083\u3046\u3068\u5909\u3060\u3057\u2026\u2026\uff01",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 14,
+          "MotionName": "w-happy-glad01",
+          "FacialName": "face_sad_02",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 14,
+          "VoiceId": "voice_sc_ev_wonder_05_06_16_14",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 13
+        }
+      ],
+      "WindowDisplayName": "\u53f8",
+      "Body": "\u305d\u3046\u3060\u306a\u2026\u2026\u3053\u3053\u304b\u3089\u306f\u3059\u3050\u3001\n\u5be7\u3005\u304c\u85ac\u3092\u98f2\u3093\u3067\u5909\u8eab\u3059\u308b\u30b7\u30fc\u30f3\u306b\u306a\u308b",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 13,
+          "MotionName": "m-tsukasa-lookdown01",
+          "FacialName": "face_smallmouth_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 13,
+          "VoiceId": "voice_sc_ev_wonder_05_06_17_13",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 13
+        }
+      ],
+      "WindowDisplayName": "\u53f8",
+      "Body": "\u4f55\u304b\u624b\u52a9\u3051\u3067\u304d\u308c\u3070\u3044\u3044\u3093\u3060\u304c\u3001\u3069\u3046\u3059\u308c\u3070\u2026\u2026",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 13,
+          "MotionName": "m-tsukasa-nod02",
+          "FacialName": "face_sad_02",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 13,
+          "VoiceId": "voice_sc_ev_wonder_05_06_18_13",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 1,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 15
+        }
+      ],
+      "WindowDisplayName": "\u4eba\u9b5a\u59eb",
+      "Body": "\u300e\u3069\u3046\u3057\u3088\u3046\u2026\u2026\u308f\u305f\u3057\u3058\u3083\u3075\u305f\u308a\u3092\u52a9\u3051\u3089\u308c\u306a\u3044\u2026\u2026\u300f",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [],
+      "Voices": [
+        {
+          "Character2dId": 15,
+          "VoiceId": "voice_sc_ev_wonder_05_06_19_15",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 15
+        }
+      ],
+      "WindowDisplayName": "\u5be7\u3005",
+      "Body": "\uff08\u2026\u2026\u672c\u5f53\u306a\u3089\u3001\u3053\u3053\u3067\u3059\u3050\u306b\u3001\n\u3075\u305f\u308a\u3092\u52a9\u3051\u308b\u305f\u3081\u306b\u85ac\u3092\u98f2\u307e\u306a\u304d\u3083\u3044\u3051\u306a\u3044\uff09",
+      "TalkTention": 0,
+      "LipSync": 2,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 15,
+          "MotionName": "w-cute-nod02",
+          "FacialName": "face_sad_02",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 15,
+          "VoiceId": "voice_sc_ev_wonder_05_06_20_15",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 15
+        }
+      ],
+      "WindowDisplayName": "\u5be7\u3005",
+      "Body": "\uff08\u3067\u3082\u3001\u30cd\u30cd\u30ed\u30dc\u304c\u76f4\u308b\u307e\u3067\u3001\n\u6642\u9593\u3092\u304b\u305b\u304c\u306a\u304f\u3063\u3061\u3083\u2014\u2014\uff01\uff09",
+      "TalkTention": 0,
+      "LipSync": 2,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 15,
+          "MotionName": "w-animal-nod01",
+          "FacialName": "face_sharp_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 15,
+          "VoiceId": "voice_sc_ev_wonder_05_06_21_15",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 15
+        }
+      ],
+      "WindowDisplayName": "\u4eba\u9b5a\u59eb",
+      "Body": "\u300e\u2026\u2026\u3046\u3046\u3093\uff01\n\u5225\u306b\u3042\u3093\u306a\u3075\u305f\u308a\u3001\u3069\u3046\u306a\u3063\u3066\u3082\u304b\u307e\u308f\u306a\u3044\u300f",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 15,
+          "MotionName": "w-cute-shakehead02",
+          "FacialName": "face_angry_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 15,
+          "VoiceId": "voice_sc_ev_wonder_05_06_22_15",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 15
+        }
+      ],
+      "WindowDisplayName": "\u4eba\u9b5a\u59eb",
+      "Body": "\u300e\u308f\u305f\u3057\u304c\u3042\u308c\u3060\u3051\u5371\u306a\u3044\u3063\u3066\u8a00\u3063\u305f\u306e\u306b\u3001\n\u4eba\u9593\u306b\u8fd1\u3065\u3044\u305f\u308a\u3059\u308b\u304b\u3089\u2026\u2026\u300f",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 15,
+          "MotionName": "w-normal-nod01",
+          "FacialName": "face_angry_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 15,
+          "VoiceId": "voice_sc_ev_wonder_05_06_23_15",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 15
+        }
+      ],
+      "WindowDisplayName": "\u4eba\u9b5a\u59eb",
+      "Body": "\u300e\u2026\u2026\u3060\u3051\u3069\u300f",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 15,
+          "MotionName": "w-normal-trouble01",
+          "FacialName": "face_sad_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 15,
+          "VoiceId": "voice_sc_ev_wonder_05_06_24_15",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 15
+        }
+      ],
+      "WindowDisplayName": "\u4eba\u9b5a\u59eb",
+      "Body": "\u300e\u3075\u305f\u308a\u306e\u304a\u304b\u3052\u3067\u3001\u3044\u308d\u3093\u306a\u3053\u3068\u3092\u77e5\u308c\u305f\u306a\u300f",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 15,
+          "MotionName": "w-normal-tilthead01",
+          "FacialName": "face_smile_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 15,
+          "VoiceId": "voice_sc_ev_wonder_05_06_25_15",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 15
+        }
+      ],
+      "WindowDisplayName": "\u4eba\u9b5a\u59eb",
+      "Body": "\u300e\u4eba\u9593\u3082\u3001\u305d\u3093\u306a\u306b\u60aa\u3044\u30e4\u30c4\u3070\u3063\u304b\u308a\u3058\u3083\u306a\u3044\u3057\u3001\n\u4eba\u9593\u306e\u4f5c\u308b\u3054\u98ef\u3082\u7f8e\u5473\u3057\u304b\u3063\u305f\u3057\u2026\u2026\u300f",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 15,
+          "MotionName": "w-normal-tilthead0106",
+          "FacialName": "face_smile_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 15,
+          "VoiceId": "voice_sc_ev_wonder_05_06_26_15",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 15
+        }
+      ],
+      "WindowDisplayName": "\u4eba\u9b5a\u59eb",
+      "Body": "\u300e\u3075\u305f\u308a\u304c\u3044\u3066\u304f\u308c\u305f\u304b\u3089\u2014\u2014\u300f",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 15,
+          "MotionName": "w-animal-nod02",
+          "FacialName": "face_smile_09",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 15,
+          "VoiceId": "voice_sc_ev_wonder_05_06_27_15",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 0
+        }
+      ],
+      "WindowDisplayName": "\u5b50\u4f9b\u9054",
+      "Body": "\u304a\u304b\u30fc\u3055\u3093\u3001\u4eba\u9b5a\u738b\u5b50\u3069\u3046\u306a\u3063\u3061\u3083\u3046\u3093\u3060\u308d\u3046\uff1f",
+      "TalkTention": 0,
+      "LipSync": 0,
+      "MotionChangeFrom": 1,
+      "Motions": [],
+      "Voices": [],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 0
+        }
+      ],
+      "WindowDisplayName": "\u5b50\u4f9b\u9054",
+      "Body": "\u305f\u3059\u3051\u3066\u3042\u3052\u3066\uff5e\uff01",
+      "TalkTention": 0,
+      "LipSync": 0,
+      "MotionChangeFrom": 1,
+      "Motions": [],
+      "Voices": [],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 15
+        }
+      ],
+      "WindowDisplayName": "\u5be7\u3005",
+      "Body": "\uff08\u5c11\u3057\u3060\u3051\u3069\u3001\u306a\u3093\u3068\u304b\u6642\u9593\u3092\u7a3c\u3052\u3066\u308b\uff09",
+      "TalkTention": 0,
+      "LipSync": 2,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 15,
+          "MotionName": "w-normal-nod02",
+          "FacialName": "face_smile_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 15,
+          "VoiceId": "voice_sc_ev_wonder_05_06_28_15",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 15
+        }
+      ],
+      "WindowDisplayName": "\u5be7\u3005",
+      "Body": "\uff08\u3067\u3082\u3001\u3053\u3046\u3084\u3063\u3066\u30b0\u30eb\u30b0\u30eb\u8003\u3048\u3066\u308b\u6f14\u6280\u3060\u3051\u3058\u3083\u3001\n\u304a\u5ba2\u3055\u3093\u3082\u304a\u304b\u3057\u3044\u3063\u3066\u6c17\u3065\u3044\u3061\u3083\u3046\u3002\u3069\u3046\u3059\u308c\u3070\u2026\u2026\uff09",
+      "TalkTention": 0,
+      "LipSync": 2,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 15,
+          "MotionName": "w-normal-tilthead02",
+          "FacialName": "face_sad_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 15,
+          "VoiceId": "voice_sc_ev_wonder_05_06_29_15",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 142
+        }
+      ],
+      "WindowDisplayName": "\u5915\u590f",
+      "Body": "\u2026\u2026\u2026\u2026",
+      "TalkTention": 0,
+      "LipSync": 2,
+      "MotionChangeFrom": 1,
+      "Motions": [],
+      "Voices": [
+        {
+          "Character2dId": 142,
+          "VoiceId": "voice_sc_ev_wonder_05_06_30_127",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 15
+        }
+      ],
+      "WindowDisplayName": "\u5be7\u3005",
+      "Body": "\uff08\u3042\u2026\u2026\uff01\n\u98a8\u796d\u3055\u3093\u2026\u2026\uff01\uff09",
+      "TalkTention": 0,
+      "LipSync": 2,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 15,
+          "MotionName": "w-normal-tilthead05",
+          "FacialName": "face_smallmouth_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 15,
+          "VoiceId": "voice_sc_ev_wonder_05_06_31_15",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 15
+        }
+      ],
+      "WindowDisplayName": "\u5be7\u3005",
+      "Body": "\uff08\u2026\u2026\u98a8\u796d\u3055\u3093\u3060\u3063\u305f\u3089\u3001\n\u3053\u3093\u306a\u6642\u3001\u3069\u3046\u3059\u308b\u3093\u3060\u308d\u3046\uff1f\uff09",
+      "TalkTention": 0,
+      "LipSync": 2,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 15,
+          "MotionName": "w-normal-trouble02",
+          "FacialName": "face_sad_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 15,
+          "VoiceId": "voice_sc_ev_wonder_05_06_32_15",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 15
+        }
+      ],
+      "WindowDisplayName": "\u5be7\u3005",
+      "Body": "\uff08\u3042\u306e\u65e5\u3001\u308f\u305f\u3057\u304c\u898b\u305f\u4eba\u9b5a\u59eb\u3060\u3063\u305f\u3089\u2014\u2014\uff09",
+      "TalkTention": 0,
+      "LipSync": 2,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 15,
+          "MotionName": "w-cute-nod05",
+          "FacialName": "face_sad_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 15,
+          "VoiceId": "voice_sc_ev_wonder_05_06_33_15",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 1,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 142
+        }
+      ],
+      "WindowDisplayName": "\u4eba\u9b5a\u59eb",
+      "Body": "\u300e\u672a\u77e5\u306e\u4e16\u754c\u3078\u98db\u3073\u3053\u3080\u306e\u306f\u3068\u3066\u3082\u6016\u3044\u3051\u308c\u3069\u3001\n\u6050\u6016\u306b\u8ca0\u3051\u3066\u3069\u3053\u306b\u3082\u884c\u3051\u306a\u3044\u306e\u306f\u3001\u3082\u3063\u3068\u5acc\uff01\u300f",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 142,
+          "MotionName": "s-common-lookdown01",
+          "FacialName": "",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 142,
+          "VoiceId": "voice_sc_ev_wonder_05_02_11_127",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 142
+        }
+      ],
+      "WindowDisplayName": "\u4eba\u9b5a\u59eb",
+      "Body": "\u300e\u79c1\u306f\u3001\u9678\u306b\u884c\u304f\u308f\uff01\u3000\u3042\u306e\u4eba\u306b\u4f1a\u3044\u306b\u2014\u2014\uff01\u300f",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [],
+      "Voices": [
+        {
+          "Character2dId": 142,
+          "VoiceId": "voice_sc_ev_wonder_05_02_12_127",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 142
+        }
+      ],
+      "WindowDisplayName": "\u4eba\u9b5a\u59eb",
+      "Body": "\u300e\u266a\u2014\u2014\u2014\u2014\uff01\u300f",
+      "TalkTention": 0,
+      "LipSync": 0,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 142,
+          "MotionName": "s-common-blushed01",
+          "FacialName": "",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 1,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 15
+        }
+      ],
+      "WindowDisplayName": "\u5be7\u3005",
+      "Body": "\uff08\u2026\u2026\u305d\u3046\u3060\uff01\uff09",
+      "TalkTention": 0,
+      "LipSync": 2,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 15,
+          "MotionName": "w-cute-nod04",
+          "FacialName": "face_surprise_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 15,
+          "VoiceId": "voice_sc_ev_wonder_05_06_34_15",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 15
+        }
+      ],
+      "WindowDisplayName": "\u5be7\u3005",
+      "Body": "\uff08\u308f\u305f\u3057\u306b\u306f\u3001\u3042\u306e\u6b4c\u304c\u3042\u308b\uff01\uff09",
+      "TalkTention": 0,
+      "LipSync": 2,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 15,
+          "MotionName": "w-cute-tilthead03",
+          "FacialName": "face_smile_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 15,
+          "VoiceId": "voice_sc_ev_wonder_05_06_35_15",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 15
+        }
+      ],
+      "WindowDisplayName": "\u4eba\u9b5a\u59eb",
+      "Body": "\u300e\u2026\u2026\u4eba\u9593\u306b\u7acb\u3061\u5411\u304b\u3046\u306e\u306f\u3001\u6016\u3044\u3002\n\u6355\u307e\u3063\u3066\u77e5\u3089\u306a\u3044\u5834\u6240\u306b\u58f2\u3089\u308c\u305f\u308a\u3001\n\u898b\u4e16\u7269\u306b\u3055\u308c\u305f\u308a\u3057\u305f\u3089\u3063\u3066\u601d\u3046\u3068\u2026\u2026\u6ce3\u304d\u305d\u3046\u306b\u306a\u308b\u300f",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 15,
+          "MotionName": "w-animal-fidget02",
+          "FacialName": "face_sad_02",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 15,
+          "VoiceId": "voice_sc_ev_wonder_05_06_36_15",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 15
+        }
+      ],
+      "WindowDisplayName": "\u4eba\u9b5a\u59eb",
+      "Body": "\u300e\u3067\u3082\u2014\u2014\u3075\u305f\u308a\u3092\u898b\u6368\u3066\u308b\u306a\u3093\u3066\u3001\u3067\u304d\u306a\u3044\uff01\u300f",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 15,
+          "MotionName": "w-cute-tilthead03",
+          "FacialName": "face_sharp_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 15,
+          "VoiceId": "voice_sc_ev_wonder_05_06_37_15",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 15
+        }
+      ],
+      "WindowDisplayName": "\u4eba\u9b5a\u59eb",
+      "Body": "\u300e\u3061\u3087\u3063\u3068\u3060\u3051\u3067\u3044\u3044\u304b\u3089\u52c7\u6c17\u3092\u3060\u3055\u306a\u304f\u3061\u3083\u300f",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 15,
+          "MotionName": "w-cute-tilthead07",
+          "FacialName": "face_sharp_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 15,
+          "VoiceId": "voice_sc_ev_wonder_05_06_38_15",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 15
+        }
+      ],
+      "WindowDisplayName": "\u4eba\u9b5a\u59eb",
+      "Body": "\u300e\u3072\u3068\u308a\u3067\u9678\u306b\u5411\u304b\u3063\u305f\u3001\u4eba\u9b5a\u59eb\u307f\u305f\u3044\u306b\u2014\u2014\uff01\u300f",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 15,
+          "MotionName": "w-cute-forward02",
+          "FacialName": "face_sharp_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 15,
+          "VoiceId": "voice_sc_ev_wonder_05_06_39_15",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 15
+        }
+      ],
+      "WindowDisplayName": "\u4eba\u9b5a\u59eb",
+      "Body": "\u300e\u266a\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2026\u2026\u300f",
+      "TalkTention": 0,
+      "LipSync": 0,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 15,
+          "MotionName": "w-animal-nod01",
+          "FacialName": "face_closeeye_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 14
+        }
+      ],
+      "WindowDisplayName": "\u3048\u3080",
+      "Body": "\u3048\u3048\u3063\uff01\uff1f\n\u5be7\u3005\u3061\u3083\u3093\u3001\u6b4c\u3044\u3060\u3057\u305f\u3088\uff01",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [],
+      "Voices": [
+        {
+          "Character2dId": 14,
+          "VoiceId": "voice_sc_ev_wonder_05_06_40_14",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 13
+        }
+      ],
+      "WindowDisplayName": "\u53f8",
+      "Body": "\u4f55\uff01\uff1f\u3000\u4eca\u56de\u3001\u6b4c\u3046\u30b7\u30fc\u30f3\u306f\u306a\u3044\u306f\u305a\u3060\u305e\uff01\uff1f",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [],
+      "Voices": [
+        {
+          "Character2dId": 13,
+          "VoiceId": "voice_sc_ev_wonder_05_06_41_13",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 0
+        }
+      ],
+      "WindowDisplayName": "\u89b3\u5ba2",
+      "Body": "\u308f\u3041\u2026\u2026\uff01\u3000\u3068\u3063\u3066\u3082\u7d20\u6575\u306a\u6b4c\u2026\u2026\uff01",
+      "TalkTention": 0,
+      "LipSync": 0,
+      "MotionChangeFrom": 1,
+      "Motions": [],
+      "Voices": [],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 16
+        }
+      ],
+      "WindowDisplayName": "\u985e",
+      "Body": "\uff08\u307e\u3055\u304b\u5373\u8208\u3067\u6b4c\u307e\u3067\u2026\u2026\uff01\uff09",
+      "TalkTention": 0,
+      "LipSync": 2,
+      "MotionChangeFrom": 1,
+      "Motions": [],
+      "Voices": [
+        {
+          "Character2dId": 16,
+          "VoiceId": "voice_sc_ev_wonder_05_06_42_16",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 16
+        }
+      ],
+      "WindowDisplayName": "\u985e",
+      "Body": "\uff08\u3057\u304b\u3057\u3001\u30e1\u30ed\u30c7\u30a3\u30fc\u3084\u6b4c\u8a5e\u306f\u9055\u3046\u3051\u308c\u3069\u3001\u3053\u306e\u6b4c\u306f\u307e\u308b\u3067\u2026\u2026\uff09",
+      "TalkTention": 0,
+      "LipSync": 2,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 16,
+          "MotionName": "m-normal-nod04",
+          "FacialName": "face_smile_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 16,
+          "VoiceId": "voice_sc_ev_wonder_05_06_43_16",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 142
+        }
+      ],
+      "WindowDisplayName": "\u5915\u590f",
+      "Body": "\u307e\u308b\u3067\u3001\u79c1\u304c\u4eba\u9b5a\u59eb\u3067\u6b4c\u3063\u305f\u2014\u2014",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [],
+      "Voices": [
+        {
+          "Character2dId": 142,
+          "VoiceId": "voice_sc_ev_wonder_05_06_44_127",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 1,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 16
+        }
+      ],
+      "WindowDisplayName": "\u985e",
+      "Body": "\u2014\u2014\u3088\u3057\uff01\u3000\u518d\u8d77\u52d5\u3067\u304d\u305f\uff01",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [],
+      "Voices": [
+        {
+          "Character2dId": 16,
+          "VoiceId": "voice_sc_ev_wonder_05_06_45_16",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 16
+        }
+      ],
+      "WindowDisplayName": "\u985e",
+      "Body": "\u3055\u3042\u3001\u30b9\u30c6\u30fc\u30b8\u306b\u7acb\u3064\u6e96\u5099\u306f\u3044\u3044\u304b\u3044\uff1f",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 16,
+          "MotionName": "m-cool-tilthead01",
+          "FacialName": "face_smile_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 16,
+          "VoiceId": "voice_sc_ev_wonder_05_06_46_16",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 71
+        }
+      ],
+      "WindowDisplayName": "\u30cd\u30cd\u30ed\u30dc",
+      "Body": "\u30cf\u30a4\uff01\u3000\u30d0\u30c3\u30c1\u30ea\u30c7\u30b9\uff01",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 71,
+          "MotionName": "w-dayo-nod01",
+          "FacialName": "",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 71,
+          "VoiceId": "voice_sc_ev_wonder_05_06_47_15",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 16
+        }
+      ],
+      "WindowDisplayName": "\u985e",
+      "Body": "\u3048\u3080\u304f\u3093\uff01\u3000\u5be7\u3005\u306b\u5408\u56f3\u3092\uff01",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 16,
+          "MotionName": "m-cool-nod01",
+          "FacialName": "face_smile_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 16,
+          "VoiceId": "voice_sc_ev_wonder_05_06_48_16",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 14
+        }
+      ],
+      "WindowDisplayName": "\u3048\u3080",
+      "Body": "\u3046\u3093\u3063\uff01",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 14,
+          "MotionName": "w-happy-nod02",
+          "FacialName": "face_ncsmile_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 14,
+          "VoiceId": "voice_sc_ev_wonder_05_06_49_14",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 14
+        }
+      ],
+      "WindowDisplayName": "\u3048\u3080",
+      "Body": "\u5be7\u3005\u3061\u3083\u3093\uff01\n\u30cd\u30cd\u30ed\u30dc\u3061\u3083\u3093\u3001\u52d5\u3051\u308b\u3088\uff5e\uff01",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 14,
+          "MotionName": "w-cute-tilthead06",
+          "FacialName": "face_smile_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 14,
+          "VoiceId": "voice_sc_ev_wonder_05_06_50_14",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 15
+        }
+      ],
+      "WindowDisplayName": "\u5be7\u3005",
+      "Body": "\u2026\u2026\uff01\uff01",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [],
+      "Voices": [
+        {
+          "Character2dId": 15,
+          "VoiceId": "voice_sc_ev_wonder_05_06_51_15",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 15
+        }
+      ],
+      "WindowDisplayName": "\u4eba\u9b5a\u59eb",
+      "Body": "\u300e\u2026\u2026\u3046\u3093\u3002\u6b4c\u3063\u305f\u3089\u3001\u52c7\u6c17\u304c\u3067\u305f\u3002\n\u3075\u305f\u308a\u3092\u52a9\u3051\u306b\u884c\u3053\u3046\uff01\u300f",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 15,
+          "MotionName": "w-normal-nod06",
+          "FacialName": "face_smile_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 15,
+          "VoiceId": "voice_sc_ev_wonder_05_06_52_15",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 15
+        }
+      ],
+      "WindowDisplayName": "\u4eba\u9b5a\u59eb",
+      "Body": "\u300e\u2014\u2014\u305d\u3046\u3060\uff01\u3000\u3042\u306e\u30d8\u30f3\u306a\u85ac\u304c\u307e\u3060\u3042\u3063\u305f\u306f\u305a\uff01\n\u3053\u308c\u304c\u3042\u308c\u3070\u3082\u3057\u304b\u3057\u305f\u3089\u2026\u2026\u300f",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 15,
+          "MotionName": "w-animal-nod02",
+          "FacialName": "face_smile_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 15,
+          "VoiceId": "voice_sc_ev_wonder_05_06_53_15",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 1,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 15
+        }
+      ],
+      "WindowDisplayName": "\u4eba\u9b5a\u59eb",
+      "Body": "\u300e\u304a\u9858\u3044\u3001\u307f\u3093\u306a\u3092\u52a9\u3051\u305f\u3044\u306e\u2026\u2026\uff01\u300f",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 15,
+          "MotionName": "w-animal-nod01",
+          "FacialName": "face_sharp_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 15,
+          "VoiceId": "voice_sc_ev_wonder_05_06_54_15",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 15
+        }
+      ],
+      "WindowDisplayName": "\u4eba\u9b5a\u59eb",
+      "Body": "\u300e\u52a9\u3051\u3089\u308c\u305f\u3089\u3001\u3042\u306e\u672c\u306e\u4eba\u9b5a\u59eb\u307f\u305f\u3044\u306b\u3001\n\u6ce1\u306b\u306a\u3063\u3066\u3082\u3044\u3044\u304b\u3089\u2026\u2026\uff01\u300f",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 15,
+          "MotionName": "w-cute-tilthead07",
+          "FacialName": "face_sharp_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 15,
+          "VoiceId": "voice_sc_ev_wonder_05_06_55_15",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 1,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 15
+        }
+      ],
+      "WindowDisplayName": "\u4eba\u9b5a\u59eb",
+      "Body": "\u300e\u2026\u2026\u3042\u308c\uff1f\u3000\u3048\u3063\uff1f\n\u308f\u305f\u3057\u3001\u3069\u3046\u306a\u3063\u3061\u3083\u3063\u305f\u306e\u30fc\uff01\uff1f\u300f",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 71,
+          "MotionName": "w-dayo-tilthead01",
+          "FacialName": "face_normal_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 15,
+          "VoiceId": "voice_sc_ev_wonder_05_06_56_15",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 1,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 15
+        }
+      ],
+      "WindowDisplayName": "\u4eba\u9b5a\u59eb",
+      "Body": "\u300e\u3088\u3001\u3088\u304f\u308f\u304b\u3089\u306a\u3044\u3051\u3069\u3001\u3053\u308c\u306a\u3089\u3075\u305f\u308a\u3092\u52a9\u3051\u3089\u308c\u308b\u306f\u305a\uff01\n\u3048\uff5e\u3044\uff01\uff01\u3000\u767a\u9032\uff01\uff01\u300f",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 71,
+          "MotionName": "w-dayo-lookdown01",
+          "FacialName": "face_normal_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 15,
+          "VoiceId": "voice_sc_ev_wonder_05_06_57_15",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 1,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 142
+        }
+      ],
+      "WindowDisplayName": "\u5915\u590f",
+      "Body": "\u2026\u2026\u2026\u2026",
+      "TalkTention": 0,
+      "LipSync": 2,
+      "MotionChangeFrom": 1,
+      "Motions": [],
+      "Voices": [
+        {
+          "Character2dId": 142,
+          "VoiceId": "voice_sc_ev_wonder_05_06_58_127",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 1,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 15
+        }
+      ],
+      "WindowDisplayName": "\u5be7\u3005",
+      "Body": "\u2026\u2026\u306f\u3041\u3002\n\u30c9\u30ad\u30c9\u30ad\u3057\u3059\u304e\u3066\u6b7b\u306c\u304b\u3068\u601d\u3063\u305f\u2026\u2026",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [],
+      "Voices": [
+        {
+          "Character2dId": 15,
+          "VoiceId": "voice_sc_ev_wonder_05_06_59_15",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 14
+        }
+      ],
+      "WindowDisplayName": "\u3048\u3080",
+      "Body": "\u5be7\u3005\u3061\u3083\uff5e\uff5e\uff5e\u3093\uff01\uff01\uff01",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [],
+      "Voices": [
+        {
+          "Character2dId": 14,
+          "VoiceId": "voice_sc_ev_wonder_05_06_60_14",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 1,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 15
+        }
+      ],
+      "WindowDisplayName": "\u5be7\u3005",
+      "Body": "\u3072\u3083\u3063\uff01\uff1f",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 15,
+          "MotionName": "w-normal-trouble01",
+          "FacialName": "face_surprise_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 15,
+          "VoiceId": "voice_sc_ev_wonder_05_06_61_15",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 14
+        }
+      ],
+      "WindowDisplayName": "\u3048\u3080",
+      "Body": "\u5be7\u3005\u3061\u3083\u3093\u3001\u3068\u3063\u3066\u3082\u3068\u3063\u3066\u3082\u308f\u3093\u3060\u307b\u3044\u3060\u3063\u305f\u3088\u30fc\uff01\uff01\n\u5be7\u3005\u3061\u3083\u3093\u306e\u6b4c\u3082\u3001\u3044\u3064\u3082\u3088\u308a\u3082\u30fc\u3063\u3068\u308f\u3093\u3060\u307b\u3044\uff01\uff01",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 14,
+          "MotionName": "w-cute-tilthead07",
+          "FacialName": "face_smile_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 14,
+          "VoiceId": "voice_sc_ev_wonder_05_06_62_14",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 15
+        }
+      ],
+      "WindowDisplayName": "\u5be7\u3005",
+      "Body": "\u3061\u3087\u3063\u3068\u3048\u3080\u3001\u3073\u3063\u304f\u308a\u3055\u305b\u306a\u3044\u3067\u3088\u306d\u2026\u2026\u3002\n\u5bff\u547d\u304c\u7e2e\u3080\u304b\u3068\u601d\u3063\u305f\u3093\u3060\u3051\u3069",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 15,
+          "MotionName": "w-normal-sigh01",
+          "FacialName": "face_angry_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 15,
+          "VoiceId": "voice_sc_ev_wonder_05_06_63_15",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 13
+        }
+      ],
+      "WindowDisplayName": "\u53f8",
+      "Body": "\u3048\u3080\u306e\u8a00\u3046\u3068\u304a\u308a\u3001\u30ca\u30a4\u30b9\u30a2\u30c9\u30ea\u30d6\u3060\u3063\u305f\u305e\u3001\u5be7\u3005\uff01\n\u3042\u306e\u6b4c\u3082\u7d20\u6674\u3089\u3057\u304b\u3063\u305f\uff01",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [],
+      "Voices": [
+        {
+          "Character2dId": 13,
+          "VoiceId": "voice_sc_ev_wonder_05_06_64_13",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 16
+        }
+      ],
+      "WindowDisplayName": "\u985e",
+      "Body": "\u3042\u3042\u3002\n\u30b7\u30fc\u30f3\u304c\u58ca\u308c\u308b\u53ef\u80fd\u6027\u3082\u3042\u308b\u4e2d\u3067\u3001\n\u672c\u5f53\u306b\u7d20\u6674\u3089\u3057\u3044\u30a2\u30c9\u30ea\u30d6\u3092\u3057\u3066\u304f\u308c\u305f\u306d",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [],
+      "Voices": [
+        {
+          "Character2dId": 16,
+          "VoiceId": "voice_sc_ev_wonder_05_06_65_16",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 16
+        }
+      ],
+      "WindowDisplayName": "\u985e",
+      "Body": "\u3042\u308a\u304c\u3068\u3046\u3001\u5be7\u3005\u3002\n\u5be7\u3005\u306e\u304a\u304b\u3052\u3067\u3001\u307f\u3093\u306a\u304c\u7b11\u9854\u306b\u306a\u308c\u305f\u3088",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 16,
+          "MotionName": "m-adult-nod03",
+          "FacialName": "face_smile_03",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 16,
+          "VoiceId": "voice_sc_ev_wonder_05_06_66_16",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 15
+        }
+      ],
+      "WindowDisplayName": "\u5be7\u3005",
+      "Body": "\u305d\u2026\u2026\u305d\u3093\u306a\u306b\u8912\u3081\u3089\u308c\u308b\u307b\u3069\u3058\u3083\u2026\u2026",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 15,
+          "MotionName": "w-normal-shy01",
+          "FacialName": "face_smile_06",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 15,
+          "VoiceId": "voice_sc_ev_wonder_05_06_67_15",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 16
+        }
+      ],
+      "WindowDisplayName": "\u985e",
+      "Body": "\u3044\u3044\u3084\u3001\u8a87\u3063\u3066\u307b\u3057\u3044\u306a\u3002\n\u5f79\u8005\u3068\u3057\u3066\u3001\u89b3\u5ba2\u306e\u305f\u3081\u306b\u7d20\u6674\u3089\u3057\u3044\u50cd\u304d\u3092\u3057\u305f\u3093\u3060\u304b\u3089\u306d",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 16,
+          "MotionName": "m-tsukasa-shakehead03",
+          "FacialName": "face_smile_03",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 16,
+          "VoiceId": "voice_sc_ev_wonder_05_06_68_16",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 14
+        }
+      ],
+      "WindowDisplayName": "\u3048\u3080",
+      "Body": "\u3046\u3093\u3063\uff01\n\u5be7\u3005\u3061\u3083\u3093\u3001\u30ad\u30e9\u30ad\u30e9\u304a\u661f\u3055\u307e\u3060\u3063\u305f\u3088\uff01",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [],
+      "Voices": [
+        {
+          "Character2dId": 14,
+          "VoiceId": "voice_sc_ev_wonder_05_06_69_14",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 13
+        }
+      ],
+      "WindowDisplayName": "\u53f8",
+      "Body": "\u3080\u3002\u30b9\u30bf\u30fc\u306e\u5ea7\u3092\u6e21\u3059\u3064\u3082\u308a\u306f\u306a\u3044\u304c\u2026\u2026\u3002\n\u3057\u304b\u3057\u80f8\u3092\u5f35\u308b\u304c\u3044\u3044\uff01\u3000\u304a\u524d\u3053\u305d\u4eca\u65e5\u306eMVP\u3060\uff01",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 13,
+          "MotionName": "m-tsukasa-tilthead01",
+          "FacialName": "face_smallmouth_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 13,
+          "VoiceId": "voice_sc_ev_wonder_05_06_70_13",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 15
+        }
+      ],
+      "WindowDisplayName": "\u5be7\u3005",
+      "Body": "\u3042\u2026\u2026",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 15,
+          "MotionName": "w-normal-tilthead05",
+          "FacialName": "face_smile_02",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 15,
+          "VoiceId": "voice_sc_ev_wonder_05_06_71_15",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 15
+        }
+      ],
+      "WindowDisplayName": "\u5be7\u3005",
+      "Body": "\u3042\u308a\u304c\u3068\u3046\u3001\u307f\u3093\u306a",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 15,
+          "MotionName": "w-normal-nod05",
+          "FacialName": "face_smile_06",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 15,
+          "VoiceId": "voice_sc_ev_wonder_05_06_72_15",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 1,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 142
+        }
+      ],
+      "WindowDisplayName": "\u5915\u590f",
+      "Body": "\u2014\u2014\u5be7\u3005\u3061\u3083\u3093\u3001\u304a\u75b2\u308c\u3055\u307e\u3002\n\u4eca\u3061\u3087\u3063\u3068\u3044\u3044\uff1f",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [],
+      "Voices": [
+        {
+          "Character2dId": 142,
+          "VoiceId": "voice_sc_ev_wonder_05_06_73_127",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 15
+        }
+      ],
+      "WindowDisplayName": "\u5be7\u3005",
+      "Body": "\u3042\u2026\u2026\u98a8\u796d\u3055\u3093\uff01\n\u308f\u3056\u308f\u3056\u30b9\u30c6\u30fc\u30b8\u88cf\u307e\u3067\u6765\u3066\u3082\u3089\u3048\u308b\u306a\u3093\u3066\u2026\u2026\uff01",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 15,
+          "MotionName": "w-happy-tilthead04",
+          "FacialName": "face_blush_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 15,
+          "VoiceId": "voice_sc_ev_wonder_05_06_74_15",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 13
+        }
+      ],
+      "WindowDisplayName": "\u53f8",
+      "Body": "\u304a\u304a\u3002\u985e\u3001\u3042\u306e\u4eba\u304c\u4f8b\u306e\u4ff3\u512a\u304b\uff1f",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 13,
+          "MotionName": "m-tsukasa-nod03",
+          "FacialName": "face_smile_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 13,
+          "VoiceId": "voice_sc_ev_wonder_05_06_75_13",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 16
+        }
+      ],
+      "WindowDisplayName": "\u985e",
+      "Body": "\u3042\u3042\u3002\u305d\u3046\u3060\u3088\u3002\n\u6614\u3068\u5909\u308f\u3089\u306a\u3044\u3001\u5b58\u5728\u611f\u306e\u3042\u308b\u4eba\u3060\u306a",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 16,
+          "MotionName": "m-tsukasa-nod02",
+          "FacialName": "face_smile_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 16,
+          "VoiceId": "voice_sc_ev_wonder_05_06_76_16",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 15
+        }
+      ],
+      "WindowDisplayName": "\u5be7\u3005",
+      "Body": "\u304a\u5fd9\u3057\u3044\u4e2d\u3001\u308f\u3056\u308f\u3056\u6765\u3066\u304f\u3060\u3055\u3063\u3066\u3042\u308a\u304c\u3068\u3046\u3054\u3056\u3044\u307e\u3059\uff01",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 15,
+          "MotionName": "w-animal-nod01",
+          "FacialName": "face_blush_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 15,
+          "VoiceId": "voice_sc_ev_wonder_05_06_77_15",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 142
+        }
+      ],
+      "WindowDisplayName": "\u5915\u590f",
+      "Body": "\u3046\u3046\u3093\u3001\u3053\u3061\u3089\u3053\u305d\u7d20\u6575\u306a\u30b7\u30e7\u30fc\u3092\u898b\u305b\u3066\u304f\u308c\u3066\u3042\u308a\u304c\u3068\u3046\u3002\n\u3088\u304b\u3063\u305f\u3089\u611f\u60f3\u3092\u8a00\u3044\u305f\u3044\u306a\u3068\u601d\u3063\u305f\u3093\u3060\u3051\u3069\u2014\u2014",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 142,
+          "MotionName": "s-common-shakehead01",
+          "FacialName": "face_smile_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 142,
+          "VoiceId": "voice_sc_ev_wonder_05_06_78_127",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 15
+        }
+      ],
+      "WindowDisplayName": "\u5be7\u3005",
+      "Body": "\u3048\uff01\u3000\u307b\u3001\u672c\u5f53\u3067\u3059\u304b\uff01\uff1f\n\u3042\u2026\u2026\u3067\u3082\u307e\u3060\u7247\u3065\u3051\u304c\u2026\u2026",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 15,
+          "MotionName": "w-cute-tilthead07",
+          "FacialName": "face_blush_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 15,
+          "VoiceId": "voice_sc_ev_wonder_05_06_79_15",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 14
+        }
+      ],
+      "WindowDisplayName": "\u3048\u3080",
+      "Body": "\u3046\u3046\u3093\uff01\u3000\u3053\u3063\u3061\u306f\u5927\u4e08\u592b\u3060\u3088\u5be7\u3005\u3061\u3083\u3093\uff01\n\u3086\u3063\u304f\u308a\u304a\u8a71\u3057\u3066\u304d\u3066\u3063\u266a",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 14,
+          "MotionName": "w-cute-shakehead02",
+          "FacialName": "face_ncsmile_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 14,
+          "VoiceId": "voice_sc_ev_wonder_05_06_80_14",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 13
+        }
+      ],
+      "WindowDisplayName": "\u53f8",
+      "Body": "\u3042\u3042\uff01\u3000\u884c\u3063\u3066\u304f\u308b\u304c\u3044\u3044\uff01",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 13,
+          "MotionName": "m-tsukasa-angry03",
+          "FacialName": "face_smile_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 13,
+          "VoiceId": "voice_sc_ev_wonder_05_06_81_13",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 16
+        }
+      ],
+      "WindowDisplayName": "\u985e",
+      "Body": "\u7247\u3065\u3051\u306f\u50d5\u9054\u3060\u3051\u3067\u3082\u3067\u304d\u308b\u304b\u3089\u306d\u3002\n\u3044\u3063\u3066\u3089\u3063\u3057\u3083\u3044\u3001\u5be7\u3005",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 16,
+          "MotionName": "m-cool-nod01",
+          "FacialName": "face_smile_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 16,
+          "VoiceId": "voice_sc_ev_wonder_05_06_82_16",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 15
+        }
+      ],
+      "WindowDisplayName": "\u5be7\u3005",
+      "Body": "\u3042\u2026\u2026\u3042\u308a\u304c\u3068\u3046",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 15,
+          "MotionName": "w-normal-tilthead06",
+          "FacialName": "face_surprise_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 15,
+          "VoiceId": "voice_sc_ev_wonder_05_06_83_15",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 142
+        }
+      ],
+      "WindowDisplayName": "\u5915\u590f",
+      "Body": "\u6025\u306a\u7533\u3057\u51fa\u306a\u306e\u306b\u3042\u308a\u304c\u3068\u3046",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 142,
+          "MotionName": "s-common-nod01",
+          "FacialName": "face_smile_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 142,
+          "VoiceId": "voice_sc_ev_wonder_05_06_84_127",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 142
+        }
+      ],
+      "WindowDisplayName": "\u5915\u590f",
+      "Body": "\u305d\u308c\u3058\u3083\u3042\u2026\u2026\u7247\u3065\u3051\u306e\u90aa\u9b54\u306b\u306a\u3089\u306a\u3044\u3088\u3046\u306b\u3001\n\u3042\u3063\u3061\u306e\u6d5c\u8fba\u3067\u8a71\u3059\u306e\u306f\u3069\u3046\uff1f",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 142,
+          "MotionName": "s-common-tilthead02",
+          "FacialName": "face_smile_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 142,
+          "VoiceId": "voice_sc_ev_wonder_05_06_85_127",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 15
+        }
+      ],
+      "WindowDisplayName": "\u5be7\u3005",
+      "Body": "\u306f\u3001\u306f\u3044\uff01\n\u3088\u308d\u3057\u304f\u304a\u9858\u3044\u3057\u307e\u3059\uff01",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 15,
+          "MotionName": "w-normal-nod05",
+          "FacialName": "face_smile_02",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 15,
+          "VoiceId": "voice_sc_ev_wonder_05_06_86_15",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 1,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    }
+  ],
+  "LayoutData": [
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 13,
+      "CostumeType": "13tsukasa_unit",
+      "MotionName": "m-tsukasa-shakehead03",
+      "FacialName": "face_sad_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 13,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 13,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 14,
+      "CostumeType": "14emu_unit",
+      "MotionName": "w-happy-glad02",
+      "FacialName": "face_ncworry_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 13,
+      "CostumeType": "",
+      "MotionName": "m-tsukasa-nod02",
+      "FacialName": "face_smile_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 13,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 14,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 13,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_smallmouth_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 13,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 15,
+      "CostumeType": "15nene_unit",
+      "MotionName": "w-normal-relief01",
+      "FacialName": "face_sad_02",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 15,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 13,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_smile_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 1,
+      "SideFrom": 0,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 13,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 13,
+      "CostumeType": "",
+      "MotionName": "m-normal-tilthead02",
+      "FacialName": "face_smile_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 6,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 13,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 2
+    },
+    {
+      "Type": 2,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 14,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_ncsmallmouth_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 16,
+      "CostumeType": "16rui_unit",
+      "MotionName": "m-tsukasa-posenod02",
+      "FacialName": "face_ serious_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 14,
+      "CostumeType": "",
+      "MotionName": "w-cute-nod05",
+      "FacialName": "face_ncsmallmouth_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 16,
+      "CostumeType": "",
+      "MotionName": "m-cool-tilthead01",
+      "FacialName": "face_trouble_02",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 14,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 16,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 13,
+      "CostumeType": "",
+      "MotionName": "m-tsukasa-angry01",
+      "FacialName": "face_surprise_02",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 13,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 16,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_sharp_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 16,
+      "CostumeType": "",
+      "MotionName": "m-adult-nod02",
+      "FacialName": "face_sharp_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 16,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 14,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_smile_04",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 14,
+      "CostumeType": "",
+      "MotionName": "w-happy-nod04",
+      "FacialName": "face_sad_02",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 14,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 14,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 13,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_smallmouth_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 14,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 13,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 15,
+      "CostumeType": "",
+      "MotionName": "w-cute-fidget01",
+      "FacialName": "face_sad_02",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 15,
+      "CostumeType": "",
+      "MotionName": "w-normal-nod06",
+      "FacialName": "face_smile_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 15,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 15,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_smile_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 15,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 142,
+      "CostumeType": "sub_yuuka",
+      "MotionName": "s-common-tilthead01",
+      "FacialName": "face_normal_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 142,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 15,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_smallmouth_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 15,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 142,
+      "CostumeType": "sub_yuukablack",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 142,
+      "CostumeType": "",
+      "MotionName": "s-common-angry02",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 142,
+      "CostumeType": "",
+      "MotionName": "s-common-angry01",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 142,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 15,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 15,
+      "CostumeType": "",
+      "MotionName": "w-cute-nod02",
+      "FacialName": "face_smile_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 15,
+      "CostumeType": "",
+      "MotionName": "w-cute-nod02",
+      "FacialName": "face_sad_02",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 15,
+      "CostumeType": "",
+      "MotionName": "w-animal-nod01",
+      "FacialName": "face_sharp_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 15,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 14,
+      "CostumeType": "",
+      "MotionName": "w-happy-glad02",
+      "FacialName": "face_surprise_04",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 14,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 14,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 13,
+      "CostumeType": "",
+      "MotionName": "m-tsukasa-tilthead03",
+      "FacialName": "face_surprise_02",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 14,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 13,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 16,
+      "CostumeType": "",
+      "MotionName": "m-normal-pride01",
+      "FacialName": "face_surprise_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 16,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 142,
+      "CostumeType": "sub_yuuka",
+      "MotionName": "s-common-angry01",
+      "FacialName": "face_surprise_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 142,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 71,
+      "CostumeType": "sub_nenedayo",
+      "MotionName": "",
+      "FacialName": "face_lightoff_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 71,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_lighton_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 71,
+      "CostumeType": "",
+      "MotionName": "w-dayo-joy01",
+      "FacialName": "face_normal_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 71,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 16,
+      "CostumeType": "",
+      "MotionName": "m-tsukasa-nod02",
+      "FacialName": "face_smile_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 16,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 71,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 71,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 16,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_smile_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 14,
+      "CostumeType": "",
+      "MotionName": "w-happy-posetilthead02",
+      "FacialName": "face_ncsmile_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 16,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 14,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 14,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_smile_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 14,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 15,
+      "CostumeType": "",
+      "MotionName": "w-normal-tilthead06",
+      "FacialName": "face_surprise_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 15,
+      "CostumeType": "",
+      "MotionName": "w-adult-tilthead02",
+      "FacialName": "face_smile_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 15,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 71,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 71,
+      "CostumeType": "",
+      "MotionName": "w-dayo-joy01",
+      "FacialName": "face_normal_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 71,
+      "CostumeType": "",
+      "MotionName": "w-dayo-nod01",
+      "FacialName": "face_normal_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 71,
+      "CostumeType": "",
+      "MotionName": "w-dayo-joy01",
+      "FacialName": "face_normal_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 1,
+      "SideFrom": 0,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 71,
+      "CostumeType": "",
+      "MotionName": "w-dayo-nod01",
+      "FacialName": "face_lighton_01",
+      "MoveSpeedType": 1
+    },
+    {
+      "Type": 1,
+      "SideFrom": 0,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 71,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_normal_01",
+      "MoveSpeedType": 1
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 6,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 71,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 1
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 142,
+      "CostumeType": "",
+      "MotionName": "s-common-tilthead01",
+      "FacialName": "face_smile_04",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 142,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 15,
+      "CostumeType": "",
+      "MotionName": "w-normal-relief01",
+      "FacialName": "face_sad_02",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 15,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 14,
+      "CostumeType": "",
+      "MotionName": "w-cute-forward02",
+      "FacialName": "face_smile_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 14,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 15,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 2,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 200.0,
+      "DepthType": 0,
+      "Character2dId": 14,
+      "CostumeType": "",
+      "MotionName": "w-cute-glad05",
+      "FacialName": "face_smile_03",
+      "MoveSpeedType": 1
+    },
+    {
+      "Type": 1,
+      "SideFrom": 0,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 400.0,
+      "DepthType": 0,
+      "Character2dId": 15,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_surprise_01",
+      "MoveSpeedType": 1
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 14,
+      "CostumeType": "",
+      "MotionName": "w-happy-wandahoi01",
+      "FacialName": "face_sparkling_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 14,
+      "CostumeType": "",
+      "MotionName": "w-happy-glad02",
+      "FacialName": "face_sparkling_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 14,
+      "CostumeType": "",
+      "MotionName": "w-cute-glad05",
+      "FacialName": "face_sparkling_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 14,
+      "CostumeType": "",
+      "MotionName": "w-happy-wandahoi01",
+      "FacialName": "face_sparkling_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 3,
+      "SideFromOffsetX": 200.0,
+      "SideTo": 3,
+      "SideToOffsetX": 200.0,
+      "DepthType": 0,
+      "Character2dId": 14,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 400.0,
+      "SideTo": 4,
+      "SideToOffsetX": 400.0,
+      "DepthType": 0,
+      "Character2dId": 15,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 13,
+      "CostumeType": "",
+      "MotionName": "m-tsukasa-nod04",
+      "FacialName": "face_smile_02",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 13,
+      "CostumeType": "",
+      "MotionName": "m-tsukasa-angry02",
+      "FacialName": "face_smile_02",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 13,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 16,
+      "CostumeType": "",
+      "MotionName": "m-cool-nod01",
+      "FacialName": "face_smile_08",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 16,
+      "CostumeType": "",
+      "MotionName": "m-cool-disgust01",
+      "FacialName": "face_smile_03",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 16,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 15,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_smile_06",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 15,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 15,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 16,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_smile_03",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 16,
+      "CostumeType": "",
+      "MotionName": "m-tsukasa-nod04",
+      "FacialName": "face_smile_03",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 16,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 14,
+      "CostumeType": "",
+      "MotionName": "w-happy-glad02",
+      "FacialName": "face_ncsmile_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 14,
+      "CostumeType": "",
+      "MotionName": "w-cute-forward02",
+      "FacialName": "face_sparkling_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 14,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 13,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_smallmouth_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 13,
+      "CostumeType": "",
+      "MotionName": "m-tsukasa-nod02",
+      "FacialName": "face_smile_02",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 13,
+      "CostumeType": "",
+      "MotionName": "m-tsukasa-smug01",
+      "FacialName": "face_smile_03",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 15,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 13,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 15,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_smile_02",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 15,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 142,
+      "CostumeType": "",
+      "MotionName": "s-common-nod01",
+      "FacialName": "face_smile_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 142,
+      "CostumeType": "",
+      "MotionName": "s-common-tilthead01",
+      "FacialName": "face_smile_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 142,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 15,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_blush_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 142,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 15,
+      "CostumeType": "",
+      "MotionName": "w-normal-trouble02",
+      "FacialName": "face_blush_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 15,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 142,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 13,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_smile_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 16,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 16,
+      "CostumeType": "",
+      "MotionName": "m-tsukasa-tilthead01",
+      "FacialName": "face_smile_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 13,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 16,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 15,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_blush_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 142,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 142,
+      "CostumeType": "",
+      "MotionName": "s-common-tilthead01",
+      "FacialName": "face_smile_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 15,
+      "CostumeType": "",
+      "MotionName": "w-cute-shy01",
+      "FacialName": "face_sad_02",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 15,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 142,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 13,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 14,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_ncsmile_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 14,
+      "CostumeType": "",
+      "MotionName": "w-cute-nod05",
+      "FacialName": "face_ncsmile_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 13,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 14,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 16,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_smile_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 16,
+      "CostumeType": "",
+      "MotionName": "m-cool-tilthead01",
+      "FacialName": "face_smile_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 16,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 15,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_surprise_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 15,
+      "CostumeType": "",
+      "MotionName": "w-normal-nod02",
+      "FacialName": "face_smile_09",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 15,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 15,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 142,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_smile_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 15,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 142,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    }
+  ],
+  "SpecialEffectData": [
+    {
+      "EffectType": 2,
+      "StringVal": "",
+      "StringValSub": "",
+      "Duration": 1.0,
+      "IntVal": 0
+    },
+    {
+      "EffectType": 1,
+      "StringVal": "",
+      "StringValSub": "",
+      "Duration": 1.0,
+      "IntVal": 0
+    },
+    {
+      "EffectType": 2,
+      "StringVal": "",
+      "StringValSub": "",
+      "Duration": 1.0,
+      "IntVal": 0
+    },
+    {
+      "EffectType": 1,
+      "StringVal": "",
+      "StringValSub": "",
+      "Duration": 1.0,
+      "IntVal": 0
+    },
+    {
+      "EffectType": 4,
+      "StringVal": "",
+      "StringValSub": "",
+      "Duration": 0.10000000149011612,
+      "IntVal": 0
+    },
+    {
+      "EffectType": 7,
+      "StringVal": "bg_d001401",
+      "StringValSub": "bg_d001401",
+      "Duration": 0.0,
+      "IntVal": 0
+    },
+    {
+      "EffectType": 9,
+      "StringVal": "",
+      "StringValSub": "",
+      "Duration": 0.0,
+      "IntVal": 0
+    },
+    {
+      "EffectType": 3,
+      "StringVal": "",
+      "StringValSub": "",
+      "Duration": 0.10000000149011612,
+      "IntVal": 0
+    },
+    {
+      "EffectType": 4,
+      "StringVal": "",
+      "StringValSub": "",
+      "Duration": 0.10000000149011612,
+      "IntVal": 0
+    },
+    {
+      "EffectType": 7,
+      "StringVal": "bg_d001501",
+      "StringValSub": "bg_d001501",
+      "Duration": 0.0,
+      "IntVal": 0
+    },
+    {
+      "EffectType": 10,
+      "StringVal": "",
+      "StringValSub": "",
+      "Duration": 0.0,
+      "IntVal": 0
+    },
+    {
+      "EffectType": 3,
+      "StringVal": "",
+      "StringValSub": "",
+      "Duration": 0.10000000149011612,
+      "IntVal": 0
+    },
+    {
+      "EffectType": 2,
+      "StringVal": "",
+      "StringValSub": "",
+      "Duration": 0.5,
+      "IntVal": 0
+    },
+    {
+      "EffectType": 1,
+      "StringVal": "",
+      "StringValSub": "",
+      "Duration": 0.5,
+      "IntVal": 0
+    },
+    {
+      "EffectType": 3,
+      "StringVal": "",
+      "StringValSub": "",
+      "Duration": 0.5,
+      "IntVal": 0
+    },
+    {
+      "EffectType": 4,
+      "StringVal": "",
+      "StringValSub": "",
+      "Duration": 1.0,
+      "IntVal": 0
+    },
+    {
+      "EffectType": 3,
+      "StringVal": "",
+      "StringValSub": "",
+      "Duration": 1.0,
+      "IntVal": 0
+    },
+    {
+      "EffectType": 5,
+      "StringVal": "",
+      "StringValSub": "",
+      "Duration": 2.0,
+      "IntVal": 0
+    },
+    {
+      "EffectType": 3,
+      "StringVal": "",
+      "StringValSub": "",
+      "Duration": 0.5,
+      "IntVal": 0
+    },
+    {
+      "EffectType": 2,
+      "StringVal": "",
+      "StringValSub": "",
+      "Duration": 2.0,
+      "IntVal": 0
+    },
+    {
+      "EffectType": 7,
+      "StringVal": "bg_d001502",
+      "StringValSub": "bg_d001502",
+      "Duration": 0.0,
+      "IntVal": 0
+    },
+    {
+      "EffectType": 13,
+      "StringVal": "",
+      "StringValSub": "",
+      "Duration": 0.0,
+      "IntVal": 0
+    },
+    {
+      "EffectType": 1,
+      "StringVal": "",
+      "StringValSub": "",
+      "Duration": 1.0,
+      "IntVal": 0
+    },
+    {
+      "EffectType": 5,
+      "StringVal": "",
+      "StringValSub": "",
+      "Duration": 2.0,
+      "IntVal": 0
+    },
+    {
+      "EffectType": 2,
+      "StringVal": "",
+      "StringValSub": "",
+      "Duration": 2.5,
+      "IntVal": 0
+    }
+  ],
+  "SoundData": [
+    {
+      "PlayMode": 0,
+      "Bgm": "bgm00000",
+      "Se": "",
+      "Volume": 1.0,
+      "SeBundleName": "",
+      "Duration": 1.5
+    },
+    {
+      "PlayMode": 0,
+      "Bgm": "bgm00016",
+      "Se": "",
+      "Volume": 1.0,
+      "SeBundleName": "",
+      "Duration": 2.0
+    },
+    {
+      "PlayMode": 0,
+      "Bgm": "bgm00000",
+      "Se": "",
+      "Volume": 1.0,
+      "SeBundleName": "",
+      "Duration": 1.5
+    },
+    {
+      "PlayMode": 0,
+      "Bgm": "",
+      "Se": "se00053",
+      "Volume": 1.0,
+      "SeBundleName": "",
+      "Duration": 0.0
+    },
+    {
+      "PlayMode": 0,
+      "Bgm": "bgm00092",
+      "Se": "",
+      "Volume": 1.0,
+      "SeBundleName": "",
+      "Duration": 2.0
+    },
+    {
+      "PlayMode": 0,
+      "Bgm": "",
+      "Se": "se00074",
+      "Volume": 1.0,
+      "SeBundleName": "",
+      "Duration": 0.0
+    },
+    {
+      "PlayMode": 0,
+      "Bgm": "",
+      "Se": "se00070",
+      "Volume": 1.0,
+      "SeBundleName": "",
+      "Duration": 0.0
+    },
+    {
+      "PlayMode": 0,
+      "Bgm": "",
+      "Se": "se00240",
+      "Volume": 1.0,
+      "SeBundleName": "",
+      "Duration": 0.0
+    },
+    {
+      "PlayMode": 0,
+      "Bgm": "bgm00000",
+      "Se": "",
+      "Volume": 1.0,
+      "SeBundleName": "",
+      "Duration": 2.0
+    },
+    {
+      "PlayMode": 0,
+      "Bgm": "",
+      "Se": "se00085",
+      "Volume": 1.0,
+      "SeBundleName": "",
+      "Duration": 0.0
+    },
+    {
+      "PlayMode": 0,
+      "Bgm": "",
+      "Se": "se00035",
+      "Volume": 1.0,
+      "SeBundleName": "",
+      "Duration": 0.0
+    },
+    {
+      "PlayMode": 0,
+      "Bgm": "",
+      "Se": "se00074",
+      "Volume": 1.0,
+      "SeBundleName": "",
+      "Duration": 0.0
+    },
+    {
+      "PlayMode": 0,
+      "Bgm": "",
+      "Se": "se00078",
+      "Volume": 1.0,
+      "SeBundleName": "",
+      "Duration": 0.0
+    },
+    {
+      "PlayMode": 0,
+      "Bgm": "",
+      "Se": "se00239",
+      "Volume": 1.0,
+      "SeBundleName": "",
+      "Duration": 0.0
+    },
+    {
+      "PlayMode": 0,
+      "Bgm": "",
+      "Se": "se00051",
+      "Volume": 1.0,
+      "SeBundleName": "",
+      "Duration": 0.0
+    },
+    {
+      "PlayMode": 0,
+      "Bgm": "bgm00048",
+      "Se": "",
+      "Volume": 1.0,
+      "SeBundleName": "",
+      "Duration": 2.0
+    },
+    {
+      "PlayMode": 0,
+      "Bgm": "",
+      "Se": "se00227",
+      "Volume": 1.0,
+      "SeBundleName": "",
+      "Duration": 0.0
+    },
+    {
+      "PlayMode": 0,
+      "Bgm": "bgm00000",
+      "Se": "",
+      "Volume": 1.0,
+      "SeBundleName": "",
+      "Duration": 2.0
+    },
+    {
+      "PlayMode": 0,
+      "Bgm": "bgm00024",
+      "Se": "",
+      "Volume": 1.0,
+      "SeBundleName": "",
+      "Duration": 2.0
+    },
+    {
+      "PlayMode": 0,
+      "Bgm": "bgm00000",
+      "Se": "",
+      "Volume": 1.0,
+      "SeBundleName": "",
+      "Duration": 2.5
+    }
+  ],
+  "NeedBundleNames": [
+    "scenario/background/bg_d001501",
+    "scenario/background/bg_d001401",
+    "scenario/background/bg_d001502"
+  ],
+  "IncludeSoundDataBundleNames": []
+}
