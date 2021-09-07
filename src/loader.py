@@ -100,7 +100,7 @@ class Loader():
         eventurl = "https://api.pjsek.ai/assets?" \
             "parent=ondemand/event_story&$limit=1000"
         eventsdata = json.loads(requests.get(eventurl).text)["data"]
-        events = [e['path'].split('/')[-1] for e in sorted(
+        events = [{'name':e['path'].split('/')[-1], 'version':e['assetVersion']} for e in sorted(
             eventsdata, key=lambda k: k['datetime'])]
         # TODO add title
 

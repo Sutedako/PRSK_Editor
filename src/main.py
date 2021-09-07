@@ -52,8 +52,9 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         with open(chrpath, 'r', encoding='utf-8') as f:
             self.chars = json.load(f)
         eventpath = osp.join(self.settingdir, "events.json")
-        with open(eventpath, 'r', encoding='utf-8') as f:
-            self.events = json.load(f)
+        if osp.exists(eventpath):
+            with open(eventpath, 'r', encoding='utf-8') as f:
+                self.events = json.load(f)
 
         self.setComboBox()
 
@@ -89,11 +90,13 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         qw.QShortcut(QKeySequence(self.tr("Ctrl+S")), self, self.saveText)
 
     def loadJson(self):
+        if not self.event:
+            return
         # TODO only for event now
         storyType = self.comboBoxStoryType.currentText()
         source = self.comboBoxDataSource.currentText()
         idx = self.comboBoxStoryIndex.currentText().split(" ")[0]
-        event = self.events[int(idx) - 1]
+        event = self.events[int(idx) - 1]['name']
         idx = idx.zfill(2)
         chapter = self.comboBoxStoryChapter.currentText().zfill(2)
 
@@ -127,6 +130,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         else:
             self.dstText.loadJson(self.srcText.talks)
 
+    # create new text for json 
     def createText(self):
         self.dstText.createFile(self.srcText.talks)
         self.getDstFileName()
@@ -240,7 +244,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         self.setting['textdir'] = osp.dirname(textpath)
 
         self.dstText.loadFile(
-            editormode, textpath, self.srcText.talks)
+            editormode, textpath)
         self.dstText.showDiff(self.checkBoxShowDiff.isChecked())
 
         title = osp.basename(textpath).split(" ")[-1].split(".")[0]
@@ -262,6 +266,9 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         self.dstfilename = u"【{}】{}-{}.txt".format(
             EditorMode[self.editormode], idx, chapter)
         title = self.plainTextEditTitle.toPlainText()
+        if not title:
+            title = "Untitled"
+            self.plainTextEditTitle.setPlainText(title)
         if title:
             self.dstfilename = self.dstfilename[:-4] + " {}.txt".format(title)
 
@@ -278,17 +285,17 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             return
 
         elif relpy == qw.QMessageBox.Yes:
-            if not self.dstfilepath:
-                self.dstfilepath = osp.join(self.setting['textdir'], self.dstfilename)
-                self.dstfilepath, _ = qw.QFileDialog.getSaveFileName(
-                    self, u"保存文件", self.dstfilepath, "Text Files (*.txt)")
-                if not self.dstfilepath:
-                    return
-                self.setting['textdir'] = osp.dirname(self.dstfilepath)
-
             self.saveText()
 
     def saveText(self):
+        if not self.dstfilepath:
+            self.dstfilepath = osp.join(self.setting['textdir'], self.dstfilename)
+            self.dstfilepath, _ = qw.QFileDialog.getSaveFileName(
+                self, u"保存文件", self.dstfilepath, "Text Files (*.txt)")
+            if not self.dstfilepath:
+                return
+            self.setting['textdir'] = osp.dirname(self.dstfilepath)
+
         self.dstText.saveFile(self.dstfilepath)
         self.saved = True
         self.setWindowTitle("{} Sekai Text".format(self.dstfilename))
@@ -326,9 +333,11 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             # TODO
             self.comboBoxStoryChapter.addItem(u"未完成")
         elif storyType == u"活动剧情":
+            if not self.events:
+                return
             for idx, event in enumerate(self.events[::-1]):
                 self.comboBoxStoryIndex.addItem(" ".join(
-                    [str(len(self.events) - idx), event.split("_")[1]]))
+                    [str(len(self.events) - idx), event['name'].split("_")[1]]))
             self.comboBoxStoryChapter.addItems(
                 [str(i + 1) for i in range(8)])
             # TODO
@@ -347,7 +356,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         self.events = self.srcText.update()
         eventpath = osp.join(self.settingdir, "events.json")
         with open(eventpath, 'w', encoding='utf-8') as f:
-            json.dump(self.events, f)
+            json.dump(self.events, f, indent=2)
         self.setComboBox()
 
     def translateMode(self):
