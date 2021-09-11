@@ -362,7 +362,7 @@ class Editor():
         if Count > srcCount:
             for i in range(Count - srcCount):
                 del loadtalks[0]
-        while loadtalks[0]['text'] == '':
+        while loadtalks and loadtalks[0]['text'] == '':
             del loadtalks[0]
 
         newtalks = []

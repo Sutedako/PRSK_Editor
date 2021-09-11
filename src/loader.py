@@ -43,9 +43,12 @@ class Loader():
 
                 row = table.rowCount()
                 table.setRowCount(row + 1)
-                if speaker in chrtable:
-                    iconpath = "image/icon/chr/chr_{}.png".format(
-                        chrtable.index(speaker) + 1)
+                charIdx = -1
+                for idx, c in enumerate(chrtable):
+                    if c["name_j"] == speaker:
+                        charIdx = idx
+                if charIdx >= 0:
+                    iconpath = "image/icon/chr/chr_{}.png".format(charIdx + 1)
                     iconpath = osp.join(self.root, iconpath)
                     icon = QTableWidgetItem(QIcon(iconpath), speaker)
                     table.setItem(row, 0, icon)
@@ -96,15 +99,78 @@ class Loader():
         table.removeRow(table.rowCount() - 1)
         table.setCurrentCell(0, 0)
 
-    def update(self):
-        eventurl = "https://api.pjsek.ai/assets?" \
-            "parent=ondemand/event_story&$limit=1000"
-        eventsdata = json.loads(requests.get(eventurl).text)["data"]
-        events = [{'name':e['path'].split('/')[-1], 'version':e['assetVersion']} for e in sorted(
-            eventsdata, key=lambda k: k['datetime'])]
-        # TODO add title
+    def update(self, settingdir):
+        bestDBurl = "https://sekai-world.github.io/sekai-master-db-diff/"
 
-        # TODO
-        # cardurl = ""
+        eventsUrl = bestDBurl + "events.json"
+        eventsData = json.loads(requests.get(eventsUrl).text)
 
-        return events
+        eventStoriesUrl = bestDBurl + "eventStories.json"
+        eventStoriesData = json.loads(requests.get(eventStoriesUrl).text)
+
+        eventCardsUrl = bestDBurl + "eventCards.json"
+        eventCardsData = json.loads(requests.get(eventCardsUrl).text)
+
+        eventCardIdx = 0
+        events = []
+        for e, es in zip(eventsData, eventStoriesData):
+            assert e['id'] == es['id']
+            eventId = e['id']
+            eventCards = []
+            while eventCardIdx < len(eventCardsData) and eventCardsData[eventCardIdx]["eventId"] < eventId:
+                eventCardIdx += 1
+            while eventCardIdx < len(eventCardsData) and eventCardsData[eventCardIdx]["eventId"] == eventId:
+                eventCards.append(eventCardsData[eventCardIdx]["cardId"])
+                eventCardIdx += 1
+            events.append({
+                'id': e['id'],
+                'title':e['name'],
+                'name': e['assetbundleName'],
+                'chapters': [ep['title'] for ep in es["eventStoryEpisodes"]],
+                'cards': eventCards
+                })
+
+        eventsPath = osp.join(settingdir, "events.json")
+        with open(eventsPath, 'w', encoding='utf-8') as f:
+            json.dump(events, f, indent=2, ensure_ascii=False)
+
+        cardsUrl = bestDBurl + "cards.json"
+        cardsData = json.loads(requests.get(cardsUrl).text)
+
+        chrCardCount = [0 for i in range(27)]
+        cards = []
+        for idx, c in enumerate(cardsData):
+            while idx + chrCardCount[0] + 1 < c['id']:
+                cards.append({
+                    'id': idx + 1,
+                    'characterId': 0,
+                    'cardCount': 0
+                    })
+                chrCardCount[0] += 1
+            chrCardCount[c["characterId"]] += 1
+            cards.append({
+                'id': c['id'],
+                'characterId': c['characterId'],
+                'cardCount': chrCardCount[c["characterId"]]
+                })
+
+        cardsPath = osp.join(settingdir, "cards.json")
+        with open(cardsPath, 'w', encoding='utf-8') as f:
+            json.dump(cards, f, indent=2)
+
+        mainStoryPath = osp.join(settingdir, "mainStory.json")
+        mainstory = []
+        if not osp.exists(mainStoryPath):
+            storyUrl = bestDBurl + "unitStories.json"
+            storyData = json.loads(requests.get(storyUrl).text)
+            storyData = sorted(storyData, key=lambda x: x['seq'])
+            for unitStory in storyData:
+                mainstory.append({
+                    "unit": unitStory["unit"],
+                    "chapters": [e['title'] for e in unitStory["chapters"][0]["episodes"]]
+                    })
+
+            with open(mainStoryPath, 'w', encoding='utf-8') as f:
+                json.dump(mainstory, f, indent=2, ensure_ascii=False)
+
+        return events, cards, mainstory
