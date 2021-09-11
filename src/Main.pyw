@@ -14,6 +14,7 @@ from Loader import Loader
 import json
 import requests
 import os.path as osp
+from os import mkdir
 
 EditorMode = [u'翻译', u'校对', u'合意', u'审核']
 
@@ -52,6 +53,12 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
     def __init__(self):
         super().__init__()
+
+        if not osp.exists(settingdir):
+            mkdir(settingdir)
+        if not osp.exists(datadir):
+            mkdir(datadir)
+
         iconpath = osp.join(self.root, "image/icon/32.ico")
         if osp.exists(iconpath):
             self.setWindowIcon(QIcon(iconpath))
