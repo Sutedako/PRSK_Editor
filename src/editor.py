@@ -1,13 +1,13 @@
 from PyQt5.QtWidgets import QWidget, QTableWidgetItem, QPushButton, QCheckBox, QHBoxLayout, QMenu
 from PyQt5.QtGui import QBrush, QColor
-from PyQt5.QtCore import Qt, QItemSelectionModel
-import os.path as osp
+from PyQt5.QtCore import Qt
 import copy
 
 Color = {
     'RED': QBrush(QColor(255, 192, 192)),
     'YELLOW': QBrush(QColor(255, 255, 128)),
     'GREEN': QBrush(QColor(128, 255, 128)),
+    'BLUE': QBrush(QColor(0, 128, 255)),
     'WHITE': QBrush(QColor(255, 255, 255))
 }
 
@@ -23,6 +23,7 @@ class Editor():
     proofreadpath = ""
     checkpath = ""
     isProofReading = False
+    showDifference = False
 
     def __init__(self, table=None, srctalks=None):
         self.table = table
@@ -30,14 +31,32 @@ class Editor():
             self.table.setContextMenuPolicy(Qt.CustomContextMenu)
             self.table.customContextMenuRequested.connect(self.dstMenu)
         if(srctalks):
-            self.loadJson(srctalks)
+            self.loadJson(0, srctalks)
 
-    def loadJson(self, srctalks):
+    def loadJson(self, editormode, srctalks):
         self.srctalks = srctalks
+        self.talks = []
+        self.refertalks = self.checkLines(self.refertalks)
+        self.dsttalks = self.checkLines(self.dsttalks)
 
-    # create new text for json
+        if editormode == 0:
+            for idx, talk in enumerate(self.dsttalks):
+                newtalk = copy.deepcopy(talk)
+                newtalk['dstidx'] = idx
+                newtalk['referid'] = idx
+                self.talks.append(newtalk)
+        elif editormode == 1 or editormode == 2:
+            self.talks = self.compareText(self.dsttalks, editormode)
+
+        self.table.setRowCount(0)
+        for talk in self.talks:
+            row = self.table.rowCount()
+            self.table.setRowCount(row + 1)
+            self.fillTableLine(row, talk)
+
+    # create new text from json
     def createFile(self, srctalks):
-        self.loadJson(srctalks)
+        self.loadJson(0, srctalks)
         self.talks = []
         self.refertalks = []
         self.dsttalks = []
@@ -78,13 +97,6 @@ class Editor():
             self.fillTableLine(row, talk)
 
     def loadFile(self, editormode, filepath):
-
-        self.talks = []
-        self.refertalks = []
-        self.dsttalks = []
-
-        dirpath = osp.dirname(filepath)
-        filename = osp.basename(filepath)
         srcfile = open(filepath, 'r', encoding='UTF-8')
         lines = srcfile.readlines()
 
@@ -125,28 +137,9 @@ class Editor():
         if preblank:
             loadtalks.pop()
 
-        if self.srctalks:
-            loadtalks = self.checkLines(loadtalks)
+        self.resetTalk(editormode, loadtalks)
 
-        if editormode == 0:
-            self.refertalks = copy.deepcopy(loadtalks)
-            self.dsttalks = copy.deepcopy(loadtalks)
-            for idx, talk in enumerate(self.dsttalks):
-                newtalk = copy.deepcopy(talk)
-                newtalk['dstidx'] = idx
-                newtalk['referid'] = idx
-                self.talks.append(newtalk)
-        elif editormode == 1 or editormode == 2:
-            self.dsttalks = copy.deepcopy(loadtalks)
-            self.talks = self.compareText(loadtalks, editormode)
-
-        self.table.setRowCount(0)
-        for talk in self.talks:
-            row = self.table.rowCount()
-            self.table.setRowCount(row + 1)
-            self.fillTableLine(row, talk)
-
-    def saveFile(self, filepath):
+    def saveFile(self, filepath, saveN):
         outTalk = ''
         for talk in self.dsttalks:
             if talk['speaker'] in [u'场景', '']:
@@ -155,7 +148,7 @@ class Editor():
                 if talk['start']:
                     outTalk += talk['speaker'] + "："
                 outTalk += talk['text'].split("\n")[0]
-                if not talk['end']:
+                if saveN and not talk['end']:
                     outTalk += '\\N'
                 else:
                     outTalk += '\n'
@@ -211,10 +204,12 @@ class Editor():
                 self.table.item(row, column).setFlags(Qt.NoItemFlags)
 
         if 'proofread' in talk:
-            if talk['proofread']:
+            if self.showDifference and talk['proofread']:
                 color = Color['GREEN']
-            else:
+            elif not talk['proofread']:
                 color = Color['YELLOW']
+            else:
+                color = Color['WHITE']
             for column in range(self.table.columnCount()):
                 if self.table.item(row, column):
                     self.table.item(row, column).setBackground(color)
@@ -233,10 +228,11 @@ class Editor():
         else:
             self.table.item(row, 2).setBackground(Color['WHITE'])
 
+        if not self.showDifference and not talk['save']:
+            self.table.setRowHidden(row, True)
         self.table.blockSignals(False)
 
     def changeText(self, item, editormode):
-        
         row = item.row()
         column = item.column()
         speaker = self.talks[row]['speaker']
@@ -305,8 +301,11 @@ class Editor():
                 self.table.editItem(nextItem)
 
     def checkText(self, speaker, text):
-        text = text.split("\n")[0].rstrip().lstrip()
         check = True
+        if (speaker not in ["", u"场景"]) and (not text):
+            text += "\n【空行，若不需要改行请点右侧“-”删去本行】"
+            return text, check
+        text = text.split("\n")[0].rstrip().lstrip()
         if not text:
             return text, check
 
@@ -319,6 +318,7 @@ class Editor():
         text = text.replace(',', '，')
         text = text.replace('?', '？')
         text = text.replace('!', '！')
+        text = text.replace('欸', '诶')
 
         normalend = ['，', '。', '？', '！', '~', '♪', '☆', '.', '—']
         unusualend = ['）', '」', '』', '”']
@@ -340,7 +340,7 @@ class Editor():
                 text += "\n【破折号用双破折——，或者视情况删掉】"
                 check = False
 
-        if len(text.split("\n")[0]) >= 30:
+        if len(text.split("\n")[0].replace('...', '…')) >= 30:
             text += "\n【单行过长，请删减或换行】"
             check = False
 
@@ -440,7 +440,7 @@ class Editor():
                 newtalks.append(talk)
 
             newtalks[-1]['end'] = True
-        
+
         if idx < len(loadtalks):
             idxdiff = newtalks[-1]['idx'] - loadtalks[idx]['idx'] + 1
             for talk in loadtalks[idx:]:
@@ -461,7 +461,7 @@ class Editor():
                 newtalks.append(checktalks[cidx])
                 newtalks[-1]['dstidx'] = cidx
                 cidx += 1
-            
+
             if cidx >= len(checktalks):
                 newtalk = copy.deepcopy(talk)
                 newtalk['checked'] = False
@@ -503,10 +503,11 @@ class Editor():
                     newtalk['checkmode'] = True
                 newtalks.append(newtalk)
                 newtalks[-1]['referid'] = idx
-                
+
         return newtalks
 
     def showDiff(self, state):
+        self.showDifference = state
         for idx, talk in enumerate(self.talks):
             if 'proofread' in talk:
                 if talk['proofread']:
@@ -543,10 +544,8 @@ class Editor():
             newtalk['end'] = True
             newtalk['checked'] = True
             newtalk['save'] = True
-            if not self.isProofReading or (
-                'proofread' in newtalk and newtalk['proofread']):
-                newtalk['start'] = False
-            else:
+            newtalk['start'] = False
+            if self.isProofReading:
                 newtalk['proofread'] = True
 
             dstidx = self.talks[row]['dstidx']
@@ -574,6 +573,22 @@ class Editor():
                 self.talks[row]['proofread'] = False
                 self.talks[row]['checked'] = False
                 self.talks[row]['save'] = False
+
+                temptalk = copy.deepcopy(self.talks[row])
+                temptalk['end'] = False
+                temptalk['proofread'] = True
+                temptalk['checked'] = True
+                temptalk['save'] = True
+                self.dsttalks[dstidx]['end'] = False
+                self.dsttalks[dstidx]['checked'] = True
+                self.dsttalks[dstidx]['save'] = True
+                self.talks.insert(row + 1, temptalk)
+
+                self.table.blockSignals(True)
+                self.table.insertRow(row + 1)
+                self.table.blockSignals(False)
+
+                self.fillTableLine(row + 1, temptalk)
 
             self.fillTableLine(row, self.talks[row])
 
@@ -611,7 +626,7 @@ class Editor():
         row = -1
         for i in self.table.selectionModel().selection().indexes():
             row = i.row()
-        
+
         if 0 <= row < self.table.rowCount() and self.talks[row]['speaker'] not in ["", u"场景"]:
             menu = QMenu()
             if self.talks[row]['start']:
@@ -630,6 +645,29 @@ class Editor():
                 self.removeTalk(row)
             else:
                 return
+
+    def resetTalk(self, editormode, loadtalks):
+        self.talks = []
+        if self.srctalks:
+            loadtalks = self.checkLines(loadtalks)
+
+        if editormode == 0:
+            self.refertalks = copy.deepcopy(loadtalks)
+            self.dsttalks = copy.deepcopy(loadtalks)
+            for idx, talk in enumerate(self.dsttalks):
+                newtalk = copy.deepcopy(talk)
+                newtalk['dstidx'] = idx
+                newtalk['referid'] = idx
+                self.talks.append(newtalk)
+        elif editormode == 1 or editormode == 2:
+            self.dsttalks = copy.deepcopy(loadtalks)
+            self.talks = self.compareText(loadtalks, editormode)
+
+        self.table.setRowCount(0)
+        for talk in self.talks:
+            row = self.table.rowCount()
+            self.table.setRowCount(row + 1)
+            self.fillTableLine(row, talk)
 
     def addTalk(self, row):
         self.table.blockSignals(True)
@@ -680,7 +718,7 @@ class Editor():
             self.talks.pop(stoprow)
         elif self.talks[stoprow]['text'] == "":
             self.talks.pop()
-            if editdst :
+            if editdst:
                 self.dsttalks.pop()
             if editrefer:
                 self.refertalks.pop()
@@ -713,7 +751,7 @@ class Editor():
 
     def removeTalk(self, row):
         self.table.blockSignals(True)
-        
+
         talk = self.talks[row]
 
         editdst = 'proofread' not in self.talks[row] or self.talks[row]['proofread']
@@ -743,8 +781,6 @@ class Editor():
                 if editrefer and 'referid' in talk:
                     self.refertalks[talk['referid']]['idx'] -= 1
 
-                blankCount = 0
-
         if editdst:
             self.dsttalks = self.checkLines(self.dsttalks)
         if editrefer:
@@ -773,5 +809,13 @@ class Editor():
         box = self.table.sender()
         if box:
             row = self.table.indexAt(box.pos()).row()
-        self.talks.pop(row)
-        self.table.removeRow(row)
+        self.talks[row]['checked'] = box.isChecked()
+        if self.talks[row]['checked']:
+            color = Color['BLUE']
+        else:
+            color = Color['YELLOW']
+        self.table.blockSignals(True)
+        for column in range(self.table.columnCount()):
+            if self.table.item(row, column):
+                self.table.item(row, column).setBackground(color)
+        self.table.blockSignals(False)

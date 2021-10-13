@@ -1,0 +1,6923 @@
+{
+  "m_GameObject": null,
+  "m_Enabled": 1,
+  "m_Script": "ObjectPointer(file_id=0, path_id=351856902256450410)",
+  "m_Name": "event_34_03",
+  "ScenarioId": "event_34_03",
+  "AppearCharacters": [
+    {
+      "Character2dId": 1,
+      "CostumeType": "01ichika_normal"
+    },
+    {
+      "Character2dId": 4,
+      "CostumeType": "04shiho_normal"
+    },
+    {
+      "Character2dId": 2,
+      "CostumeType": "02saki_normal"
+    },
+    {
+      "Character2dId": 3,
+      "CostumeType": "03honami_normal"
+    },
+    {
+      "Character2dId": 22,
+      "CostumeType": "21miku_band"
+    },
+    {
+      "Character2dId": 30,
+      "CostumeType": "25meiko_band"
+    }
+  ],
+  "FirstLayout": [],
+  "FirstBgm": "bgm00000",
+  "FirstBackground": "bg_f000101",
+  "Snippets": [
+    {
+      "Action": 6,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 0,
+      "Delay": 0.0
+    },
+    {
+      "Action": 7,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 0,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 0,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 1,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 2,
+      "Delay": 2.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 3,
+      "Delay": 2.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 4,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 5,
+      "Delay": 0.0
+    },
+    {
+      "Action": 6,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 1,
+      "Delay": 2.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 6,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 7,
+      "Delay": 0.0
+    },
+    {
+      "Action": 6,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 2,
+      "Delay": 0.0
+    },
+    {
+      "Action": 7,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 1,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 8,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 0,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 9,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 10,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 11,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 1,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 2,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 12,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 13,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 14,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 15,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 3,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 16,
+      "Delay": 4.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 4,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 17,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 18,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 5,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 19,
+      "Delay": 4.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 20,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 21,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 6,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 7,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 22,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 23,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 8,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 24,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 25,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 26,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 9,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 10,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 27,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 28,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 29,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 11,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 30,
+      "Delay": 4.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 12,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 31,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 32,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 13,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 14,
+      "Delay": 0.0
+    },
+    {
+      "Action": 7,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 2,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 33,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 34,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 15,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 35,
+      "Delay": 7.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 16,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 36,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 37,
+      "Delay": 0.0
+    },
+    {
+      "Action": 7,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 3,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 38,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 17,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 39,
+      "Delay": 9.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 18,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 19,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 40,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 41,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 42,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 43,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 44,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 45,
+      "Delay": 2.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 46,
+      "Delay": 2.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 47,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 48,
+      "Delay": 2.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 49,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 50,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 20,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 21,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 51,
+      "Delay": 4.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 22,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 23,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 52,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 53,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 24,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 54,
+      "Delay": 5.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 55,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 56,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 25,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 57,
+      "Delay": 3.5
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 26,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 58,
+      "Delay": 6.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 27,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 59,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 60,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 28,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 61,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 62,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 29,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 63,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 64,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 65,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 30,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 31,
+      "Delay": 0.0
+    },
+    {
+      "Action": 7,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 4,
+      "Delay": 0.0
+    },
+    {
+      "Action": 6,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 3,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 66,
+      "Delay": 0.0
+    },
+    {
+      "Action": 6,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 4,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 67,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 68,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 69,
+      "Delay": 2.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 70,
+      "Delay": 2.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 71,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 72,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 73,
+      "Delay": 2.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 74,
+      "Delay": 2.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 75,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 32,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 76,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 77,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 33,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 78,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 79,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 34,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 80,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 81,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 35,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 82,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 83,
+      "Delay": 0.0
+    },
+    {
+      "Action": 7,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 5,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 36,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 84,
+      "Delay": 3.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 85,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 86,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 37,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 38,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 87,
+      "Delay": 7.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 88,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 89,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 39,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 90,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 91,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 40,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 92,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 93,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 94,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 41,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 95,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 96,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 97,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 42,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 98,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 99,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 43,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 100,
+      "Delay": 5.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 101,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 102,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 103,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 104,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 105,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 106,
+      "Delay": 2.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 107,
+      "Delay": 2.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 108,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 44,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 109,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 110,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 111,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 45,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 112,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 113,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 46,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 114,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 115,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 116,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 47,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 117,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 118,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 119,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 48,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 49,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 120,
+      "Delay": 6.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 50,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 121,
+      "Delay": 1.5
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 51,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 52,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 122,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 123,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 124,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 53,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 125,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 126,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 127,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 54,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 128,
+      "Delay": 2.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 129,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 130,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 55,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 131,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 132,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 133,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 56,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 134,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 135,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 136,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 137,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 138,
+      "Delay": 0.0
+    },
+    {
+      "Action": 7,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 6,
+      "Delay": 2.0
+    },
+    {
+      "Action": 6,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 5,
+      "Delay": 0.0
+    },
+    {
+      "Action": 6,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 6,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 139,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 140,
+      "Delay": 0.0
+    },
+    {
+      "Action": 6,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 7,
+      "Delay": 0.0
+    },
+    {
+      "Action": 7,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 7,
+      "Delay": 0.0
+    },
+    {
+      "Action": 6,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 8,
+      "Delay": 0.0
+    },
+    {
+      "Action": 6,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 9,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 141,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 57,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 142,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 143,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 58,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 59,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 144,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 145,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 146,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 147,
+      "Delay": 2.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 148,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 149,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 60,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 61,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 150,
+      "Delay": 1.7999999523162842
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 62,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 151,
+      "Delay": 2.5
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 63,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 152,
+      "Delay": 2.200000047683716
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 64,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 65,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 66,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 153,
+      "Delay": 8.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 67,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 68,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 154,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 155,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 156,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 69,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 157,
+      "Delay": 2.0
+    },
+    {
+      "Action": 7,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 8,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 70,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 71,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 72,
+      "Delay": 0.0
+    },
+    {
+      "Action": 7,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 9,
+      "Delay": 0.5
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 73,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 158,
+      "Delay": 10.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 159,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 160,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 74,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 75,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 76,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 161,
+      "Delay": 5.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 77,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 162,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 163,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 164,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 165,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 166,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 167,
+      "Delay": 2.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 168,
+      "Delay": 2.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 169,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 78,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 79,
+      "Delay": 0.0
+    },
+    {
+      "Action": 4,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 170,
+      "Delay": 6.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 171,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 172,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 173,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 80,
+      "Delay": 0.0
+    },
+    {
+      "Action": 1,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 81,
+      "Delay": 0.0
+    },
+    {
+      "Action": 7,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 10,
+      "Delay": 1.0
+    },
+    {
+      "Action": 6,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 10,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 1,
+      "ReferenceIndex": 174,
+      "Delay": 0.0
+    },
+    {
+      "Action": 2,
+      "ProgressBehavior": 0,
+      "ReferenceIndex": 175,
+      "Delay": 0.0
+    }
+  ],
+  "TalkData": [
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 4
+        }
+      ],
+      "WindowDisplayName": "志歩",
+      "Body": "——うん、オリジナル曲もいい感じだね",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [],
+      "Voices": [
+        {
+          "Character2dId": 4,
+          "VoiceId": "voice_ev_band_05_03_01_04",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 2
+        }
+      ],
+      "WindowDisplayName": "咲希",
+      "Body": "すっごく気持ちよかった～！",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [],
+      "Voices": [
+        {
+          "Character2dId": 2,
+          "VoiceId": "voice_ev_band_05_03_02_02",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 3
+        }
+      ],
+      "WindowDisplayName": "穂波",
+      "Body": "うん、ドキドキしちゃった……！",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 3,
+          "MotionName": "w-adult-nod01",
+          "FacialName": "face_ncsmile_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 3,
+          "VoiceId": "voice_ev_band_05_03_03_03",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 1
+        }
+      ],
+      "WindowDisplayName": "一歌",
+      "Body": "ミク達の演奏に比べたらまだまだだけど……。\n結構良かったよね",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [],
+      "Voices": [
+        {
+          "Character2dId": 1,
+          "VoiceId": "voice_ev_band_05_03_04_01",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 4
+        }
+      ],
+      "WindowDisplayName": "志歩",
+      "Body": "うん。やっぱり自分達で作ったこともあって、\nみんな、上達が早いね",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 4,
+          "MotionName": "w-cool-nod03",
+          "FacialName": "face_smile_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 4,
+          "VoiceId": "voice_ev_band_05_03_05_04",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 2
+        }
+      ],
+      "WindowDisplayName": "咲希",
+      "Body": "何回も作り直したもんね～。\n大変だったけど、こだわってよかったって感じるよ！",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 2,
+          "MotionName": "w-cute-tilthead03",
+          "FacialName": "face_trouble_04",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 2,
+          "VoiceId": "voice_ev_band_05_03_06_02",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 3
+        }
+      ],
+      "WindowDisplayName": "穂波",
+      "Body": "ふふ、細かいところまで見て\nアドバイスしてくれた志歩ちゃんのおかげだね",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 3,
+          "MotionName": "w-adult-tilthead01",
+          "FacialName": "face_ncsmile_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 3,
+          "VoiceId": "voice_ev_band_05_03_07_03",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 4
+        }
+      ],
+      "WindowDisplayName": "志歩",
+      "Body": "咲希が頑張って作ってくれた曲だし、\n私もいい曲に仕上げたかったからね",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 4,
+          "MotionName": "w-cute-nod05",
+          "FacialName": "face_smile_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 4,
+          "VoiceId": "voice_ev_band_05_03_08_04",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 2
+        }
+      ],
+      "WindowDisplayName": "咲希",
+      "Body": "しほちゃん……！",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 2,
+          "MotionName": "w-cute-forward02",
+          "FacialName": "face_sparkling_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 2,
+          "VoiceId": "voice_ev_band_05_03_09_02",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 4
+        }
+      ],
+      "WindowDisplayName": "志歩",
+      "Body": "まあ、この調子ならライブまでに\n仕上げられるんじゃない？",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 4,
+          "MotionName": "w-cool-tilthead04",
+          "FacialName": "face_smile_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 4,
+          "VoiceId": "voice_ev_band_05_03_10_04",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 4
+        }
+      ],
+      "WindowDisplayName": "志歩",
+      "Body": "あとは……",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 4,
+          "MotionName": "w-happy-tilthead04",
+          "FacialName": "face_smallmouth_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 4,
+          "VoiceId": "voice_ev_band_05_03_11_04",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 1
+        }
+      ],
+      "WindowDisplayName": "一歌",
+      "Body": "ご、ごめん。歌……だよね。\n早く歌詞を書き上げられるようにするよ",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 1,
+          "MotionName": "w-normal-trouble01",
+          "FacialName": "face_sad_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 1,
+          "VoiceId": "voice_ev_band_05_03_12_01",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 4
+        }
+      ],
+      "WindowDisplayName": "志歩",
+      "Body": "……まだ時間はあるから大丈夫",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 4,
+          "MotionName": "w-happy-nod05",
+          "FacialName": "face_smile_05",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 4,
+          "VoiceId": "voice_ev_band_05_03_13_04",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 3
+        }
+      ],
+      "WindowDisplayName": "穂波",
+      "Body": "一歌ちゃん、結構悩んでるの？",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 3,
+          "MotionName": "w-adult-tilthead03",
+          "FacialName": "face_smallmouth_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 3,
+          "VoiceId": "voice_ev_band_05_03_14_03",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 1
+        }
+      ],
+      "WindowDisplayName": "一歌",
+      "Body": "うん。ちょっと……",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 1,
+          "MotionName": "w-normal-nod02",
+          "FacialName": "face_sad_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 1,
+          "VoiceId": "voice_ev_band_05_03_15_01",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 2
+        }
+      ],
+      "WindowDisplayName": "咲希",
+      "Body": "もしかして、アタシの曲だと歌詞作りづらかった？\nイメージわかなかったなら、ごめんね……！",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 2,
+          "MotionName": "w-cute-shy01",
+          "FacialName": "face_sad_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 2,
+          "VoiceId": "voice_ev_band_05_03_16_02",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 1
+        }
+      ],
+      "WindowDisplayName": "一歌",
+      "Body": "違う、そうじゃないんだ",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 1,
+          "MotionName": "w-normal-shakehead02",
+          "FacialName": "face_smile_04",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 1,
+          "VoiceId": "voice_ev_band_05_03_17_01",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 1
+        }
+      ],
+      "WindowDisplayName": "一歌",
+      "Body": "咲希がこの曲にこめた『みんなが不安になる時でも、\n聴けばまた頑張ろうって思えるような曲』って\nメッセージは、すごく共感できる",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 1,
+          "MotionName": "w-normal-tilthead05",
+          "FacialName": "face_smile_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 1,
+          "VoiceId": "voice_ev_band_05_03_18_01",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 1
+        }
+      ],
+      "WindowDisplayName": "一歌",
+      "Body": "私も、そんな詞を書きたいって思ってるよ",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 1,
+          "MotionName": "w-normal-shy01",
+          "FacialName": "face_smile_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 1,
+          "VoiceId": "voice_ev_band_05_03_19_01",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 1
+        }
+      ],
+      "WindowDisplayName": "一歌",
+      "Body": "……だけど……",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 1,
+          "MotionName": "w-happy-sad02",
+          "FacialName": "face_sad_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 1,
+          "VoiceId": "voice_ev_band_05_03_20_01",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 1,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 22
+        }
+      ],
+      "WindowDisplayName": "ミク",
+      "Body": "ねえ、一歌。\n歌詞はどれくらいできてるの？",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 22,
+          "MotionName": "w-cute-tilthead08",
+          "FacialName": "face_band_smile_02",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 22,
+          "VoiceId": "voice_ev_band_05_03_21_21_band",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 1
+        }
+      ],
+      "WindowDisplayName": "一歌",
+      "Body": "えっと……。\n形だけなら書き上がってるけど、\nまだ納得できるものにはなってなくて",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 1,
+          "MotionName": "w-happy-tilthead04",
+          "FacialName": "face_sad_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 1,
+          "VoiceId": "voice_ev_band_05_03_22_01",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 22
+        }
+      ],
+      "WindowDisplayName": "ミク",
+      "Body": "じゃあ、一度みんなに見せてみたらどう？",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 22,
+          "MotionName": "w-cool-sigh01",
+          "FacialName": "face_band_smile_02",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 22,
+          "VoiceId": "voice_ev_band_05_03_23_21_band",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 1
+        }
+      ],
+      "WindowDisplayName": "一歌",
+      "Body": "えっ、でも……",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 1,
+          "MotionName": "w-cool-tilthead04",
+          "FacialName": "face_sad_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 1,
+          "VoiceId": "voice_ev_band_05_03_24_01",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 30
+        }
+      ],
+      "WindowDisplayName": "MEIKO",
+      "Body": "そうだね。\nひとりで悩むよりも、みんなで悩んで案を出したほうが\nいいものが作れるかもしれないよ",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [],
+      "Voices": [
+        {
+          "Character2dId": 30,
+          "VoiceId": "voice_ev_band_05_03_25_25_band",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 2
+        }
+      ],
+      "WindowDisplayName": "咲希",
+      "Body": "うんうん！\nアタシも曲を作ってた時、\nみんなにたくさんアドバイスしてもらったし！",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 2,
+          "MotionName": "w-animal-nod02",
+          "FacialName": "face_smile_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 2,
+          "VoiceId": "voice_ev_band_05_03_26_02",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 2
+        }
+      ],
+      "WindowDisplayName": "咲希",
+      "Body": "アタシは、歌詞のことはわかんないし、\nいいアドバイスできないかもしれないけど……。\nでも、いっちゃんの力になりたい！",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 2,
+          "MotionName": "w-normal-tilthead01",
+          "FacialName": "face_trouble_04",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 2,
+          "VoiceId": "voice_ev_band_05_03_27_02",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 1
+        }
+      ],
+      "WindowDisplayName": "一歌",
+      "Body": "咲希……",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 1,
+          "MotionName": "w-cute-tilthead08",
+          "FacialName": "face_smallmouth_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 1,
+          "VoiceId": "voice_ev_band_05_03_28_01",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 3
+        }
+      ],
+      "WindowDisplayName": "穂波",
+      "Body": "一歌ちゃん、もしよければわたしも見たいな",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 3,
+          "MotionName": "w-adult-nod02",
+          "FacialName": "face_smile_05",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 3,
+          "VoiceId": "voice_ev_band_05_03_29_03",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 4
+        }
+      ],
+      "WindowDisplayName": "志歩",
+      "Body": "私も",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 4,
+          "MotionName": "w-normal-nod05",
+          "FacialName": "face_smile_02",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 4,
+          "VoiceId": "voice_ev_band_05_03_30_04",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 1
+        }
+      ],
+      "WindowDisplayName": "一歌",
+      "Body": "……うん、わかった",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 1,
+          "MotionName": "w-cute-nod05",
+          "FacialName": "face_smile_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 1,
+          "VoiceId": "voice_ev_band_05_03_31_01",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 1
+        }
+      ],
+      "WindowDisplayName": "一歌",
+      "Body": "えっと、これなんだけど——",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 1,
+          "MotionName": "w-happy-tilthead04",
+          "FacialName": "face_smile_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 1,
+          "VoiceId": "voice_ev_band_05_03_32_01",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 1,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 4
+        }
+      ],
+      "WindowDisplayName": "志歩",
+      "Body": "『迷い続けるsadness\nキミと歩み続けるhappiness\nいつかは虹がボクらの前に』……",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 4,
+          "MotionName": "w-cool-blushed01",
+          "FacialName": "face_smallmouth_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 4,
+          "VoiceId": "voice_ev_band_05_03_33_04",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 2
+        }
+      ],
+      "WindowDisplayName": "咲希",
+      "Body": "あ、この前書いてた歌詞だ！",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 2,
+          "MotionName": "w-cute-tilthead07",
+          "FacialName": "face_smile_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 2,
+          "VoiceId": "voice_ev_band_05_03_34_02",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 22
+        }
+      ],
+      "WindowDisplayName": "ミク",
+      "Body": "へえ……一歌、こんな詞を書くんだ",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 22,
+          "MotionName": "w-cool-nod01",
+          "FacialName": "face_band_smile_02",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 22,
+          "VoiceId": "voice_ev_band_05_03_35_21_band",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 3
+        }
+      ],
+      "WindowDisplayName": "穂波",
+      "Body": "ふふ、オシャレな歌詞だね",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 3,
+          "MotionName": "w-adult-nod01",
+          "FacialName": "face_smile_05",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 3,
+          "VoiceId": "voice_ev_band_05_03_36_03",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 4
+        }
+      ],
+      "WindowDisplayName": "志歩",
+      "Body": "……でも、何が言いたいのかわからないかも。\nニュアンスはなんとなく掴めるんだけど",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 4,
+          "MotionName": "w-cool-tilthead03",
+          "FacialName": "face_trouble_02",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 4,
+          "VoiceId": "voice_ev_band_05_03_37_04",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 1
+        }
+      ],
+      "WindowDisplayName": "一歌",
+      "Body": "そっか……。\nやっぱりそうだよね",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [],
+      "Voices": [
+        {
+          "Character2dId": 1,
+          "VoiceId": "voice_ev_band_05_03_38_01",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 1
+        }
+      ],
+      "WindowDisplayName": "一歌",
+      "Body": "私も、なんだか違う気がするんだ。\nこの歌詞じゃ、咲希が曲にこめた想いを\nうまく表現できてない気がする……",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 1,
+          "MotionName": "w-normal-tilthead02",
+          "FacialName": "face_sad_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 1,
+          "VoiceId": "voice_ev_band_05_03_39_01",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 4
+        }
+      ],
+      "WindowDisplayName": "志歩",
+      "Body": "表現、か……",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 4,
+          "MotionName": "w-cool-tilthead02",
+          "FacialName": "face_smallmouth_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 4,
+          "VoiceId": "voice_ev_band_05_03_40_04",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 22
+        }
+      ],
+      "WindowDisplayName": "ミク",
+      "Body": "……あれ、前のページにも何か書いてあるよ？",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 22,
+          "MotionName": "w-cool-tilthead04",
+          "FacialName": "face_band_smallmouth_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 22,
+          "VoiceId": "voice_ev_band_05_03_41_21_band",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 2
+        }
+      ],
+      "WindowDisplayName": "咲希",
+      "Body": "ホントだ！　なになに？",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 2,
+          "MotionName": "w-cute-nod02",
+          "FacialName": "face_smile_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 2,
+          "VoiceId": "voice_ev_band_05_03_42_02",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 1
+        }
+      ],
+      "WindowDisplayName": "一歌",
+      "Body": "あっ、そっちはだめ——！",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 1,
+          "MotionName": "w-normal-forward01",
+          "FacialName": "face_surprise_02",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 1,
+          "VoiceId": "voice_ev_band_05_03_43_01",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 2
+        }
+      ],
+      "WindowDisplayName": "咲希",
+      "Body": "『どんなに道に迷っても\nキミとなら乗り越えられるよ\n一緒に笑おう、これからも』——",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 2,
+          "MotionName": "w-cute-tilthead03",
+          "FacialName": "face_smallmouth_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 2,
+          "VoiceId": "voice_ev_band_05_03_44_02",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 1,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 3
+        }
+      ],
+      "WindowDisplayName": "穂波",
+      "Body": "わ……、すごく素敵……！",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 3,
+          "MotionName": "w-adult-blushed01",
+          "FacialName": "face_sparkling_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 3,
+          "VoiceId": "voice_ev_band_05_03_45_03",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 22
+        }
+      ],
+      "WindowDisplayName": "ミク",
+      "Body": "うん、一歌の優しい気持ちが伝わってくるね",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 22,
+          "MotionName": "w-cute-nod05",
+          "FacialName": "face_band_smile_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 22,
+          "VoiceId": "voice_ev_band_05_03_46_21_band",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 2
+        }
+      ],
+      "WindowDisplayName": "咲希",
+      "Body": "アタシも好きだな、この詞！",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 2,
+          "MotionName": "w-normal-nod06",
+          "FacialName": "face_smile_05",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 2,
+          "VoiceId": "voice_ev_band_05_03_47_02",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 1
+        }
+      ],
+      "WindowDisplayName": "一歌",
+      "Body": "だ、駄目だよ。そっちは……！",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 1,
+          "MotionName": "w-normal-shakehead01",
+          "FacialName": "face_shy_02",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 1,
+          "VoiceId": "voice_ev_band_05_03_48_01",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 4
+        }
+      ],
+      "WindowDisplayName": "志歩",
+      "Body": "どうして駄目なの？",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 4,
+          "MotionName": "w-normal-tilthead02",
+          "FacialName": "face_smallmouth_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 4,
+          "VoiceId": "voice_ev_band_05_03_49_04",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 1
+        }
+      ],
+      "WindowDisplayName": "一歌",
+      "Body": "だって、ありきたりすぎるし……。\nそれにLeo/needみんなの曲なのに、\n私の主観が入ってるような気がして……",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 1,
+          "MotionName": "w-normal-blushed01",
+          "FacialName": "face_shy_02",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 1,
+          "VoiceId": "voice_ev_band_05_03_50_01",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 4
+        }
+      ],
+      "WindowDisplayName": "志歩",
+      "Body": "…………？\nそれの何が駄目なの？",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 4,
+          "MotionName": "w-normal-tilthead05",
+          "FacialName": "face_smallmouth_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 4,
+          "VoiceId": "voice_ev_band_05_03_51_04",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 4
+        }
+      ],
+      "WindowDisplayName": "志歩",
+      "Body": "詞を作ってるのは一歌なんだから、\n一歌の気持ちをこめていいんじゃない？",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 4,
+          "MotionName": "w-happy-nod05",
+          "FacialName": "face_smile_02",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 4,
+          "VoiceId": "voice_ev_band_05_03_52_04",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 1
+        }
+      ],
+      "WindowDisplayName": "一歌",
+      "Body": "そう、かもしれないけど……",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 1,
+          "MotionName": "w-normal-sigh01",
+          "FacialName": "face_shy_02",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 1,
+          "VoiceId": "voice_ev_band_05_03_53_01",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 2
+        }
+      ],
+      "WindowDisplayName": "咲希",
+      "Body": "うーん。アタシはこっちのほうが好きなんだけどなー",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 2,
+          "MotionName": "w-cute-tilthead02",
+          "FacialName": "face_trouble_04",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 2,
+          "VoiceId": "voice_ev_band_05_03_54_02",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 3
+        }
+      ],
+      "WindowDisplayName": "穂波",
+      "Body": "わたしも。でも、一歌ちゃんが納得してないのなら、\nもっといい表現方法があるのかもしれないよね",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 3,
+          "MotionName": "w-normal-nod01",
+          "FacialName": "face_ncsmile_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 3,
+          "VoiceId": "voice_ev_band_05_03_55_03",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 4
+        }
+      ],
+      "WindowDisplayName": "志歩",
+      "Body": "……そうかもね",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 4,
+          "MotionName": "w-cute-nod05",
+          "FacialName": "face_smile_02",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 4,
+          "VoiceId": "voice_ev_band_05_03_56_04",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 1
+        }
+      ],
+      "WindowDisplayName": "一歌",
+      "Body": "……みんな、ごめん。\nもっと考えてみるよ",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 1,
+          "MotionName": "w-normal-nod05",
+          "FacialName": "face_sad_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 1,
+          "VoiceId": "voice_ev_band_05_03_57_01",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 1,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 3
+        }
+      ],
+      "WindowDisplayName": "穂波",
+      "Body": "…………",
+      "TalkTention": 0,
+      "LipSync": 2,
+      "MotionChangeFrom": 1,
+      "Motions": [],
+      "Voices": [
+        {
+          "Character2dId": 3,
+          "VoiceId": "voice_ev_band_05_03_58_03",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 4
+        }
+      ],
+      "WindowDisplayName": "志歩",
+      "Body": "——あれ、穂波？",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [],
+      "Voices": [
+        {
+          "Character2dId": 4,
+          "VoiceId": "voice_ev_band_05_03_59_04",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 4
+        }
+      ],
+      "WindowDisplayName": "志歩",
+      "Body": "（すごく真剣な顔でスマホ見てるけど……。\n何見てるんだろ？）",
+      "TalkTention": 0,
+      "LipSync": 2,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 4,
+          "MotionName": "w-cool-tilthead03",
+          "FacialName": "face_smallmouth_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 4,
+          "VoiceId": "voice_ev_band_05_03_60_04",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 1,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 4
+        }
+      ],
+      "WindowDisplayName": "志歩",
+      "Body": "ねえ、穂波",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 4,
+          "MotionName": "w-cool-nod03",
+          "FacialName": "face_smallmouth_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 4,
+          "VoiceId": "voice_ev_band_05_03_61_04",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 3
+        }
+      ],
+      "WindowDisplayName": "穂波",
+      "Body": "ひゃっ！　あ、志歩ちゃん……！",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 3,
+          "MotionName": "w-cute-glad01",
+          "FacialName": "face_shy_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 3,
+          "VoiceId": "voice_ev_band_05_03_62_03",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 4
+        }
+      ],
+      "WindowDisplayName": "志歩",
+      "Body": "……驚かせてごめん。\n何見てるのか気になって",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 4,
+          "MotionName": "w-cool-tilthead04",
+          "FacialName": "face_smile_05",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 4,
+          "VoiceId": "voice_ev_band_05_03_63_04",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 3
+        }
+      ],
+      "WindowDisplayName": "穂波",
+      "Body": "あ、これ……？\nSTANDOUTの曲、聴いてたんだ",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 3,
+          "MotionName": "w-normal-tilthead06",
+          "FacialName": "face_smile_04",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 3,
+          "VoiceId": "voice_ev_band_05_03_64_03",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 4
+        }
+      ],
+      "WindowDisplayName": "志歩",
+      "Body": "STANDOUTの？　なんで？",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 4,
+          "MotionName": "w-cute-tilthead08",
+          "FacialName": "face_smallmouth_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 4,
+          "VoiceId": "voice_ev_band_05_03_65_04",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 3
+        }
+      ],
+      "WindowDisplayName": "穂波",
+      "Body": "昨日、一歌ちゃんが作詞で悩んでたでしょ？",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 3,
+          "MotionName": "w-normal-nod01",
+          "FacialName": "face_ncsmile_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 3,
+          "VoiceId": "voice_ev_band_05_03_66_03",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 3
+        }
+      ],
+      "WindowDisplayName": "穂波",
+      "Body": "あの時、アドバイスしたいなって思っても、\n作詞のこと全然わかんなくて……。\n結局、何も言えなかったから",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 3,
+          "MotionName": "w-normal-trouble01",
+          "FacialName": "face_smile_04",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 3,
+          "VoiceId": "voice_ev_band_05_03_67_03",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 3
+        }
+      ],
+      "WindowDisplayName": "穂波",
+      "Body": "だから、少しでも勉強して、\n一歌ちゃんの力になりたいなって思って",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 3,
+          "MotionName": "w-normal-nod02",
+          "FacialName": "face_ncsmile_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 3,
+          "VoiceId": "voice_ev_band_05_03_68_03",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 4
+        }
+      ],
+      "WindowDisplayName": "志歩",
+      "Body": "……そうだったんだ",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 4,
+          "MotionName": "w-happy-nod05",
+          "FacialName": "face_smile_02",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 4,
+          "VoiceId": "voice_ev_band_05_03_69_04",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 3
+        }
+      ],
+      "WindowDisplayName": "穂波",
+      "Body": "うん。でも、やっぱり難しいな……",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 3,
+          "MotionName": "w-normal-nod05",
+          "FacialName": "face_ncsmile_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 3,
+          "VoiceId": "voice_ev_band_05_03_70_03",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 3
+        }
+      ],
+      "WindowDisplayName": "穂波",
+      "Body": "わたしは、一歌ちゃんが最初に見せてくれたオシャレな歌詞より\nふたつめのストレートな歌詞のほうがいいって思ったの",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 3,
+          "MotionName": "w-happy-nod05",
+          "FacialName": "face_smile_05",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 3,
+          "VoiceId": "voice_ev_band_05_03_71_03",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 3
+        }
+      ],
+      "WindowDisplayName": "穂波",
+      "Body": "だから、歌詞はストレートなほうがいいかなと思ったけど……",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 3,
+          "MotionName": "w-happy-tilthead04",
+          "FacialName": "face_smile_05",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 3,
+          "VoiceId": "voice_ev_band_05_03_72_03",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 3
+        }
+      ],
+      "WindowDisplayName": "穂波",
+      "Body": "でもSTANDOUTの歌詞は、オシャレな言い回しなのに\nすごく気持ちが伝わってくる気がするの",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 3,
+          "MotionName": "w-normal-trouble02",
+          "FacialName": "face_sad_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 3,
+          "VoiceId": "voice_ev_band_05_03_73_03",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 3
+        }
+      ],
+      "WindowDisplayName": "穂波",
+      "Body": "同じような表現でも、全然印象が違うんだよね。\nどうしてなんだろうって考えてたんだけど、\n……まだよくわかんなくて",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 3,
+          "MotionName": "w-adult-nod01",
+          "FacialName": "face_smile_04",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 3,
+          "VoiceId": "voice_ev_band_05_03_74_03",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 4
+        }
+      ],
+      "WindowDisplayName": "志歩",
+      "Body": "……音楽に正解はないからね",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 4,
+          "MotionName": "w-normal-nod05",
+          "FacialName": "face_normal_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 4,
+          "VoiceId": "voice_ev_band_05_03_75_04",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 4
+        }
+      ],
+      "WindowDisplayName": "志歩",
+      "Body": "ストレートな表現も、凝った言い回しも、\nどっちも正しいと思う",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 4,
+          "MotionName": "w-normal-tilthead05",
+          "FacialName": "face_normal_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 4,
+          "VoiceId": "voice_ev_band_05_03_76_04",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 4
+        }
+      ],
+      "WindowDisplayName": "志歩",
+      "Body": "問題は……、一歌がちゃんと自分の伝えたいことを\n表現できてるか、だと思うんだけど",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 4,
+          "MotionName": "w-normal-tilthead01",
+          "FacialName": "face_normal_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 4,
+          "VoiceId": "voice_ev_band_05_03_77_04",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 4
+        }
+      ],
+      "WindowDisplayName": "志歩",
+      "Body": "——私も作詞の経験はないし、\nいいアドバイスはしてあげられそうにないな",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 4,
+          "MotionName": "w-normal-trouble01",
+          "FacialName": "face_sad_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 4,
+          "VoiceId": "voice_ev_band_05_03_78_04",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 1,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 4
+        }
+      ],
+      "WindowDisplayName": "志歩",
+      "Body": "……悔しいな",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 4,
+          "MotionName": "w-normal-tilthead0106",
+          "FacialName": "face_sad_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 4,
+          "VoiceId": "voice_ev_band_05_03_79_04",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 4
+        }
+      ],
+      "WindowDisplayName": "志歩",
+      "Body": "咲希の時もそうだったけど……。\n曲作りっていう、バンドにとって大事な場面で\n私は何もできてない",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 4,
+          "MotionName": "w-normal-nod06",
+          "FacialName": "face_sad_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 4,
+          "VoiceId": "voice_ev_band_05_03_80_04",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 3
+        }
+      ],
+      "WindowDisplayName": "穂波",
+      "Body": "志歩ちゃん……",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 3,
+          "MotionName": "w-adult-tilthead01",
+          "FacialName": "face_sad_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 3,
+          "VoiceId": "voice_ev_band_05_03_81_03",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 0,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    },
+    {
+      "TalkCharacters": [
+        {
+          "Character2dId": 3
+        }
+      ],
+      "WindowDisplayName": "穂波",
+      "Body": "わたし達にできること、何かないのかな……",
+      "TalkTention": 0,
+      "LipSync": 1,
+      "MotionChangeFrom": 1,
+      "Motions": [
+        {
+          "Character2dId": 3,
+          "MotionName": "w-adult-tilthead03",
+          "FacialName": "face_sad_01",
+          "TimingSyncValue": 0.0
+        }
+      ],
+      "Voices": [
+        {
+          "Character2dId": 3,
+          "VoiceId": "voice_ev_band_05_03_82_03",
+          "Volume": 1.0
+        }
+      ],
+      "Speed": 0.0,
+      "FontSize": 0,
+      "WhenFinishCloseWindow": 1,
+      "RequirePlayEffect": 0,
+      "EffectReferenceIdx": 0,
+      "RequirePlaySound": 0,
+      "SoundReferenceIdx": 0
+    }
+  ],
+  "LayoutData": [
+    {
+      "Type": 2,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 1,
+      "CostumeType": "01ichika_normal",
+      "MotionName": "w-normal-glad01",
+      "FacialName": "face_sharp_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "04shiho_normal",
+      "MotionName": "w-cool-glad01",
+      "FacialName": "face_sharp_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 1,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 2,
+      "CostumeType": "02saki_normal",
+      "MotionName": "w-cute-nod05",
+      "FacialName": "face_angry_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "03honami_normal",
+      "MotionName": "w-adult-nod01",
+      "FacialName": "face_angry_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 2,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "w-cool-nod02",
+      "FacialName": "face_smile_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 2,
+      "CostumeType": "",
+      "MotionName": "w-cute-glad05",
+      "FacialName": "face_smile_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "",
+      "MotionName": "w-adult-posetilthead01",
+      "FacialName": "face_ncsmile_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 2,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 1,
+      "CostumeType": "",
+      "MotionName": "w-adult-tilthead02",
+      "FacialName": "face_smile_04",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 1,
+      "CostumeType": "",
+      "MotionName": "w-adult-nod02",
+      "FacialName": "face_smile_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 1,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 2,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_trouble_04",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 2,
+      "CostumeType": "",
+      "MotionName": "w-cute-nod02",
+      "FacialName": "face_smile_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 2,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_ncsmile_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 2,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_sparkling_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 2,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_smile_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 1,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_sad_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 1,
+      "CostumeType": "",
+      "MotionName": "w-normal-nod01",
+      "FacialName": "face_sad_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_smallmouth_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 2,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_sad_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 2,
+      "CostumeType": "",
+      "MotionName": "w-normal-nod06",
+      "FacialName": "face_sad_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 1,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 2,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 1,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_smile_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 1,
+      "CostumeType": "",
+      "MotionName": "w-normal-nod05",
+      "FacialName": "face_smile_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 1,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 2,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_sad_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_sad_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 1,
+      "SideFrom": 0,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 2,
+      "CostumeType": "",
+      "MotionName": "w-normal-tilthead06",
+      "FacialName": "face_sad_01",
+      "MoveSpeedType": 1
+    },
+    {
+      "Type": 1,
+      "SideFrom": 0,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "",
+      "MotionName": "w-adult-think02",
+      "FacialName": "face_sad_01",
+      "MoveSpeedType": 1
+    },
+    {
+      "Type": 3,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 2,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 22,
+      "CostumeType": "21miku_band",
+      "MotionName": "w-cool-tilthead04",
+      "FacialName": "face_band_sad_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 22,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 1,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 22,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_band_smile_02",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 1,
+      "CostumeType": "",
+      "MotionName": "w-happy-nod05",
+      "FacialName": "face_sad_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 22,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 30,
+      "CostumeType": "25meiko_band",
+      "MotionName": "w-cool-nod03",
+      "FacialName": "face_smile_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 30,
+      "CostumeType": "",
+      "MotionName": "w-cool-tilthead03",
+      "FacialName": "face_smile_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 30,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 2,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_smile_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 2,
+      "CostumeType": "",
+      "MotionName": "w-cute-glad01",
+      "FacialName": "face_smile_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 2,
+      "CostumeType": "",
+      "MotionName": "w-normal-forward01",
+      "FacialName": "face_serious_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 2,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_smile_05",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_smile_02",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 1,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 1,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_smile_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 1,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 2,
+      "CostumeType": "",
+      "MotionName": "w-cute-tilthead05",
+      "FacialName": "face_smallmouth_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "",
+      "MotionName": "w-adult-tilthead01",
+      "FacialName": "face_smallmouth_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 2,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "w-cool-tilthead04",
+      "FacialName": "face_smallmouth_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 22,
+      "CostumeType": "",
+      "MotionName": "w-cool-trouble01",
+      "FacialName": "face_band_smallmouth_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 22,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_smallmouth_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 2,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_smile_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 2,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 22,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_band_smile_02",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 22,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_smile_05",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_trouble_02",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "w-cool-nod03",
+      "FacialName": "face_trouble_02",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 1,
+      "CostumeType": "",
+      "MotionName": "w-normal-sad01",
+      "FacialName": "face_sad_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 1,
+      "CostumeType": "",
+      "MotionName": "w-normal-shakehead02",
+      "FacialName": "face_sad_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 1,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_smallmouth_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 22,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_band_smallmouth_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 22,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 2,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_smile_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 22,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 2,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 22,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 1,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_surprise_02",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 1,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 2,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_smallmouth_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 2,
+      "CostumeType": "",
+      "MotionName": "w-cute-tilthead07",
+      "FacialName": "face_surprise_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 2,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 2,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_surprise_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_surprise_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 1,
+      "SideFrom": 0,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 2,
+      "CostumeType": "",
+      "MotionName": "w-cute-glad01",
+      "FacialName": "face_surprise_01",
+      "MoveSpeedType": 1
+    },
+    {
+      "Type": 1,
+      "SideFrom": 0,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "w-cool-tilthead01",
+      "FacialName": "face_surprise_01",
+      "MoveSpeedType": 1
+    },
+    {
+      "Type": 3,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 2,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_sparkling_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 22,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_band_smile_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 2,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_smile_05",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 2,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 22,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 1,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_shy_02",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 1,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 1,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_smallmouth_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 1,
+      "CostumeType": "",
+      "MotionName": "w-normal-relief01",
+      "FacialName": "face_shy_02",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "w-happy-tilthead04",
+      "FacialName": "face_smallmouth_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 1,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 2,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_trouble_04",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 2,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 2,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_ncsmile_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "",
+      "MotionName": "w-normal-tilthead01",
+      "FacialName": "face_ncsmile_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 2,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_smile_02",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 1,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_sad_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 1,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_sad_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_sad_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 1,
+      "SideFrom": 0,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "w-cool-tilthead04",
+      "FacialName": "face_sad_01",
+      "MoveSpeedType": 1
+    },
+    {
+      "Type": 1,
+      "SideFrom": 0,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "",
+      "MotionName": "w-normal-tilthead02",
+      "FacialName": "face_sad_01",
+      "MoveSpeedType": 1
+    },
+    {
+      "Type": 3,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "",
+      "MotionName": "w-adult-tilthead02",
+      "FacialName": "face_angry_02",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "w-cool-tilthead02",
+      "FacialName": "face_smallmouth_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_angry_02",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 1,
+      "SideFrom": 0,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "",
+      "MotionName": "w-adult-think01",
+      "FacialName": "face_angry_02",
+      "MoveSpeedType": 1
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_smallmouth_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "",
+      "MotionName": "w-normal-nod06",
+      "FacialName": "face_smile_04",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "w-cute-nod05",
+      "FacialName": "face_smile_05",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "",
+      "MotionName": "w-normal-tilthead0601",
+      "FacialName": "face_ncsmile_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "",
+      "MotionName": "w-normal-sigh01",
+      "FacialName": "face_smile_04",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_ncsmile_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "",
+      "MotionName": "w-normal-shy01",
+      "FacialName": "face_smile_04",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "",
+      "MotionName": "w-adult-shakehead01",
+      "FacialName": "face_smile_04",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_normal_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "w-normal-nod01",
+      "FacialName": "face_normal_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_sad_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_sad_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 1,
+      "SideFrom": 0,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "",
+      "MotionName": "w-adult-relief01",
+      "FacialName": "face_sad_01",
+      "MoveSpeedType": 1
+    },
+    {
+      "Type": 1,
+      "SideFrom": 0,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "w-normal-blushed01",
+      "FacialName": "face_sad_01",
+      "MoveSpeedType": 1
+    },
+    {
+      "Type": 3,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_sad_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 0,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "w-normal-shakehead06",
+      "FacialName": "face_sad_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 4,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 4,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "face_sad_01",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 2,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 3,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 3,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 3,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    },
+    {
+      "Type": 3,
+      "SideFrom": 7,
+      "SideFromOffsetX": 0.0,
+      "SideTo": 7,
+      "SideToOffsetX": 0.0,
+      "DepthType": 0,
+      "Character2dId": 4,
+      "CostumeType": "",
+      "MotionName": "",
+      "FacialName": "",
+      "MoveSpeedType": 0
+    }
+  ],
+  "SpecialEffectData": [
+    {
+      "EffectType": 8,
+      "StringVal": "教室のセカイ",
+      "StringValSub": "",
+      "Duration": 0.0,
+      "IntVal": 0
+    },
+    {
+      "EffectType": 2,
+      "StringVal": "",
+      "StringValSub": "",
+      "Duration": 0.5,
+      "IntVal": 0
+    },
+    {
+      "EffectType": 1,
+      "StringVal": "",
+      "StringValSub": "",
+      "Duration": 0.5,
+      "IntVal": 0
+    },
+    {
+      "EffectType": 2,
+      "StringVal": "",
+      "StringValSub": "",
+      "Duration": 1.0,
+      "IntVal": 0
+    },
+    {
+      "EffectType": 1,
+      "StringVal": "",
+      "StringValSub": "",
+      "Duration": 1.0,
+      "IntVal": 0
+    },
+    {
+      "EffectType": 2,
+      "StringVal": "",
+      "StringValSub": "",
+      "Duration": 2.0,
+      "IntVal": 0
+    },
+    {
+      "EffectType": 7,
+      "StringVal": "bg_a002201",
+      "StringValSub": "bg_a002201",
+      "Duration": 0.0,
+      "IntVal": 0
+    },
+    {
+      "EffectType": 1,
+      "StringVal": "",
+      "StringValSub": "",
+      "Duration": 1.0,
+      "IntVal": 0
+    },
+    {
+      "EffectType": 8,
+      "StringVal": "翌日",
+      "StringValSub": "",
+      "Duration": 0.0,
+      "IntVal": 0
+    },
+    {
+      "EffectType": 8,
+      "StringVal": "宮益坂女子学園　中庭",
+      "StringValSub": "",
+      "Duration": 0.0,
+      "IntVal": 0
+    },
+    {
+      "EffectType": 2,
+      "StringVal": "",
+      "StringValSub": "",
+      "Duration": 2.5,
+      "IntVal": 0
+    }
+  ],
+  "SoundData": [
+    {
+      "PlayMode": 0,
+      "Bgm": "",
+      "Se": "se_event_future_2021_002",
+      "Volume": 1.0,
+      "SeBundleName": "",
+      "Duration": 0.0
+    },
+    {
+      "PlayMode": 0,
+      "Bgm": "bgm00024",
+      "Se": "",
+      "Volume": 1.0,
+      "SeBundleName": "",
+      "Duration": 2.0
+    },
+    {
+      "PlayMode": 0,
+      "Bgm": "bgm00000",
+      "Se": "",
+      "Volume": 1.0,
+      "SeBundleName": "",
+      "Duration": 2.0
+    },
+    {
+      "PlayMode": 0,
+      "Bgm": "bgm00039",
+      "Se": "",
+      "Volume": 1.0,
+      "SeBundleName": "",
+      "Duration": 2.0
+    },
+    {
+      "PlayMode": 0,
+      "Bgm": "bgm00000",
+      "Se": "",
+      "Volume": 1.0,
+      "SeBundleName": "",
+      "Duration": 1.5
+    },
+    {
+      "PlayMode": 0,
+      "Bgm": "bgm00038",
+      "Se": "",
+      "Volume": 1.0,
+      "SeBundleName": "",
+      "Duration": 2.0
+    },
+    {
+      "PlayMode": 0,
+      "Bgm": "bgm00000",
+      "Se": "",
+      "Volume": 1.0,
+      "SeBundleName": "",
+      "Duration": 2.5
+    },
+    {
+      "PlayMode": 0,
+      "Bgm": "bgm00018",
+      "Se": "",
+      "Volume": 1.0,
+      "SeBundleName": "",
+      "Duration": 2.0
+    },
+    {
+      "PlayMode": 0,
+      "Bgm": "bgm00000",
+      "Se": "",
+      "Volume": 1.0,
+      "SeBundleName": "",
+      "Duration": 2.0
+    },
+    {
+      "PlayMode": 0,
+      "Bgm": "bgm00016",
+      "Se": "",
+      "Volume": 1.0,
+      "SeBundleName": "",
+      "Duration": 2.0
+    },
+    {
+      "PlayMode": 0,
+      "Bgm": "bgm00000",
+      "Se": "",
+      "Volume": 1.0,
+      "SeBundleName": "",
+      "Duration": 2.5
+    }
+  ],
+  "NeedBundleNames": [
+    "scenario/background/bg_f000101",
+    "scenario/background/bg_a002201"
+  ],
+  "IncludeSoundDataBundleNames": []
+}
