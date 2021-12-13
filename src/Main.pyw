@@ -2,7 +2,10 @@ from __future__ import unicode_literals
 
 import atexit
 import sys
+import time
+import traceback
 
+import PyQt5.QtCore as qc
 import PyQt5.QtWidgets as qw
 from mainGUI import Ui_SekaiText
 from PyQt5.QtGui import QKeySequence, QIcon
@@ -47,29 +50,22 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
     dstfilename = ""
     dstfilepath = ""
 
-    root, _ = osp.split(osp.abspath(sys.argv[0]))
-    if not getattr(sys, 'frozen', False):
-        root = osp.join(root, "../")
-
-    if platform.system() == "Darwin":
-        root = osp.join(root, '../../../')
-    datadir = osp.join(root, "data")
-    settingdir = osp.join(root, "setting")
+    datadir = ""
+    settingdir = ""
 
     setting = {}
     preStoryType = ""
 
-    def __init__(self):
+    downloadState = 1
+
+    def __init__(self, root):
         super().__init__()
-        if osp.exists(self.settingdir):
-            logging.basicConfig(level=logging.INFO,
-                                filename=osp.join(self.settingdir, ".log"),
-                                filemode='w')
-        else:
+
+        self.datadir = osp.join(root, "data")
+        self.settingdir = osp.join(root, "setting")
+
+        if not osp.exists(self.settingdir):
             mkdir(self.settingdir)
-            logging.basicConfig(level=logging.INFO,
-                                filename=osp.join(self.settingdir, ".log"),
-                                filemode='w')
             logging.warning("Setting Folder not Exists")
             logging.info("Setting Folder Created")
         if not osp.exists(self.datadir):
@@ -154,6 +150,10 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         self.tableWidgetDst.itemChanged.connect(self.changeText)
 
         qw.QShortcut(QKeySequence(self.tr("Ctrl+S")), self, self.saveText)
+
+        self.tempWindow = qw.QMessageBox(self)
+        self.tempWindow.setIcon(qw.QMessageBox.Information)
+        self.tempWindow.setWindowTitle("")
 
     def loadJson(self):
         if not self.event:
@@ -304,31 +304,27 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
         if source in ["sekai.best", "pjsek.ai"]:
             logging.info("Downloading Json File from: " + jsonurl)
-            try:
-                headers={'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36'}
-                jsondata = json.loads(requests.get(jsonurl, headers=headers).text)
-            except BaseException as e:
-                logging.error("Fail to Download Json File from " + source)
-                logging.error(e)
 
-                with open(jsonpath, 'w', encoding='utf-8') as f:
-                    json.dump("", f, indent=2, ensure_ascii=False)
+            download = downloadThread(jsonpath, jsonurl)
+            download.start()
+            download.trigger.connect(self.checkDownload)
 
-                qw.QMessageBox.warning(
-                    self, "", u"下载失败\n请确认能正常访问{}，且关闭代理与VPN".format(source))
-                urlText = u"可自行前往以下地址下载<br>" + \
-                    "<a href=\"{}\">{}</a>".format(jsonurl, jsonname) + \
-                    "<br><br>下载时将文件名命名为{}，替换data文件夹中的原有文件".format(jsonname) + \
-                    "<br><br>若没有自动开始下载，则将打开的网页中的内容全部复制(Ctrl+A全选，Ctrl+C复制)，" + \
-                    "替换data文件夹中{}的内容".format(jsonname)
-                qw.QMessageBox.information(self, "", urlText)
+            urlText = u"下载中...<br>若耗时过长可自行前往下方地址下载" + \
+                "<br><a href=\"{}\">{}</a>".format(jsonurl, jsonname) + \
+                "<br><br>下载时将文件名命名为{}，替换SekaiText同目录的data文件夹中的同名文件".format(jsonname) + \
+                "<br><br>若没有自动开始下载，则将打开的网页中的内容全部复制(Ctrl+A全选，Ctrl+C复制)，" + \
+                "替换data文件夹中{}的内容(替换时用记事本打开即可)".format(jsonname) +\
+                "<br><br>轴机用json请从pjsek.ai复制"
+
+            self.tempWindow.setStandardButtons(qw.QMessageBox.Cancel)
+            self.tempWindow.setText(urlText)
+            self.tempWindow.open()
+            self.downloadState = 0
+            while not self.downloadState:
+                time.sleep(0.1)
+                qw.QApplication.processEvents()
+            if self.downloadState == 2:
                 return
-            else:
-                logging.info("Success to Download {}.".format(jsonname))
-
-            with open(jsonpath, 'w', encoding='utf-8') as f:
-                json.dump(jsondata, f, indent=2, ensure_ascii=False)
-            logging.info("Json File Saved: " + jsonpath)
             self.comboBoxDataSource.setCurrentText(u"本地文件")
         elif source == u"本地文件":
             if not osp.exists(jsonpath):
@@ -648,7 +644,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 self.comboBoxStoryIndex.addItem(unitDict[unit["unit"]])
             if (storyType == self.preStoryType) and (storyIndex >= 0):
                 self.comboBoxStoryIndex.setCurrentIndex(storyIndex)
-            unitId = self.comboBoxStoryIndex.currentIndex()
+            unitId = max(self.comboBoxStoryIndex.currentIndex(), 0)
             for idx, chapter in enumerate(self.mainstory[unitId]["chapters"]):
                 epNo = idx - 1
                 if unitId == 0:
@@ -667,7 +663,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                     [str(len(self.events) - idx), event['title']]))
             if (storyType == self.preStoryType) and (storyIndex >= 0):
                 self.comboBoxStoryIndex.setCurrentIndex(storyIndex)
-            eventId = len(self.events) - self.comboBoxStoryIndex.currentIndex()
+            eventId = len(self.events) - max(self.comboBoxStoryIndex.currentIndex(), 0)
             for idx, chapter in enumerate(self.events[eventId - 1]['chapters']):
                 self.comboBoxStoryChapter.addItem(str(idx + 1) + " " + chapter)
             if storyChapter:
@@ -681,7 +677,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                     [str(len(self.events) - idx), event['title']]))
             if (storyType == self.preStoryType) and (storyIndex >= 0):
                 self.comboBoxStoryIndex.setCurrentIndex(storyIndex)
-            eventId = len(self.events) - self.comboBoxStoryIndex.currentIndex()
+            eventId = len(self.events) - max(self.comboBoxStoryIndex.currentIndex(), 0)
             for cardId in self.events[eventId - 1]['cards']:
                 self.comboBoxStoryChapter.addItem(u"前篇  " + 
                     self.chars[self.cards[cardId - 1]['characterId'] - 1]['name_j'])
@@ -710,8 +706,8 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                         year, str(month).zfill(2)))
             if (storyType == self.preStoryType) and (storyIndex >= 0):
                 self.comboBoxStoryIndex.setCurrentIndex(storyIndex)
-            fseId = len(self.fes) - self.comboBoxStoryIndex.currentIndex()
-            for cardId in self.fes[fseId - 1]['cards']:
+            fesId = len(self.fes) - max(self.comboBoxStoryIndex.currentIndex(), 0)
+            for cardId in self.fes[fesId - 1]['cards']:
                 self.comboBoxStoryChapter.addItem(u"前篇  " + 
                     self.chars[self.cards[cardId - 1]['characterId'] - 1]['name_j'])
                 self.comboBoxStoryChapter.addItem(u"后篇  " + 
@@ -758,6 +754,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         except BaseException as e:
             logging.error("Fail to Download Settingg File from best.")
             logging.error(e)
+            traceback.print_exc()
             qw.QMessageBox.warning(
                 self, "", u"更新失败\n请确认能正常访问sekai.best，且关闭代理与VPN")
             return
@@ -789,6 +786,56 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         self.dstText.isProofReading = False
     '''
 
+    def checkDownload(self, successed):
+        while self.downloadState:
+            time.sleep(0.1)
+            qw.QApplication.processEvents()
+        if successed:
+            self.tempWindow.close()
+            self.downloadState = 1
+        else:
+            urlText = self.tempWindow.text().replace(
+                "下载中...<br>若耗时过长",
+                "下载失败，请确认代理与VPN关闭<br>随后点击下方链接确认Json文件是否存在<br>也")
+            self.tempWindow.setStandardButtons(qw.QMessageBox.Ok)
+            self.tempWindow.setText(urlText)
+            self.tempWindow.close()
+            self.tempWindow.exec()
+            self.downloadState = 2
+
+
+
+class downloadThread(qc.QThread):
+    trigger = qc.pyqtSignal(bool)
+    path = ""
+    url = ""
+
+    def __init__(self, jsonpath, jsonurl):
+        super(downloadThread, self).__init__()
+        self.path = jsonpath
+        self.url = jsonurl
+
+    def run(self):
+        try:
+            headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36'}
+            r = requests.get(self.url, headers=headers, stream=True)
+            r.encoding = 'utf-8'
+            jsondata = json.loads(r.text)
+
+            with open(self.path, 'w', encoding='utf-8') as f:
+                json.dump(jsondata, f, indent=2, ensure_ascii=False)
+            logging.info("Json File Saved: " + self.path)
+
+            if "code" in jsondata and jsondata["code"] == "not_found":
+                logging.info("Download Failed, Json File not Exist.")
+                self.trigger.emit(False)
+            else:
+                logging.info("Download Successed.")
+                self.trigger.emit(True)
+        except BaseException:
+            logging.error("Fail to Download Json File.")
+            self.trigger.emit(False)
+
 
 def save(self):
     settingpath = osp.join(self.settingdir, "setting.json")
@@ -798,21 +845,39 @@ def save(self):
 
 if __name__ == '__main__':
     app = qw.QApplication(sys.argv)
-    modeSelectWinodw = qw.QMessageBox()
-    modeSelectWinodw.setWindowTitle("Sekai Text")
-    modeSelectWinodw.setText("校对与合意时\n强烈建议在有音画对照的条件下进行\n如看游戏内，或者对照录制视频")
-    translateButton = modeSelectWinodw.addButton(u"翻译", 2)
-    proofreadButton = modeSelectWinodw.addButton(u"校对", 2)
-    checkButton = modeSelectWinodw.addButton(u"合意", 2)
-    # judgeButton = modeSelectWinodw.addButton(u"审核", 2)
 
-    mainform = mainForm()
-    translateButton.clicked.connect(mainform.translateMode)
-    proofreadButton.clicked.connect(mainform.proofreadMode)
-    checkButton.clicked.connect(mainform.checkMode)
-    # judgeButton.clicked.connect(mainform.judgeMode())
+    root, _ = osp.split(osp.abspath(sys.argv[0]))
+    if not getattr(sys, 'frozen', False):
+        root = osp.join(root, "../")
 
-    modeSelectWinodw.exec_()
-    mainform.show()
-    atexit.register(save, mainform)
-    app.exec_()
+    if platform.system() == "Darwin":
+        root = osp.join(root, '../../../')
+
+    loggingPath = osp.join(root, "setting", "log.txt")
+    logging.basicConfig(level=logging.INFO,
+                        filename=loggingPath,
+                        filemode='w')
+    try:
+        modeSelectWinodw = qw.QMessageBox()
+        modeSelectWinodw.setWindowTitle("Sekai Text")
+        modeSelectWinodw.setText("校对与合意时\n强烈建议在有音画对照的条件下进行\n如看游戏内，或者对照录制视频")
+        translateButton = modeSelectWinodw.addButton(u"翻译", 2)
+        proofreadButton = modeSelectWinodw.addButton(u"校对", 2)
+        checkButton = modeSelectWinodw.addButton(u"合意", 2)
+        # judgeButton = modeSelectWinodw.addButton(u"审核", 2)
+
+        mainform = mainForm(root)
+        translateButton.clicked.connect(mainform.translateMode)
+        proofreadButton.clicked.connect(mainform.proofreadMode)
+        checkButton.clicked.connect(mainform.checkMode)
+        # judgeButton.clicked.connect(mainform.judgeMode())
+
+        modeSelectWinodw.exec_()
+        mainform.show()
+        atexit.register(save, mainform)
+        app.exec_()
+    except BaseException:
+        exc_type, exc_value, exc_traceback_obj = sys.exc_info()
+        with open(loggingPath, 'a') as f:
+            traceback.print_exception(
+                exc_type, exc_value, exc_traceback_obj, file=f)

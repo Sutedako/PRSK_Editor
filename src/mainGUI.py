@@ -37,14 +37,14 @@ class Ui_SekaiText(object):
 
         self.comboBoxStoryIndex = QtWidgets.QComboBox(self.centralwidget)
         self.comboBoxStoryIndex.setMinimumSize(QtCore.QSize(150, 30))
-        self.comboBoxStoryIndex.setMaximumSize(QtCore.QSize(360, 30))
+        self.comboBoxStoryIndex.setMaximumSize(QtCore.QSize(380, 30))
         self.comboBoxStoryIndex.setMaxVisibleItems(20)
         self.comboBoxStoryIndex.setObjectName("comboBoxStoryIndex")
         self.horizontalLayout.addWidget(self.comboBoxStoryIndex)
 
         self.comboBoxStoryChapter = QtWidgets.QComboBox(self.centralwidget)
         self.comboBoxStoryChapter.setMinimumSize(QtCore.QSize(100, 30))
-        self.comboBoxStoryChapter.setMaximumSize(QtCore.QSize(200, 30))
+        self.comboBoxStoryChapter.setMaximumSize(QtCore.QSize(300, 30))
         self.comboBoxStoryChapter.setMaxVisibleItems(20)
         self.comboBoxStoryChapter.setObjectName("comboBoxStoryChapter")
         self.horizontalLayout.addWidget(self.comboBoxStoryChapter)
@@ -56,6 +56,7 @@ class Ui_SekaiText(object):
         self.horizontalLayout.addWidget(self.pushButtonRefresh)
 
         self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setMaximumSize(QtCore.QSize(20, 30))
         self.label.setText("")
         self.label.setObjectName("label")
         self.horizontalLayout.addWidget(self.label)
@@ -203,7 +204,7 @@ class Ui_SekaiText(object):
 
         self.tableWidgetSrc = QtWidgets.QTableWidget(self.centralwidget)
         self.tableWidgetSrc.setMinimumSize(QtCore.QSize(300, 500))
-        self.tableWidgetSrc.setMaximumSize(QtCore.QSize(760, 16777215))
+        self.tableWidgetSrc.setMaximumSize(QtCore.QSize(900, 16777215))
         self.tableWidgetSrc.setObjectName("tableWidgetSrc")
         self.tableWidgetSrc.setColumnCount(2)
         self.tableWidgetSrc.setRowCount(0)

@@ -162,10 +162,12 @@ class Loader():
                 chrCardCount[0] += 1
                 chrCardCount[preCharacterId] += 1
                 cards.append({
-                    'id': idx + chrCardCount[0] + 1,
+                    'id': idx + chrCardCount[0],
                     'characterId': preCharacterId,
                     'cardCount': chrCardCount[preCharacterId]
                 })
+                if preCharacterId == 14 or preCharacterId == 26:
+                    chrCardCount[preCharacterId] += 1
             chrCardCount[c["characterId"]] += 1
             cards.append({
                 'id': c['id'],
@@ -183,72 +185,39 @@ class Loader():
 
         eventIdx = 0
         festivals = []
+        specialCards = []
         fesIdx = 1
-        fesCards = []
-        isBirthday = False
         birthdayIdx = 1
-        for i in range(events[0]['cards'][0], cards[-1]['id'] + 1):
-            if eventIdx >= len(events):
-                if isBirthday == ('birthday' in cards[i - 1]):
-                    fesCards.append(i)
-                else:
-                    if fesCards:
-                        festivals.append({
-                            'id': birthdayIdx if isBirthday else fesIdx,
-                            'isBirthday': isBirthday,
-                            'cards': fesCards
-                        })
-                        if isBirthday:
-                            birthdayIdx += 1
-                        else:
-                            fesIdx += 1
-                        fesCards = []
-                    isBirthday = ('birthday' in cards[i - 1])
-                    fesCards.append(i)
-                continue
-            if i in events[eventIdx]['cards']:
-                if fesCards:
-                    festivals.append({
-                        'id': birthdayIdx if isBirthday else fesIdx,
-                        'isBirthday': isBirthday,
-                        'cards': fesCards
-                    })
-                    if isBirthday:
-                        birthdayIdx += 1
-                    else:
-                        fesIdx += 1
-                    fesCards = []
-                continue
-            if not fesCards:
+
+        i = events[0]['cards'][0]
+        while i < cards[-1]['id'] + 1:
+            while eventIdx < len(events) and i in events[eventIdx]['cards']:
+                while i < cards[-1]['id'] + 1 and i in events[eventIdx]['cards']:
+                    i += 1
                 eventIdx += 1
-                if eventIdx >= len(events):
-                    if isBirthday == ('birthday' in cards[i - 1]):
-                        fesCards.append(i)
-                    else:
-                        if fesCards:
-                            festivals.append({
-                                'id': birthdayIdx if isBirthday else fesIdx,
-                                'isBirthday': isBirthday,
-                                'cards': fesCards
-                            })
-                            if isBirthday:
-                                birthdayIdx += 1
-                            else:
-                                fesIdx += 1
-                            fesCards = []
-                        isBirthday = ('birthday' in cards[i - 1])
-                        fesCards.append(i)
-                    continue
-                if i in events[eventIdx]['cards']:
-                    continue
-            isBirthday = ('birthday' in cards[i - 1])
-            fesCards.append(i)
-        if fesCards:
-            festivals.append({
-                'id': birthdayIdx if isBirthday else fesIdx,
-                'isBirthday': isBirthday,
-                'cards': fesCards
-            })
+            if i < cards[-1]['id'] + 1 and 'birthday' in cards[i - 1]:
+                specialCards.append(i)
+                i += 1
+                continue
+            if specialCards:
+                festivals.append({
+                    'id': birthdayIdx,
+                    'isBirthday': True,
+                    'cards': specialCards
+                })
+                birthdayIdx += 1
+                specialCards = []
+            while i < cards[-1]['id'] + 1 and i not in events[eventIdx]['cards'] and 'birthday' not in cards[i - 1]:
+                specialCards.append(i)
+                i += 1
+            if specialCards:
+                festivals.append({
+                    'id': fesIdx,
+                    'isBirthday': False,
+                    'cards': specialCards
+                })
+                fesIdx += 1
+                specialCards = []
         fesPath = osp.join(settingdir, "festivals.json")
         with open(fesPath, 'w', encoding='utf-8') as f:
             json.dump(festivals, f, indent=2)
