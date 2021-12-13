@@ -207,7 +207,10 @@ class Loader():
                 })
                 birthdayIdx += 1
                 specialCards = []
-            while i < cards[-1]['id'] + 1 and i not in events[eventIdx]['cards'] and 'birthday' not in cards[i - 1]:
+            while i < cards[-1]['id'] + 1:
+                if eventIdx < len(events):
+                    if i in events[eventIdx]['cards'] or 'birthday' in cards[i - 1]:
+                        break
                 specialCards.append(i)
                 i += 1
             if specialCards:
@@ -216,7 +219,12 @@ class Loader():
                     'isBirthday': False,
                     'cards': specialCards
                 })
-                fesIdx += 1
+                if 335 in specialCards:
+                    festivals[-1]['id'] = 1
+                    festivals[-1]['collaboration'] = u'悪ノ大罪'
+                    festivals[-1]['cards'].pop()
+                else:
+                    fesIdx += 1
                 specialCards = []
         fesPath = osp.join(settingdir, "festivals.json")
         with open(fesPath, 'w', encoding='utf-8') as f:
