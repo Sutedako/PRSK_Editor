@@ -320,10 +320,10 @@ class Editor():
         text = text.replace('!', '！')
         text = text.replace('欸', '诶')
 
-        normalend = ['，', '。', '？', '！', '~', '♪', '☆', '.', '—']
+        normalend = ['、', '，', '。', '？', '！', '~', '♪', '☆', '.', '—']
         unusualend = ['）', '」', '』', '”']
         if text[-1] in normalend:
-            if '.。' in text or '.，' in text:
+            if '.，' in text or '.。' in text:
                 text += "\n【「……。」和「……，」只保留省略号】"
                 check = False
         elif text[-1] in unusualend:
@@ -629,11 +629,11 @@ class Editor():
         if 0 <= row < self.table.rowCount() and self.talks[row]['speaker'] not in ["", u"场景"]:
             menu = QMenu()
             if self.talks[row]['start']:
-                addTalkUpAction = menu.addAction(u"在上方插入一行")
+                addTalkUpAction = menu.addAction(u"在上方添加遗漏的说话人")
             if self.talks[row]['end']:
-                addTalkDownAction = menu.addAction(u"在下方插入一行")
+                addTalkDownAction = menu.addAction(u"在下方添加遗漏的说话人")
             if self.talks[row]['start'] and self.talks[row]['end']:
-                removeTalkAction = menu.addAction(u"删除该行")
+                removeTalkAction = menu.addAction(u"删除该行多余说话人")
             action = menu.exec_(self.table.mapToGlobal(pos))
 
             if self.talks[row]['start'] and action == addTalkUpAction:
@@ -713,7 +713,7 @@ class Editor():
             if editdst:
                 self.dsttalks.pop(self.talks[stoprow]['dstidx'])
             if editrefer:
-                self.refertalks.pop(self.talks[stoprow]['srcidx'])
+                self.refertalks.pop(self.talks[stoprow]['referid'])
             self.talks.pop(stoprow)
         elif self.talks[stoprow]['text'] == "":
             self.talks.pop()

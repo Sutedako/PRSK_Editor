@@ -59,6 +59,7 @@ class Loader():
                 for idx, c in enumerate(chrtable):
                     if c["name_j"] == speaker:
                         charIdx = idx
+                        break
                 if charIdx >= 0:
                     iconpath = "image/icon/chr/chr_{}.png".format(charIdx + 1)
                     iconpath = osp.join(self.root, iconpath)
@@ -162,15 +163,17 @@ class Loader():
                 chrCardCount[0] += 1
                 chrCardCount[preCharacterId] += 1
                 cards.append({
-                    'id': idx + chrCardCount[0] + 1,
+                    'id': idx + chrCardCount[0],
                     'characterId': preCharacterId,
                     'cardCount': chrCardCount[preCharacterId]
                 })
+                if preCharacterId == 14 or preCharacterId == 26:
+                    chrCardCount[preCharacterId] += 1
             chrCardCount[c["characterId"]] += 1
             cards.append({
                 'id': c['id'],
                 'characterId': c['characterId'],
-                'cardCount': chrCardCount[c["characterId"]]
+                'cardCount': chrCardCount[c["characterId"]],
             })
             if c["cardRarityType"] == "rarity_birthday":
                 cards[-1]['birthday'] = True
@@ -183,71 +186,59 @@ class Loader():
 
         eventIdx = 0
         festivals = []
+        specialCards = []
+        birthdatCards = []
         fesIdx = 1
-        fesCards = []
-        isBirthday = False
         birthdayIdx = 1
-        for i in range(events[0]['cards'][0], cards[-1]['id'] + 1):
-            if eventIdx >= len(events):
-                if isBirthday == ('birthday' in cards[i - 1]):
-                    fesCards.append(i)
-                else:
-                    if fesCards:
-                        festivals.append({
-                            'id': birthdayIdx if isBirthday else fesIdx,
-                            'isBirthday': isBirthday,
-                            'cards': fesCards
-                        })
-                        if isBirthday:
-                            birthdayIdx += 1
-                        else:
-                            fesIdx += 1
-                        fesCards = []
-                    isBirthday = ('birthday' in cards[i - 1])
-                    fesCards.append(i)
-                continue
-            if i in events[eventIdx]['cards']:
-                if fesCards:
-                    festivals.append({
-                        'id': birthdayIdx if isBirthday else fesIdx,
-                        'isBirthday': isBirthday,
-                        'cards': fesCards
-                    })
-                    if isBirthday:
-                        birthdayIdx += 1
-                    else:
-                        fesIdx += 1
-                    fesCards = []
-                continue
-            if not fesCards:
+
+        i = events[0]['cards'][0]
+        while i < cards[-1]['id'] + 1:
+            while eventIdx < len(events) and i in events[eventIdx]['cards']:
+                while i < cards[-1]['id'] + 1 and i in events[eventIdx]['cards']:
+                    i += 1
                 eventIdx += 1
-                if eventIdx >= len(events):
-                    if isBirthday == ('birthday' in cards[i - 1]):
-                        fesCards.append(i)
-                    else:
-                        if fesCards:
-                            festivals.append({
-                                'id': birthdayIdx if isBirthday else fesIdx,
-                                'isBirthday': isBirthday,
-                                'cards': fesCards
-                            })
-                            if isBirthday:
-                                birthdayIdx += 1
-                            else:
-                                fesIdx += 1
-                            fesCards = []
-                        isBirthday = ('birthday' in cards[i - 1])
-                        fesCards.append(i)
-                    continue
-                if i in events[eventIdx]['cards']:
-                    continue
-            isBirthday = ('birthday' in cards[i - 1])
-            fesCards.append(i)
-        if fesCards:
+            if i < cards[-1]['id'] + 1 and 'birthday' in cards[i - 1]:
+                birthdatCards.append(i)
+                if birthdatCards and cards[i - 1]['characterId'] in [7, 16, 14, 23]:
+                    festivals.append({
+                        'id': birthdayIdx,
+                        'isBirthday': True,
+                        'cards': birthdatCards
+                    })
+                    birthdayIdx += 1
+                    birthdatCards = []
+                i += 1
+                continue
+            while i < cards[-1]['id'] + 1:
+                if eventIdx < len(events):
+                    if i in events[eventIdx]['cards'] or 'birthday' in cards[i - 1]:
+                        break
+                specialCards.append(i)
+                i += 1
+            if specialCards:
+                festivals.append({
+                    'id': fesIdx,
+                    'isBirthday': False,
+                    'cards': specialCards
+                })
+                if 335 in specialCards:
+                    festivals[-1]['id'] = 1
+                    festivals[-1]['collaboration'] = u'悪ノ大罪'
+                    festivals[-1]['cards'].pop()
+                else:
+                    fesIdx += 1
+                specialCards = []
+        if specialCards:
             festivals.append({
-                'id': birthdayIdx if isBirthday else fesIdx,
-                'isBirthday': isBirthday,
-                'cards': fesCards
+                'id': fesIdx,
+                'isBirthday': False,
+                'cards': specialCards
+            })
+        if birthdatCards:
+            festivals.append({
+                'id': birthdayIdx,
+                'isBirthday': True,
+                'cards': birthdatCards
             })
         fesPath = osp.join(settingdir, "festivals.json")
         with open(fesPath, 'w', encoding='utf-8') as f:
