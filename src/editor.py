@@ -323,10 +323,9 @@ class Editor():
         normalend = ['，', '。', '？', '！', '~', '♪', '☆', '.', '—']
         unusualend = ['）', '」', '』', '”']
         if text[-1] in normalend:
-            if text[-1] in [',', '。']:
-                if len(text) > 1 and text[-2] == '.':
-                    text += "\n【「……。」和「……，」只保留省略号】"
-                    check = False
+            if '.。' in text or '.，' in text:
+                text += "\n【「……。」和「……，」只保留省略号】"
+                check = False
         elif text[-1] in unusualend:
             if len(text) > 1 and text[-2] not in normalend:
                 text += "\n【句尾缺少逗号句号】"
