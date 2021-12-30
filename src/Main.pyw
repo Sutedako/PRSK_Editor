@@ -1069,7 +1069,7 @@ if __name__ == '__main__':
     if not getattr(sys, 'frozen', False):
         root = osp.join(root, "../")
 
-    if platform.system() == "Darwin":
+    elif platform.system() == "Darwin":
         root = osp.join(root, '../../../')
 
     loggingPath = osp.join(root, "setting", "log.txt")
