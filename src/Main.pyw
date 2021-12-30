@@ -52,14 +52,8 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
     dstfilename = ""
     dstfilepath = ""
 
-    root, _ = osp.split(osp.abspath(sys.argv[0]))
-    if not getattr(sys, 'frozen', False):
-        root = osp.join(root, "../")
-
-    elif platform.system() == "Darwin":
-        root = osp.join(root, '../../../')
-    datadir = osp.join(root, "data")
-    settingdir = osp.join(root, "setting")
+    datadir = ""
+    settingdir = ""
 
     setting = {}
     preStoryType = ""
@@ -1080,7 +1074,7 @@ if __name__ == '__main__':
 
     loggingPath = osp.join(root, "setting", "log.txt")
     if not osp.exists(osp.join(root, "setting")):
-        os.mkdir(osp.join(root, "setting"))
+        mkdir(osp.join(root, "setting"))
 
     logging.basicConfig(level=logging.INFO,
                         filename=loggingPath,
@@ -1097,7 +1091,7 @@ if __name__ == '__main__':
             translateButton = modeSelectWinodw.addButton(u"翻译", 2)
             proofreadButton = modeSelectWinodw.addButton(u"校对", 2)
             checkButton = modeSelectWinodw.addButton(u"合意", 2)
-        # judgeButton = modeSelectWinodw.addButton(u"审核", 2)
+            # judgeButton = modeSelectWinodw.addButton(u"审核", 2)
 
         mainform = mainForm(root)
         translateButton.clicked.connect(mainform.translateMode)
@@ -1113,3 +1107,4 @@ if __name__ == '__main__':
         exc_type, exc_value, exc_traceback_obj = sys.exc_info()
         with open(loggingPath, 'a') as f:
             traceback.print_exception(
+                exc_type, exc_value, exc_traceback_obj, file=f)
