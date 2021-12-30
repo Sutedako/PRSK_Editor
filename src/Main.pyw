@@ -1070,6 +1070,9 @@ if __name__ == '__main__':
         root = osp.join(root, '../../../')
 
     loggingPath = osp.join(root, "setting", "log.txt")
+    if not osp.exists(osp.join(root, "setting")):
+        os.mkdir(osp.join(root, "setting"))
+
     logging.basicConfig(level=logging.INFO,
                         filename=loggingPath,
                         filemode='w')
