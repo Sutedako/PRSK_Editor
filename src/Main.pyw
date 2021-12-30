@@ -52,8 +52,14 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
     dstfilename = ""
     dstfilepath = ""
 
-    datadir = ""
-    settingdir = ""
+    root, _ = osp.split(osp.abspath(sys.argv[0]))
+    if not getattr(sys, 'frozen', False):
+        root = osp.join(root, "../")
+
+    elif platform.system() == "Darwin":
+        root = osp.join(root, '../../../')
+    datadir = osp.join(root, "data")
+    settingdir = osp.join(root, "setting")
 
     setting = {}
     preStoryType = ""
@@ -89,7 +95,10 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         self.iconpath = "image/icon"
         if getattr(sys, 'frozen', False):
             self.iconpath = osp.join(sys._MEIPASS, self.iconpath)
-        titleIcon = osp.join(self.iconpath, "32.ico")
+        if platform.system() == "Darwin":
+            titleIcon = osp.join(self.iconpath, "32.icns")
+        else:
+            titleIcon = osp.join(self.iconpath, "32.ico")
         if osp.exists(titleIcon):
             self.setWindowIcon(QIcon(titleIcon))
             logging.info("Icon Loaded")
@@ -1080,9 +1089,14 @@ if __name__ == '__main__':
         modeSelectWinodw = qw.QMessageBox()
         modeSelectWinodw.setWindowTitle("Sekai Text")
         modeSelectWinodw.setText("校对与合意时\n强烈建议在有音画对照的条件下进行\n如看游戏内，或者对照录制视频")
-        translateButton = modeSelectWinodw.addButton(u"翻译", 2)
-        proofreadButton = modeSelectWinodw.addButton(u"校对", 2)
-        checkButton = modeSelectWinodw.addButton(u"合意", 2)
+        if platform.system() == "Darwin":
+            checkButton = modeSelectWinodw.addButton(u"合意", 2)
+            proofreadButton = modeSelectWinodw.addButton(u"校对", 2)
+            translateButton = modeSelectWinodw.addButton(u"翻译", 2)
+        else:
+            translateButton = modeSelectWinodw.addButton(u"翻译", 2)
+            proofreadButton = modeSelectWinodw.addButton(u"校对", 2)
+            checkButton = modeSelectWinodw.addButton(u"合意", 2)
         # judgeButton = modeSelectWinodw.addButton(u"审核", 2)
 
         mainform = mainForm(root)
@@ -1099,4 +1113,3 @@ if __name__ == '__main__':
         exc_type, exc_value, exc_traceback_obj = sys.exc_info()
         with open(loggingPath, 'a') as f:
             traceback.print_exception(
-                exc_type, exc_value, exc_traceback_obj, file=f)
