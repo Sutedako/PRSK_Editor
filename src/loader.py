@@ -59,6 +59,7 @@ class Loader():
                 for idx, c in enumerate(chrtable):
                     if c["name_j"] == speaker:
                         charIdx = idx
+                        break
                 if charIdx >= 0:
                     iconpath = "image/icon/chr/chr_{}.png".format(charIdx + 1)
                     iconpath = osp.join(self.root, iconpath)
@@ -172,7 +173,7 @@ class Loader():
             cards.append({
                 'id': c['id'],
                 'characterId': c['characterId'],
-                'cardCount': chrCardCount[c["characterId"]]
+                'cardCount': chrCardCount[c["characterId"]],
             })
             if c["cardRarityType"] == "rarity_birthday":
                 cards[-1]['birthday'] = True
@@ -186,6 +187,7 @@ class Loader():
         eventIdx = 0
         festivals = []
         specialCards = []
+        birthdatCards = []
         fesIdx = 1
         birthdayIdx = 1
 
@@ -196,17 +198,17 @@ class Loader():
                     i += 1
                 eventIdx += 1
             if i < cards[-1]['id'] + 1 and 'birthday' in cards[i - 1]:
-                specialCards.append(i)
+                birthdatCards.append(i)
+                if birthdatCards and cards[i - 1]['characterId'] in [7, 16, 14, 23]:
+                    festivals.append({
+                        'id': birthdayIdx,
+                        'isBirthday': True,
+                        'cards': birthdatCards
+                    })
+                    birthdayIdx += 1
+                    birthdatCards = []
                 i += 1
                 continue
-            if specialCards:
-                festivals.append({
-                    'id': birthdayIdx,
-                    'isBirthday': True,
-                    'cards': specialCards
-                })
-                birthdayIdx += 1
-                specialCards = []
             while i < cards[-1]['id'] + 1:
                 if eventIdx < len(events):
                     if i in events[eventIdx]['cards'] or 'birthday' in cards[i - 1]:
@@ -226,6 +228,18 @@ class Loader():
                 else:
                     fesIdx += 1
                 specialCards = []
+        if specialCards:
+            festivals.append({
+                'id': fesIdx,
+                'isBirthday': False,
+                'cards': specialCards
+            })
+        if birthdatCards:
+            festivals.append({
+                'id': birthdayIdx,
+                'isBirthday': True,
+                'cards': birthdatCards
+            })
         fesPath = osp.join(settingdir, "festivals.json")
         with open(fesPath, 'w', encoding='utf-8') as f:
             json.dump(festivals, f, indent=2)

@@ -8,7 +8,7 @@ import traceback
 import PyQt5.QtCore as qc
 import PyQt5.QtWidgets as qw
 from mainGUI import Ui_SekaiText
-from PyQt5.QtGui import QKeySequence, QIcon
+from PyQt5.QtGui import QKeySequence, QIcon, QBrush, QColor
 
 from Editor import Editor
 from Loader import Loader
@@ -86,11 +86,12 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             self.setting['textdir'] = self.datadir
         logging.info("Text Folder Path: {}".format(self.setting['textdir']))
 
-        iconpath = "image/icon/32.ico"
+        self.iconpath = "image/icon"
         if getattr(sys, 'frozen', False):
-            iconpath = osp.join(sys._MEIPASS, iconpath)
-        if osp.exists(iconpath):
-            self.setWindowIcon(QIcon(iconpath))
+            self.iconpath = osp.join(sys._MEIPASS, self.iconpath)
+        titleIcon = osp.join(self.iconpath, "32.ico")
+        if osp.exists(titleIcon):
+            self.setWindowIcon(QIcon(titleIcon))
             logging.info("Icon Loaded")
 
         self.setupUi(self)
@@ -132,7 +133,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         self.pushButtonRefresh.clicked.connect(self.updateComboBox)
 
         self.pushButtonLoad.clicked.connect(self.loadJson)
-        self.pushButtonCreate.clicked.connect(self.createText)
+        self.pushButtonCount.clicked.connect(self.countSpeaker)
 
         self.radioButtonTranslate.clicked.connect(self.translateMode)
         self.radioButtonProofread.clicked.connect(self.proofreadMode)
@@ -142,6 +143,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         self.plainTextEditTitle.textChanged.connect(self.changeTitle)
         self.pushButtonOpen.clicked.connect(self.openText)
         self.pushButtonSave.clicked.connect(self.saveText)
+        self.pushButtonClear.clicked.connect(self.clearText)
         self.pushButtonCheck.clicked.connect(self.checkLines)
         self.checkBoxShowDiff.stateChanged.connect(self.showDiff)
         self.checkBoxSaveN.stateChanged.connect(self.saveN)
@@ -157,182 +159,45 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         self.tempWindow.setIcon(qw.QMessageBox.Information)
         self.tempWindow.setWindowTitle("")
 
+    def downloadJson(self, jsonname, jsonurl):
+        jsonpath = osp.join(self.datadir, jsonname)
+        download = downloadThread(jsonpath, jsonurl)
+        download.start()
+        download.trigger.connect(self.checkDownload)
+
+        urlText = u"下载中...<br>若耗时过长可自行前往下方地址下载" + \
+            "<br><a href=\"{}\">{}</a>".format(jsonurl, jsonname) + \
+            "<br><br>下载时将文件名命名为{}，替换SekaiText同目录的data文件夹中的同名文件".format(jsonname) + \
+            "<br><br>若没有自动开始下载，则将打开的网页中的内容全部复制(Ctrl+A全选，Ctrl+C复制)，" + \
+            "替换data文件夹中{}的内容(替换时用记事本打开即可)".format(jsonname) +\
+            "<br><br>轴机用json请从pjsek.ai复制"
+
+        self.tempWindow.setStandardButtons(qw.QMessageBox.Cancel)
+        self.tempWindow.setText(urlText)
+        self.tempWindow.open()
+        self.downloadState = 0
+        while not self.downloadState:
+            time.sleep(0.1)
+            qw.QApplication.processEvents()
+        if self.downloadState == 2:
+            return False
+        return True
+
     def loadJson(self):
         try:
             if not self.event:
                 return
             storyType = self.comboBoxStoryType.currentText()
-            source = self.comboBoxDataSource.currentText()
+            storyIdx = self.comboBoxStoryIndex.currentIndex()
             chapterIdx = self.comboBoxStoryChapter.currentIndex()
-
-            if storyType == u"主线剧情":
-                unitIdx = self.comboBoxStoryIndex.currentIndex()
-                unit = self.mainstory[unitIdx]["unit"].replace("_", "-")
-                if unitIdx == 0:
-                    sekai = "vs" + sekaiDict[int((chapterIdx + 1) / 5)]
-                else:
-                    sekai = sekaiDict[unitIdx - 1]
-                if unitIdx == 0:
-                    chapter = str(chapterIdx % 4).zfill(2)
-                else:
-                    chapter = str(chapterIdx).zfill(2)
-                jsonname = "mainStory_{}_{}.json".format(sekai, chapter)
-                if source == "sekai.best":
-                    jsonurl = "http://sekai-res.dnaroma.eu/" \
-                        "file/sekai-assets/scenario/unitstory/" \
-                        "{}-story-chapter_rip/{}_01_{}.asset".format(unit, sekai, chapter)
-                elif source == "pjsek.ai":
-                    jsonurl = "http://assets.pjsek.ai/file/" \
-                        "pjsekai-assets/startapp/scenario/unitstory/" \
-                        "{}-story-chapter/{}_01_{}.json".format(unit, sekai, chapter)
-                self.preTitle = "{}-{}".format(sekai, chapter)
-
-            elif storyType == u"活动剧情":
-                eventId = len(self.events) - self.comboBoxStoryIndex.currentIndex()
-                event = self.events[int(eventId) - 1]['name']
-                eventId = str(eventId).zfill(2)
-                chapter = str(chapterIdx + 1).zfill(2)
-
-                jsonname = "event_{}_{}.json".format(eventId, chapter)
-                if source == "sekai.best":
-                    jsonurl = "http://sekai-res.dnaroma.eu/" \
-                        "file/sekai-assets/event_story/" \
-                        "{}/scenario_rip/event_{}_{}.asset".format(event, eventId, chapter)
-                elif source == "pjsek.ai":
-                    jsonurl = "http://assets.pjsek.ai/file/" \
-                        "pjsekai-assets/ondemand/event_story/" \
-                        "{}/scenario/event_{}_{}.json".format(event, eventId, chapter)
-                self.preTitle = "{}-{}".format(eventId, chapter)
-
-            elif storyType == u"活动卡面":
-                eventId = len(self.events) - self.comboBoxStoryIndex.currentIndex()
-                cardId = self.events[eventId - 1]["cards"][int(chapterIdx / 3)]
-                charId = self.cards[cardId - 1]["characterId"]
-                count = str(self.cards[cardId - 1]["cardCount"]).zfill(3)
-                chapter = str(chapterIdx % 3 + 1).zfill(2)
-                eventId = str(eventId).zfill(2)
-                charname = self.chars[charId - 1]['name']
-                jsonname = "event_{}_{}_{}.json".format(eventId, charname, chapter)
-                charId = str(charId).zfill(3)
-                if source == "sekai.best":
-                    jsonurl = "http://sekai-res.dnaroma.eu/" \
-                        "file/sekai-assets/character/member/" \
-                        "res{}_no{}_rip/{}{}_{}{}.asset".format(
-                            charId, count, charId, count, charname, chapter)
-                elif source == "pjsek.ai":
-                    jsonurl = "http://assets.pjsek.ai/file/" \
-                        "pjsekai-assets/startapp/character/member/" \
-                        "res{}_no{}/{}{}_{}{}.json".format(
-                            charId, count, charId, count, charname, chapter)
-                self.preTitle = "{}-{}-{}".format(eventId, charname, chapter)
-
-            elif storyType == u"特殊卡面":
-                fesId = len(self.fes) - self.comboBoxStoryIndex.currentIndex()
-                cardId = self.fes[fesId - 1]["cards"][int(chapterIdx / 3)]
-                charId = self.cards[cardId - 1]["characterId"]
-                count = str(self.cards[cardId - 1]["cardCount"]).zfill(3)
-                chapter = str(chapterIdx % 3 + 1).zfill(2)
-                charname = self.chars[charId - 1]['name']
-
-                idx = self.fes[fesId - 1]['id']
-                if 'collaboration' in self.fes[fesId - 1]:
-                    jsonname = "collabo_{}_{}_{}.json".format(
-                        idx, charname, chapter)
-                elif self.fes[fesId - 1]['isBirthday']:
-                    year = 2021 + int((idx + 2) / 4)
-                    jsonname = "birth_{}_{}_{}.json".format(
-                        year, charname, chapter)
-                else:
-                    year = 2021 + int(idx / 4)
-                    month = str(idx % 4 * 3 + 1).zfill(2)
-                    jsonname = "fes_{}{}_{}_{}.json".format(
-                        year, month, charname, chapter)
-
-                charId = str(charId).zfill(3)
-                if source == "sekai.best":
-                    jsonurl = "http://sekai-res.dnaroma.eu/" \
-                        "file/sekai-assets/character/member/" \
-                        "res{}_no{}_rip/{}{}_{}{}.asset".format(
-                            charId, count, charId, count, charname, chapter)
-                elif source == "pjsek.ai":
-                    jsonurl = "http://assets.pjsek.ai/file/" \
-                        "pjsekai-assets/startapp/character/member/" \
-                        "res{}_no{}/{}{}_{}{}.json".format(
-                            charId, count, charId, count, charname, chapter)
-                if 'collaboration' in self.fes[fesId - 1]:
-                    self.preTitle = "collabo{}_{}_{}.json".format(
-                        idx, charname, chapter)
-                elif self.fes[fesId - 1]['isBirthday']:
-                    self.preTitle = "birth{}_{}_{}.json".format(
-                        year, charname, chapter)
-                else:
-                    self.preTitle = "fes{}{}_{}_{}.json".format(
-                        year, month, charname, chapter)
-
-            elif storyType == u"初始卡面":
-                currentIdx = self.comboBoxStoryIndex.currentIndex()
-                if currentIdx > 25:
-                    charId = currentIdx - 4
-                else:
-                    charId = int(currentIdx / 5) * 4 + (currentIdx + 1) % 5
-                charname = self.chars[charId - 1]['name']
-                rarity = int(chapterIdx / 3) + 1
-                if charname == "miku":
-                    realRarity = max(2, rarity - 4) if rarity > 2 else rarity
-                    if realRarity == 2:
-                        unit = sekaiDict[rarity - 2]
-                    realRarity = str(realRarity).zfill(3)
-                rarity = str(rarity).zfill(3)
-                chapter = str(chapterIdx % 3 + 1).zfill(2)
-                jsonname = "release_{}_{}_{}.json".format(
-                    charname, rarity, chapter)
-                if charname == "miku":
-                    if realRarity == "02":
-                        jsonname = "release_{}_{}_02_{}.json".format(
-                            charname, unit, chapter)
-                    else:
-                        jsonname = "release_{}_{}_{}.json".format(
-                            charname, realRarity, chapter)
-                charId = str(charId).zfill(3)
-                if source == "sekai.best":
-                    jsonurl = "http://sekai-res.dnaroma.eu/" \
-                        "file/sekai-assets/character/member/" \
-                        "res{}_no{}_rip/{}{}_{}{}.asset".format(
-                            charId, count, charId, count, charname, chapter)
-                elif source == "pjsek.ai":
-                    jsonurl = "http://assets.pjsek.ai/file/" \
-                        "pjsekai-assets/startapp/character/member/" \
-                        "res{}_no{}/{}{}_{}{}.json".format(
-                            charId, rarity, charId, rarity, charname, chapter)
-                if charname == "miku" and realRarity == "02":
-                    self.preTitle = "00-miku-{}-02-{}".format(unit, chapter)
-                else:
-                    self.preTitle = "00-{}-{}-{}".format(charname, rarity, chapter)
+            source = self.comboBoxDataSource.currentText()
+            self.preTitle, jsonname, jsonurl = self.getJsonPath(storyType, storyIdx, chapterIdx, source)
 
             jsonpath = osp.join(self.datadir, jsonname)
 
             if source in ["sekai.best", "pjsek.ai"]:
                 logging.info("Downloading Json File from: " + jsonurl)
-
-                download = downloadThread(jsonpath, jsonurl)
-                download.start()
-                download.trigger.connect(self.checkDownload)
-
-                urlText = u"下载中...<br>若耗时过长可自行前往下方地址下载" + \
-                    "<br><a href=\"{}\">{}</a>".format(jsonurl, jsonname) + \
-                    "<br><br>下载时将文件名命名为{}，替换SekaiText同目录的data文件夹中的同名文件".format(jsonname) + \
-                    "<br><br>若没有自动开始下载，则将打开的网页中的内容全部复制(Ctrl+A全选，Ctrl+C复制)，" + \
-                    "替换data文件夹中{}的内容(替换时用记事本打开即可)".format(jsonname) +\
-                    "<br><br>轴机用json请从pjsek.ai复制"
-
-                self.tempWindow.setStandardButtons(qw.QMessageBox.Cancel)
-                self.tempWindow.setText(urlText)
-                self.tempWindow.open()
-                self.downloadState = 0
-                while not self.downloadState:
-                    time.sleep(0.1)
-                    qw.QApplication.processEvents()
-                if self.downloadState == 2:
+                if not self.downloadJson(jsonname, jsonurl):
                     return
                 self.comboBoxDataSource.setCurrentText(u"本地文件")
             elif source == u"本地文件":
@@ -366,7 +231,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 self.plainTextEditTitle.setPlainText(title)
 
             if not self.dstText.talks:
-                self.createText()
+                self.clearText()
             else:
                 self.dstText.loadJson(self.editormode, self.srcText.talks)
         except BaseException:
@@ -375,10 +240,109 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 traceback.print_exception(
                     exc_type, exc_value, exc_traceback_obj, file=f)
             qw.QMessageBox.warning(
-                self, "", u"错误2\n请将“setting\\log.txt发给弃子”")
+                self, "", u"loadJson错误\n请将“setting\\log.txt发给弃子”")
+
+    def countSpeaker(self):
+        try:
+            chapterList = [self.comboBoxStoryChapter.currentIndex()]
+            if self.checkBoxAll.isChecked():
+                chapterList = []
+                for idx in range(self.comboBoxStoryChapter.count()):
+                    if self.comboBoxStoryChapter.itemText(idx):
+                        chapterList.append(idx)
+
+            countList = [{'name': self.chars[i]["name_j"], "count": [0 for i in range(len(chapterList) + 1)]} for i in range(26)]
+            storyType = self.comboBoxStoryType.currentText()
+            storyIdx = self.comboBoxStoryIndex.currentIndex()
+            source = "sekai.best"
+            for idx, chapterIdx in enumerate(chapterList):
+                _, jsonname, jsonurl = self.getJsonPath(storyType, storyIdx, chapterIdx, source)
+
+                jsonpath = osp.join(self.datadir, jsonname)
+                if not osp.exists(jsonpath):
+                    logging.info("Downloading Json File from: " + jsonurl)
+                    if not self.downloadJson(jsonname, jsonurl):
+                        return
+                with open(jsonpath, 'r', encoding='UTF-8') as f:
+                    fulldata = json.load(f)
+                for talkdata in fulldata['TalkData']:
+                    counted = False
+                    speaker = talkdata['WindowDisplayName']
+                    for c in countList:
+                        if c["name"] == speaker:
+                            c["count"][idx] += 1
+                            c["count"][-1] += 1
+                            counted = True
+                            break
+                    if not counted:
+                        countList.append({"name": speaker, "count": [0 for i in range(len(chapterList) + 1)]})
+                        countList[-1]["count"][idx] += 1
+                        countList[-1]["count"][-1] += 1
+
+            self.countTable = qw.QTableWidget()
+            self.countTable.verticalHeader().hide()
+            self.countTable.setIconSize(qc.QSize(48, 48))
+            columnCount = len(chapterList) + 2
+            self.countTable.setColumnCount(columnCount)
+            self.countTable.setRowCount(0)
+            self.countTable.horizontalHeader().resizeSection(0, 120)
+            self.countTable.setHorizontalHeaderItem(0, qw.QTableWidgetItem(" "))
+            for idx, chapterIdx in enumerate(chapterList):
+                text = self.comboBoxStoryChapter.itemText(chapterIdx)
+                if self.comboBoxStoryType.currentText()[-2:] != u"卡面":
+                    text = text.split(" ")[0]
+                self.countTable.setHorizontalHeaderItem(idx + 1, qw.QTableWidgetItem(text))
+                self.countTable.horizontalHeader().resizeSection(idx + 1, 60)
+                if self.comboBoxStoryType.currentText()[-2:] == u"卡面":
+                    self.countTable.horizontalHeader().resizeSection(idx + 1, 100)
+            self.countTable.setHorizontalHeaderItem(len(chapterList) + 1, qw.QTableWidgetItem(u"总计"))
+            self.countTable.horizontalHeader().resizeSection(len(chapterList) + 1, 60)
+
+            totalHeight = 0
+            totalWidth = 0
+
+            for idx, c in enumerate(countList):
+                if c["count"][-1] == 0:
+                    continue
+                row = self.countTable.rowCount()
+                self.countTable.setRowCount(row + 1)
+                if (idx < 26):
+                    charIcon = "chr/chr_{}.png".format(idx + 1)
+                    charIcon = osp.join(self.iconpath, charIcon)
+                    icon = qw.QTableWidgetItem(QIcon(charIcon), c["name"])
+                    self.countTable.setItem(row, 0, icon)
+                    self.countTable.setRowHeight(row, 60)
+                    totalHeight += 60
+                else:
+                    self.countTable.setItem(row, 0, qw.QTableWidgetItem(c["name"]))
+                    self.countTable.setRowHeight(row, 30)
+                    totalHeight += 30
+                for idx, count in enumerate(c["count"]):
+                    if count == 0:
+                        self.countTable.setItem(row, idx + 1, qw.QTableWidgetItem(" "))
+                        self.countTable.item(row, idx + 1).setBackground(QBrush(QColor(127, 127, 127)))
+                    else:
+                        self.countTable.setItem(row, idx + 1, qw.QTableWidgetItem(str(count)))
+            row = self.countTable.rowCount()
+            col = self.countTable.columnCount()
+
+            totalWidth = 66 + col * 60
+            if self.comboBoxStoryType.currentText()[-2:] == u"卡面":
+                totalWidth = col * 100
+            self.countTable.setFixedSize(qc.QSize(min(800, totalWidth), min(800, 45 + totalHeight)))
+            self.countTable.show()
+
+
+        except BaseException:
+            exc_type, exc_value, exc_traceback_obj = sys.exc_info()
+            with open(loggingPath, 'a') as f:
+                traceback.print_exception(
+                    exc_type, exc_value, exc_traceback_obj, file=f)
+            qw.QMessageBox.warning(
+                self, "", u"countSpeaker错误\n请将“setting\\log.txt发给弃子”")
 
     # create new text from json
-    def createText(self):
+    def clearText(self):
         try:
             if self.dstText.talks:
                 relpy = qw.QMessageBox.question(
@@ -398,7 +362,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 traceback.print_exception(
                     exc_type, exc_value, exc_traceback_obj, file=f)
             qw.QMessageBox.warning(
-                self, "", u"错误3\n请将“setting\\log.txt发给弃子”")
+                self, "", u"clearText错误\n请将“setting\\log.txt发给弃子”")
 
     def openText(self, editormode):
         try:
@@ -530,7 +494,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 traceback.print_exception(
                     exc_type, exc_value, exc_traceback_obj, file=f)
             qw.QMessageBox.warning(
-                self, "", u"错误5\n请将“setting\\log.txt发给弃子”")
+                self, "", u"openText错误\n请将“setting\\log.txt发给弃子”")
 
     def loadText(self, textpath, editormode):
         if not textpath:
@@ -554,7 +518,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 traceback.print_exception(
                     exc_type, exc_value, exc_traceback_obj, file=f)
             qw.QMessageBox.warning(
-                self, "", u"错误6\n请将“setting\\log.txt发给弃子”")
+                self, "", u"checkLines错误\n请将“setting\\log.txt发给弃子”")
 
     def changeTitle(self):
         try:
@@ -572,7 +536,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 traceback.print_exception(
                     exc_type, exc_value, exc_traceback_obj, file=f)
             qw.QMessageBox.warning(
-                self, "", u"错误4\n请将“setting\\log.txt发给弃子”")
+                self, "", u"changeTitle错误\n请将“setting\\log.txt发给弃子”")
 
     def getDstFileName(self):
         storyType = self.comboBoxStoryType.currentText()
@@ -643,7 +607,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 traceback.print_exception(
                     exc_type, exc_value, exc_traceback_obj, file=f)
             qw.QMessageBox.warning(
-                self, "", u"错误5\n请将“setting\\log.txt发给弃子”")
+                self, "", u"saveText错误\n请将“setting\\log.txt发给弃子”")
 
     def closeEvent(self, event):
         if not self.checkSave():
@@ -661,20 +625,21 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 traceback.print_exception(
                     exc_type, exc_value, exc_traceback_obj, file=f)
             qw.QMessageBox.warning(
-                self, "", u"错误9\n请将“setting\\log.txt发给弃子”")
+                self, "", u"editText错误\n请将“setting\\log.txt发给弃子”")
 
     def changeText(self, item):
         try:
             self.dstText.changeText(item, self.editormode)
             self.saved = False
             self.setWindowTitle(u"*{} Sekai Text".format(self.dstfilename))
+            self.dstText.saveFile(osp.join(osp.dirname(self.dstfilepath), "[AutoSave].txt"), self.saveN)
         except BaseException:
             exc_type, exc_value, exc_traceback_obj = sys.exc_info()
             with open(loggingPath, 'a') as f:
                 traceback.print_exception(
                     exc_type, exc_value, exc_traceback_obj, file=f)
             qw.QMessageBox.warning(
-                self, "", u"错误10\n请将“setting\\log.txt发给弃子”")
+                self, "", u"changeText错误\n请将“setting\\log.txt发给弃子”")
 
     def showDiff(self, state):
         try:
@@ -685,7 +650,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 traceback.print_exception(
                     exc_type, exc_value, exc_traceback_obj, file=f)
             qw.QMessageBox.warning(
-                self, "", u"错误7\n请将“setting\\log.txt发给弃子”")
+                self, "", u"showDiff错误\n请将“setting\\log.txt发给弃子”")
 
     def saveN(self, state):
         self.saved = False
@@ -707,7 +672,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 traceback.print_exception(
                     exc_type, exc_value, exc_traceback_obj, file=f)
             qw.QMessageBox.warning(
-                self, "", u"错误8\n请将“setting\\log.txt发给弃子”")
+                self, "", u"trackSrc错误\n请将“setting\\log.txt发给弃子”")
 
     def setComboBox(self, isInit=False):
         try:
@@ -771,10 +736,10 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                     self.comboBoxStoryIndex.setCurrentIndex(storyIndex)
                 eventId = len(self.events) - max(self.comboBoxStoryIndex.currentIndex(), 0)
                 for cardId in self.events[eventId - 1]['cards']:
-                    self.comboBoxStoryChapter.addItem(u"前篇  " + 
-                        self.chars[self.cards[cardId - 1]['characterId'] - 1]['name_j'])
-                    self.comboBoxStoryChapter.addItem(u"后篇  " + 
-                        self.chars[self.cards[cardId - 1]['characterId'] - 1]['name_j'])
+                    self.comboBoxStoryChapter.addItem( 
+                        self.chars[self.cards[cardId - 1]['characterId'] - 1]['name_j'] + u" 前篇")
+                    self.comboBoxStoryChapter.addItem(
+                        self.chars[self.cards[cardId - 1]['characterId'] - 1]['name_j'] + u" 后篇")
                 lastSeparator = int(self.comboBoxStoryChapter.count() / 2 * 3 - 3)
                 for i in range(2, lastSeparator, 3):
                     self.comboBoxStoryChapter.insertSeparator(i)
@@ -802,10 +767,10 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                     self.comboBoxStoryIndex.setCurrentIndex(storyIndex)
                 fesId = len(self.fes) - max(self.comboBoxStoryIndex.currentIndex(), 0)
                 for cardId in self.fes[fesId - 1]['cards']:
-                    self.comboBoxStoryChapter.addItem(u"前篇  " + 
-                        self.chars[self.cards[cardId - 1]['characterId'] - 1]['name_j'])
-                    self.comboBoxStoryChapter.addItem(u"后篇  " + 
-                        self.chars[self.cards[cardId - 1]['characterId'] - 1]['name_j'])
+                    self.comboBoxStoryChapter.addItem(
+                        self.chars[self.cards[cardId - 1]['characterId'] - 1]['name_j'] + u" 前篇")
+                    self.comboBoxStoryChapter.addItem(
+                        self.chars[self.cards[cardId - 1]['characterId'] - 1]['name_j'] + u" 后篇")
                 lastSeparator = int(self.comboBoxStoryChapter.count() / 2 * 3 - 3)
                 for i in range(2, lastSeparator, 3):
                     self.comboBoxStoryChapter.insertSeparator(i)
@@ -819,20 +784,20 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                     self.comboBoxStoryIndex.insertSeparator(i)
                 if (storyType == self.preStoryType) and (storyIndex >= 0):
                     self.comboBoxStoryIndex.setCurrentIndex(storyIndex)
-                self.comboBoxStoryChapter.addItem(u"前篇  一星")
-                self.comboBoxStoryChapter.addItem(u"后篇  一星")
+                self.comboBoxStoryChapter.addItem(u"一星 前篇")
+                self.comboBoxStoryChapter.addItem(u"一星 后篇")
                 if self.comboBoxStoryIndex.currentText() != u"ミク":
-                    self.comboBoxStoryChapter.addItem(u"前篇  二星")
-                    self.comboBoxStoryChapter.addItem(u"后篇  二星")
+                    self.comboBoxStoryChapter.addItem(u"二星 前篇")
+                    self.comboBoxStoryChapter.addItem(u"二星 后篇")
                 else:
                     for unit in sekaiDict:
-                        self.comboBoxStoryChapter.addItem(u"前篇  {}二星".format(unit))
-                        self.comboBoxStoryChapter.addItem(u"后篇  {}二星".format(unit))
-                self.comboBoxStoryChapter.addItem(u"前篇  三星")
-                self.comboBoxStoryChapter.addItem(u"后篇  三星")
+                        self.comboBoxStoryChapter.addItem(u"{}二星 前篇".format(unit))
+                        self.comboBoxStoryChapter.addItem(u"{}二星 后篇".format(unit))
+                self.comboBoxStoryChapter.addItem(u"三星 前篇")
+                self.comboBoxStoryChapter.addItem(u"三星 后篇")
                 if self.comboBoxStoryIndex.currentText() in [u"一歌", u"ミク", u"リン", u"レン"]:
-                    self.comboBoxStoryChapter.addItem(u"前篇  四星")
-                    self.comboBoxStoryChapter.addItem(u"后篇  四星")
+                    self.comboBoxStoryChapter.addItem(u"四星 前篇")
+                    self.comboBoxStoryChapter.addItem(u"四星 后篇")
                 lastSeparator = int(self.comboBoxStoryChapter.count() / 2 * 3 - 3)
                 for i in range(2, lastSeparator, 3):
                     self.comboBoxStoryChapter.insertSeparator(i)
@@ -847,7 +812,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 traceback.print_exception(
                     exc_type, exc_value, exc_traceback_obj, file=f)
             qw.QMessageBox.warning(
-                self, "", u"错误1\n请将“setting\\log.txt发给弃子”")
+                self, "", u"setComboBox错误\n请将“setting\\log.txt发给弃子”")
 
     def updateComboBox(self):
         try:
@@ -867,6 +832,154 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             self.mainstory = mainstory
         logging.info("Story List Updated")
         self.setComboBox()
+
+    def getJsonPath(self, storyType, storyIdx, chapterIdx, source):
+        jsonurl = ""
+        if storyType == u"主线剧情":
+            unitIdx = storyIdx
+            self.comboBoxStoryIndex.currentIndex()
+            unit = self.mainstory[unitIdx]["unit"].replace("_", "-")
+            if unitIdx == 0:
+                sekai = "vs" + sekaiDict[int((chapterIdx + 1) / 5)]
+            else:
+                sekai = sekaiDict[unitIdx - 1]
+            if unitIdx == 0:
+                chapter = str(chapterIdx % 4).zfill(2)
+            else:
+                chapter = str(chapterIdx).zfill(2)
+            jsonname = "mainStory_{}_{}.json".format(sekai, chapter)
+            if source == "sekai.best":
+                jsonurl = "http://sekai-res.dnaroma.eu/" \
+                    "file/sekai-assets/scenario/unitstory/" \
+                    "{}-story-chapter_rip/{}_01_{}.asset".format(unit, sekai, chapter)
+            elif source == "pjsek.ai":
+                jsonurl = "http://assets.pjsek.ai/file/" \
+                    "pjsekai-assets/startapp/scenario/unitstory/" \
+                    "{}-story-chapter/{}_01_{}.json".format(unit, sekai, chapter)
+            preTitle = "{}-{}".format(sekai, chapter)
+
+        elif storyType == u"活动剧情":
+            eventId = len(self.events) - storyIdx
+            event = self.events[int(eventId) - 1]['name']
+            eventId = str(eventId).zfill(2)
+            chapter = str(chapterIdx + 1).zfill(2)
+
+            jsonname = "event_{}_{}.json".format(eventId, chapter)
+            if source == "sekai.best":
+                jsonurl = "http://sekai-res.dnaroma.eu/" \
+                    "file/sekai-assets/event_story/" \
+                    "{}/scenario_rip/event_{}_{}.asset".format(event, eventId, chapter)
+            elif source == "pjsek.ai":
+                jsonurl = "http://assets.pjsek.ai/file/" \
+                    "pjsekai-assets/ondemand/event_story/" \
+                    "{}/scenario/event_{}_{}.json".format(event, eventId, chapter)
+            preTitle = "{}-{}".format(eventId, chapter)
+
+        elif storyType == u"活动卡面":
+            eventId = len(self.events) - storyIdx
+            cardId = self.events[eventId - 1]["cards"][int(chapterIdx / 3)]
+            charId = self.cards[cardId - 1]["characterId"]
+            count = str(self.cards[cardId - 1]["cardCount"]).zfill(3)
+            chapter = str(chapterIdx % 3 + 1).zfill(2)
+            eventId = str(eventId).zfill(2)
+            charname = self.chars[charId - 1]['name']
+            jsonname = "event_{}_{}_{}.json".format(eventId, charname, chapter)
+            charId = str(charId).zfill(3)
+            if source == "sekai.best":
+                jsonurl = "http://sekai-res.dnaroma.eu/" \
+                    "file/sekai-assets/character/member/" \
+                    "res{}_no{}_rip/{}{}_{}{}.asset".format(
+                        charId, count, charId, count, charname, chapter)
+            elif source == "pjsek.ai":
+                jsonurl = "http://assets.pjsek.ai/file/" \
+                    "pjsekai-assets/startapp/character/member/" \
+                    "res{}_no{}/{}{}_{}{}.json".format(
+                        charId, count, charId, count, charname, chapter)
+            preTitle = "{}-{}-{}".format(eventId, charname, chapter)
+
+        elif storyType == u"特殊卡面":
+            fesId = len(self.fes) - storyIdx
+            cardId = self.fes[fesId - 1]["cards"][int(chapterIdx / 3)]
+            charId = self.cards[cardId - 1]["characterId"]
+            count = str(self.cards[cardId - 1]["cardCount"]).zfill(3)
+            chapter = str(chapterIdx % 3 + 1).zfill(2)
+            charname = self.chars[charId - 1]['name']
+
+            idx = self.fes[fesId - 1]['id']
+            if 'collaboration' in self.fes[fesId - 1]:
+                jsonname = "collabo_{}_{}_{}.json".format(
+                    idx, charname, chapter)
+            elif self.fes[fesId - 1]['isBirthday']:
+                year = 2021 + int((idx + 2) / 4)
+                jsonname = "birth_{}_{}_{}.json".format(
+                    year, charname, chapter)
+            else:
+                year = 2021 + int(idx / 4)
+                month = str(idx % 4 * 3 + 1).zfill(2)
+                jsonname = "fes_{}{}_{}_{}.json".format(
+                    year, month, charname, chapter)
+
+            charId = str(charId).zfill(3)
+            if source == "sekai.best":
+                jsonurl = "http://sekai-res.dnaroma.eu/" \
+                    "file/sekai-assets/character/member/" \
+                    "res{}_no{}_rip/{}{}_{}{}.asset".format(
+                        charId, count, charId, count, charname, chapter)
+            elif source == "pjsek.ai":
+                jsonurl = "http://assets.pjsek.ai/file/" \
+                    "pjsekai-assets/startapp/character/member/" \
+                    "res{}_no{}/{}{}_{}{}.json".format(
+                        charId, count, charId, count, charname, chapter)
+            if 'collaboration' in self.fes[fesId - 1]:
+                preTitle = "collabo{}_{}_{}.json".format(
+                    idx, charname, chapter)
+            elif self.fes[fesId - 1]['isBirthday']:
+                preTitle = "birth{}_{}_{}.json".format(
+                    year, charname, chapter)
+            else:
+                preTitle = "fes{}{}_{}_{}.json".format(
+                    year, month, charname, chapter)
+
+        elif storyType == u"初始卡面":
+            currentIdx = storyIdx
+            if currentIdx > 25:
+                charId = currentIdx - 4
+            else:
+                charId = int(currentIdx / 5) * 4 + (currentIdx + 1) % 5
+            charname = self.chars[charId - 1]['name']
+            rarity = int(chapterIdx / 3) + 1
+            if charname == "miku":
+                realRarity = max(2, rarity - 4) if rarity > 2 else rarity
+                if realRarity == 2:
+                    unit = sekaiDict[rarity - 2]
+                realRarity = str(realRarity).zfill(3)
+            rarity = str(rarity).zfill(3)
+            chapter = str(chapterIdx % 3 + 1).zfill(2)
+            jsonname = "release_{}_{}_{}.json".format(
+                charname, rarity, chapter)
+            if charname == "miku":
+                if realRarity == "02":
+                    jsonname = "release_{}_{}_02_{}.json".format(
+                        charname, unit, chapter)
+                else:
+                    jsonname = "release_{}_{}_{}.json".format(
+                        charname, realRarity, chapter)
+            charId = str(charId).zfill(3)
+            if source == "sekai.best":
+                jsonurl = "http://sekai-res.dnaroma.eu/" \
+                    "file/sekai-assets/character/member/" \
+                    "res{}_no{}_rip/{}{}_{}{}.asset".format(
+                        charId, count, charId, count, charname, chapter)
+            elif source == "pjsek.ai":
+                jsonurl = "http://assets.pjsek.ai/file/" \
+                    "pjsekai-assets/startapp/character/member/" \
+                    "res{}_no{}/{}{}_{}{}.json".format(
+                        charId, rarity, charId, rarity, charname, chapter)
+            if charname == "miku" and realRarity == "02":
+                preTitle = "00-miku-{}-02-{}".format(unit, chapter)
+            else:
+                preTitle = "00-{}-{}-{}".format(charname, rarity, chapter)
+        return preTitle, jsonname, jsonurl
 
     def translateMode(self):
         self.radioButtonTranslate.setChecked(True)
