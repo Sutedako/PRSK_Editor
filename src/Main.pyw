@@ -153,6 +153,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
         self.tableWidgetDst.currentCellChanged.connect(self.trackSrc)
         self.tableWidgetDst.itemActivated.connect(self.editText)
+        self.tableWidgetDst.itemClicked.connect(self.editText)
         self.tableWidgetDst.itemDoubleClicked.connect(self.editText)
         self.tableWidgetDst.itemChanged.connect(self.changeText)
 
@@ -508,7 +509,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         self.dstText.showDiff(self.checkBoxShowDiff.isChecked())
 
         title = osp.basename(textpath).split(" ")[-1].split(".")[0]
-        if title:
+        if title and title != "[AutoSave]":
             self.plainTextEditTitle.setPlainText(title)
         return True
 
@@ -669,6 +670,9 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 srcrow = min(srcrow, self.dstText.talks[currentRow]['idx'])
                 srcItem = self.tableWidgetSrc.item(srcrow - 1, 1)
                 self.tableWidgetSrc.setCurrentItem(srcItem)
+
+            currentItem = self.tableWidgetDst.item(currentRow, currentColumn)
+            self.tableWidgetDst.editItem(currentItem)
         except BaseException:
             exc_type, exc_value, exc_traceback_obj = sys.exc_info()
             with open(loggingPath, 'a') as f:
@@ -1021,7 +1025,6 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             self.tempWindow.close()
             self.tempWindow.exec()
             self.downloadState = 2
-
 
 
 class downloadThread(qc.QThread):
