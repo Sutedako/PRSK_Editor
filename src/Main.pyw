@@ -674,7 +674,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             currentItem = self.tableWidgetDst.item(currentRow, currentColumn)
             self.tableWidgetDst.editItem(currentItem)
             self.tableWidgetDst.blockSignals(True)
-            item.setText(item.text().split("\n")[0].rstrip().lstrip())
+            currentItem.setText(currentItem.text().split("\n")[0].rstrip().lstrip())
             self.tableWidgetDst.blockSignals(False)
         except BaseException:
             exc_type, exc_value, exc_traceback_obj = sys.exc_info()
