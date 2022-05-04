@@ -1,2 +1,0 @@
-INFO:root:Icon Loaded
-INFO:root:Json Loaded
