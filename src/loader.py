@@ -1,7 +1,5 @@
 from PyQt5.QtWidgets import QTableWidgetItem, QPushButton
 from PyQt5.QtGui import QIcon
-import PyQt5.QtMultimedia as media
-from PyQt5.QtCore import QUrl
 
 import json
 import os.path as osp

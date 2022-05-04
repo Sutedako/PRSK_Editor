@@ -1,7 +1,8 @@
-from PyQt5.QtWidgets import QWidget, QTableWidgetItem, QPushButton, QCheckBox, QHBoxLayout, QMenu
+from PyQt5.QtWidgets import QTableWidgetItem
 from PyQt5.QtGui import QBrush, QColor
 from PyQt5.QtCore import Qt
-import copy
+
+import os.path as osp
 
 Color = {
     'RED': QBrush(QColor(255, 192, 192)),
@@ -10,6 +11,7 @@ Color = {
     'BLUE': QBrush(QColor(0, 128, 255)),
     'WHITE': QBrush(QColor(255, 255, 255))
 }
+
 
 class Editor():
 
@@ -59,6 +61,12 @@ class Editor():
         srcfile = open(filepath, 'r', encoding='UTF-8')
         lines = srcfile.readlines()
 
+        profile = []
+        while lines[0][0] == 'Q' or not lines[0]:
+            content = "" if len(lines[0].split(':')) <= 1 else lines[0].split(':')[-1]
+            profile.append(content)
+            lines.pop(0)
+
         self.talks = []
         for idx, line in enumerate(lines):
             line = line.replace(":", "：")
@@ -99,6 +107,7 @@ class Editor():
                 self.talks[-1]['end'] = True
             else:
                 self.talks[-2]['end'] = True
+        return profile
 
     def saveFile(self):
         outTalk = ''
@@ -144,6 +153,7 @@ class Editor():
 
         if talk['comment']:
             self.table.item(row, 2).setBackground(Color['YELLOW'])
+            self.table.item(row, 2).setFlags(Qt.NoItemFlags)
         elif talk['warning']:
             self.table.item(row, 2).setBackground(Color['RED'])
         else:
