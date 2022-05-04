@@ -15,11 +15,61 @@ class Ui_SekaiText(object):
     def setupUi(self, SekaiText):
         SekaiText.setObjectName("Sekai Test")
         SekaiText.resize(1024, 1024)
+        SekaiText.setMaximumSize(1800, 2048)
 
         self.centralwidget = QtWidgets.QWidget(SekaiText)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
         self.gridLayout.setObjectName("gridLayout")
+
+        self.profileLayout = QtWidgets.QVBoxLayout()
+        self.topLayout = QtWidgets.QHBoxLayout()
+
+        self.nameLable = QtWidgets.QLabel("昵称", self.centralwidget)
+        self.nameLable.setFixedSize(QtCore.QSize(40, 30))
+        self.topLayout.addWidget(self.nameLable)
+        self.nameText = QtWidgets.QLineEdit(self.centralwidget)
+        self.nameText.setFixedSize(QtCore.QSize(120, 30))
+        self.topLayout.addWidget(self.nameText)
+
+        self.blank = QtWidgets.QLabel("", self.centralwidget)
+        self.blank.setFixedSize(QtCore.QSize(40, 30))
+        self.topLayout.addWidget(self.blank)
+
+        self.recommendLable = QtWidgets.QLabel("推的团或角色", self.centralwidget)
+        self.recommendLable.setFixedSize(QtCore.QSize(110, 30))
+        self.topLayout.addWidget(self.recommendLable)
+        self.recommendText = QtWidgets.QLineEdit(self.centralwidget)
+        self.recommendText.setFixedSize(QtCore.QSize(180, 30))
+        self.topLayout.addWidget(self.recommendText)
+
+        self.label = QtWidgets.QLabel("", self.centralwidget)
+        self.label.setMinimumSize(QtCore.QSize(20, 30))
+        self.label.setMaximumSize(QtCore.QSize(2000, 30))
+        self.topLayout.addWidget(self.label)
+        self.profileLayout.addLayout(self.topLayout)
+
+        self.degreeLable = QtWidgets.QLabel("对游戏剧情的了解程度", self.centralwidget)
+        self.degreeLable.setFixedSize(QtCore.QSize(410, 30))
+        self.profileLayout.addWidget(self.degreeLable)
+        self.degreeText = QtWidgets.QTextEdit(self.centralwidget)
+        self.degreeText.setMinimumSize(QtCore.QSize(300, 30))
+        self.degreeText.setMaximumSize(QtCore.QSize(900, 60))
+        self.profileLayout.addWidget(self.degreeText)
+
+        self.understandLable = QtWidgets.QLabel("对PJSK企划与VOCALOID的理解（选）", self.centralwidget)
+        self.understandLable.setFixedSize(QtCore.QSize(410, 30))
+        self.profileLayout.addWidget(self.understandLable)
+        self.understandText = QtWidgets.QTextEdit(self.centralwidget)
+        self.understandText.setMinimumSize(QtCore.QSize(300, 30))
+        self.understandText.setMaximumSize(QtCore.QSize(900, 60))
+        self.profileLayout.addWidget(self.understandText)
+
+        self.Vblank = QtWidgets.QLabel("", self.centralwidget)
+        self.Vblank.setFixedSize(QtCore.QSize(20, 20))
+        self.profileLayout.addWidget(self.Vblank)
+
+        self.gridLayout.addLayout(self.profileLayout, 0, 0, 1, 1)
 
         self.tableWidgetSrc = QtWidgets.QTableWidget(self.centralwidget)
         self.tableWidgetSrc.setMinimumSize(QtCore.QSize(300, 500))
@@ -31,10 +81,10 @@ class Ui_SekaiText(object):
         self.tableWidgetSrc.horizontalHeader().resizeSection(0, 120)
         self.tableWidgetSrc.horizontalHeader().setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
         self.tableWidgetSrc.setIconSize(QtCore.QSize(48,48))
-        self.gridLayout.addWidget(self.tableWidgetSrc, 0, 0, 1, 1)
+        self.gridLayout.addWidget(self.tableWidgetSrc, 1, 0, 1, 1)
 
         self.tableWidgetDst = QtWidgets.QTableWidget(self.centralwidget)
-        self.tableWidgetDst.setMinimumSize(QtCore.QSize(300, 500))
+        self.tableWidgetDst.setMinimumSize(QtCore.QSize(500, 500))
         self.tableWidgetDst.setObjectName("tableWidgetDst")
         self.tableWidgetDst.setColumnCount(4)
         self.tableWidgetDst.setRowCount(0)
@@ -52,7 +102,7 @@ class Ui_SekaiText(object):
         self.tableWidgetDst.horizontalHeader().setSectionResizeMode(2, QtWidgets.QHeaderView.Stretch)
         self.tableWidgetDst.horizontalHeader().resizeSection(3, 100)
         self.tableWidgetDst.verticalHeader().hide()
-        self.gridLayout.addWidget(self.tableWidgetDst, 0, 1, 1, 1)
+        self.gridLayout.addWidget(self.tableWidgetDst, 0, 1, 2, 1)
 
         SekaiText.setCentralWidget(self.centralwidget)
 
