@@ -1,7 +1,6 @@
-from PyQt5.QtWidgets import QWidget, QTableWidgetItem, QPushButton, QCheckBox, QHBoxLayout, QMenu
+from PyQt5.QtWidgets import QTableWidgetItem
 from PyQt5.QtGui import QBrush, QColor
 from PyQt5.QtCore import Qt
-import copy
 
 Color = {
     'RED': QBrush(QColor(255, 192, 192)),
@@ -10,6 +9,7 @@ Color = {
     'BLUE': QBrush(QColor(0, 128, 255)),
     'WHITE': QBrush(QColor(255, 255, 255))
 }
+
 
 class Editor():
 
@@ -59,6 +59,12 @@ class Editor():
         srcfile = open(filepath, 'r', encoding='UTF-8')
         lines = srcfile.readlines()
 
+        profile = []
+        while lines[0][0] == 'Q' or not lines[0]:
+            content = "" if len(lines[0].split(':')) <= 1 else lines[0].split(':')[-1]
+            profile.append(content)
+            lines.pop(0)
+
         self.talks = []
         for idx, line in enumerate(lines):
             line = line.replace(":", "：")
@@ -99,10 +105,14 @@ class Editor():
                 self.talks[-1]['end'] = True
             else:
                 self.talks[-2]['end'] = True
+        return profile
 
     def saveFile(self):
         outTalk = ''
         for talk in self.talks:
+            if talk['comment']:
+                outTalk = outTalk.rstrip()
+                outTalk += '\\C'
             if not talk['speaker']:
                 outTalk += '\n'
             elif talk['speaker'] == u'场景':
@@ -111,8 +121,6 @@ class Editor():
             else:
                 if talk['start']:
                     outTalk += talk['speaker'] + "："
-                if talk['comment']:
-                    outTalk += '\\C'
                 outTalk += talk['text'].split("\n")[0]
                 if not talk['end']:
                     outTalk += '\\N'
@@ -185,6 +193,7 @@ class Editor():
         column = item.column()
         speaker = self.talks[row]['speaker']
         text = item.text()
+        check = True
         if not self.talks[row]['comment']:
             text, check = self.checkText(speaker, text)
         if len(text.split("\n")) > 1:
@@ -197,6 +206,11 @@ class Editor():
         self.talks[row]['text'] = text
         self.talks[row]['warning'] = not check
         self.fillTableLine(row, self.talks[row])
+
+        if row < self.table.rowCount():
+            nextItem = self.table.item(row + 1, column)
+            self.table.setCurrentItem(nextItem)
+            self.table.editItem(nextItem)
 
     def checkText(self, speaker, text):
         check = True
