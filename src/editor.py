@@ -2,8 +2,6 @@ from PyQt5.QtWidgets import QTableWidgetItem
 from PyQt5.QtGui import QBrush, QColor
 from PyQt5.QtCore import Qt
 
-import os.path as osp
-
 Color = {
     'RED': QBrush(QColor(255, 192, 192)),
     'YELLOW': QBrush(QColor(255, 255, 128)),
@@ -112,6 +110,9 @@ class Editor():
     def saveFile(self):
         outTalk = ''
         for talk in self.talks:
+            if talk['comment']:
+                outTalk = outTalk.rstrip()
+                outTalk += '\\C'
             if not talk['speaker']:
                 outTalk += '\n'
             elif talk['speaker'] == u'场景':
@@ -120,8 +121,6 @@ class Editor():
             else:
                 if talk['start']:
                     outTalk += talk['speaker'] + "："
-                if talk['comment']:
-                    outTalk += '\\C'
                 outTalk += talk['text'].split("\n")[0]
                 if not talk['end']:
                     outTalk += '\\N'

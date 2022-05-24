@@ -50,19 +50,19 @@ class Ui_SekaiText(object):
         self.profileLayout.addLayout(self.topLayout)
 
         self.degreeLable = QtWidgets.QLabel("对游戏剧情的了解程度", self.centralwidget)
-        self.degreeLable.setFixedSize(QtCore.QSize(410, 30))
+        self.degreeLable.setFixedSize(QtCore.QSize(410, 20))
         self.profileLayout.addWidget(self.degreeLable)
         self.degreeText = QtWidgets.QTextEdit(self.centralwidget)
         self.degreeText.setMinimumSize(QtCore.QSize(300, 30))
-        self.degreeText.setMaximumSize(QtCore.QSize(900, 60))
+        self.degreeText.setMaximumSize(QtCore.QSize(900, 80))
         self.profileLayout.addWidget(self.degreeText)
 
         self.understandLable = QtWidgets.QLabel("对PJSK企划与VOCALOID的理解（选）", self.centralwidget)
-        self.understandLable.setFixedSize(QtCore.QSize(410, 30))
+        self.understandLable.setFixedSize(QtCore.QSize(410, 20))
         self.profileLayout.addWidget(self.understandLable)
         self.understandText = QtWidgets.QTextEdit(self.centralwidget)
         self.understandText.setMinimumSize(QtCore.QSize(300, 30))
-        self.understandText.setMaximumSize(QtCore.QSize(900, 60))
+        self.understandText.setMaximumSize(QtCore.QSize(900, 80))
         self.profileLayout.addWidget(self.understandText)
 
         self.Vblank = QtWidgets.QLabel("", self.centralwidget)

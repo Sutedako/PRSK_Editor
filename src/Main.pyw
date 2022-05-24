@@ -40,6 +40,11 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         self.setupUi(self)
         self.dstText = Editor(self.tableWidgetDst)
 
+        self.nameText.textChanged.connect(self.saveFile)
+        self.recommendText.textChanged.connect(self.saveFile)
+        self.degreeText.textChanged.connect(self.saveFile)
+        self.understandText.textChanged.connect(self.saveFile)
+
         self.tableWidgetDst.currentCellChanged.connect(self.trackSrc)
         self.tableWidgetDst.itemActivated.connect(self.editText)
         self.tableWidgetDst.itemClicked.connect(self.editText)
@@ -59,14 +64,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             self.srcText = Loader(jsonpath, self.tableWidgetSrc)
             logging.info("Json Loaded")
 
-            profile = []
-            if osp.exists(self.resultPath):
-                profile = self.dstText.loadFile(self.resultPath)
-                logging.info("Result Loaded")
-            elif osp.exists(self.answerPath):
-                profile = self.dstText.loadFile(self.answerPath)
-                logging.info("Answer Loaded")
-            else:
+            if not (osp.exists(self.resultPath) or osp.exists(self.answerPath)):
                 self.dstText.createFile(self.srcText.talks)
             self.dstText.fillTable()
 
