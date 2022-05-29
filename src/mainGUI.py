@@ -13,7 +13,7 @@ from PyQt5 import QtCore, QtWidgets
 
 class Ui_SekaiText(object):
     def setupUi(self, SekaiText):
-        SekaiText.setObjectName("Sekai Test")
+        SekaiText.setObjectName("Sekai Judge")
         SekaiText.resize(1024, 1024)
         SekaiText.setMaximumSize(1800, 2048)
 

@@ -75,7 +75,7 @@ class Editor():
                 speaker = u"场景" if len(line.strip()) else ""
                 fulltext = line.replace(u"场景", "")
 
-            texts = fulltext.split("\\N")
+            texts = (fulltext + " ").split("\\N")
             for iidx, text in enumerate(texts):
                 comment = text.split("\\C")[-1] if "\\C" in text else ""
                 if comment:
@@ -96,14 +96,13 @@ class Editor():
                         'speaker': speaker,
                         'text': comment.rstrip(),
                         'start': False,
-                        'end': True,
+                        'end': False,
                         'comment': True,
                         'warning': False,
                     }
                     self.talks.append(talk_c)
-            if not self.talks[-1]['comment']:
-                self.talks[-1]['end'] = True
-            else:
+            self.talks[-1]['end'] = True
+            if self.talks[-1]['comment']:
                 self.talks[-2]['end'] = True
         return profile
 
@@ -111,7 +110,12 @@ class Editor():
         outTalk = ''
         for talk in self.talks:
             if talk['comment']:
-                outTalk = outTalk.rstrip()
+                if not talk['text'].rstrip():
+                    continue
+                if outTalk[-1:] == "\n":
+                    outTalk = outTalk.rstrip()
+                elif outTalk[-2:] == "\\N":
+                    outTalk = outTalk[0:-3]
                 outTalk += '\\C'
             if not talk['speaker']:
                 outTalk += '\n'
@@ -143,7 +147,7 @@ class Editor():
             'speaker': self.talks[row - 1]['speaker'],
             'text': '',
             'start': False,
-            'end': True,
+            'end': self.talks[row - 1]['end'],
             'comment': True,
             'warning': False
         })
@@ -161,7 +165,7 @@ class Editor():
             self.table.setItem(row, 1, QTableWidgetItem(" "))
         self.table.setItem(row, 2, QTableWidgetItem(talk['text']))
 
-        if not talk['end']:
+        if not talk['end'] and not talk['comment']:
             self.table.removeCellWidget(row, 3)
             self.table.setItem(row, 3, QTableWidgetItem("\\N"))
 
@@ -206,11 +210,6 @@ class Editor():
         self.talks[row]['text'] = text
         self.talks[row]['warning'] = not check
         self.fillTableLine(row, self.talks[row])
-
-        if row < self.table.rowCount():
-            nextItem = self.table.item(row + 1, column)
-            self.table.setCurrentItem(nextItem)
-            self.table.editItem(nextItem)
 
     def checkText(self, speaker, text):
         check = True

@@ -21,8 +21,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
     def __init__(self, root):
         super().__init__()
 
-        self.resultPath = osp.join(root, u"审核结果.txt")
-        self.answerPath = osp.join(root, u"答题纸.txt")
+        self.resultPath = osp.join(root, u"Dare 审核结果.txt")
 
         self.iconpath = "image/icon"
         if getattr(sys, 'frozen', False):
@@ -42,7 +41,6 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
         self.tableWidgetDst.currentCellChanged.connect(self.trackSrc)
         self.tableWidgetDst.itemActivated.connect(self.editText)
-        self.tableWidgetDst.itemClicked.connect(self.editText)
         self.tableWidgetDst.itemDoubleClicked.connect(self.editText)
         self.tableWidgetDst.itemChanged.connect(self.changeText)
 
@@ -59,8 +57,6 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             self.srcText = Loader(jsonpath, self.tableWidgetSrc)
             logging.info("Json Loaded")
 
-            if not (osp.exists(self.resultPath) or osp.exists(self.answerPath)):
-                self.dstText.createFile(self.srcText.talks)
             self.dstText.fillTable()
         except BaseException:
             exc_type, exc_value, exc_traceback_obj = sys.exc_info()
@@ -99,7 +95,6 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             f.write(content)
             f.close()
 
-
     def changeText(self, item):
         try:
             self.dstText.changeText(item, self.editormode)
@@ -135,12 +130,9 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
     def proofreadMode(self):
         self.editormode = 1
 
-    def checkExistingFile(self):
-        textPath = ""
-        if osp.exists(self.resultPath):
-            textPath = self.resultPath
-        elif osp.exists(self.answerPath):
-            textPath = self.answerPath
+    def openFile(self, root):
+        textPath, _ = qw.QFileDialog.getOpenFileName(
+            self, u"选取文件", root, "Text Files (*.txt)")
 
         if textPath:
             profile = self.dstText.loadFile(textPath)
@@ -154,6 +146,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 self.understandText.setText(
                     profile[4].rstrip().replace('\\N', '\n'))
 
+            self.resultPath = osp.join(root, u"{} 审核结果.txt".format(profile[0].rstrip()))
             if self.editormode > -1:
                 return True
 
@@ -178,25 +171,10 @@ if __name__ == '__main__':
     try:
         mainform = mainForm(root)
 
-        if not mainform.checkExistingFile():
-            modeSelectWinodw = qw.QMessageBox()
-            modeSelectWinodw.setWindowTitle("Sekai Test")
-            modeSelectWinodw.setText("请阅读题干与格式规范\n建议对照视频进行翻译")
-            if platform.system() == "Darwin":
-                proofreadButton = modeSelectWinodw.addButton(u"校对", 2)
-                translateButton = modeSelectWinodw.addButton(u"翻译", 2)
-            else:
-                translateButton = modeSelectWinodw.addButton(u"翻译", 2)
-                proofreadButton = modeSelectWinodw.addButton(u"校对", 2)
-
-            translateButton.clicked.connect(mainform.translateMode)
-            proofreadButton.clicked.connect(mainform.proofreadMode)
-
-            modeSelectWinodw.exec_()
-
-        mainform.load()
-        mainform.show()
-        app.exec_()
+        if mainform.openFile(root):
+            mainform.load()
+            mainform.show()
+            app.exec_()
     except BaseException:
         exc_type, exc_value, exc_traceback_obj = sys.exc_info()
         with open(loggingPath, 'a') as f:
