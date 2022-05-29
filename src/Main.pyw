@@ -10,6 +10,7 @@ from PyQt5.QtGui import QIcon
 from Editor import Editor
 from Loader import Loader
 import logging
+from os import listdir
 import os.path as osp
 import platform
 
@@ -23,6 +24,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
         self.resultPath = osp.join(root, u"审核结果.txt")
         self.answerPath = osp.join(root, u"答题纸.txt")
+        self.result = False
 
         self.iconpath = "image/icon"
         if getattr(sys, 'frozen', False):
@@ -91,21 +93,22 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 self, "", u"editText错误\n请将“log.txt发给弃子”")
 
     def saveFile(self):
-        content = ""
-        content += "Q1:" + self.nameText.text() + "\n"
-        content += "Q2:" + str(self.editormode) + "\n"
-        content += "Q3:" + self.recommendText.text() + "\n"
-        content += "Q4:" + self.degreeText.toPlainText().replace('\n', '\\N') + "\n"
-        content += "Q5:" + self.understandText.toPlainText().replace('\n', '\\N') + "\n"
-        content += self.dstText.saveFile()
+        if not self.result:
+            content = ""
+            content += "Q1:" + self.nameText.text() + "\n"
+            content += "Q2:" + str(self.editormode) + "\n"
+            content += "Q3:" + self.recommendText.text() + "\n"
+            content += "Q4:" + self.degreeText.toPlainText().replace('\n', '\\N') + "\n"
+            content += "Q5:" + self.understandText.toPlainText().replace('\n', '\\N') + "\n"
+            content += self.dstText.saveFile()
 
-        with open(self.answerPath, 'w', encoding='UTF-8') as f:
-            f.write(content)
-            f.close()
+            with open(self.answerPath, 'w', encoding='UTF-8') as f:
+                f.write(content)
+                f.close()
 
     def changeText(self, item):
         try:
-            self.dstText.changeText(item, self.editormode)
+            self.dstText.changeText(item)
             self.saveFile()
         except BaseException:
             exc_type, exc_value, exc_traceback_obj = sys.exc_info()
@@ -144,11 +147,14 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
     def proofreadMode(self):
         self.editormode = 1
 
-    def checkExistingFile(self):
+    def checkExistingFile(self, root):
         textPath = ""
-        if osp.exists(self.resultPath):
-            textPath = self.resultPath
-        elif osp.exists(self.answerPath):
+        for file in listdir(root):
+            if file[-8:] == u"审核结果.txt":
+                textPath = osp.join(root, file)
+                self.resultPath = textPath
+                self.result = True
+        if not textPath and osp.exists(self.answerPath):
             textPath = self.answerPath
 
         if textPath:
@@ -187,7 +193,7 @@ if __name__ == '__main__':
     try:
         mainform = mainForm(root)
 
-        if not mainform.checkExistingFile():
+        if not mainform.checkExistingFile(root):
             modeSelectWinodw = qw.QMessageBox()
             modeSelectWinodw.setWindowTitle("Sekai Test")
             modeSelectWinodw.setText("请阅读题干与格式规范\n建议对照视频进行翻译")

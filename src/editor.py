@@ -96,14 +96,13 @@ class Editor():
                         'speaker': speaker,
                         'text': comment.rstrip(),
                         'start': False,
-                        'end': True,
+                        'end': False,
                         'comment': True,
                         'warning': False,
                     }
                     self.talks.append(talk_c)
-            if not self.talks[-1]['comment']:
-                self.talks[-1]['end'] = True
-            else:
+            self.talks[-1]['end'] = True
+            if self.talks[-1]['comment']:
                 self.talks[-2]['end'] = True
         return profile
 
@@ -111,7 +110,12 @@ class Editor():
         outTalk = ''
         for talk in self.talks:
             if talk['comment']:
-                outTalk = outTalk.rstrip()
+                if not talk['text'].rstrip():
+                    continue
+                if outTalk[-1:] == "\n":
+                    outTalk = outTalk.rstrip()
+                elif outTalk[-2:] == "\\N":
+                    outTalk = outTalk[0:-3]
                 outTalk += '\\C'
             if not talk['speaker']:
                 outTalk += '\n'
@@ -139,7 +143,7 @@ class Editor():
             self.table.setItem(row, 1, QTableWidgetItem(" "))
         self.table.setItem(row, 2, QTableWidgetItem(talk['text']))
 
-        if not talk['end']:
+        if not talk['end'] and not talk['comment']:
             self.table.removeCellWidget(row, 3)
             self.table.setItem(row, 3, QTableWidgetItem("\\N"))
 
@@ -167,7 +171,7 @@ class Editor():
             self.table.setRowCount(row + 1)
             self.fillTableLine(row, talk)
 
-    def changeText(self, item, editormode):
+    def changeText(self, item):
         row = item.row()
         column = item.column()
         speaker = self.talks[row]['speaker']
