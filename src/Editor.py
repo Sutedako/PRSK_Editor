@@ -80,6 +80,7 @@ class Editor():
                 comment = text.split("\\C")[-1] if "\\C" in text else ""
                 if comment:
                     text = text.split("\\C")[0]
+                text, check = self.checkText(speaker, text)
                 talk = {
                     'idx': idx + 1,
                     'speaker': speaker,
@@ -87,7 +88,7 @@ class Editor():
                     'start': iidx == 0,
                     'end': False,
                     'comment': False,
-                    'warning': False,
+                    'warning': not check,
                 }
                 self.talks.append(talk)
                 if comment:
@@ -214,8 +215,8 @@ class Editor():
     def checkText(self, speaker, text):
         check = True
         if (speaker not in ["", u"场景"]) and (not text):
-            text += "\n【空行，若不需要改行请点右侧“-”删去本行】"
-            return text, check
+            text += "\n【空行】"
+            return text, False
         text = text.split("\n")[0].rstrip().lstrip()
         if not text:
             return text, check
