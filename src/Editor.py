@@ -188,7 +188,7 @@ class Editor():
         self.talks[row]['text'] = text
         self.talks[row]['warning'] = not check
         self.fillTableLine(row, self.talks[row])
-        if row < self.table.rowCount():
+        if row < self.table.rowCount() - 1:
             nextItem = self.table.item(row + 1, column)
             self.table.setCurrentItem(nextItem)
             self.table.editItem(nextItem)
