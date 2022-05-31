@@ -11,13 +11,13 @@ from mainGUI import Ui_SekaiText
 from PyQt5.QtGui import QKeySequence, QIcon, QBrush, QColor
 
 from Editor import Editor
-from Loader import Loader
+from Loader import Loader, update
 from chr import chrs
 
 import json
 import logging
 import os.path as osp
-from os import mkdir
+from os import mkdir, _exit
 import platform
 import requests
 
@@ -35,33 +35,30 @@ sekaiDict = ['leo', 'mmj', 'street', 'wonder', 'nightcode']
 
 loggingPath = ""
 
+
 class mainForm(qw.QMainWindow, Ui_SekaiText):
-
-    chars = chrs
-    events = []
-    fes = []
-    cards = []
-    mainstory = []
-    saved = True
-    isNewFile = False
-    editormode = 0
-
-    srcText = Loader()
-    dstText = Editor()
-    preTitle = ""
-    dstfilename = ""
-    dstfilepath = ""
-
-    datadir = ""
-    settingdir = ""
-
-    setting = {}
-    preStoryType = ""
-
-    downloadState = 1
-
     def __init__(self, root):
         super().__init__()
+
+        self.chars = chrs
+        self.events = []
+        self.fes = []
+        self.cards = []
+        self.mainstory = []
+        self.saved = True
+        self.isNewFile = False
+        self.editormode = 0
+
+        self.srcText = Loader()
+        self.dstText = Editor()
+        self.preTitle = ""
+        self.dstfilename = ""
+        self.dstfilepath = ""
+
+        self.setting = {}
+        self.preStoryType = ""
+
+        self.downloadState = 1
 
         self.datadir = osp.join(root, "data")
         self.settingdir = osp.join(root, "setting")
@@ -143,7 +140,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         self.radioButtonCheck.clicked.connect(self.checkMode)
         # self.radioButtonJudge.clicked.connect(self.judgeMode)
 
-        self.plainTextEditTitle.textChanged.connect(self.changeTitle)
+        self.lineEditTitle.textChanged.connect(self.changeTitle)
         self.pushButtonOpen.clicked.connect(self.openText)
         self.pushButtonSave.clicked.connect(self.saveText)
         self.pushButtonClear.clicked.connect(self.clearText)
@@ -162,11 +159,11 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         self.tempWindow = qw.QMessageBox(self)
         self.tempWindow.setIcon(qw.QMessageBox.Information)
         self.tempWindow.setWindowTitle("")
+        self.tempWindow.buttonClicked.connect(self.downloadFailed)
 
     def downloadJson(self, jsonname, jsonurl):
         jsonpath = osp.join(self.datadir, jsonname)
         download = downloadThread(jsonpath, jsonurl)
-        download.start()
         download.trigger.connect(self.checkDownload)
 
         urlText = u"下载中...<br>若耗时过长可自行前往下方地址下载" + \
@@ -176,10 +173,11 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             "替换data文件夹中{}的内容(替换时用记事本打开即可)".format(jsonname) +\
             "<br><br>轴机用json请从pjsek.ai复制"
 
-        self.tempWindow.setStandardButtons(qw.QMessageBox.Cancel)
         self.tempWindow.setText(urlText)
         self.tempWindow.open()
         self.downloadState = 0
+
+        download.start()
         while not self.downloadState:
             time.sleep(0.1)
             qw.QApplication.processEvents()
@@ -189,15 +187,19 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
     def loadJson(self):
         try:
-            if not self.event:
+            if not self.events:
+                qw.QMessageBox.information(self, "", u"请先刷新")
                 return
             storyType = self.comboBoxStoryType.currentText()
             storyIdx = self.comboBoxStoryIndex.currentIndex()
             chapterIdx = self.comboBoxStoryChapter.currentIndex()
             source = self.comboBoxDataSource.currentText()
-            self.preTitle, jsonname, jsonurl = self.getJsonPath(storyType, storyIdx, chapterIdx, source)
+            jsonpath = ""
+            if storyType != u"自定义":
+                self.preTitle, jsonname, jsonurl = self.getJsonPath(
+                    storyType, storyIdx, chapterIdx, source)
 
-            jsonpath = osp.join(self.datadir, jsonname)
+                jsonpath = osp.join(self.datadir, jsonname)
 
             if source in ["sekai.best", "pjsek.ai"]:
                 logging.info("Downloading Json File from: " + jsonurl)
@@ -213,7 +215,8 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 return
             try:
                 self.srcText = Loader(jsonpath, self.tableWidgetSrc)
-            except BaseException as e:
+                logging.info("Json File Loaded: " + jsonpath)
+            except BaseException:
                 logging.error("Fail to Load Json File: " + jsonpath)
                 exc_type, exc_value, exc_traceback_obj = sys.exc_info()
                 with open(loggingPath, 'a') as f:
@@ -222,17 +225,29 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 qw.QMessageBox.warning(
                     self, "", u"读取Json失败\n{}\n请检查文件或重新下载".format(jsonpath))
                 return
-            else:
-                logging.info("Json File Loaded: " + jsonpath)
 
             self.setting['storyType'] = self.comboBoxStoryType.currentIndex()
             self.setting['storyIdx'] = self.comboBoxStoryIndex.currentIndex()
             self.setting['storyChapter'] = self.comboBoxStoryChapter.currentIndex()
             save(self)
 
-            if storyType[-2:] != u"卡面":
+            if storyType[-2:] == u"剧情":
                 title = self.comboBoxStoryChapter.currentText().split(" ")[-1]
-                self.plainTextEditTitle.setPlainText(title)
+            elif storyType[-2:] == u"卡面":
+                chapter = int(self.preTitle[-2:])
+                self.preTitle = self.preTitle[:-3]
+                if chapter == 1:
+                    title = u"前篇"
+                elif chapter == 2:
+                    title = u"后篇"
+                else:
+                    title = u"特殊篇"
+            else:
+                title = u"未知"
+            self.lineEditTitle.setText(title)
+
+            self.getDstFileName()
+            self.setWindowTitle("*{} Sekai Text".format(self.dstfilename))
 
             if not self.dstText.talks:
                 self.clearText()
@@ -248,6 +263,9 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
     def countSpeaker(self):
         try:
+            if not self.events:
+                qw.QMessageBox.information(self, "", u"请先刷新")
+                return
             chapterList = [self.comboBoxStoryChapter.currentIndex()]
             if self.checkBoxAll.isChecked():
                 chapterList = []
@@ -258,7 +276,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             countList = [{'name': self.chars[i]["name_j"], "count": [0 for i in range(len(chapterList) + 1)]} for i in range(26)]
             storyType = self.comboBoxStoryType.currentText()
             storyIdx = self.comboBoxStoryIndex.currentIndex()
-            source = "sekai.best"
+            source = self.comboBoxDataSource.currentText()
             for idx, chapterIdx in enumerate(chapterList):
                 _, jsonname, jsonurl = self.getJsonPath(storyType, storyIdx, chapterIdx, source)
 
@@ -508,9 +526,10 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         self.dstText.loadFile(editormode, textpath)
         self.dstText.showDiff(self.checkBoxShowDiff.isChecked())
 
-        title = osp.basename(textpath).split(" ")[-1].split(".")[0]
+        title = osp.basename(textpath).split(".")[0]
+        title = title[title.find(" ") + 1:]
         if title and title != "[AutoSave]":
-            self.plainTextEditTitle.setPlainText(title)
+            self.lineEditTitle.setText(title)
         return True
 
     def checkLines(self):
@@ -526,14 +545,14 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
     def changeTitle(self):
         try:
-            self.plainTextEditTitle.blockSignals(True)
+            self.lineEditTitle.blockSignals(True)
             self.getDstFileName()
             if self.dstfilepath:
                 self.dstfilepath = osp.join(
                     osp.dirname(self.dstfilepath), self.dstfilename)
             self.isNewFile = True
             self.setWindowTitle("*{} Sekai Text".format(self.dstfilename))
-            self.plainTextEditTitle.blockSignals(False)
+            self.lineEditTitle.blockSignals(False)
         except BaseException:
             exc_type, exc_value, exc_traceback_obj = sys.exc_info()
             with open(loggingPath, 'a') as f:
@@ -547,7 +566,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
         self.dstfilename = u"【{}】{}.txt".format(
             EditorMode[self.editormode], self.preTitle)
-        title = self.plainTextEditTitle.toPlainText()
+        title = self.lineEditTitle.text()
         if not title and storyType[-2:] != u"卡面":
             title = "Untitled"
         if title:
@@ -578,10 +597,17 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                     self.setting['textdir'], self.dstfilename)
                 self.dstfilepath, _ = qw.QFileDialog.getSaveFileName(
                     self, u"保存文件", self.dstfilepath, "Text Files (*.txt)")
+
                 if not self.dstfilepath:
                     return
                 self.setting['textdir'] = osp.dirname(self.dstfilepath)
                 self.isNewFile = False
+
+                self.dstfilename = osp.basename(self.dstfilepath)
+                self.lineEditTitle.blockSignals(True)
+                self.lineEditTitle.setText(self.dstfilename.spilt(".")[0])
+                self.lineEditTitle.blockSignals(False)
+                self.setWindowTitle("{} Sekai Text".format(self.dstfilename))
 
             if self.isNewFile and osp.exists(self.dstfilepath):
                 relpy = qw.QMessageBox.question(
@@ -592,19 +618,11 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 if relpy == qw.QMessageBox.No:
                     return
 
-            self.plainTextEditTitle.blockSignals(True)
             saveN = self.checkBoxSaveN.isChecked()
             self.dstText.saveFile(self.dstfilepath, saveN)
             self.saved = True
             self.isNewFile = False
-            self.dstfilename = osp.basename(self.dstfilepath)
-            self.plainTextEditTitle.setPlainText(self.dstfilename)
-            if " " in self.dstfilename:
-                title = self.dstfilename.split(".")[0].split(" ")[-1]
-                if title:
-                    self.plainTextEditTitle.setPlainText(title)
-            self.plainTextEditTitle.blockSignals(False)
-            self.setWindowTitle("{} Sekai Text".format(self.dstfilename))
+
         except BaseException:
             exc_type, exc_value, exc_traceback_obj = sys.exc_info()
             with open(loggingPath, 'a') as f:
@@ -616,6 +634,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
     def closeEvent(self, event):
         if not self.checkSave():
             event.ignore()
+        _exit(0)
 
     def editText(self, item):
         try:
@@ -814,6 +833,13 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 if storyChapter:
                     self.comboBoxStoryChapter.setCurrentIndex(storyChapter)
 
+            self.comboBoxDataSource.clear()
+            if storyType != u"自定义":
+                self.comboBoxDataSource.addItem(u"sekai.best")
+                self.comboBoxDataSource.addItem(u"pjsek.ai")
+            self.comboBoxDataSource.addItem(u"本地文件")
+            self.comboBoxDataSource.setCurrentText(u"本地文件")
+
             self.preStoryType = storyType
             logging.info("Choose Story {} {}".format(storyType, self.comboBoxStoryIndex.currentText()))
         except BaseException:
@@ -825,23 +851,23 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 self, "", u"setComboBox错误\n请将“setting\\log.txt发给弃子”")
 
     def updateComboBox(self):
-        try:
-            self.events, self.cards, self.fes, mainstory = self.srcText.update(self.settingdir)
-        except BaseException as e:
-            logging.error("Fail to Download Settingg File from best.")
-            exc_type, exc_value, exc_traceback_obj = sys.exc_info()
-            with open(loggingPath, 'a') as f:
-                traceback.print_exception(
-                    exc_type, exc_value, exc_traceback_obj, file=f)
-            qw.QMessageBox.warning(
-                self, "", u"更新失败\n请确认能正常访问sekai.best，且关闭代理与VPN")
-            return
-        else:
-            logging.info("Chapter Information Update Successed.")
-        if mainstory:
-            self.mainstory = mainstory
+        update = updateThread(self.settingdir)
+        update.trigger.connect(self.checkUpdated)
+
+        self.tempWindow.setText(u"更新中...")
+        self.tempWindow.open()
+        self.downloadState = 0
+
+        update.start()
+        while not self.downloadState:
+            time.sleep(0.1)
+            qw.QApplication.processEvents()
+        if self.downloadState == 2:
+            return False
+
         logging.info("Story List Updated")
         self.setComboBox()
+        return True
 
     def getJsonPath(self, storyType, storyIdx, chapterIdx, source):
         jsonurl = ""
@@ -854,7 +880,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             else:
                 sekai = sekaiDict[unitIdx - 1]
             if unitIdx == 0:
-                chapter = str(chapterIdx % 4).zfill(2)
+                chapter = str(chapterIdx % 4 + 1).zfill(2)
             else:
                 chapter = str(chapterIdx).zfill(2)
             jsonname = "mainStory_{}_{}.json".format(sekai, chapter)
@@ -941,13 +967,13 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                     "res{}_no{}/{}{}_{}{}.json".format(
                         charId, count, charId, count, charname, chapter)
             if 'collaboration' in self.fes[fesId - 1]:
-                preTitle = "collabo{}_{}_{}.json".format(
+                preTitle = "collabo{}_{}_{}".format(
                     idx, charname, chapter)
             elif self.fes[fesId - 1]['isBirthday']:
-                preTitle = "birth{}_{}_{}.json".format(
+                preTitle = "birth{}_{}_{}".format(
                     year, charname, chapter)
             else:
-                preTitle = "fes{}{}_{}_{}.json".format(
+                preTitle = "fes{}{}_{}_{}".format(
                     year, month, charname, chapter)
 
         elif storyType == u"初始卡面":
@@ -962,7 +988,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 realRarity = max(2, rarity - 4) if rarity > 2 else rarity
                 if realRarity == 2:
                     unit = sekaiDict[rarity - 2]
-                realRarity = str(realRarity).zfill(3)
+                realRarity = str(realRarity).zfill(2)
             rarity = str(rarity).zfill(3)
             chapter = str(chapterIdx % 3 + 1).zfill(2)
             jsonname = "release_{}_{}_{}.json".format(
@@ -979,7 +1005,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 jsonurl = "http://sekai-res.dnaroma.eu/" \
                     "file/sekai-assets/character/member/" \
                     "res{}_no{}_rip/{}{}_{}{}.asset".format(
-                        charId, count, charId, count, charname, chapter)
+                        charId, rarity, charId, rarity, charname, chapter)
             elif source == "pjsek.ai":
                 jsonurl = "http://assets.pjsek.ai/file/" \
                     "pjsekai-assets/startapp/character/member/" \
@@ -989,6 +1015,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 preTitle = "00-miku-{}-02-{}".format(unit, chapter)
             else:
                 preTitle = "00-{}-{}-{}".format(charname, rarity, chapter)
+
         return preTitle, jsonname, jsonurl
 
     def translateMode(self):
@@ -1005,12 +1032,6 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         self.radioButtonCheck.setChecked(True)
         self.editormode = 2
         self.dstText.isProofReading = True
-    '''
-    def judgeMode(self):
-        self.radioButtonJudge.setChecked(True)
-        self.editormode = 3
-        self.dstText.isProofReading = False
-    '''
 
     def checkDownload(self, successed):
         while self.downloadState:
@@ -1028,6 +1049,24 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             self.tempWindow.close()
             self.tempWindow.exec()
             self.downloadState = 2
+
+    def checkUpdated(self, events, cards, fes, mainstory):
+        while self.downloadState:
+            time.sleep(0.1)
+            qw.QApplication.processEvents()
+        if events:
+            self.events = events
+            self.cards = cards
+            self.fes = fes
+            if mainstory:
+                self.mainstory = mainstory
+            self.downloadState = 1
+        else:
+            self.downloadState = 2
+        self.tempWindow.close()
+
+    def downloadFailed(self):
+        self.downloadState = 2
 
 
 class downloadThread(qc.QThread):
@@ -1060,6 +1099,30 @@ class downloadThread(qc.QThread):
         except BaseException:
             logging.error("Fail to Download Json File.")
             self.trigger.emit(False)
+
+
+class updateThread(qc.QThread):
+    trigger = qc.pyqtSignal(list, list, list, list)
+    path = ""
+
+    def __init__(self, settingpath):
+        super(updateThread, self).__init__()
+        self.path = settingpath
+
+    def run(self):
+        try:
+            events, cards, fes, mainstory = update(self.path)
+            self.trigger.emit(events, cards, fes, mainstory)
+            logging.info("Chapter Information Update Successed.")
+        except BaseException:
+            logging.error("Fail to Download Settingg File from best.")
+            exc_type, exc_value, exc_traceback_obj = sys.exc_info()
+            with open(loggingPath, 'a') as f:
+                traceback.print_exception(
+                    exc_type, exc_value, exc_traceback_obj, file=f)
+            qw.QMessageBox.warning(
+                self, "", u"更新失败\n请确认能正常访问sekai.best，且关闭代理与VPN")
+            self.trigger.emit([], [], [], [])
 
 
 def save(self):
@@ -1097,13 +1160,11 @@ if __name__ == '__main__':
             translateButton = modeSelectWinodw.addButton(u"翻译", 2)
             proofreadButton = modeSelectWinodw.addButton(u"校对", 2)
             checkButton = modeSelectWinodw.addButton(u"合意", 2)
-            # judgeButton = modeSelectWinodw.addButton(u"审核", 2)
 
         mainform = mainForm(root)
         translateButton.clicked.connect(mainform.translateMode)
         proofreadButton.clicked.connect(mainform.proofreadMode)
         checkButton.clicked.connect(mainform.checkMode)
-        # judgeButton.clicked.connect(mainform.judgeMode())
 
         modeSelectWinodw.exec_()
         mainform.show()

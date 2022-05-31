@@ -11,21 +11,21 @@ Color = {
     'WHITE': QBrush(QColor(255, 255, 255))
 }
 
+
 class Editor():
-
-    talks = []
-
-    srctalks = []
-    refertalks = []
-    dsttalks = []
-
-    translatepath = ""
-    proofreadpath = ""
-    checkpath = ""
-    isProofReading = False
-    showDifference = False
-
     def __init__(self, table=None, srctalks=None):
+        self.talks = []
+
+        self.srctalks = []
+        self.refertalks = []
+        self.dsttalks = []
+
+        self.translatepath = ""
+        self.proofreadpath = ""
+        self.checkpath = ""
+        self.isProofReading = False
+        self.showDifference = False
+
         self.table = table
         if(self.table):
             self.table.setContextMenuPolicy(Qt.CustomContextMenu)
@@ -63,26 +63,20 @@ class Editor():
 
         for idx, srctalk in enumerate(self.srctalks):
             subsrctalks = srctalk['text'].split("\n")
-            self.dsttalks.append({
-                'idx': idx + 1,
-                'speaker': srctalk['speaker'],
-                'text': '',
-                'start': True,
-                'end': False,
-                'checked': True,
-                'save': True
-            })
-            if len(subsrctalks) > 1:
-                for subsrctalk in subsrctalks[1:]:
-                    self.dsttalks.append({
-                        'idx': idx + 1,
-                        'speaker': srctalk['speaker'],
-                        'text': '',
-                        'start': False,
-                        'end': False,
-                        'checked': True,
-                        'save': True
-                    })
+            for iidx, subsrctalk in enumerate(subsrctalks):
+                tempText = ''
+                for char in subsrctalk:
+                    if char in ['♪', '☆']:
+                        tempText += char
+                self.dsttalks.append({
+                    'idx': idx + 1,
+                    'speaker': srctalk['speaker'],
+                    'text': tempText,
+                    'start': iidx == 0,
+                    'end': False,
+                    'checked': True,
+                    'save': True
+                })
             self.dsttalks[-1]['end'] = True
 
         for idx, talk in enumerate(self.dsttalks):
@@ -251,9 +245,6 @@ class Editor():
             self.dsttalks[self.talks[row]['dstidx']]['text'] = text
             self.dsttalks[self.talks[row]['dstidx']]['checked'] = check
             self.fillTableLine(row, self.talks[row])
-            nextItem = self.table.item(row + 1, column)
-            self.table.setCurrentItem(nextItem)
-            self.table.editItem(nextItem)
         # proofread
         elif editormode == 1 or editormode == 2:
             if 'proofread' not in self.talks[row]:
@@ -280,9 +271,7 @@ class Editor():
                 self.talks[row]['proofread'] = False
                 self.fillTableLine(row, self.talks[row])
 
-                nextItem = self.table.item(row + 2, column)
-                self.table.setCurrentItem(nextItem)
-                self.table.editItem(nextItem)
+                row += 1
 
             elif self.talks[row]['proofread']:
 
@@ -290,15 +279,15 @@ class Editor():
                 self.dsttalks[self.talks[row]['dstidx']]['text'] = text
                 self.talks[row]['checked'] = True
                 self.fillTableLine(row, self.talks[row])
-                nextItem = self.table.item(row + 1, column)
-                self.table.setCurrentItem(nextItem)
-                self.table.editItem(nextItem)
 
             else:
                 self.fillTableLine(row, self.talks[row])
-                nextItem = self.table.item(row + 1, column)
-                self.table.setCurrentItem(nextItem)
-                self.table.editItem(nextItem)
+
+        if row < self.table.rowCount():
+            nextItem = self.table.item(row + 1, column)
+            self.table.setCurrentItem(nextItem)
+            self.table.editItem(nextItem)
+        print(row, self.table.rowCount())
 
     def checkText(self, speaker, text):
         check = True
@@ -628,6 +617,7 @@ class Editor():
 
         if 0 <= row < self.table.rowCount() and self.talks[row]['speaker'] not in ["", u"场景"]:
             menu = QMenu()
+            # repalceBracketsAction = menu.addAction(u"替换括号")
             if self.talks[row]['start']:
                 addTalkUpAction = menu.addAction(u"在上方添加遗漏的说话人")
             if self.talks[row]['end']:
@@ -636,6 +626,7 @@ class Editor():
                 removeTalkAction = menu.addAction(u"删除该行多余说话人")
             action = menu.exec_(self.table.mapToGlobal(pos))
 
+            # if action == repalceBracketsAction:
             if self.talks[row]['start'] and action == addTalkUpAction:
                 self.addTalk(row)
             elif self.talks[row]['end'] and action == addTalkDownAction:
