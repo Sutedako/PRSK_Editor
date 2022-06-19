@@ -250,9 +250,16 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             self.setWindowTitle("*{} Sekai Text".format(self.dstfilename))
 
             if not self.dstText.talks:
-                self.clearText()
+                self.createText()
             else:
-                self.dstText.loadJson(self.editormode, self.srcText.talks)
+                relpy = qw.QMessageBox.question(
+                    self, "", u"是否清除现有翻译内容？",
+                    qw.QMessageBox.Yes | qw.QMessageBox.No | qw.QMessageBox.Cancel,
+                    qw.QMessageBox.No)
+                if relpy == qw.QMessageBox.Yes:
+                    self.createText()
+                if relpy == qw.QMessageBox.No:
+                    self.dstText.loadJson(self.editormode, self.srcText.talks)
         except BaseException:
             exc_type, exc_value, exc_traceback_obj = sys.exc_info()
             with open(loggingPath, 'a') as f:
@@ -364,6 +371,13 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 self, "", u"countSpeaker错误\n请将“setting\\log.txt发给弃子”")
 
     # create new text from json
+    def createText(self):
+        self.dstText.createFile(self.srcText.talks, self.checkBoxJapanese.isChecked())
+        self.getDstFileName()
+        self.saved = True
+        self.isNewFile = True
+        self.setWindowTitle("*{} Sekai Text".format(self.dstfilename))
+
     def clearText(self):
         try:
             if self.dstText.talks:
@@ -373,11 +387,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                     qw.QMessageBox.No)
                 if relpy == qw.QMessageBox.No:
                     return
-            self.dstText.createFile(self.srcText.talks)
-            self.getDstFileName()
-            self.saved = True
-            self.isNewFile = True
-            self.setWindowTitle("*{} Sekai Text".format(self.dstfilename))
+            self.createText()
         except BaseException:
             exc_type, exc_value, exc_traceback_obj = sys.exc_info()
             with open(loggingPath, 'a') as f:
@@ -605,7 +615,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
                 self.dstfilename = osp.basename(self.dstfilepath)
                 self.lineEditTitle.blockSignals(True)
-                self.lineEditTitle.setText(self.dstfilename.spilt(".")[0])
+                self.lineEditTitle.setText(self.dstfilename.split(".")[0])
                 self.lineEditTitle.blockSignals(False)
                 self.setWindowTitle("{} Sekai Text".format(self.dstfilename))
 
@@ -693,7 +703,8 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             currentItem = self.tableWidgetDst.item(currentRow, currentColumn)
             self.tableWidgetDst.editItem(currentItem)
             self.tableWidgetDst.blockSignals(True)
-            currentItem.setText(currentItem.text().split("\n")[0].rstrip().lstrip())
+            if currentItem:
+                currentItem.setText(currentItem.text().split("\n")[0].rstrip().lstrip())
             self.tableWidgetDst.blockSignals(False)
         except BaseException:
             exc_type, exc_value, exc_traceback_obj = sys.exc_info()

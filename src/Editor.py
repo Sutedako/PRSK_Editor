@@ -33,7 +33,7 @@ class Editor():
         if(srctalks):
             self.loadJson(0, srctalks)
 
-    def loadJson(self, editormode, srctalks):
+    def loadJson(self, editormode, srctalks, jp=False):
         self.srctalks = srctalks
         self.talks = []
         self.refertalks = self.checkLines(self.refertalks)
@@ -55,7 +55,7 @@ class Editor():
             self.fillTableLine(row, talk)
 
     # create new text from json
-    def createFile(self, srctalks):
+    def createFile(self, srctalks, jp=False):
         self.loadJson(0, srctalks)
         self.talks = []
         self.refertalks = []
@@ -71,7 +71,7 @@ class Editor():
                 self.dsttalks.append({
                     'idx': idx + 1,
                     'speaker': srctalk['speaker'],
-                    'text': tempText,
+                    'text': tempText if not jp else subsrctalk,
                     'start': iidx == 0,
                     'end': False,
                     'checked': True,
@@ -142,8 +142,9 @@ class Editor():
                 if talk['start']:
                     outTalk += talk['speaker'] + "："
                 outTalk += talk['text'].split("\n")[0]
-                if saveN and not talk['end']:
-                    outTalk += '\\N'
+                if not talk['end']:
+                    if saveN:
+                        outTalk += '\\N'
                 else:
                     outTalk += '\n'
         outTalk = outTalk.rstrip()
@@ -283,11 +284,10 @@ class Editor():
             else:
                 self.fillTableLine(row, self.talks[row])
 
-        if row < self.table.rowCount():
+        if row < self.table.rowCount() - 1:
             nextItem = self.table.item(row + 1, column)
             self.table.setCurrentItem(nextItem)
             self.table.editItem(nextItem)
-        print(row, self.table.rowCount())
 
     def checkText(self, speaker, text):
         check = True
