@@ -119,6 +119,7 @@ class Loader():
 def update(settingdir):
     headers={'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36'}
     bestDBurl = "http://sekai-world.github.io/sekai-master-db-diff/"
+    #aiDBurl = "https://api.pjsek.ai/database/master/eventCards?$limit=20&$skip=0&"
 
     eventsUrl = bestDBurl + "events.json"
     eventsData = json.loads(requests.get(eventsUrl, headers=headers).text)
