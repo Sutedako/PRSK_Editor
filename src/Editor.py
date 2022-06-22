@@ -116,7 +116,7 @@ class Editor():
                 if outTalk[-1:] == "\n":
                     outTalk = outTalk.rstrip()
                 elif outTalk[-2:] == "\\N":
-                    outTalk = outTalk[0:-3]
+                    outTalk = outTalk[0:-2]
                 outTalk += '\\C'
             if not talk['speaker']:
                 outTalk += '\n'
