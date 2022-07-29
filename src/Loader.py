@@ -118,16 +118,26 @@ class Loader():
 
 def update(settingdir):
     headers={'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36'}
-    bestDBurl = "http://sekai-world.github.io/sekai-master-db-diff/"
-    #aiDBurl = "https://api.pjsek.ai/database/master/eventCards?$limit=20&$skip=0&"
+    bestDBurl = "http://sekai-world.github.io/sekai-master-db-diff/{}"
+    aiDBurl = "https://api.pjsek.ai/database/master/{}?$limit=1000&$skip=0&"
 
-    eventsUrl = bestDBurl + "events.json"
-    eventsData = json.loads(requests.get(eventsUrl, headers=headers).text)
+    bestEventsUrl = bestDBurl.format("events.json")
+    bestEventsData = json.loads(requests.get(bestEventsUrl, headers=headers).text)
 
-    eventStoriesUrl = bestDBurl + "eventStories.json"
+    aiEventsUrl = aiDBurl.format("events.json")
+    aiEventsData = json.loads(requests.get(aiEventsUrl, headers=headers).text)
+
+    if len(bestEventsData) > len(aiEventsData):
+        DBurl = bestDBurl
+        eventsData = bestEventsData
+    else:
+        DBurl = aiDBurl
+        eventsData = aiEventsData
+
+    eventStoriesUrl = DBurl.format("eventStories.json")
     eventStoriesData = json.loads(requests.get(eventStoriesUrl, headers=headers).text)
 
-    eventCardsUrl = bestDBurl + "eventCards.json"
+    eventCardsUrl = DBurl.format("eventCards.json")
     eventCardsData = json.loads(requests.get(eventCardsUrl, headers=headers).text)
 
     eventCardIdx = 0
@@ -154,7 +164,7 @@ def update(settingdir):
         json.dump(events, f, indent=2, ensure_ascii=False)
     logging.info("Events Updated")
 
-    cardsUrl = bestDBurl + "cards.json"
+    cardsUrl = DBurl.format("cards.json")
     cardsData = json.loads(requests.get(cardsUrl, headers=headers).text)
 
     chrCardCount = [0 for i in range(27)]
@@ -250,7 +260,7 @@ def update(settingdir):
     mainStoryPath = osp.join(settingdir, "mainStory.json")
     mainstory = []
     if not osp.exists(mainStoryPath):
-        storyUrl = bestDBurl + "unitStories.json"
+        storyUrl = DBurl.format("unitStories.json")
         storyData = json.loads(requests.get(storyUrl, headers=headers).text)
         storyData = sorted(storyData, key=lambda x: x['seq'])
         for unitStory in storyData:

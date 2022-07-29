@@ -17,7 +17,7 @@ from chr import chrs
 import json
 import logging
 import os.path as osp
-from os import mkdir, _exit
+from os import mkdir, _exit, remove
 import platform
 import requests
 
@@ -288,6 +288,12 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 _, jsonname, jsonurl = self.getJsonPath(storyType, storyIdx, chapterIdx, source)
 
                 jsonpath = osp.join(self.datadir, jsonname)
+                if osp.exists(jsonpath):
+                    with open(jsonpath, 'r', encoding='UTF-8') as f:
+                        fulldata = json.load(f)
+                    if 'TalkData' not in fulldata:
+                        f.close()
+                        remove(jsonpath)
                 if not osp.exists(jsonpath):
                     logging.info("Downloading Json File from: " + jsonurl)
                     if not self.downloadJson(jsonname, jsonurl):
@@ -896,8 +902,8 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 chapter = str(chapterIdx).zfill(2)
             jsonname = "mainStory_{}_{}.json".format(sekai, chapter)
             if source == "sekai.best":
-                jsonurl = "http://sekai-res.dnaroma.eu/" \
-                    "file/sekai-assets/scenario/unitstory/" \
+                jsonurl = "http://minio.dnaroma.eu/" \
+                    "sekai-assets/scenario/unitstory/" \
                     "{}-story-chapter_rip/{}_01_{}.asset".format(unit, sekai, chapter)
             elif source == "pjsek.ai":
                 jsonurl = "http://assets.pjsek.ai/file/" \
@@ -913,8 +919,8 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
             jsonname = "event_{}_{}.json".format(eventId, chapter)
             if source == "sekai.best":
-                jsonurl = "http://sekai-res.dnaroma.eu/" \
-                    "file/sekai-assets/event_story/" \
+                jsonurl = "http://minio.dnaroma.eu/" \
+                    "sekai-assets/event_story/" \
                     "{}/scenario_rip/event_{}_{}.asset".format(event, eventId, chapter)
             elif source == "pjsek.ai":
                 jsonurl = "http://assets.pjsek.ai/file/" \
@@ -933,8 +939,8 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             jsonname = "event_{}_{}_{}.json".format(eventId, charname, chapter)
             charId = str(charId).zfill(3)
             if source == "sekai.best":
-                jsonurl = "http://sekai-res.dnaroma.eu/" \
-                    "file/sekai-assets/character/member/" \
+                jsonurl = "http://minio.dnaroma.eu/" \
+                    "sekai-assets/character/member/" \
                     "res{}_no{}_rip/{}{}_{}{}.asset".format(
                         charId, count, charId, count, charname, chapter)
             elif source == "pjsek.ai":
@@ -968,8 +974,8 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
             charId = str(charId).zfill(3)
             if source == "sekai.best":
-                jsonurl = "http://sekai-res.dnaroma.eu/" \
-                    "file/sekai-assets/character/member/" \
+                jsonurl = "http://minio.dnaroma.eu/" \
+                    "sekai-assets/character/member/" \
                     "res{}_no{}_rip/{}{}_{}{}.asset".format(
                         charId, count, charId, count, charname, chapter)
             elif source == "pjsek.ai":
@@ -1013,8 +1019,8 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                         charname, realRarity, chapter)
             charId = str(charId).zfill(3)
             if source == "sekai.best":
-                jsonurl = "http://sekai-res.dnaroma.eu/" \
-                    "file/sekai-assets/character/member/" \
+                jsonurl = "http://minio.dnaroma.eu/" \
+                    "sekai-assets/character/member/" \
                     "res{}_no{}_rip/{}{}_{}{}.asset".format(
                         charId, rarity, charId, rarity, charname, chapter)
             elif source == "pjsek.ai":
