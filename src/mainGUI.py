@@ -47,7 +47,6 @@ class Ui_SekaiText(object):
         self.horizontalLayout.addWidget(self.comboBoxStoryTypeSort)
         self.comboBoxStoryTypeSort.setVisible(False)
 
-
         self.comboBoxStoryIndex = QtWidgets.QComboBox(self.centralwidget)
         self.comboBoxStoryIndex.setMinimumSize(QtCore.QSize(150, 30))
         self.comboBoxStoryIndex.setMaximumSize(QtCore.QSize(680, 30))

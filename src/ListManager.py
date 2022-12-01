@@ -3,9 +3,19 @@ from __future__ import unicode_literals
 import json
 import logging
 import os.path as osp
+from os import environ
 import requests
 
 from Dictionary import unitDict, sekaiDict, characterDict, areaDict, greetDict
+
+from urllib import request
+
+proxy = request.getproxies()
+if 'http' in proxy:
+    environ['http_proxy'] = proxy['http']
+    environ['https_proxy'] = proxy['http']
+if 'https' in proxy:
+    environ['https_proxy'] = proxy['https']
 
 
 class ListManager():
@@ -305,8 +315,8 @@ class ListManager():
                     "text": g["serif"]
                 })
 
-        def greetAddSingle(index):
-            self.greets[-1].append({
+        def greetAddSingle(index, delay=0):
+            self.greets[-1 - delay].append({
                 "characterId": getDetailCharId(greets[index - 1]),
                 "text": greets[index - 1]["serif"]
             })
@@ -350,6 +360,10 @@ class ListManager():
             })
 
         preCharId = 32
+        greetDictIndex = 28
+        seasons = ['spring', 'summer', 'autumn', 'winter']
+        seasonDelay = False
+        delay = 0
         for idx, g in enumerate(greets[644:]):
             index = idx + 645
 
@@ -364,9 +378,31 @@ class ListManager():
 
             if (g["characterId"] != 21 and g["characterId"] < preCharId) or index in [712, 829, 928]:
                 if not ((867 < index < 898) or index == 1036):  # 2020 七夕, 2021 えむ
+                    if not seasonDelay:
+                        delay = 0
                     self.greets.append([])
-
-            greetAddSingle(index)
+                    if index >= 1036:
+                        greetDictIndex = (greetDictIndex + 1) % len(greetDict)
+                        greetType = greetDict[greetDictIndex].split("_")[-1]
+                        voiceType = g['voice'].split('_')[1]
+                        if greetType in seasons or voiceType in seasons:
+                            if greetType in seasons and voiceType in seasons:
+                                pass
+                            elif seasonDelay:
+                                print("pop", greetType, g['voice'])
+                                self.greets.pop()
+                                seasonDelay = False
+                            else:
+                                print("push", greetType, g['voice'])
+                                self.greets.append([])
+                                seasonDelay = True
+                                delay += 1
+                        elif seasonDelay:
+                            delay += 1
+            if seasonDelay:
+                greetAddSingle(index)
+            else:
+                greetAddSingle(index, delay)
             preCharId = g["characterId"]
 
         greetsPath = osp.join(self.settingDir, "greets.json")
@@ -558,7 +594,7 @@ class ListManager():
                     epNo = idx % 4 + 1
                 else:
                     epNo = idx
-                storyChapter.append(str(epNo) + " " + chapter['title'])
+                storyChapter.append(str(epNo) + " " + chapter)
                 if unitId == 0 and epNo == 4:
                     storyChapter.append("-")
             if unitId == 0:

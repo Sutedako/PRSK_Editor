@@ -18,9 +18,17 @@ from Dictionary import unitDict, sekaiDict, characterDict
 import json
 import logging
 import os.path as osp
-from os import mkdir, _exit, remove
+from os import environ, mkdir, _exit, remove
 import platform
 import requests
+from urllib import request
+
+proxy = request.getproxies()
+if 'http' in proxy:
+    environ['http_proxy'] = proxy['http']
+    environ['https_proxy'] = proxy['http']
+if 'https' in proxy:
+    environ['https_proxy'] = proxy['https']
 
 EditorMode = [u'翻译', u'校对', u'合意', u'审核']
 
@@ -123,8 +131,9 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         qw.QShortcut(QKeySequence(self.tr("Ctrl+S")), self, self.saveText)
 
         self.tempWindow = qw.QMessageBox(self)
-        self.tempWindow.setIcon(qw.QMessageBox.Information)
+        self.tempWindow.setStandardButtons(qw.QMessageBox.No)
         self.tempWindow.setWindowTitle("")
+        self.tempWindow.button(qw.QMessageBox.No).setText("取消")
         self.tempWindow.buttonClicked.connect(self.downloadFailed)
 
     def downloadJson(self, jsonname, jsonurl):
@@ -810,9 +819,6 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         self.dstText.isProofReading = True
 
     def checkDownload(self, successed):
-        while self.downloadState:
-            time.sleep(0.1)
-            qw.QApplication.processEvents()
         if successed:
             self.tempWindow.close()
             self.downloadState = 1
@@ -826,12 +832,12 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             self.tempWindow.exec()
             self.downloadState = 2
 
-    def checkUpdated(self, ListManager):
-        while self.downloadState:
-            time.sleep(0.1)
-            qw.QApplication.processEvents()
-        if ListManager.events:
-            self.ListManager = ListManager
+    def checkUpdated(self, output):
+        if type(output) == str:
+            self.tempWindow.setText(u"下载{}列表...   ".format(output))
+            return
+        if type(output) == ListManager and output.events:
+            self.ListManager = output
             self.downloadState = 1
         else:
             self.downloadState = 2
@@ -853,8 +859,7 @@ class downloadThread(qc.QThread):
 
     def run(self):
         try:
-            headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36'}
-            r = requests.get(self.url, headers=headers, stream=True)
+            r = requests.get(self.url, stream=True, timeout=5)
             r.encoding = 'utf-8'
             jsondata = json.loads(r.text)
 
@@ -874,7 +879,7 @@ class downloadThread(qc.QThread):
 
 
 class updateThread(qc.QThread):
-    trigger = qc.pyqtSignal(ListManager)
+    trigger = qc.pyqtSignal(object)
     path = ""
 
     def __init__(self, settingpath):
@@ -883,7 +888,21 @@ class updateThread(qc.QThread):
 
     def run(self):
         try:
-            self.ListManager.update()
+            self.ListManager.chooseSite()
+            self.trigger.emit("活动")
+            self.ListManager.updateEvents()
+            self.trigger.emit("卡面")
+            self.ListManager.updateCards()
+            self.trigger.emit("特殊卡面")
+            self.ListManager.updateFestivals()
+            self.trigger.emit("主线")
+            self.ListManager.updateMainstory()
+            self.trigger.emit("地图对话")
+            self.ListManager.updateAreatalks()
+            self.trigger.emit("主界面语音")
+            self.ListManager.updateGreets()
+            self.trigger.emit("特殊剧情")
+            self.ListManager.updateSpecials()
             self.trigger.emit(self.ListManager)
             logging.info("Chapter Information Update Successed.")
         except BaseException:
