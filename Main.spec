@@ -4,7 +4,7 @@
 block_cipher = None
 
 
-a = Analysis(['src\\Main.pyw', 'src\\Editor.py', 'src\\Loader.py', 'src\\mainGUI.py', 'src\\chr.py'],
+a = Analysis(['src\\Main.pyw', 'src\\ListManager.py', 'src\\Editor.py', 'src\\JsonLoader.py', 'src\\mainGUI.py', 'src\\Dictionary.py'],
              pathex=['C:\\Users\\Suteko\\Desktop\\PRSK_Editor'],
              binaries=[],
              datas=[('image', 'image')],
