@@ -342,9 +342,9 @@ class ListManager():
         greetAppend(602, 606)
         greetAddSingle(641)
         greetAddSingle(642)  # 2020 雫
+        greetAppendReleaseHoliday(467)  # 2020 サンタ
         greetAppend(614, 620)  # 2020 RIN
         greetAppend(620, 626)  # 2020 LEN
-        greetAppendReleaseHoliday(467)  # 2020 サンタ
         greetAppendReleaseHoliday(468)  # 2020 年末
         greetAppendReleaseHoliday(469)  # 2021 年始
         greetAppend(594, 598)
@@ -361,8 +361,7 @@ class ListManager():
 
         preCharId = 32
         greetDictIndex = 28
-        seasons = ['spring', 'summer', 'autumn', 'winter']
-        seasonDelay = False
+        haveDelay = False
         delay = 0
         for idx, g in enumerate(greets[644:]):
             index = idx + 645
@@ -378,31 +377,30 @@ class ListManager():
 
             if (g["characterId"] != 21 and g["characterId"] < preCharId) or index in [712, 829, 928]:
                 if not ((867 < index < 898) or index == 1036):  # 2020 七夕, 2021 えむ
-                    if not seasonDelay:
+                    if not haveDelay:
                         delay = 0
                     self.greets.append([])
                     if index >= 1036:
                         greetDictIndex = (greetDictIndex + 1) % len(greetDict)
-                        greetType = greetDict[greetDictIndex].split("_")[-1]
-                        voiceType = g['voice'].split('_')[1]
-                        if greetType in seasons or voiceType in seasons:
-                            if greetType in seasons and voiceType in seasons:
-                                pass
-                            elif seasonDelay:
-                                print("pop", greetType, g['voice'])
+                        celebrateGreet = greetDict[greetDictIndex].split("　")[-1] in [u"誕生日", u"記念日"]
+                        celebrateVoice = g['voice'].split('_')[1] in ["birthday", "anniversary"]
+                        if celebrateGreet or celebrateVoice:
+                            if haveDelay:
                                 self.greets.pop()
-                                seasonDelay = False
-                            else:
-                                print("push", greetType, g['voice'])
-                                self.greets.append([])
-                                seasonDelay = True
+                                self.greets.insert(-1, [])
+                                if celebrateGreet and celebrateVoice:
+                                    delay += 1
+                                else:
+                                    haveDelay = False
+                            elif not (celebrateGreet and celebrateVoice):
+                                haveDelay = True
                                 delay += 1
-                        elif seasonDelay:
+                        elif haveDelay:
                             delay += 1
-            if seasonDelay:
-                greetAddSingle(index)
+            if (haveDelay and delay > 1) or (delay > 0 and not haveDelay):
+                greetAddSingle(index, 1)
             else:
-                greetAddSingle(index, delay)
+                greetAddSingle(index)
             preCharId = g["characterId"]
 
         greetsPath = osp.join(self.settingDir, "greets.json")
