@@ -606,7 +606,6 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 self.lineEditTitle.blockSignals(True)
                 self.lineEditTitle.setText(self.dstfilename.split(".")[0])
                 self.lineEditTitle.blockSignals(False)
-                self.setWindowTitle("{} Sekai Text".format(self.dstfilename))
 
             if self.isNewFile and osp.exists(self.dstfilepath):
                 relpy = qw.QMessageBox.question(
@@ -619,6 +618,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
             saveN = self.checkBoxSaveN.isChecked()
             self.dstText.saveFile(self.dstfilepath, saveN)
+            self.setWindowTitle("{} Sekai Text".format(self.dstfilename))
             self.saved = True
             self.isNewFile = False
 
@@ -731,14 +731,6 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
         self.setComboBoxStoryIndex()
 
-        self.comboBoxDataSource.clear()
-        if storyType != u"主界面语音":
-            if storyType != u"自定义":
-                self.comboBoxDataSource.addItem(u"sekai.best")
-                self.comboBoxDataSource.addItem(u"pjsek.ai")
-            self.comboBoxDataSource.addItem(u"本地文件")
-            self.comboBoxDataSource.setCurrentText(u"本地文件")
-
         return
 
     def setComboBoxStoryIndex(self, isInit=False):
@@ -762,6 +754,15 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             self.comboBoxStoryIndex.setCurrentIndex(self.setting['storyIdx'])
 
         self.setComboBoxStoryChapter(isInit)
+
+        self.comboBoxDataSource.clear()
+        if storyType != u"主界面语音":
+            if storyType != u"自定义":
+                self.comboBoxDataSource.addItem(u"sekai.best")
+                self.comboBoxDataSource.addItem(u"pjsek.ai")
+            self.comboBoxDataSource.addItem(u"本地文件")
+            self.comboBoxDataSource.setCurrentText(u"本地文件")
+
         return
 
     def setComboBoxStoryChapter(self, isInit=False):
