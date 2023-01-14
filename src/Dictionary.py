@@ -92,45 +92,41 @@ areaDict = [
     u"宫益坂女子学园"
 ]
 
-greetDict = [
-    u"年始_newyear",
-    u"志歩　誕生日",
-    u"まふゆ　誕生日",
-    u"ルカ　記念日",
-    u"節分_setsubun",
-    u"奏　誕生日",
-    u"バレンタイン_valentine",
-    u"KAITO　記念日",
-    u"こはね　誕生日",
-    u"雛祭り_hinamatsuri",
-    u"春_spring",
-    u"ホワイトデー_whiteday",
-    u"愛莉　誕生日",
-    u"エイプリルフール_aprilfool",
-    u"みのり　誕生日",
-    u"絵名　誕生日",
-    u"咲希　誕生日",
-    u"司　誕生日",
-    u"冬弥　誕生日",
-    u"夏_summer",
-    u"類　誕生日",
-    u"七夕_tanabata",
-    u"寧々　誕生日",
-    u"杏　誕生日",
-    u"一歌　誕生日",
-    u"瑞希　誕生日",
-    u"ミク　記念日",
-    u"秋_autumn",
-    u"えむ　誕生日",
-    u"遥　誕生日",
-    u"穂波　誕生日",
-    u"ハロウィーン_halloween",
-    u"MEIKO　記念日",
-    u"彰人　誕生日",
-    u"冬_winter",
-    u"雫　誕生日",
-    u"リン　記念日",
-    u"レン　記念日",
-    u"クリスマス—_christmas",
-    u"年末_endofyear"
+greetDict_season = [
+    {"ch": u"春",
+     "en": "spring"},
+    {"ch": u"夏",
+     "en": "summer"},
+    {"ch": u"秋",
+     "en": "autumn"},
+    {"ch": u"冬",
+     "en": "winter"}
+]
+
+greetDict_celebrate = [
+    3, 17, 23, 16, 25, 8, 6, 4, 18, 1, 12, 11, 15,
+    14, 9, 0, 19, 20, 13, 5, 2, 24, 10, 7, 21, 22
+]
+
+greetDict_holiday = [
+    {"ch": u"新年",
+     "en": "newyear"},
+    {"ch": u"节分",
+     "en": "setsubun"},
+    {"ch": u"情人节",
+     "en": "valentine"},
+    {"ch": u"女儿节",
+     "en": "hinamatsuri"},
+    {"ch": u"白情",
+     "en": "whiteday"},
+    {"ch": u"愚人节",
+     "en": "aprilfool"},
+    {"ch": u"七夕",
+     "en": "tanabata"},
+    {"ch": u"万圣节",
+     "en": "halloween"},
+    {"ch": u"圣诞节",
+     "en": "christmas"},
+    {"ch": u"年末",
+     "en": "endofyear"}
 ]
