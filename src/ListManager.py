@@ -66,30 +66,36 @@ class ListManager():
         self.updateSpecials()
 
     def chooseSite(self):
-        bestDBurl = "http://sekai-world.github.io/sekai-master-db-diff/{}"
-        aiDBurl = "https://api.pjsek.ai/database/master/{}?$limit=999&$skip=0&"
+        bestDBurl = "http://sekai-world.github.io/sekai-master-db-diff/{}.json"
+        aiDBurl = "https://api.pjsek.ai/database/master/{}?$limit=9999&$skip=0&"
 
-        bestUrl = bestDBurl.format("events.json")
+        bestUrl = bestDBurl.format("events")
         bestData = json.loads(requests.get(bestUrl, headers=self.headers).text)
 
-        aiUrl = aiDBurl.format("events.json")
+        aiUrl = aiDBurl.format("events")
         aiData = json.loads(requests.get(aiUrl, headers=self.headers).text)
 
-        if len(bestData) > len(aiData):
+        if len(bestData) > len(aiData['data']):
             self.DBurl = bestDBurl
         else:
             self.DBurl = aiDBurl
 
     def updateEvents(self):
-        url = self.DBurl.format("events.json")
+        url = self.DBurl.format("events")
         events = json.loads(requests.get(url, headers=self.headers).text)
+        if("data" in events):
+            events = events["data"]
         cardIdx = 0
 
-        url = self.DBurl.format("eventStories.json")
+        url = self.DBurl.format("eventStories")
         stories = json.loads(requests.get(url, headers=self.headers).text)
+        if("data" in stories):
+            stories = stories["data"]
 
-        url = self.DBurl.format("eventCards.json")
+        url = self.DBurl.format("eventCards")
         cards = json.loads(requests.get(url, headers=self.headers).text)
+        if("data" in cards):
+            cards = cards["data"]
 
         self.events = []
         for e, es in zip(events, stories):
@@ -115,8 +121,10 @@ class ListManager():
         logging.info("Events Updated")
 
     def updateCards(self):
-        url = self.DBurl.format("cards.json")
+        url = self.DBurl.format("cards")
         cards = json.loads(requests.get(url, headers=self.headers).text)
+        if("data" in cards):
+            cards = cards["data"]
 
         self.cards = []
         cardCount = 0
@@ -210,8 +218,10 @@ class ListManager():
             self.mainstory = self.loadFile("mainStory.json", "MainStory")
             return
         self.mainstory = []
-        url = self.DBurl.format("unitStories.json")
+        url = self.DBurl.format("unitStories")
         story = json.loads(requests.get(url, headers=self.headers).text)
+        if("data" in story):
+            story = story["data"]
         story = sorted(story, key=lambda x: x['seq'])
         for unitStory in story:
             self.mainstory.append({
@@ -225,8 +235,10 @@ class ListManager():
         logging.info("MainStory Updated")
 
     def updateCharacter2ds(self):
-        url = self.DBurl.format("character2ds.json")
+        url = self.DBurl.format("character2ds")
         char2ds = json.loads(requests.get(url, headers=self.headers).text)
+        if("data" in char2ds):
+            char2ds = char2ds["data"]
 
         self.char2ds = []
         char2dsCount = 0
@@ -244,8 +256,10 @@ class ListManager():
             char2dsCount += 1
 
     def updateAreatalks(self):
-        url = self.DBurl.format("actionSets.json")
+        url = self.DBurl.format("actionSets")
         actions = json.loads(requests.get(url, headers=self.headers).text)
+        if("data" in actions):
+            actions = actions["data"]
 
         self.updateCharacter2ds()
 
@@ -304,8 +318,10 @@ class ListManager():
                 return (26 + units.index(unit))
             return Id
 
-        url = self.DBurl.format("systemLive2ds.json")
+        url = self.DBurl.format("systemLive2ds")
         greets = json.loads(requests.get(url, headers=self.headers).text)
+        if("data" in greets):
+            greets = greets["data"]
 
         def greetAppend(start, end):
             self.greets.append([])
@@ -409,8 +425,10 @@ class ListManager():
         logging.info("Greets Updated")
 
     def updateSpecials(self):
-        url = self.DBurl.format("specialStories.json")
+        url = self.DBurl.format("specialStories")
         stories = json.loads(requests.get(url, headers=self.headers).text)
+        if("data" in stories):
+            stories = stories["data"]
 
         self.specials = []
         for story in stories[1:]:
