@@ -6,7 +6,8 @@ import os.path as osp
 from os import environ
 import requests
 
-from Dictionary import unitDict, sekaiDict, characterDict, areaDict, greetDict
+from Dictionary import unitDict, sekaiDict, characterDict, areaDict
+from Dictionary import greetDict_season, greetDict_celebrate, greetDict_holiday
 
 from urllib import request
 
@@ -265,12 +266,15 @@ class ListManager():
 
         self.areatalks = []
         actionCount = 0
+        areatalkCount = 0
+        specialAreatalkCount = 0
         addEventId = 1
         for action in actions:
             actionCount += 1
             while actionCount < action['id']:
                 self.areatalks.append({
                     'id': actionCount,
+                    'talkid': -1,
                     'areaId': -1,
                     'characterIds': [],
                     'scenarioId': "none",
@@ -302,6 +306,13 @@ class ListManager():
                 'addEventId': addEventId,
                 'releaseEventId': releaseEventId
             })
+            if self.areatalks[-1]['scenarioId'] != 'none':
+                if self.areatalks[-1]['type'] == "normal":
+                    areatalkCount += 1
+                    self.areatalks[-1]['talkid'] = str(areatalkCount).zfill(4)
+                elif self.areatalks[-1]['type'] != "none":
+                    specialAreatalkCount += 1
+                    self.areatalks[-1]['talkid'] = "S" + str(specialAreatalkCount).zfill(4)
 
         areatalksPath = osp.join(self.settingDir, "areatalks.json")
         with open(areatalksPath, 'w', encoding='utf-8') as f:
@@ -311,6 +322,13 @@ class ListManager():
     def updateGreets(self):
         units = [key for key in unitDict.keys()]
 
+        seasonIdx = 1
+        celebrateIdx = 18
+        holidayIdx = 6
+        year_season = 2020
+        year_celebrate = 2020
+        year_holiday = 2020
+
         def getDetailCharId(greet):
             Id = greet["characterId"]
             unit = greet["unit"]
@@ -318,74 +336,106 @@ class ListManager():
                 return (26 + units.index(unit))
             return Id
 
+        def getGreetCharContent(idx):
+            character = characterDict[greetDict_celebrate[idx]]
+            if greetDict_celebrate[idx] < 20:
+                content = {
+                    "ch": character["name_j"] + "-誕生日",
+                    "en": character["name"] + "_birthday"
+                }
+            else:
+                content = {
+                    "ch": character["name_j"] + "-記念日",
+                    "en": character["name"] + "_anniversary"
+                }
+            return content
+
         url = self.DBurl.format("systemLive2ds")
         greets = json.loads(requests.get(url, headers=self.headers).text)
         if("data" in greets):
             greets = greets["data"]
 
-        def greetAppend(start, end):
-            self.greets.append([])
-            for g in greets[start - 1: end - 1]:
-                self.greets[-1].append({
-                    "characterId": getDetailCharId(g),
-                    "text": g["serif"]
-                })
+        def greetAppend(greetType, start, end):
+            if greetType == "season":
+                nonlocal seasonIdx, year_season
+                if seasonIdx == 0:
+                    year_season += 1
+                seasonIdx = (seasonIdx + 1) % len(greetDict_season)
+                self.greets.append({"theme": greetDict_season[seasonIdx], "year": year_season, "greets": []})
+                for g in greets[start - 1: end - 1]:
+                    self.greets[-1]["greets"].append({
+                        "characterId": getDetailCharId(g),
+                        "text": g["serif"]
+                    })
+                return
+            elif greetType == "celebrate":
+                nonlocal celebrateIdx, year_celebrate
+                celebrateIdx = (celebrateIdx + 1) % len(greetDict_celebrate)
+                if celebrateIdx == 0:
+                    year_celebrate += 1
+                self.greets.append({"theme": getGreetCharContent(celebrateIdx), "year": year_celebrate, "greets": []})
+                for g in greets[start - 1: end - 1]:
+                    self.greets[-1]["greets"].append({
+                        "characterId": getDetailCharId(g),
+                        "text": g["serif"]
+                    })
 
-        def greetAddSingle(index, delay=0):
-            self.greets[-1 - delay].append({
+        def greetAddSingle(index):
+            self.greets[-1]["greets"].append({
                 "characterId": getDetailCharId(greets[index - 1]),
                 "text": greets[index - 1]["serif"]
             })
 
         def greetAppendReleaseHoliday(index):
-            self.greets.append([])
+            nonlocal holidayIdx, year_holiday
+            holidayIdx = (holidayIdx + 1) % len(greetDict_holiday)
+            if holidayIdx == 0:
+                year_holiday += 1
+            self.greets.append({"theme": greetDict_holiday[holidayIdx], "year": year_holiday, "greets": []})
             for g in greets[index - 1: index + 123: 4]:
-                self.greets[-1].append({
+                self.greets[-1]["greets"].append({
                     "characterId": getDetailCharId(g),
                     "text": g["serif"]
                 })
 
-        greetAppend(373, 466)  # 2020 秋
-        greetAppend(598, 602)  # 2020 遥
-        greetAppend(590, 594)
+        greetAppend("season", 373, 466)  # 2020 秋
+        greetAppend("celebrate", 598, 602)  # 2020 遥
+        greetAppend("celebrate", 590, 594)
         greetAddSingle(638)  # 2020 穂波
         greetAppendReleaseHoliday(466)  # 2020 ハロウィーン
-        greetAppend(632, 638)  # 2020 MEIKO
-        greetAppend(606, 610)
+        greetAppend("celebrate", 632, 638)  # 2020 MEIKO
+        greetAppend("celebrate", 606, 610)
         greetAddSingle(639)
         greetAddSingle(640)  # 2020 彰人
-        greetAppend(94, 187)  # 2020 冬
-        greetAppend(602, 606)
+        greetAppend("season", 94, 187)  # 2020 冬
+        greetAppend("celebrate", 602, 606)
         greetAddSingle(641)
         greetAddSingle(642)  # 2020 雫
-        greetAppendReleaseHoliday(467)  # 2020 サンタ
-        greetAppend(614, 620)  # 2020 RIN
-        greetAppend(620, 626)  # 2020 LEN
+        greetAppendReleaseHoliday(467)  # 2020 クリスマス
+        greetAppend("celebrate", 614, 620)  # 2020 RIN
+        greetAppend("celebrate", 620, 626)  # 2020 LEN
         greetAppendReleaseHoliday(468)  # 2020 年末
         greetAppendReleaseHoliday(469)  # 2021 年始
-        greetAppend(594, 598)
+        greetAppend("celebrate", 594, 598)
         greetAddSingle(643)  # 2021 志歩
-        greetAppend(610, 614)
+        greetAppend("celebrate", 610, 614)
         greetAddSingle(644)  # 2021 まふゆ
-        greetAppend(626, 632)  # 2021 LUKA
+        greetAppend("celebrate", 626, 632)  # 2021 LUKA
 
         def greetPlusSingle(greet):
-            self.greets[-1].append({
+            self.greets[-1]["greets"].append({
                 "characterId": getDetailCharId(greet),
                 "text": greet["serif"]
             })
 
         preCharId = 32
-        greetDictIndex = 28
-        haveDelay = False
-        delay = 0
         for idx, g in enumerate(greets[644:]):
             index = idx + 645
 
             if index == 755:
-                greetAppend(187, 280)  # 2020 春
+                greetAppend("season", 187, 280)  # 2020 春
             if index == 860:
-                greetAppend(280, 373)  # 2020 夏
+                greetAppend("season", 280, 373)  # 2020 夏
 
             if index in [680, 722, 723, 833, 834, 845, 902, 907, 908]:
                 greetPlusSingle(g)
@@ -393,30 +443,22 @@ class ListManager():
 
             if (g["characterId"] != 21 and g["characterId"] < preCharId) or index in [712, 829, 928]:
                 if not ((867 < index < 898) or index == 1036):  # 2020 七夕, 2021 えむ
-                    if not haveDelay:
-                        delay = 0
-                    self.greets.append([])
-                    if index >= 1036:
-                        greetDictIndex = (greetDictIndex + 1) % len(greetDict)
-                        celebrateGreet = greetDict[greetDictIndex].split("　")[-1] in [u"誕生日", u"記念日"]
-                        celebrateVoice = g['voice'].split('_')[1] in ["birthday", "anniversary"]
-                        if celebrateGreet or celebrateVoice:
-                            if haveDelay:
-                                self.greets.pop()
-                                self.greets.insert(-1, [])
-                                if celebrateGreet and celebrateVoice:
-                                    delay += 1
-                                else:
-                                    haveDelay = False
-                            elif not (celebrateGreet and celebrateVoice):
-                                haveDelay = True
-                                delay += 1
-                        elif haveDelay:
-                            delay += 1
-            if (haveDelay and delay > 1) or (delay > 0 and not haveDelay):
-                greetAddSingle(index, 1)
-            else:
-                greetAddSingle(index)
+                    if g["characterId"] > 20 or g['voice'].split('_')[1] in ["birthday", "anniversary"]:
+                        celebrateIdx = (celebrateIdx + 1) % len(greetDict_celebrate)
+                        if celebrateIdx == 0:
+                            year_celebrate += 1
+                        self.greets.append({"theme": getGreetCharContent(celebrateIdx), "year": year_celebrate, "greets": []})
+                    elif g['voice'].split('_')[1] in ["spring", "summer", "autumn", "winter"]:
+                        seasonIdx = (seasonIdx + 1) % len(greetDict_season)
+                        if seasonIdx == 0:
+                            year_season += 1
+                        self.greets.append({"theme": greetDict_season[seasonIdx], "year": year_season, "greets": []})
+                    else:
+                        holidayIdx = (holidayIdx + 1) % len(greetDict_holiday)
+                        if holidayIdx == 0:
+                            year_holiday += 1
+                        self.greets.append({"theme": greetDict_holiday[holidayIdx], "year": year_holiday, "greets": []})
+            greetAddSingle(index)
             preCharId = g["characterId"]
 
         greetsPath = osp.join(self.settingDir, "greets.json")
@@ -503,17 +545,25 @@ class ListManager():
                 preAddId = 0
                 preReleaseId = 0
                 inspecial = False
+                inmonthly = False
                 for areatalk in self.areatalks:
                     if areatalk["addEventId"] < 0:
                         continue
                     if areatalk["addEventId"] == 1 and preAddId == 0:
                         continue
 
+                    if areatalk["type"] == "none":
+                        continue
                     if inspecial:
-                        if areatalk["type"] == "limited" or "monthly" in areatalk["scenarioId"]:
+                        if areatalk["type"] == "limited":
                             continue
                         else:
                             inspecial = False
+                    if inmonthly:
+                        if "monthly" in areatalk["scenarioId"]:
+                            continue
+                        else:
+                            inmonthly = False
 
                     if areatalk["type"] == "limited":
                         if "aprilfool" in areatalk["scenarioId"]:
@@ -539,7 +589,7 @@ class ListManager():
                             "limited": False,
                             "monthly": True
                         })
-                        inspecial = True
+                        inmonthly = True
                     else:
                         if areatalk["addEventId"] != preAddId:
                             eventId = areatalk["addEventId"]
@@ -581,15 +631,8 @@ class ListManager():
                         storyIndex.append("-")
             elif sort == u"按时间":
                 year = 2020
-                idx = 27
-                storyIndex.append(greetDict[idx].split("_")[0] + " " + str(year))
-                idx += 2
-                for g in self.greets[1:]:
-                    storyIndex.append(greetDict[idx].split("_")[0] + " " + str(year))
-                    idx += 1
-                    if idx == len(greetDict):
-                        idx = 0
-                        year += 1
+                for g in self.greets:
+                    storyIndex.append(g["theme"]["ch"] + " " + str(g["year"]))
                 storyIndex = storyIndex[::-1]
 
         elif storyType == u"特殊剧情":
@@ -676,8 +719,8 @@ class ListManager():
                         charnames = []
                         for cId in areatalk["characterIds"]:
                             charnames.append(characterDict[cId - 1]["name_j"])
-                        storyChapter.append(u"·".join(charnames))
-                        self.chapterScenario.append((areatalk["id"], areatalk["scenarioId"]))
+                        storyChapter.append(areatalk["talkid"] + " " + u"·".join(charnames))
+                        self.chapterScenario.append((areatalk["id"], areatalk["scenarioId"], areatalk["talkid"]))
                         if areatalkCount % 6 == 0:
                             storyChapter.append("-")
                             self.chapterScenario.append("")
@@ -693,8 +736,8 @@ class ListManager():
                         charnames = []
                         for cId in areatalk["characterIds"]:
                             charnames.append(characterDict[cId - 1]["name_j"])
-                        storyChapter.append(u"·".join(charnames))
-                        self.chapterScenario.append((areatalk["id"], areatalk["scenarioId"]))
+                        storyChapter.append(areatalk["talkid"] + " " + u"·".join(charnames))
+                        self.chapterScenario.append((areatalk["id"], areatalk["scenarioId"], areatalk["talkid"]))
                         areatalkCount += 1
                         if areatalkCount % 10 == 0:
                             storyChapter.append("-")
@@ -718,8 +761,8 @@ class ListManager():
                         charnames = []
                         for cId in areatalk["characterIds"]:
                             charnames.append(characterDict[cId - 1]["name_j"])
-                        storyChapter.append(u"·".join(charnames))
-                        self.chapterScenario.append((areatalk["id"], areatalk["scenarioId"]))
+                        storyChapter.append(areatalk["talkid"] + " " + u"·".join(charnames))
+                        self.chapterScenario.append((areatalk["id"], areatalk["scenarioId"], areatalk["talkid"]))
                         if areatalkCount % 6 == 0:
                             storyChapter.append("-")
                             self.chapterScenario.append("")
@@ -741,8 +784,8 @@ class ListManager():
                         charnames = []
                         for cId in areatalk["characterIds"]:
                             charnames.append(characterDict[cId - 1]["name_j"])
-                        storyChapter.append(u"·".join(charnames))
-                        self.chapterScenario.append((areatalk["id"], areatalk["scenarioId"]))
+                        storyChapter.append(areatalk["talkid"] + " " + u"·".join(charnames))
+                        self.chapterScenario.append((areatalk["id"], areatalk["scenarioId"], areatalk["talkid"]))
                 elif areaTalksInfo["monthly"]:
                     foundStart = False
                     for areatalk in self.areatalks:
@@ -757,8 +800,8 @@ class ListManager():
                         charnames = []
                         for cId in areatalk["characterIds"]:
                             charnames.append(characterDict[cId - 1]["name_j"])
-                        storyChapter.append(u"·".join(charnames))
-                        self.chapterScenario.append((areatalk["id"], areatalk["scenarioId"]))
+                        storyChapter.append(areatalk["talkid"] + " " + u"·".join(charnames))
+                        self.chapterScenario.append((areatalk["id"], areatalk["scenarioId"], areatalk["talkid"]))
                 else:
                     for areatalk in self.areatalks:
                         sameId = areatalk["addEventId"] == areaTalksInfo["addEventId"] and areatalk["releaseEventId"] == areaTalksInfo["releaseEventId"]
@@ -771,8 +814,8 @@ class ListManager():
                         charnames = []
                         for cId in areatalk["characterIds"]:
                             charnames.append(characterDict[cId - 1]["name_j"])
-                        storyChapter.append(u"·".join(charnames))
-                        self.chapterScenario.append((areatalk["id"], areatalk["scenarioId"]))
+                        storyChapter.append(areatalk["talkid"] + " " + u"·".join(charnames))
+                        self.chapterScenario.append((areatalk["id"], areatalk["scenarioId"], areatalk["talkid"]))
 
             elif sort == u"按地点":
                 areaId = storyIndex + 1 if storyIndex <= 5 else storyIndex + 2
@@ -788,8 +831,8 @@ class ListManager():
                         charnames = []
                         for cId in areatalk["characterIds"]:
                             charnames.append(characterDict[cId - 1]["name_j"])
-                        storyChapter.append(u"·".join(charnames))
-                        self.chapterScenario.append((areatalk["id"], areatalk["scenarioId"]))
+                        storyChapter.append(areatalk["talkid"] + " " + u"·".join(charnames))
+                        self.chapterScenario.append((areatalk["id"], areatalk["scenarioId"], areatalk["talkid"]))
                         areatalkCount += 1
                         if areatalkCount % 10 == 0:
                             storyChapter.append("-")
@@ -817,7 +860,7 @@ class ListManager():
                 jsonurl = aiBaseUrl + "startapp/scenario/unitstory/" \
                     "{}-chapter/{}.json".format(unit, chapter)
 
-            preTitle = chapter
+            preTitle = chapter.replace("_", "-")
             jsonname = "mainStory_{}.json".format(chapter)
 
         elif storyType == u"活动剧情":
@@ -833,7 +876,7 @@ class ListManager():
                 jsonurl = aiBaseUrl + "ondemand/event_story/" \
                     "{}/scenario/{}.json".format(event, chapter)
 
-            preTitle = chapter
+            preTitle = "-".join(chapter.split("_")[1:])
             jsonname = chapter + ".json"
 
         elif storyType == u"活动卡面":
@@ -843,7 +886,7 @@ class ListManager():
 
             cardNo = self.cards[cardId - 1]["cardNo"]
             chapter = str(chapterIdx % 3 + 1).zfill(2)
-            eventId = str(eventId).zfill(2)
+            eventId = str(eventId).zfill(3)
             charname = characterDict[charId - 1]['name']
             charId = str(charId).zfill(3)
 
@@ -880,16 +923,16 @@ class ListManager():
 
             idx = self.festivals[fesId - 1]['id']
             if 'collaboration' in self.festivals[fesId - 1]:
-                preTitle = "collabo{}_{}_{}".format(
+                preTitle = "collabo{}-{}-{}".format(
                     idx, charname, chapter)
             elif self.festivals[fesId - 1]['isBirthday']:
                 year = 2021 + int((idx + 2) / 4)
-                preTitle = "birth{}_{}_{}".format(
+                preTitle = "birth{}-{}-{}".format(
                     year, charname, chapter)
             else:
                 year = 2021 + int(idx / 4)
                 month = str(idx % 4 * 3 + 1).zfill(2)
-                preTitle = "fes{}{}_{}_{}".format(
+                preTitle = "fes{}{}-{}-{}".format(
                     year, month, charname, chapter)
             jsonname = preTitle.replace("-", "_") + ".json"
 
@@ -923,27 +966,22 @@ class ListManager():
             if charname == "miku" and realRarity == "02":
                 preTitle = "release-miku-{}-02-{}".format(unit, chapter)
             else:
-                preTitle = "release-{}-{}-{}".format(charname, rarity, chapter)
+                preTitle = "release-{}-{}-{}".format(charname, rarity[1:], chapter)
             jsonname = preTitle.replace("-", "_") + ".json"
 
         elif storyType in [u"初始地图对话", u"追加地图对话"]:
             group = int(self.chapterScenario[chapterIdx][0] / 100)
             jsonname = self.chapterScenario[chapterIdx][1]
-            # titlename = jsonname.replace("areatalk", "as")
 
             if source == "sekai.best":
                 jsonurl = bestBaseUrl + "scenario/actionset/" \
                     "group{}_rip/{}.asset".format(group, jsonname)
-                # titleurl = bestBaseUrl + "actionset/" \
-                #    "group{}_rip/{}.asset".format(group, titlename)
             elif source == "pjsek.ai":
                 jsonurl = aiBaseUrl + "startapp/scenario/actionset/" \
                     "group{}/{}.json".format(group, jsonname)
-                # titleurl = aiBaseUrl + "startapp/actionset/" \
-                #     "group{}/{}.json".format(group, titlename)
 
-            preTitle = jsonname
-            jsonname = jsonname + ".json"
+            preTitle = "areatalk-" + self.chapterScenario[chapterIdx][2]
+            jsonname = self.chapterScenario[chapterIdx][2] + "_" + jsonname + ".json"
 
         elif storyType == u"主界面语音":
             if sort == u"按人物":
@@ -956,33 +994,14 @@ class ListManager():
                     charId = int(currentIdx / 5) * 4 + (currentIdx + 1) % 5
                 charname = characterDict[charId - 1]['name']
 
-                preTitle = "greets_" + charname
-                jsonname = preTitle + ".json"
+                preTitle = "greets-" + charname
+                jsonname = preTitle.replace("-", "_") + ".json"
 
             elif sort == u"按时间":
-                storyIdx = len(self.greets) - 1 - storyIdx
-                if storyIdx == 0:
-                    idx = 27
-                else:
-                    idx = 28 + storyIdx
-                year = 2020 + int(idx / len(greetDict))
-                title = greetDict[idx % len(greetDict)]
-
-                if "_" in title:
-                    preTitle = title.split("_")[-1]
-                else:
-                    charName = title.split("　")[0]
-                    for char in characterDict:
-                        if charName == char["name_j"]:
-                            preTitle = char["name"]
-                            break
-                    if title.split("　")[1] == "誕生日":
-                        preTitle = preTitle + "_birthday"
-                    elif title.split("　")[1] == "記念日":
-                        preTitle = preTitle + "_anniversary"
-
-                preTitle = preTitle + "_" + str(year)
-                jsonname = preTitle + ".json"
+                greetIdx = len(self.greets) - 1 - storyIdx
+                greet = self.greets[greetIdx]
+                preTitle = greet["theme"]["ch"] + str(greet["year"])
+                jsonname = greet["theme"]["en"] + "_" + str(greet["year"]) + ".json"
 
         elif storyType == u"特殊剧情":
             storyIdx = len(self.specials) - 1 - storyIdx
@@ -1026,23 +1045,16 @@ class ListManager():
                 charId = int(currentIdx / 5) * 4 + (currentIdx + 1) % 5
 
             for index, greets in enumerate(self.greets):
-                idx = 27 if index == 0 else 28 + index
-                title = greetDict[idx % len(greetDict)]
-                if "_" in title:
-                    title = title.split("_")[0]
-                year = 2020 + int(idx / len(greetDict))
-                title = title + " " + str(year)
-
-                for greet in greets:
+                title = greets["theme"]["ch"] + str(greets["year"])
+                for greet in greets["greets"]:
                     if greet["characterId"] == charId:
                         addGreet(title, greet["text"])
 
         elif sort == u"按时间":
             storyIdx = len(self.greets) - 1 - storyIdx
-            for greet in self.greets[storyIdx]:
+            for greet in self.greets[storyIdx]["greets"]:
                 addGreet(characterDict[greet["characterId"] - 1]["name_j"], greet["text"])
 
         with open(savepath, 'w', encoding='utf-8') as f:
             json.dump(data, f, indent=2, ensure_ascii=False)
         logging.info("")
-
