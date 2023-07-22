@@ -225,11 +225,12 @@ class ListManager():
             story = story["data"]
         story = sorted(story, key=lambda x: x['seq'])
         for unitStory in story:
-            self.mainstory.append({
-                "unit": unitStory["unit"],
-                "assetName": unitStory["assetbundleName"],
-                "chapters": [{'title': e['title'], 'assetName': e['scenarioId']} for e in unitStory["chapters"][0]["episodes"]]
-            })
+            for chapter in unitStory["chapters"]:
+                self.mainstory.append({
+                    "unit": chapter["unit"],
+                    "assetName": chapter["assetbundleName"],
+                    "chapters": [{'title': e['title'], 'assetName': e['scenarioId']} for e in chapter["episodes"]]
+                })
 
         with open(mainStoryPath, 'w', encoding='utf-8') as f:
             json.dump(self.mainstory, f, indent=2, ensure_ascii=False)
@@ -653,7 +654,7 @@ class ListManager():
                     epNo = idx % 4 + 1
                 else:
                     epNo = idx
-                storyChapter.append(str(epNo) + " " + chapter)
+                storyChapter.append(str(epNo) + " " + chapter["title"])
                 if unitId == 0 and epNo == 4:
                     storyChapter.append("-")
             if unitId == 0:
@@ -855,10 +856,11 @@ class ListManager():
 
             if source == "sekai.best":
                 jsonurl = bestBaseUrl + "scenario/unitstory/" \
-                    "{}-chapter_rip/{}.asset".format(unit, chapter)
+                    "{}_rip/{}.asset".format(unit, chapter)
             elif source == "pjsek.ai":
                 jsonurl = aiBaseUrl + "startapp/scenario/unitstory/" \
-                    "{}-chapter/{}.json".format(unit, chapter)
+                    "{}/{}.json".format(unit, chapter)
+            print(jsonurl)
 
             preTitle = chapter.replace("_", "-")
             jsonname = "mainStory_{}.json".format(chapter)
