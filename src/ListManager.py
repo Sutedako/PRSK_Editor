@@ -824,10 +824,10 @@ class ListManager():
                 isRelease = True
                 areatalkCount = 0
                 for areatalk in self.areatalks:
+                    if areatalk["addEventId"] > 1:
+                        isRelease = False
                     if areatalk["addEventId"] == 1 and isRelease:
                         continue
-                    else:
-                        isRelease = False
                     if areatalk["type"] == "normal" and areaId == areatalk["areaId"] and areatalk["scenarioId"] != "none":
                         charnames = []
                         for cId in areatalk["characterIds"]:

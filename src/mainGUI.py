@@ -16,6 +16,9 @@ class Ui_SekaiText(object):
         SekaiText.setObjectName("Sekai Text")
         SekaiText.resize(1024, 1024)
 
+        font = QtGui.QFont()
+        font.setFamily("SimHei")
+
         self.centralwidget = QtWidgets.QWidget(SekaiText)
         self.centralwidget.setObjectName("centralwidget")
         self.gridLayout = QtWidgets.QGridLayout(self.centralwidget)
@@ -48,7 +51,7 @@ class Ui_SekaiText(object):
         self.comboBoxStoryTypeSort.setVisible(False)
 
         self.comboBoxStoryIndex = QtWidgets.QComboBox(self.centralwidget)
-        self.comboBoxStoryIndex.setMinimumSize(QtCore.QSize(150, 30))
+        self.comboBoxStoryIndex.setMinimumSize(QtCore.QSize(100, 30))
         self.comboBoxStoryIndex.setMaximumSize(QtCore.QSize(680, 30))
         self.comboBoxStoryIndex.setMaxVisibleItems(20)
         self.comboBoxStoryIndex.setObjectName("comboBoxStoryIndex")
@@ -56,7 +59,7 @@ class Ui_SekaiText(object):
 
         self.comboBoxStoryChapter = QtWidgets.QComboBox(self.centralwidget)
         self.comboBoxStoryChapter.setMinimumSize(QtCore.QSize(100, 30))
-        self.comboBoxStoryChapter.setMaximumSize(QtCore.QSize(350, 30))
+        self.comboBoxStoryChapter.setMaximumSize(QtCore.QSize(550, 30))
         self.comboBoxStoryChapter.setMaxVisibleItems(20)
         self.comboBoxStoryChapter.setObjectName("comboBoxStoryChapter")
         self.horizontalLayout.addWidget(self.comboBoxStoryChapter)
@@ -66,16 +69,22 @@ class Ui_SekaiText(object):
         self.pushButtonRefresh.setObjectName("pushButtonRefresh")
         self.horizontalLayout.addWidget(self.pushButtonRefresh)
 
-        self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setMaximumSize(QtCore.QSize(100, 30))
-        self.label.setText("")
-        self.label.setObjectName("label")
-        self.horizontalLayout.addWidget(self.label)
+        self.label_1e = QtWidgets.QLabel(self.centralwidget)
+        self.label_1e.setFixedSize(QtCore.QSize(5, 30))
+        self.label_1e.setText("")
+        self.label_1e.setObjectName("label_1e")
+        self.horizontalLayout.addWidget(self.label_1e)
 
         self.gridLayout.addLayout(self.horizontalLayout, 0, 0, 1, 1)
 
         self.horizontalLayout_3 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_3.setObjectName("horizontalLayout_3")
+
+        self.label_3f = QtWidgets.QLabel(self.centralwidget)
+        self.label_3f.setFixedSize(QtCore.QSize(5, 30))
+        self.label_3f.setText("")
+        self.label_3f.setObjectName("label_3f")
+        self.horizontalLayout_3.addWidget(self.label_3f)
 
         self.radioButtonTranslate = QtWidgets.QRadioButton(self.centralwidget)
         self.radioButtonTranslate.setFixedSize(QtCore.QSize(70, 30))
@@ -91,6 +100,21 @@ class Ui_SekaiText(object):
         self.radioButtonCheck.setFixedSize(QtCore.QSize(70, 30))
         self.radioButtonCheck.setObjectName("radioButtonCheck")
         self.horizontalLayout_3.addWidget(self.radioButtonCheck)
+
+        self.pushButtonOpen = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButtonOpen.setFixedSize(QtCore.QSize(60, 30))
+        self.pushButtonOpen.setObjectName("pushButtonOpen")
+        self.horizontalLayout_3.addWidget(self.pushButtonOpen)
+
+        self.pushButtonSave = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButtonSave.setFixedSize(QtCore.QSize(60, 30))
+        self.pushButtonSave.setObjectName("pushButtonSave")
+        self.horizontalLayout_3.addWidget(self.pushButtonSave)
+
+        self.pushButtonClear = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButtonClear.setFixedSize(QtCore.QSize(60, 30))
+        self.pushButtonClear.setObjectName("pushButton")
+        self.horizontalLayout_3.addWidget(self.pushButtonClear)
 
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setText("")
@@ -128,52 +152,53 @@ class Ui_SekaiText(object):
         self.checkBoxJapanese.setObjectName("checkBoxJapanese")
         self.horizontalLayout_2.addWidget(self.checkBoxJapanese)
 
-        # TODO
-        self.pushButtonCount = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButtonCount.setFixedSize(QtCore.QSize(60, 30))
-        self.pushButtonCount.setObjectName("pushButtonCount")
-        self.horizontalLayout_2.addWidget(self.pushButtonCount)
-
-        self.checkBoxAll = QtWidgets.QCheckBox(self.centralwidget)
-        self.checkBoxAll.setFixedSize(QtCore.QSize(160, 30))
-        self.checkBoxAll.setObjectName("checkBoxAll")
-        self.horizontalLayout_2.addWidget(self.checkBoxAll)
-
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setText("")
         self.label_2.setObjectName("label_2")
         self.horizontalLayout_2.addWidget(self.label_2)
+
+        self.pushButtonCount = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButtonCount.setFixedSize(QtCore.QSize(100, 30))
+        self.pushButtonCount.setObjectName("pushButtonCount")
+        self.horizontalLayout_2.addWidget(self.pushButtonCount)
+
+        self.checkBoxAll = QtWidgets.QCheckBox(self.centralwidget)
+        self.checkBoxAll.setFixedSize(QtCore.QSize(100, 30))
+        self.checkBoxAll.setObjectName("checkBoxAll")
+        self.horizontalLayout_2.addWidget(self.checkBoxAll)
+
+        self.label_2e = QtWidgets.QLabel(self.centralwidget)
+        self.label_2e.setFixedSize(QtCore.QSize(10, 30))
+        self.label_2e.setText("")
+        self.label_2e.setObjectName("label_4f")
+        self.horizontalLayout_2.addWidget(self.label_2e)
 
         self.gridLayout.addLayout(self.horizontalLayout_2, 1, 0, 1, 1)
 
         self.horizontalLayout_4 = QtWidgets.QHBoxLayout()
         self.horizontalLayout_4.setObjectName("horizontalLayout_4")
 
+        self.label_4f = QtWidgets.QLabel(self.centralwidget)
+        self.label_4f.setFixedSize(QtCore.QSize(5, 30))
+        self.label_4f.setText("")
+        self.label_4f.setObjectName("label_4f")
+        self.horizontalLayout_4.addWidget(self.label_4f)
+
         self.labelTitle = QtWidgets.QLabel(self.centralwidget)
-        self.labelTitle.setFixedSize(QtCore.QSize(60, 30))
+        self.labelTitle.setFixedSize(QtCore.QSize(50, 30))
         self.labelTitle.setObjectName("labelTitle")
         self.horizontalLayout_4.addWidget(self.labelTitle)
 
         self.lineEditTitle = QtWidgets.QLineEdit(self.centralwidget)
         self.lineEditTitle.setMinimumSize(QtCore.QSize(150, 30))
-        self.lineEditTitle.setMaximumSize(QtCore.QSize(260, 30))
+        self.lineEditTitle.setMaximumSize(QtCore.QSize(380, 30))
         self.lineEditTitle.setObjectName("lineEditTitle")
         self.horizontalLayout_4.addWidget(self.lineEditTitle)
 
-        self.pushButtonOpen = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButtonOpen.setFixedSize(QtCore.QSize(60, 30))
-        self.pushButtonOpen.setObjectName("pushButtonOpen")
-        self.horizontalLayout_4.addWidget(self.pushButtonOpen)
-
-        self.pushButtonSave = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButtonSave.setFixedSize(QtCore.QSize(60, 30))
-        self.pushButtonSave.setObjectName("pushButtonSave")
-        self.horizontalLayout_4.addWidget(self.pushButtonSave)
-
-        self.pushButtonClear = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButtonClear.setFixedSize(QtCore.QSize(60, 30))
-        self.pushButtonClear.setObjectName("pushButton")
-        self.horizontalLayout_4.addWidget(self.pushButtonClear)
+        self.pushButtonSpeaker = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButtonSpeaker.setFixedSize(QtCore.QSize(100, 30))
+        self.pushButtonSpeaker.setObjectName("pushButtonSpeaker")
+        self.horizontalLayout_4.addWidget(self.pushButtonSpeaker)
 
         self.pushButtonCheck = QtWidgets.QPushButton(self.centralwidget)
         self.pushButtonCheck.setFixedSize(QtCore.QSize(60, 30))
@@ -193,6 +218,7 @@ class Ui_SekaiText(object):
         self.gridLayout.addLayout(self.horizontalLayout_4, 1, 1, 1, 1)
 
         self.tableWidgetSrc = QtWidgets.QTableWidget(self.centralwidget)
+        self.tableWidgetSrc.setFont(font)
         self.tableWidgetSrc.setMinimumSize(QtCore.QSize(300, 500))
         self.tableWidgetSrc.setMaximumSize(QtCore.QSize(900, 16777215))
         self.tableWidgetSrc.setObjectName("tableWidgetSrc")
@@ -206,6 +232,7 @@ class Ui_SekaiText(object):
         self.gridLayout.addWidget(self.tableWidgetSrc, 2, 0, 1, 1)
 
         self.tableWidgetDst = QtWidgets.QTableWidget(self.centralwidget)
+        self.tableWidgetDst.setFont(font)
         self.tableWidgetDst.setMinimumSize(QtCore.QSize(300, 500))
         self.tableWidgetDst.setObjectName("tableWidgetDst")
         self.tableWidgetDst.setColumnCount(4)
@@ -338,18 +365,19 @@ class Ui_SekaiText(object):
         self.radioButtonTranslate.setText(_translate("SekaiText", u"翻译"))
         self.radioButtonProofread.setText(_translate("SekaiText", u"校对"))
         self.radioButtonCheck.setText(_translate("SekaiText", u"合意"))
+        self.pushButtonOpen.setText(_translate("SekaiText", u"打开"))
+        self.pushButtonSave.setText(_translate("SekaiText", u"保存"))
+        self.pushButtonClear.setText(_translate("SekaiText", u"清空"))
         self.checkBoxShowDiff.setText(_translate("SekaiText", u"显示修改前内容"))
         self.radioButtonTranslate.setChecked(True)
         # self.pushButtonCheck_2.setText(_translate("SekaiText", u"名词表"))
         self.labelDataSrc.setText(_translate("SekaiText", u"数据来源："))
         self.pushButtonLoad.setText(_translate("SekaiText", u"载入"))
         self.checkBoxJapanese.setText(_translate("SekaiText", u"生成日文"))
-        self.pushButtonCount.setText(_translate("SekaiText", u"统计"))
+        self.pushButtonCount.setText(_translate("SekaiText", u"统计说话人"))
         self.checkBoxAll.setText(_translate("SekaiText", u"全部章节"))
         self.labelTitle.setText(_translate("SekaiText", u"标题："))
-        self.pushButtonOpen.setText(_translate("SekaiText", u"打开"))
-        self.pushButtonSave.setText(_translate("SekaiText", u"保存"))
-        self.pushButtonClear.setText(_translate("SekaiText", u"清空"))
+        self.pushButtonSpeaker.setText(_translate("SekaiText", u"检查说话人"))
         self.pushButtonCheck.setText(_translate("SekaiText", u"检查"))
         self.checkBoxSaveN.setText(_translate("SekaiText", u"保存换行符\\N"))
         self.checkBoxSaveN.setChecked(True)

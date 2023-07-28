@@ -81,11 +81,11 @@ class JsonLoader():
             elif snippet['Action'] == 6:
                 effectdata = fulldata['SpecialEffectData'][snippet['ReferenceIndex']]
                 # Center Location or Time
-                if effectdata['EffectType'] == 8:
+                if effectdata['EffectType'] == 8 or effectdata['EffectType'] == 18:
                     text = effectdata['StringVal']
 
                     self.talks.append({
-                        'speaker': '场景',
+                        'speaker': u'场景' if effectdata['EffectType'] == 8 else u'左上场景',
                         'text': text
                     })
 

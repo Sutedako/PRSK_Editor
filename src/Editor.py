@@ -1,7 +1,9 @@
-from PyQt5.QtWidgets import QWidget, QTableWidgetItem, QPushButton, QCheckBox, QHBoxLayout, QMenu
+from PyQt5.QtWidgets import QWidget, QTableWidget, QTableWidgetItem, QPushButton, QCheckBox, QHBoxLayout, QMenu
 from PyQt5.QtGui import QBrush, QColor
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QSize
 import copy
+
+from Dictionary import characterDict
 
 Color = {
     'RED': QBrush(QColor(255, 192, 192)),
@@ -80,6 +82,13 @@ class Editor():
             self.dsttalks[-1]['end'] = True
 
         for idx, talk in enumerate(self.dsttalks):
+            for character in characterDict:
+                if talk['speaker'] == character["name_j"]:
+                    self.dsttalks[idx]['speaker'] = character["name_c"]
+                    break
+
+
+        for idx, talk in enumerate(self.dsttalks):
             newtalk = copy.deepcopy(talk)
             newtalk['dstidx'] = idx
             self.talks.append(newtalk)
@@ -136,7 +145,7 @@ class Editor():
     def saveFile(self, filepath, saveN):
         outTalk = ''
         for talk in self.dsttalks:
-            if talk['speaker'] in [u'场景', '']:
+            if talk['speaker'] in [u'场景', '左上场景', '']:
                 outTalk += talk['text'] + '\n'
             else:
                 if talk['start']:
@@ -195,7 +204,7 @@ class Editor():
         self.table.setRowHeight(row, 40 + 20 * height)
 
         for column in range(self.table.columnCount()):
-            if self.table.item(row, column) and column != 2:
+            if self.table.item(row, column) and (talk['speaker'] == "" or not(column == 2 or (column == 1 and talk['start']))):
                 self.table.item(row, column).setFlags(Qt.NoItemFlags)
 
         if 'proofread' in talk:
@@ -227,6 +236,89 @@ class Editor():
             self.table.setRowHidden(row, True)
         self.table.blockSignals(False)
 
+    def changeSpeaker(self, item, editormode):
+        row = item.row()
+        column = item.column()
+        srcSpeaker = self.srctalks[self.talks[row]['idx'] - 1]['speaker']
+        newSpeaker = item.text()
+
+        if (srcSpeaker in ["", u"场景"]) or not newSpeaker:
+            return
+
+        for idx, talk in enumerate(self.talks):
+            if self.srctalks[talk['idx'] - 1]['speaker'] == srcSpeaker:
+                self.talks[idx]['speaker'] = newSpeaker
+                self.dsttalks[self.talks[idx]['dstidx']]['speaker'] = newSpeaker
+
+                if(self.talks[idx]['start']):
+                    self.table.blockSignals(True)
+                    self.table.item(idx, column).setText(newSpeaker)
+                    self.table.blockSignals(False)
+
+        return
+
+    def showSpeakers(self):
+        if not self.talks:
+            return
+
+        self.speakerTable = QTableWidget()
+        self.speakerTable.verticalHeader().hide()
+
+        speakers = {}
+        for talk in self.talks:
+            if self.srctalks:
+                srcSpeaker = self.srctalks[talk['idx'] - 1]['speaker']
+            else:
+                srcSpeaker = talk['speaker']
+
+            if srcSpeaker not in ["", u"场景"] and srcSpeaker not in speakers:
+                speakers[srcSpeaker] = talk['speaker']
+
+        self.speakerTable.setColumnCount(2)
+        self.speakerTable.setRowCount(0)
+        self.speakerTable.horizontalHeader().resizeSection(0, 200)
+        if self.srctalks:
+            self.speakerTable.setHorizontalHeaderItem(0, QTableWidgetItem(u"日文原文"))
+        else:
+            self.speakerTable.setHorizontalHeaderItem(0, QTableWidgetItem(u"原翻译"))
+        self.speakerTable.horizontalHeader().resizeSection(1, 200)
+        self.speakerTable.setHorizontalHeaderItem(1, QTableWidgetItem(u"翻译"))
+
+        for speaker in speakers:
+            row = self.speakerTable.rowCount()
+            self.speakerTable.setRowCount(row + 1)
+            self.speakerTable.setItem(row, 0, QTableWidgetItem(speaker))
+            self.speakerTable.setItem(row, 1, QTableWidgetItem(speakers[speaker]))
+            self.speakerTable.setRowHeight(row, 40)
+            self.speakerTable.item(row, 0).setFlags(Qt.NoItemFlags)
+
+        self.speakerTable.setFixedSize(QSize(415, min(800, 45 + 40 * len(speakers))))
+        self.speakerTable.itemChanged.connect(self.changeSpeakerTable)
+
+        self.speakerTable.setWindowTitle(u"检查说话人")
+        self.speakerTable.show()
+
+    def changeSpeakerTable(self, item):
+        row = item.row()
+        srcSpeaker = self.speakerTable.item(row, 0).text()
+        newSpeaker = item.text()
+
+        for idx, talk in enumerate(self.talks):
+            if self.srctalks:
+                speaker = self.srctalks[talk['idx'] - 1]['speaker']
+            else:
+                speaker = talk['speaker']
+
+            if speaker == srcSpeaker:
+                self.talks[idx]['speaker'] = newSpeaker
+                self.dsttalks[self.talks[idx]['dstidx']]['speaker'] = newSpeaker
+
+                if(self.talks[idx]['start']):
+                    self.table.blockSignals(True)
+                    self.table.item(idx, 1).setText(newSpeaker)
+                    self.table.blockSignals(False)
+        return
+
     def changeText(self, item, editormode):
         row = item.row()
         column = item.column()
@@ -235,7 +327,7 @@ class Editor():
         if len(text.split("\n")) > 1:
             check = False
 
-        if not self.talks[row]['speaker']:
+        if not speaker:
             self.table.item(row, column).setText("")
             return
 
@@ -298,7 +390,7 @@ class Editor():
         if not text:
             return text, check
 
-        if speaker in [u'场景', '']:
+        if speaker in [u'场景', '左上场景', '']:
             return text, check
 
         text = text.replace('…', '...')
@@ -360,7 +452,7 @@ class Editor():
             if idx >= len(loadtalks):
                 dstend = True
 
-            if srctalk['speaker'] in ['', u'场景']:
+            if srctalk['speaker'] in [u'场景', '左上场景', '']:
                 if dstend or srctalk['speaker'] != loadtalks[idx]['speaker']:
                     newtalk = {
                         'idx': srcidx + 1,
@@ -383,7 +475,7 @@ class Editor():
                     loadtalks[idx]['text'], check = self.checkText(srctalk['speaker'], loadtalks[idx]['text'])
                     talk = {
                         'idx': srcidx + 1,
-                        'speaker': srctalk['speaker'],
+                        'speaker': loadtalks[idx]['speaker'],
                         'text': loadtalks[idx]['text'],
                         'start': iidx == 0,
                         'end': False,
@@ -417,7 +509,7 @@ class Editor():
                 loadtalks[idx]['text'], check = self.checkText(srctalk['speaker'], loadtalks[idx]['text'])
                 talk = {
                     'idx': srcidx + 1,
-                    'speaker': srctalk['speaker'],
+                    'speaker': loadtalks[idx]['speaker'],
                     'text': loadtalks[idx]['text'] + "\n【分行不一致】",
                     'start': False,
                     'end': True,
@@ -615,24 +707,25 @@ class Editor():
         for i in self.table.selectionModel().selection().indexes():
             row = i.row()
 
-        if 0 <= row < self.table.rowCount() and self.talks[row]['speaker'] not in ["", u"场景"]:
+        if 0 <= row < self.table.rowCount():
             menu = QMenu()
-            # repalceBracketsAction = menu.addAction(u"替换括号")
-            if self.talks[row]['start']:
-                addTalkUpAction = menu.addAction(u"在上方添加遗漏的说话人")
-            if self.talks[row]['end']:
-                addTalkDownAction = menu.addAction(u"在下方添加遗漏的说话人")
-            if self.talks[row]['start'] and self.talks[row]['end']:
-                removeTalkAction = menu.addAction(u"删除该行多余说话人")
+            repalceBracketsAction1 = menu.addAction(u"替换为「」")
+            repalceBracketsAction2 = menu.addAction(u"替换为『』")
+            repalceBracketsAction3 = menu.addAction(u"替换为（）")
+            repalceBracketsAction4 = menu.addAction(u"替换为“”")
+            repalceBracketsAction5 = menu.addAction(u"替换为‘’")
             action = menu.exec_(self.table.mapToGlobal(pos))
 
-            # if action == repalceBracketsAction:
-            if self.talks[row]['start'] and action == addTalkUpAction:
-                self.addTalk(row)
-            elif self.talks[row]['end'] and action == addTalkDownAction:
-                self.addTalk(row + 1)
-            elif self.talks[row]['start'] and self.talks[row]['end'] and action == removeTalkAction:
-                self.removeTalk(row)
+            if action == repalceBracketsAction1:
+                self.repalceBrackets(row, '「」')
+            elif action == repalceBracketsAction2:
+                self.repalceBrackets(row, '『』')
+            elif action == repalceBracketsAction3:
+                self.repalceBrackets(row, '（）')
+            elif action == repalceBracketsAction4:
+                self.repalceBrackets(row, '“”')
+            elif action == repalceBracketsAction5:
+                self.repalceBrackets(row, '‘’')
             else:
                 return
 
@@ -659,141 +752,17 @@ class Editor():
             self.table.setRowCount(row + 1)
             self.fillTableLine(row, talk)
 
-    def addTalk(self, row):
-        self.table.blockSignals(True)
-
-        if self.talks[row]['speaker'] not in ["", u"场景"]:
-            talk = copy.deepcopy(self.talks[row])
-        else:
-            talk = copy.deepcopy(self.talks[row - 1])
-        talk['text'] = " "
-        self.talks.insert(row, talk)
-
-        editdst = 'proofread' not in self.talks[row] or self.talks[row]['proofread']
-        if editdst:
-            dsttalk = copy.deepcopy(self.dsttalks[talk['dstidx']])
-            dsttalk['text'] = " "
-            self.dsttalks.insert(talk['dstidx'], dsttalk)
-
-        editrefer = self.isProofReading and (
-            'proofread' not in self.talks[row] or not self.talks[row]['proofread'])
-        if editrefer:
-            refertalk = copy.deepcopy(self.refertalks[talk['referid']])
-            refertalk['text'] = " "
-            self.refertalks.insert(talk['referid'], refertalk)
-
-        stoprow = -1
-        if row + 1 < len(self.talks):
-            for idx, talk in enumerate(self.talks[row + 1:]):
-                if talk['speaker'] in ["", u"场景"]:
-                    stoprow = row + idx
-                    break
-
-                talk['idx'] += 1
-                if 'dstidx' in talk:
-                    talk['dstidx'] += 1
-                if 'referid' in talk:
-                    talk['referid'] += 1
-
-                if editdst and 'dstidx' in talk:
-                    self.dsttalks[talk['dstidx']]['idx'] += 1
-                if editrefer and 'referid' in talk:
-                    self.refertalks[talk['referid']]['idx'] += 1
-
-        if stoprow != -1:
-            if editdst:
-                self.dsttalks.pop(self.talks[stoprow]['dstidx'])
-            if editrefer:
-                self.refertalks.pop(self.talks[stoprow]['referid'])
-            self.talks.pop(stoprow)
-        elif self.talks[stoprow]['text'] == "":
-            self.talks.pop()
-            if editdst:
-                self.dsttalks.pop()
-            if editrefer:
-                self.refertalks.pop()
-
-        if editdst:
-            self.dsttalks = self.checkLines(self.dsttalks)
-        if editrefer:
-            self.refertalks = self.checkLines(self.refertalks)
-
-        if not self.isProofReading:
-            self.talks = []
-            for idx, talk in enumerate(self.dsttalks):
-                newtalk = copy.deepcopy(talk)
-                newtalk['dstidx'] = idx
-                self.talks.append(newtalk)
-        else:
-            self.talks = self.compareText(self.dsttalks, 1)
-
-        for idx, talk in enumerate(self.talks[row:]):
-            if row + idx >= self.table.rowCount():
-                self.table.setRowCount(row + idx + 1)
-            self.fillTableLine(row + idx, talk)
-        self.table.setRowCount(len(self.talks))
-
-        nextItem = self.table.item(row, 2)
-        self.table.setCurrentItem(nextItem)
-        self.table.editItem(nextItem)
-
-        self.table.blockSignals(False)
-
-    def removeTalk(self, row):
-        self.table.blockSignals(True)
-
-        talk = self.talks[row]
-
-        editdst = 'proofread' not in self.talks[row] or self.talks[row]['proofread']
-        if editdst:
-            self.dsttalks.pop(talk['dstidx'])
-
-        editrefer = self.isProofReading and (
-            'proofread' not in self.talks[row] or not self.talks[row]['proofread'])
-        if editrefer:
-            self.refertalks.pop(talk['referid'])
-
-        self.talks.pop(row)
-
-        if row < len(self.talks):
-            for idx, talk in enumerate(self.talks[row:]):
-                if talk['speaker'] in ["", u"场景"]:
-                    break
-
-                talk['idx'] -= 1
-                if 'dstidx' in talk:
-                    talk['dstidx'] -= 1
-                if 'referid' in talk:
-                    talk['referid'] -= 1
-
-                if editdst and 'dstidx' in talk:
-                    self.dsttalks[talk['dstidx']]['idx'] -= 1
-                if editrefer and 'referid' in talk:
-                    self.refertalks[talk['referid']]['idx'] -= 1
-
-        if editdst:
-            self.dsttalks = self.checkLines(self.dsttalks)
-        if editrefer:
-            self.refertalks = self.checkLines(self.refertalks)
-
-        if not self.isProofReading:
-            self.talks = []
-            for idx, talk in enumerate(self.dsttalks):
-                newtalk = copy.deepcopy(talk)
-                newtalk['dstidx'] = idx
-                self.talks.append(newtalk)
-        else:
-            self.talks = self.compareText(self.dsttalks, 1)
-
-        for idx, talk in enumerate(self.talks[row:]):
-            self.fillTableLine(row + idx, talk)
-        self.table.setRowCount(len(self.talks))
-
-        nextItem = self.table.item(row, 2)
-        self.table.setCurrentItem(nextItem)
-        self.table.editItem(nextItem)
-
-        self.table.blockSignals(False)
+    def repalceBrackets(self, row, brackets):
+        text = self.table.item(row, 2).text()
+        newText = ""
+        for idx, char in enumerate(text):
+            if char in ['「', '『', '（', '“', '‘', '【']:
+                newText += brackets[0]
+            elif char in ['」', '』', '）', '”', '’', '】']:
+                newText += brackets[1]
+            else:
+                newText += char
+        self.table.item(row, 2).setText(newText)
 
     def checkProofread(self):
         box = self.table.sender()

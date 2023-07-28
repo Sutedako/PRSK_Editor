@@ -100,7 +100,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 logging.info("Character Loaded")
         '''
 
-        self.setComboBoxStoryType()
+        self.setComboBoxStoryType(True)
         self.comboBoxStoryType.activated.connect(lambda: self.setComboBoxStoryTypeSort(False))
         self.comboBoxStoryTypeSort.activated.connect(lambda: self.setComboBoxStoryIndex(False))
         self.comboBoxStoryIndex.activated.connect(lambda: self.setComboBoxStoryChapter(False))
@@ -112,13 +112,15 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         self.radioButtonTranslate.clicked.connect(self.translateMode)
         self.radioButtonProofread.clicked.connect(self.proofreadMode)
         self.radioButtonCheck.clicked.connect(self.checkMode)
-        # self.radioButtonJudge.clicked.connect(self.judgeMode)
 
-        self.lineEditTitle.textChanged.connect(self.changeTitle)
         self.pushButtonOpen.clicked.connect(self.openText)
         self.pushButtonSave.clicked.connect(self.saveText)
         self.pushButtonClear.clicked.connect(self.clearText)
+
+        self.lineEditTitle.textChanged.connect(self.changeTitle)
+        self.pushButtonSpeaker.clicked.connect(self.setSpeaker)
         self.pushButtonCheck.clicked.connect(self.checkLines)
+
         self.checkBoxShowDiff.stateChanged.connect(self.showDiff)
         self.checkBoxSaveN.stateChanged.connect(self.saveN)
 
@@ -519,6 +521,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         if not textpath:
             return False
         self.setting['textdir'] = osp.dirname(textpath)
+        save(self)
 
         self.dstText.loadFile(editormode, textpath)
         self.dstText.showDiff(self.checkBoxShowDiff.isChecked())
@@ -528,6 +531,17 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         if title and title != "[AutoSave]":
             self.lineEditTitle.setText(title)
         return True
+
+    def setSpeaker(self):
+        try:
+            self.dstText.showSpeakers()
+        except BaseException:
+            exc_type, exc_value, exc_traceback_obj = sys.exc_info()
+            with open(loggingPath, 'a') as f:
+                traceback.print_exception(
+                    exc_type, exc_value, exc_traceback_obj, file=f)
+            qw.QMessageBox.warning(
+                self, "", u"setSpeaker错误\n请将“setting\\log.txt发给弃子”")
 
     def checkLines(self):
         try:
@@ -651,7 +665,10 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
     def changeText(self, item):
         try:
-            self.dstText.changeText(item, self.editormode)
+            if(item.column() == 1):
+                self.dstText.changeSpeaker(item, self.editormode)
+            elif(item.column() == 2):
+                self.dstText.changeText(item, self.editormode)
             self.saved = False
             self.setWindowTitle(u"*{} Sekai Text".format(self.dstfilename))
             self.dstText.saveFile(osp.join(osp.dirname(self.dstfilepath), "[AutoSave].txt"), self.saveN)
@@ -710,7 +727,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         if self.ListManager.events == []:
             return
 
-        self.setComboBoxStoryTypeSort(True)
+        self.setComboBoxStoryTypeSort(isInt)
 
     def setComboBoxStoryTypeSort(self, isInit=False):
         storyType = self.comboBoxStoryType.currentText()
@@ -726,10 +743,10 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             self.comboBoxStoryTypeSort.setVisible(False)
             self.comboBoxStoryTypeSort.clear()
 
-        if isInit and 'storyTyprSort' in self.setting:
-            self.comboBoxStoryTypeSort.setCurrentIndex(self.setting['storyTyprSort'])
+        if isInit and 'storyTypeSort' in self.setting:
+            self.comboBoxStoryTypeSort.setCurrentIndex(self.setting['storyTypeSort'])
 
-        self.setComboBoxStoryIndex()
+        self.setComboBoxStoryIndex(isInit)
 
         return
 
@@ -737,10 +754,12 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         storyType = self.comboBoxStoryType.currentText()
         sort = self.comboBoxStoryTypeSort.currentText()
 
-        if storyType == u"初始卡面" or sort == u"按人物" or sort == u"按地点":
-            self.comboBoxStoryIndex.setMaximumSize(qc.QSize(180, 30))
+        if u"卡面" in storyType:
+            self.comboBoxStoryIndex.setMinimumSize(qc.QSize(280, 30))
+        elif sort == u"按人物":
+            self.comboBoxStoryIndex.setMinimumSize(qc.QSize(100, 30))
         else:
-            self.comboBoxStoryIndex.setMaximumSize(qc.QSize(680, 30))
+            self.comboBoxStoryIndex.setMinimumSize(qc.QSize(150, 30))
 
         self.comboBoxStoryIndex.clear()
         storyIndexList = self.ListManager.getStoryIndexList(storyType, sort)
@@ -762,6 +781,9 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 self.comboBoxDataSource.addItem(u"pjsek.ai")
             self.comboBoxDataSource.addItem(u"本地文件")
             self.comboBoxDataSource.setCurrentText(u"本地文件")
+        else:
+            self.comboBoxDataSource.addItem(u"-")
+            self.comboBoxDataSource.setCurrentText(u"-")
 
         return
 
@@ -769,6 +791,11 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         storyType = self.comboBoxStoryType.currentText()
         sort = self.comboBoxStoryTypeSort.currentText()
         storyIndex = self.comboBoxStoryIndex.currentIndex()
+
+        if storyType in [u"主界面语音", u"特殊剧情"]:
+            self.comboBoxStoryChapter.setVisible(False)
+        else:
+            self.comboBoxStoryChapter.setVisible(True)
 
         self.comboBoxStoryChapter.clear()
         storyChapterList = self.ListManager.getStoryChapterList(storyType, sort, storyIndex)
