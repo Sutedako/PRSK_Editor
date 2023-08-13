@@ -17,13 +17,14 @@ class JsonLoader():
         root, _ = osp.split(osp.abspath(sys.argv[0]))
         root = osp.join(root, "../")
 
-    def __init__(self, path="", table=None):
+    def __init__(self, path="", table=None, fontSize=18):
         self.talks = []
         self.table = table
         if not path:
             return
         self.talks = []
         self.table.setRowCount(0)
+        self.setFontSize(fontSize)
 
         with open(path, 'r', encoding='UTF-8') as f:
             fulldata = json.load(f)
@@ -63,8 +64,8 @@ class JsonLoader():
                 # buttonPlay = QPushButton("")
                 # buttonPlay.clicked.connect(self.play)
                 # self.table.setCellWidget(row, 2, buttonPlay)
-                height = len(text.split('\n')) - 1
-                self.table.setRowHeight(row, 60 + 20 * height)
+                height = len(text.split('\n'))
+                self.table.setRowHeight(row, 20 + (15 + self.fontSize) * height)
 
                 if close:
                     self.talks.append({
@@ -92,6 +93,7 @@ class JsonLoader():
                     row = self.table.rowCount()
                     self.table.setRowCount(row + 1)
                     self.table.setItem(row, 1, QTableWidgetItem(text))
+                    self.table.setRowHeight(row, 20 + (15 + self.fontSize))
 
                     self.talks.append({
                         'speaker': '',
@@ -102,8 +104,21 @@ class JsonLoader():
                     self.table.setRowCount(row + 1)
                     splitstr = "".join(['-' for i in range(60)])
                     self.table.setItem(row, 1, QTableWidgetItem(splitstr))
+                    self.table.setRowHeight(row, 20 + (15 + self.fontSize))
 
         if self.talks[-1]["speaker"] == '':
             self.talks.pop()
             self.table.removeRow(self.table.rowCount() - 1)
         self.table.setCurrentCell(0, 0)
+
+    def setFontSize(self, fontSize):
+        self.fontSize = fontSize
+        font = self.table.font()
+        font.setPixelSize(self.fontSize)
+        self.table.setFont(font)
+        self.table.horizontalHeader().resizeSection(0, self.fontSize * 7)
+
+        for row in range(self.table.rowCount()):
+            text = self.table.item(row, 1).text()
+            height = len(text.split('\n'))
+            self.table.setRowHeight(row, 20 + (15 + self.fontSize) * height)

@@ -15,7 +15,7 @@ Color = {
 
 
 class Editor():
-    def __init__(self, table=None, srctalks=None):
+    def __init__(self, table=None, srctalks=None, fontSize=18):
         self.talks = []
 
         self.srctalks = []
@@ -32,8 +32,22 @@ class Editor():
         if(self.table):
             self.table.setContextMenuPolicy(Qt.CustomContextMenu)
             self.table.customContextMenuRequested.connect(self.dstMenu)
+            self.setFontSize(fontSize)
         if(srctalks):
             self.loadJson(0, srctalks)
+
+    def setFontSize(self, fontSize):
+        self.fontSize = fontSize
+        font = self.table.font()
+        font.setPixelSize(self.fontSize)
+        self.table.setFont(font)
+        self.table.horizontalHeader().resizeSection(0, self.fontSize * 3)
+        self.table.horizontalHeader().resizeSection(1, self.fontSize * 7)
+
+        for row in range(self.table.rowCount()):
+            text = self.table.item(row, 1).text()
+            height = len(text.split('\n'))
+            self.table.setRowHeight(row, 20 + (15 + self.fontSize) * height)
 
     def loadJson(self, editormode, srctalks, jp=False):
         self.srctalks = srctalks
@@ -82,11 +96,14 @@ class Editor():
             self.dsttalks[-1]['end'] = True
 
         for idx, talk in enumerate(self.dsttalks):
-            for character in characterDict:
-                if talk['speaker'] == character["name_j"]:
-                    self.dsttalks[idx]['speaker'] = character["name_c"]
-                    break
-
+            speakers = talk['speaker'].replace(u"の声", "").split(u"・")
+            for speaker in speakers:
+                for character in characterDict:
+                    if speaker == character["name_j"]:
+                        self.dsttalks[idx]['speaker'] = self.dsttalks[idx]['speaker'].replace(speaker, character["name_c"])
+                        break
+            self.dsttalks[idx]['speaker'] = self.dsttalks[idx]['speaker'].replace(u"の声", u"的声音")
+            self.dsttalks[idx]['speaker'] = self.dsttalks[idx]['speaker'].replace(u"ネネロボ", u"宁宁号")
 
         for idx, talk in enumerate(self.dsttalks):
             newtalk = copy.deepcopy(talk)
@@ -200,8 +217,8 @@ class Editor():
             self.table.removeCellWidget(row, 3)
             self.table.setItem(row, 3, QTableWidgetItem("\\N"))
 
-        height = len(talk['text'].split('\n')) - 1
-        self.table.setRowHeight(row, 40 + 20 * height)
+        height = len(talk['text'].split('\n'))
+        self.table.setRowHeight(row, 20 + (15 + self.fontSize) * height)
 
         for column in range(self.table.columnCount()):
             if self.table.item(row, column) and (talk['speaker'] == "" or not(column == 2 or (column == 1 and talk['start']))):
@@ -289,7 +306,7 @@ class Editor():
             self.speakerTable.setRowCount(row + 1)
             self.speakerTable.setItem(row, 0, QTableWidgetItem(speaker))
             self.speakerTable.setItem(row, 1, QTableWidgetItem(speakers[speaker]))
-            self.speakerTable.setRowHeight(row, 40)
+            self.speakerTable.setRowHeight(row, 20 + (15 + self.fontSize))
             self.speakerTable.item(row, 0).setFlags(Qt.NoItemFlags)
 
         self.speakerTable.setFixedSize(QSize(415, min(800, 45 + 40 * len(speakers))))

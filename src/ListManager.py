@@ -11,12 +11,7 @@ from Dictionary import greetDict_season, greetDict_celebrate, greetDict_holiday
 
 from urllib import request
 
-proxy = request.getproxies()
-if 'http' in proxy:
-    environ['http_proxy'] = proxy['http']
-    environ['https_proxy'] = proxy['http']
-if 'https' in proxy:
-    environ['https_proxy'] = proxy['https']
+localProxy = request.getproxies()
 
 
 class ListManager():
@@ -71,10 +66,10 @@ class ListManager():
         aiDBurl = "https://api.pjsek.ai/database/master/{}?$limit=9999&$skip=0&"
 
         bestUrl = bestDBurl.format("events")
-        bestData = json.loads(requests.get(bestUrl, headers=self.headers).text)
+        bestData = json.loads(requests.get(bestUrl, headers=self.headers, proxies=localProxy).text)
 
         aiUrl = aiDBurl.format("events")
-        aiData = json.loads(requests.get(aiUrl, headers=self.headers).text)
+        aiData = json.loads(requests.get(aiUrl, headers=self.headers, proxies=localProxy).text)
 
         if len(bestData) > len(aiData['data']):
             self.DBurl = bestDBurl
@@ -83,18 +78,18 @@ class ListManager():
 
     def updateEvents(self):
         url = self.DBurl.format("events")
-        events = json.loads(requests.get(url, headers=self.headers).text)
+        events = json.loads(requests.get(url, headers=self.headers, proxies=localProxy).text)
         if("data" in events):
             events = events["data"]
         cardIdx = 0
 
         url = self.DBurl.format("eventStories")
-        stories = json.loads(requests.get(url, headers=self.headers).text)
+        stories = json.loads(requests.get(url, headers=self.headers, proxies=localProxy).text)
         if("data" in stories):
             stories = stories["data"]
 
         url = self.DBurl.format("eventCards")
-        cards = json.loads(requests.get(url, headers=self.headers).text)
+        cards = json.loads(requests.get(url, headers=self.headers, proxies=localProxy).text)
         if("data" in cards):
             cards = cards["data"]
 
@@ -123,7 +118,7 @@ class ListManager():
 
     def updateCards(self):
         url = self.DBurl.format("cards")
-        cards = json.loads(requests.get(url, headers=self.headers).text)
+        cards = json.loads(requests.get(url, headers=self.headers, proxies=localProxy).text)
         if("data" in cards):
             cards = cards["data"]
 
@@ -220,7 +215,7 @@ class ListManager():
             return
         self.mainstory = []
         url = self.DBurl.format("unitStories")
-        story = json.loads(requests.get(url, headers=self.headers).text)
+        story = json.loads(requests.get(url, headers=self.headers, proxies=localProxy).text)
         if("data" in story):
             story = story["data"]
         story = sorted(story, key=lambda x: x['seq'])
@@ -238,7 +233,7 @@ class ListManager():
 
     def updateCharacter2ds(self):
         url = self.DBurl.format("character2ds")
-        char2ds = json.loads(requests.get(url, headers=self.headers).text)
+        char2ds = json.loads(requests.get(url, headers=self.headers, proxies=localProxy).text)
         if("data" in char2ds):
             char2ds = char2ds["data"]
 
@@ -259,7 +254,7 @@ class ListManager():
 
     def updateAreatalks(self):
         url = self.DBurl.format("actionSets")
-        actions = json.loads(requests.get(url, headers=self.headers).text)
+        actions = json.loads(requests.get(url, headers=self.headers, proxies=localProxy).text)
         if("data" in actions):
             actions = actions["data"]
 
@@ -287,7 +282,7 @@ class ListManager():
 
             releaseEventId = action['releaseConditionId']
             if releaseEventId > 100000:
-                releaseEventId = int((releaseEventId % 10000) / 100) + 1
+                releaseEventId = int((releaseEventId % 100000) / 100) + 1
             if releaseEventId > 1000:
                 releaseEventId = -1
             if action['id'] == 618:
@@ -352,7 +347,7 @@ class ListManager():
             return content
 
         url = self.DBurl.format("systemLive2ds")
-        greets = json.loads(requests.get(url, headers=self.headers).text)
+        greets = json.loads(requests.get(url, headers=self.headers, proxies=localProxy).text)
         if("data" in greets):
             greets = greets["data"]
 
@@ -469,7 +464,7 @@ class ListManager():
 
     def updateSpecials(self):
         url = self.DBurl.format("specialStories")
-        stories = json.loads(requests.get(url, headers=self.headers).text)
+        stories = json.loads(requests.get(url, headers=self.headers, proxies=localProxy).text)
         if("data" in stories):
             stories = stories["data"]
 
@@ -592,8 +587,8 @@ class ListManager():
                         })
                         inmonthly = True
                     else:
-                        if areatalk["addEventId"] != preAddId:
-                            eventId = areatalk["addEventId"]
+                        eventId = areatalk["addEventId"]
+                        if eventId != preAddId:
                             eventTitle = self.events[eventId - 1]["title"]
                             storyIndex.append(u"{} {}".format(eventId, eventTitle))
                             self.areaTalkByTime.append({
@@ -603,8 +598,9 @@ class ListManager():
                                 "monthly": False
                             })
                             preAddId = eventId
-                        if areatalk["releaseEventId"] != areatalk["addEventId"] and areatalk["releaseEventId"] != preReleaseId:
-                            eventId = areatalk["releaseEventId"]
+                            preReleaseId = areatalk["releaseEventId"]
+                        eventId = areatalk["releaseEventId"]
+                        if eventId != areatalk["addEventId"] and eventId != preReleaseId:
                             if eventId <= 1:
                                 storyIndex.append(u"【追加】初始")
                             elif eventId > 1:

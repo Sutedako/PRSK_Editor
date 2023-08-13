@@ -23,16 +23,11 @@ import platform
 import requests
 from urllib import request
 
-proxy = request.getproxies()
-if 'http' in proxy:
-    environ['http_proxy'] = proxy['http']
-    environ['https_proxy'] = proxy['http']
-if 'https' in proxy:
-    environ['https_proxy'] = proxy['https']
-
 EditorMode = [u'翻译', u'校对', u'合意', u'审核']
 
 loggingPath = ""
+
+localProxy = request.getproxies()
 
 
 class mainForm(qw.QMainWindow, Ui_SekaiText):
@@ -78,6 +73,8 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         if 'textdir' not in self.setting:
             self.setting['textdir'] = self.datadir
         logging.info("Text Folder Path: {}".format(self.setting['textdir']))
+        if 'fontSize' in self.setting:
+            self.fontSize = self.setting['fontSize']
 
         self.iconpath = "image/icon"
         if getattr(sys, 'frozen', False):
@@ -91,7 +88,8 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             logging.info("Icon Loaded")
 
         self.setupUi(self)
-        self.dstText = Editor(self.tableWidgetDst)
+        self.spinBoxFontSize.setValue(self.fontSize)
+        self.dstText = Editor(self.tableWidgetDst, fontSize=self.fontSize)
         '''
         chrspath = osp.join(self.settingdir, "chr.json")
         if osp.exists(chrspath):
@@ -120,6 +118,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         self.lineEditTitle.textChanged.connect(self.changeTitle)
         self.pushButtonSpeaker.clicked.connect(self.setSpeaker)
         self.pushButtonCheck.clicked.connect(self.checkLines)
+        self.spinBoxFontSize.valueChanged.connect(self.setFontSize)
 
         self.checkBoxShowDiff.stateChanged.connect(self.showDiff)
         self.checkBoxSaveN.stateChanged.connect(self.saveN)
@@ -194,7 +193,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             if not jsonpath:
                 return
             try:
-                self.srcText = JsonLoader(jsonpath, self.tableWidgetSrc)
+                self.srcText = JsonLoader(jsonpath, self.tableWidgetSrc, fontSize=self.fontSize)
                 logging.info("Json File Loaded: " + jsonpath)
             except BaseException:
                 logging.error("Fail to Load Json File: " + jsonpath)
@@ -532,6 +531,21 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             self.lineEditTitle.setText(title)
         return True
 
+    def setFontSize(self):
+        try:
+            self.fontSize = self.spinBoxFontSize.value()
+            self.srcText.setFontSize(self.fontSize)
+            self.dstText.setFontSize(self.fontSize)
+            self.setting['fontSize'] = self.fontSize
+            save(self)
+        except BaseException:
+            exc_type, exc_value, exc_traceback_obj = sys.exc_info()
+            with open(loggingPath, 'a') as f:
+                traceback.print_exception(
+                    exc_type, exc_value, exc_traceback_obj, file=f)
+            qw.QMessageBox.warning(
+                self, "", u"setFontsize错误\n请将“setting\\log.txt发给弃子”")
+
     def setSpeaker(self):
         try:
             self.dstText.showSpeakers()
@@ -577,7 +591,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
         self.dstfilename = u"【{}】{}.txt".format(
             EditorMode[self.editormode], self.preTitle)
-        title = self.lineEditTitle.text()
+        title = self.lineEditTitle.text().replace("\\", "、").replace("/", "、")
         if title == u"无":
             return
         if not title and storyType[-2:] != u"卡面":
@@ -731,6 +745,8 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
     def setComboBoxStoryTypeSort(self, isInit=False):
         storyType = self.comboBoxStoryType.currentText()
+        self.comboBoxStoryIndex.setMaximumSize(qc.QSize(350, 30))
+        self.comboBoxStoryChapter.setMaximumSize(qc.QSize(300, 30))
         if storyType in [u"初始地图对话", u"追加地图对话", u"主界面语音"]:
             self.comboBoxStoryTypeSort.setVisible(True)
             self.comboBoxStoryTypeSort.clear()
@@ -739,9 +755,15 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 self.comboBoxStoryTypeSort.addItem(u"按时间")
             if storyType != u"主界面语音":
                 self.comboBoxStoryTypeSort.addItem(u"按地点")
+                self.comboBoxStoryIndex.setMaximumSize(qc.QSize(300, 30))
+                self.comboBoxStoryChapter.setMaximumSize(qc.QSize(250, 30))
+            else:
+                self.comboBoxStoryIndex.setMaximumSize(qc.QSize(600, 30))
         else:
             self.comboBoxStoryTypeSort.setVisible(False)
             self.comboBoxStoryTypeSort.clear()
+            if storyType == u"特殊剧情":
+                self.comboBoxStoryIndex.setMaximumSize(qc.QSize(800, 30))
 
         if isInit and 'storyTypeSort' in self.setting:
             self.comboBoxStoryTypeSort.setCurrentIndex(self.setting['storyTypeSort'])
@@ -887,7 +909,7 @@ class downloadThread(qc.QThread):
 
     def run(self):
         try:
-            r = requests.get(self.url, stream=True, timeout=5)
+            r = requests.get(self.url, stream=True, timeout=5, proxies=localProxy)
             r.encoding = 'utf-8'
             jsondata = json.loads(r.text)
 
