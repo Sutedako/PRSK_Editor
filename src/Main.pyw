@@ -42,6 +42,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         self.tableWidgetDst.currentCellChanged.connect(self.trackSrc)
         self.tableWidgetDst.itemActivated.connect(self.editText)
         self.tableWidgetDst.itemDoubleClicked.connect(self.editText)
+        self.tableWidgetDst.itemPressed.connect(self.editText)
         self.tableWidgetDst.itemChanged.connect(self.changeText)
 
     def load(self):

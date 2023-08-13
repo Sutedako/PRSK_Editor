@@ -199,7 +199,11 @@ class Editor():
         speaker = self.talks[row]['speaker']
         text = item.text()
         check = True
+
         if not self.talks[row]['comment']:
+            if row+1 < len(self.talks) and self.talks[row+1]['comment']:
+                self.fillTableLine(row, self.talks[row])
+                return
             text, check = self.checkText(speaker, text)
         if len(text.split("\n")) > 1:
             check = False
@@ -208,9 +212,18 @@ class Editor():
             self.table.item(row, column).setText("")
             return
 
+        if not self.talks[row]['comment']:
+            row += 1
+            if row >= len(self.talks) or not self.talks[row]['comment']:
+                newtalk = copy.deepcopy(self.talks[row-1])
+                newtalk['comment'] = True
+                newtalk['start'] =  False
+                self.talks.insert(row, newtalk)
+
         self.talks[row]['text'] = text
         self.talks[row]['warning'] = not check
         self.fillTableLine(row, self.talks[row])
+        self.fillTableLine(row-1, self.talks[row-1])
 
     def checkText(self, speaker, text):
         check = True
