@@ -38,6 +38,8 @@ class Editor():
 
     def setFontSize(self, fontSize):
         self.fontSize = fontSize
+        if(not self.table):
+            return
         font = self.table.font()
         font.setPixelSize(self.fontSize)
         self.table.setFont(font)

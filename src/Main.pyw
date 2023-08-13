@@ -73,8 +73,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         if 'textdir' not in self.setting:
             self.setting['textdir'] = self.datadir
         logging.info("Text Folder Path: {}".format(self.setting['textdir']))
-        if 'fontSize' in self.setting:
-            self.fontSize = self.setting['fontSize']
+        self.fontSize = self.setting['fontSize'] if 'fontSize' in self.setting else 18
 
         self.iconpath = "image/icon"
         if getattr(sys, 'frozen', False):
@@ -745,8 +744,8 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
     def setComboBoxStoryTypeSort(self, isInit=False):
         storyType = self.comboBoxStoryType.currentText()
-        self.comboBoxStoryIndex.setMaximumSize(qc.QSize(350, 30))
-        self.comboBoxStoryChapter.setMaximumSize(qc.QSize(300, 30))
+        self.comboBoxStoryIndex.setMaximumSize(qc.QSize(450, 30))
+        self.comboBoxStoryChapter.setMaximumSize(qc.QSize(500, 30))
         if storyType in [u"初始地图对话", u"追加地图对话", u"主界面语音"]:
             self.comboBoxStoryTypeSort.setVisible(True)
             self.comboBoxStoryTypeSort.clear()
@@ -755,15 +754,15 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 self.comboBoxStoryTypeSort.addItem(u"按时间")
             if storyType != u"主界面语音":
                 self.comboBoxStoryTypeSort.addItem(u"按地点")
-                self.comboBoxStoryIndex.setMaximumSize(qc.QSize(300, 30))
-                self.comboBoxStoryChapter.setMaximumSize(qc.QSize(250, 30))
+                self.comboBoxStoryIndex.setMaximumSize(qc.QSize(400, 30))
+                self.comboBoxStoryChapter.setMaximumSize(qc.QSize(450, 30))
             else:
-                self.comboBoxStoryIndex.setMaximumSize(qc.QSize(600, 30))
+                self.comboBoxStoryIndex.setMaximumSize(qc.QSize(800, 30))
         else:
             self.comboBoxStoryTypeSort.setVisible(False)
             self.comboBoxStoryTypeSort.clear()
             if storyType == u"特殊剧情":
-                self.comboBoxStoryIndex.setMaximumSize(qc.QSize(800, 30))
+                self.comboBoxStoryIndex.setMaximumSize(qc.QSize(1000, 30))
 
         if isInit and 'storyTypeSort' in self.setting:
             self.comboBoxStoryTypeSort.setCurrentIndex(self.setting['storyTypeSort'])
@@ -782,6 +781,13 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             self.comboBoxStoryIndex.setMinimumSize(qc.QSize(100, 30))
         else:
             self.comboBoxStoryIndex.setMinimumSize(qc.QSize(150, 30))
+
+        if sort != u"按时间":
+            self.comboBoxStoryIndex.setMaximumSize(qc.QSize(200, 30))
+            self.comboBoxStoryChapter.setMaximumSize(qc.QSize(650, 30))
+        else:
+            self.comboBoxStoryIndex.setMaximumSize(qc.QSize(400, 30))
+            self.comboBoxStoryChapter.setMaximumSize(qc.QSize(450, 30))
 
         self.comboBoxStoryIndex.clear()
         storyIndexList = self.ListManager.getStoryIndexList(storyType, sort)
