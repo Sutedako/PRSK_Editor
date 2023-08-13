@@ -782,12 +782,13 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         else:
             self.comboBoxStoryIndex.setMinimumSize(qc.QSize(150, 30))
 
-        if sort != u"按时间":
-            self.comboBoxStoryIndex.setMaximumSize(qc.QSize(200, 30))
-            self.comboBoxStoryChapter.setMaximumSize(qc.QSize(650, 30))
-        else:
-            self.comboBoxStoryIndex.setMaximumSize(qc.QSize(400, 30))
-            self.comboBoxStoryChapter.setMaximumSize(qc.QSize(450, 30))
+        if storyType in [u"初始地图对话", u"追加地图对话"]:
+            if sort != u"按时间":
+                self.comboBoxStoryIndex.setMaximumSize(qc.QSize(200, 30))
+                self.comboBoxStoryChapter.setMaximumSize(qc.QSize(650, 30))
+            else:
+                self.comboBoxStoryIndex.setMaximumSize(qc.QSize(400, 30))
+                self.comboBoxStoryChapter.setMaximumSize(qc.QSize(450, 30))
 
         self.comboBoxStoryIndex.clear()
         storyIndexList = self.ListManager.getStoryIndexList(storyType, sort)
