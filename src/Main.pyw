@@ -179,7 +179,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
             if storyType == u"主界面语音":
                 self.ListManager.makeJson(storyTypesort, storyIdx, jsonpath)
-            elif source in ["sekai.best", "pjsek.ai"]:
+            elif source != u"本地文件":
                 logging.info("Downloading Json File from: " + jsonurl)
                 if not self.downloadJson(jsonname, jsonurl):
                     return
@@ -746,11 +746,11 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         storyType = self.comboBoxStoryType.currentText()
         self.comboBoxStoryIndex.setMaximumSize(qc.QSize(450, 30))
         self.comboBoxStoryChapter.setMaximumSize(qc.QSize(500, 30))
-        if storyType in [u"初始地图对话", u"追加地图对话", u"主界面语音"]:
+        if storyType in [u"初始地图对话", u"升级地图对话", u"追加地图对话", u"主界面语音"]:
             self.comboBoxStoryTypeSort.setVisible(True)
             self.comboBoxStoryTypeSort.clear()
             self.comboBoxStoryTypeSort.addItem(u"按人物")
-            if storyType != u"初始地图对话":
+            if storyType not in [u"初始地图对话", u"升级地图对话"]:
                 self.comboBoxStoryTypeSort.addItem(u"按时间")
             if storyType != u"主界面语音":
                 self.comboBoxStoryTypeSort.addItem(u"按地点")
@@ -782,7 +782,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         else:
             self.comboBoxStoryIndex.setMinimumSize(qc.QSize(150, 30))
 
-        if storyType in [u"初始地图对话", u"追加地图对话"]:
+        if storyType in [u"初始地图对话", u"升级地图对话", u"追加地图对话"]:
             if sort != u"按时间":
                 self.comboBoxStoryIndex.setMaximumSize(qc.QSize(200, 30))
                 self.comboBoxStoryChapter.setMaximumSize(qc.QSize(650, 30))
@@ -808,6 +808,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             if storyType != u"自定义":
                 self.comboBoxDataSource.addItem(u"sekai.best")
                 self.comboBoxDataSource.addItem(u"pjsek.ai")
+                self.comboBoxDataSource.addItem(u"unipjsk.com")
             self.comboBoxDataSource.addItem(u"本地文件")
             self.comboBoxDataSource.setCurrentText(u"本地文件")
         else:

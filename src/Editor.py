@@ -84,7 +84,7 @@ class Editor():
             for iidx, subsrctalk in enumerate(subsrctalks):
                 tempText = ''
                 for char in subsrctalk:
-                    if char in ['♪', '☆']:
+                    if char in ['♪', '☆', '/', '『', '』']:
                         tempText += char
                 self.dsttalks.append({
                     'idx': idx + 1,
@@ -129,6 +129,9 @@ class Editor():
             if "：" in line:
                 speaker = line.split("：")[0]
                 fulltext = line[len(speaker) + 1:]
+            elif "/" in line:
+                speaker = u"选项"
+                fulltext = line
             else:
                 speaker = u"场景" if len(line.strip()) else ""
                 fulltext = line
@@ -164,7 +167,11 @@ class Editor():
     def saveFile(self, filepath, saveN):
         outTalk = ''
         for talk in self.dsttalks:
-            if talk['speaker'] in [u'场景', '左上场景', '']:
+            if talk['speaker'] in [u'场景', u'左上场景', u'选项', '']:
+                if talk['speaker'] in [u'场景', u'左上场景'] and talk['text'] == '':
+                    talk['text'] = u'场景'
+                elif talk['speaker'] == u'选项' and '/' not in talk['text']:
+                    talk['text'] = talk['text'] + '/'
                 outTalk += talk['text'] + '\n'
             else:
                 if talk['start']:
@@ -200,7 +207,7 @@ class Editor():
                 lineCtrl = QWidget()
                 layout = QHBoxLayout(lineCtrl)
 
-                if talk['speaker'] not in ["", u"场景"]:
+                if talk['speaker'] not in ["", u"场景", u"左上场景", u"选项"]:
                     buttonAdd = QPushButton("+", lineCtrl)
                     buttonAdd.setFixedSize(30, 30)
                     layout.addWidget(buttonAdd)
@@ -261,7 +268,7 @@ class Editor():
         srcSpeaker = self.srctalks[self.talks[row]['idx'] - 1]['speaker']
         newSpeaker = item.text()
 
-        if (srcSpeaker in ["", u"场景"]) or not newSpeaker:
+        if (srcSpeaker in ["", u"场景", u"左上场景", u"选项"]) or not newSpeaker:
             return
 
         for idx, talk in enumerate(self.talks):
@@ -290,7 +297,7 @@ class Editor():
             else:
                 srcSpeaker = talk['speaker']
 
-            if srcSpeaker not in ["", u"场景"] and srcSpeaker not in speakers:
+            if srcSpeaker not in ["", u"场景", u"左上场景", u"选项"] and srcSpeaker not in speakers:
                 speakers[srcSpeaker] = talk['speaker']
 
         self.speakerTable.setColumnCount(2)
@@ -402,14 +409,22 @@ class Editor():
 
     def checkText(self, speaker, text):
         check = True
-        if (speaker not in ["", u"场景"]) and (not text):
+        if (speaker not in ["", u"场景", u"左上场景", u"选项"]) and (not text):
             text += "\n【空行，若不需要改行请点右侧“-”删去本行】"
             return text, check
         text = text.split("\n")[0].rstrip().lstrip()
         if not text:
             return text, check
 
-        if speaker in [u'场景', '左上场景', '']:
+        if speaker in [u'场景', u"左上场景", '']:
+            return text, check
+        
+        if speaker == u"选项":
+            if '/' not in text:
+                text =  text + '/'
+            if text[-1] == '/':
+                text += "\n【选项必须用/分隔】"
+                check = False
             return text, check
 
         text = text.replace('…', '...')
@@ -448,13 +463,13 @@ class Editor():
     def checkLines(self, loadtalks):
         srcCount = 0
         for srctalk in self.srctalks:
-            if srctalk['speaker'] == u"场景":
+            if srctalk['speaker'] in [u"场景", u"左上场景", u"选项"]:
                 srcCount += 1
             elif srctalk['speaker'] != "":
                 break
         Count = 0
         for talk in loadtalks:
-            if talk['speaker'] == u"场景":
+            if talk['speaker'] in [u"场景", u"左上场景", u"选项"]:
                 Count += 1
             elif talk['speaker'] != "":
                 break
@@ -470,8 +485,11 @@ class Editor():
         for srcidx, srctalk in enumerate(self.srctalks):
             if idx >= len(loadtalks):
                 dstend = True
+            
+            if not dstend and srctalk['speaker'] == u'左上场景' and loadtalks[idx]['speaker'] == u'场景':
+                loadtalks[idx]['speaker'] = u'左上场景'
 
-            if srctalk['speaker'] in [u'场景', '左上场景', '']:
+            if srctalk['speaker'] in [u'场景', u'左上场景', u'选项', '']:
                 if dstend or srctalk['speaker'] != loadtalks[idx]['speaker']:
                     newtalk = {
                         'idx': srcidx + 1,

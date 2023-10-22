@@ -140,6 +140,8 @@ class ListManager():
                 'cardNo': c["assetbundleName"][-3:],
                 'birthday': c["cardRarityType"] == "rarity_birthday"
             })
+            if 724 <= cardCount <= 759:
+                self.cards[-1]["levelup"] = True
 
         cardsPath = osp.join(self.settingDir, "cards.json")
         with open(cardsPath, 'w', encoding='utf-8') as f:
@@ -188,6 +190,17 @@ class ListManager():
                     self.festivals[-1]['id'] = 1
                     self.festivals[-1]['collaboration'] = u'悪ノ大罪'
                     self.festivals[-1]['cards'].pop()
+                elif 724 in specialCards:
+                    self.festivals[-1]['id'] = 1
+                    self.festivals[-1]['levelup'] = True
+                    self.festivals[-1]['cards'].pop()
+                    self.festivals[-1]['cards'].pop()
+
+                    self.festivals.append({
+                        'id': fesIdx,
+                        'isBirthday': False,
+                        'cards': specialCards[-2:]
+                    })
                 else:
                     fesIdx += 1
                 specialCards = []
@@ -500,6 +513,8 @@ class ListManager():
                 idx = f['id']
                 if 'collaboration' in f:
                     storyIndex.append(f['collaboration'])
+                elif 'levelup' in f:
+                    continue
                 elif f['isBirthday']:
                     year = 2021 + int((idx + 2) / 4)
                     month = (idx + 2) % 4 * 3 + 1
@@ -511,13 +526,13 @@ class ListManager():
                     storyIndex.append("Festival {} {}".format(
                         year, str(month).zfill(2)))
 
-        elif storyType == u"初始卡面":
+        elif storyType in [u"初始卡面", u"升级卡面"]:
             for idx, char in enumerate(characterDict[:26]):
                 storyIndex.append(char['name_j'])
                 if idx % 4 == 3 and idx < 20:
                     storyIndex.append("-")
 
-        elif storyType == u"初始地图对话":
+        elif storyType in [u"初始地图对话", u"升级地图对话"]:
             if sort == u"按人物":
                 for idx, char in enumerate(characterDict[:26]):
                     storyIndex.append(char['name_j'])
@@ -543,6 +558,8 @@ class ListManager():
                 inspecial = False
                 inmonthly = False
                 for areatalk in self.areatalks:
+                    if areatalk["scenarioId"] == "none":
+                        continue
                     if areatalk["addEventId"] < 0:
                         continue
                     if areatalk["addEventId"] == 1 and preAddId == 0:
@@ -602,7 +619,10 @@ class ListManager():
                         eventId = areatalk["releaseEventId"]
                         if eventId != areatalk["addEventId"] and eventId != preReleaseId:
                             if eventId <= 1:
-                                storyIndex.append(u"【追加】初始")
+                                if "3rdaniv" in areatalk["scenarioId"]:
+                                    storyIndex.append(u"【追加】3周年升级")
+                                else:
+                                    storyIndex.append(u"【追加】初始")
                             elif eventId > 1:
                                 eventTitle = self.events[eventId - 1]["title"]
                                 storyIndex.append(u"【追加】{} {}".format(eventId, eventTitle))
@@ -700,6 +720,24 @@ class ListManager():
             if storyIndex in [0, 25, 26, 27]:
                 storyChapter.append(u"四星 前篇")
                 storyChapter.append(u"四星 后篇")
+        
+        elif storyType == u"升级卡面":
+            storyChapter.append(u"前篇")
+            storyChapter.append(u"后篇")
+
+            # MIKU
+            if storyIndex == 25:
+                storyChapter.append("-")
+                for unit in sekaiDict:
+                    storyChapter.append(u"{} 前篇".format(unit))
+                    storyChapter.append(u"{} 后篇".format(unit))
+                    storyChapter.append("-")
+            
+            # SEKAI VS
+            elif storyIndex > 25:
+                storyChapter.append("-")
+                storyChapter.append(u"SEKAI ver 前篇")
+                storyChapter.append(u"SEKAI ver 后篇")
 
         elif storyType == u"初始地图对话":
             if sort == u"按人物":
@@ -728,6 +766,45 @@ class ListManager():
                 areatalkCount = 0
                 for areatalk in self.areatalks:
                     if areatalk["addEventId"] > 1:
+                        continue
+                    if areatalk["type"] == "normal" and areaId == areatalk["areaId"] and areatalk["scenarioId"] != "none":
+                        charnames = []
+                        for cId in areatalk["characterIds"]:
+                            charnames.append(characterDict[cId - 1]["name_j"])
+                        storyChapter.append(areatalk["talkid"] + " " + u"·".join(charnames))
+                        self.chapterScenario.append((areatalk["id"], areatalk["scenarioId"], areatalk["talkid"]))
+                        areatalkCount += 1
+                        if areatalkCount % 10 == 0:
+                            storyChapter.append("-")
+                            self.chapterScenario.append("")
+        
+        elif storyType == u"升级地图对话":
+            if sort == u"按人物":
+                charId = int((storyIndex + 1) * 4 / 5) + 1
+                if storyIndex == 30:
+                    charId = 26
+
+                areatalkCount = 0
+                for areatalk in self.areatalks:
+                    if "3rdaniv" not in areatalk["scenarioId"]:
+                        continue
+                    if areatalk["type"] == "normal" and charId in areatalk["characterIds"] and areatalk["scenarioId"] != "none":
+                        areatalkCount += 1
+                        charnames = []
+                        for cId in areatalk["characterIds"]:
+                            charnames.append(characterDict[cId - 1]["name_j"])
+                        storyChapter.append(areatalk["talkid"] + " " + u"·".join(charnames))
+                        self.chapterScenario.append((areatalk["id"], areatalk["scenarioId"], areatalk["talkid"]))
+                        if areatalkCount % 6 == 0:
+                            storyChapter.append("-")
+                            self.chapterScenario.append("")
+
+            elif sort == u"按地点":
+                areaId = storyIndex + 1 if storyIndex <= 5 else storyIndex + 2
+
+                areatalkCount = 0
+                for areatalk in self.areatalks:
+                    if "3rdaniv" not in areatalk["scenarioId"]:
                         break
                     if areatalk["type"] == "normal" and areaId == areatalk["areaId"] and areatalk["scenarioId"] != "none":
                         charnames = []
@@ -841,6 +918,7 @@ class ListManager():
         jsonurl = ""
         bestBaseUrl = "https://minio.dnaroma.eu/sekai-assets/"
         aiBaseUrl = "https://assets.pjsek.ai/file/pjsekai-assets/"
+        uniBaseUrl = "https://assets.unipjsk.com/"
 
         if storyType == u"主线剧情":
             unitIdx = storyIdx
@@ -855,6 +933,9 @@ class ListManager():
                     "{}_rip/{}.asset".format(unit, chapter)
             elif source == "pjsek.ai":
                 jsonurl = aiBaseUrl + "startapp/scenario/unitstory/" \
+                    "{}/{}.json".format(unit, chapter)
+            elif source == "unipjsk.com":
+                jsonurl = uniBaseUrl + "startapp/scenario/unitstory/" \
                     "{}/{}.json".format(unit, chapter)
             print(jsonurl)
 
@@ -872,6 +953,9 @@ class ListManager():
                     "{}/scenario_rip/{}.asset".format(event, chapter)
             elif source == "pjsek.ai":
                 jsonurl = aiBaseUrl + "ondemand/event_story/" \
+                    "{}/scenario/{}.json".format(event, chapter)
+            elif source == "unipjsk.com":
+                jsonurl = uniBaseUrl + "ondemand/event_story/" \
                     "{}/scenario/{}.json".format(event, chapter)
 
             preTitle = "-".join(chapter.split("_")[1:])
@@ -896,6 +980,10 @@ class ListManager():
                 jsonurl = aiBaseUrl + "startapp/character/member/" \
                     "res{}_no{}/{}{}_{}{}.json".format(
                         charId, cardNo, charId, cardNo, charname, chapter)
+            elif source == "unipjsk.com":
+                jsonurl = uniBaseUrl + "startapp/character/member/" \
+                    "res{}_no{}/{}{}_{}{}.json".format(
+                        charId, cardNo, charId, cardNo, charname, chapter) 
 
             preTitle = "event{}-{}-{}".format(eventId, charname, chapter)
             jsonname = preTitle.replace("-", "_") + ".json"
@@ -916,6 +1004,10 @@ class ListManager():
                         charId, cardNo, charId, cardNo, charname, chapter)
             elif source == "pjsek.ai":
                 jsonurl = aiBaseUrl + "startapp/character/member/" \
+                    "res{}_no{}/{}{}_{}{}.json".format(
+                        charId, cardNo, charId, cardNo, charname, chapter)
+            elif source == "unipjsk.com":
+                jsonurl = uniBaseUrl + "startapp/character/member/" \
                     "res{}_no{}/{}{}_{}{}.json".format(
                         charId, cardNo, charId, cardNo, charname, chapter)
 
@@ -961,13 +1053,67 @@ class ListManager():
                 jsonurl = aiBaseUrl + "startapp/character/member/" \
                     "res{}_no{}/{}{}_{}{}.json".format(
                         charId, rarity, charId, rarity, charname, chapter)
+            elif source == "unipjsk.com":
+                jsonurl = uniBaseUrl + "startapp/character/member/" \
+                    "res{}_no{}/{}{}_{}{}.json".format(
+                        charId, rarity, charId, rarity, charname, chapter)
+
             if charname == "miku" and realRarity == "02":
                 preTitle = "release-miku-{}-02-{}".format(unit, chapter)
             else:
                 preTitle = "release-{}-{}-{}".format(charname, rarity[1:], chapter)
             jsonname = preTitle.replace("-", "_") + ".json"
 
-        elif storyType in [u"初始地图对话", u"追加地图对话"]:
+        elif storyType == u"升级卡面":
+            currentIdx = storyIdx
+            if currentIdx > 25:
+                charId = currentIdx - 4
+            else:
+                charId = int(currentIdx / 5) * 4 + (currentIdx + 1) % 5
+            charname = characterDict[charId - 1]['name']
+
+            for f in self.festivals:
+                if 'levelup' in f:
+                    levelupcards = f['cards']
+                    break
+            cardId = levelupcards[charId - 1]
+            # SEKAI VS
+            if charId == 21 and chapterIdx > 2:
+                cardId = levelupcards[len(characterDict) - 6 + int(chapterIdx / 3)]
+            elif charId == 22 and chapterIdx > 2:
+                cardId = levelupcards[-4]
+            elif charId == 23 and chapterIdx > 2:
+                cardId = levelupcards[-3]
+            elif charId == 24 and chapterIdx > 2:
+                cardId = levelupcards[-5]
+            elif charId == 25 and chapterIdx > 2:
+                cardId = levelupcards[-2]
+            elif charId == 26 and chapterIdx > 2:
+                cardId = levelupcards[-1]
+
+            cardNo = self.cards[cardId - 1]["cardNo"]
+            chapter = str(chapterIdx % 3 + 1).zfill(2)
+            charname = characterDict[charId - 1]['name']
+            charId = str(charId).zfill(3)
+
+            if source == "sekai.best":
+                jsonurl = bestBaseUrl + "character/member/" \
+                    "res{}_no{}_rip/{}{}_{}{}.asset".format(
+                        charId, cardNo, charId, cardNo, charname, chapter)
+            elif source == "pjsek.ai":
+                jsonurl = aiBaseUrl + "startapp/character/member/" \
+                    "res{}_no{}/{}{}_{}{}.json".format(
+                        charId, cardNo, charId, cardNo, charname, chapter)
+            elif source == "unipjsk.com":
+                jsonurl = uniBaseUrl + "startapp/character/member/" \
+                    "res{}_no{}/{}{}_{}{}.json".format(
+                        charId, cardNo, charId, cardNo, charname, chapter)
+            
+            preTitle = "lvelup2023-{}-{}".format(charname, chapter)
+            jsonname = preTitle.replace("-", "_") + ".json"
+
+
+        elif storyType in [u"初始地图对话", u"升级地图对话", u"追加地图对话"]:
             group = int(self.chapterScenario[chapterIdx][0] / 100)
             jsonname = self.chapterScenario[chapterIdx][1]
 
@@ -976,6 +1122,9 @@ class ListManager():
                     "group{}_rip/{}.asset".format(group, jsonname)
             elif source == "pjsek.ai":
                 jsonurl = aiBaseUrl + "startapp/scenario/actionset/" \
+                    "group{}/{}.json".format(group, jsonname)
+            elif source == "unipjsk.com":
+                jsonurl = uniBaseUrl + "startapp/scenario/actionset/" \
                     "group{}/{}.json".format(group, jsonname)
 
             preTitle = "areatalk-" + self.chapterScenario[chapterIdx][2]
@@ -1010,6 +1159,9 @@ class ListManager():
                     "{}_rip/{}.asset".format(story["dirName"], story["fileName"])
             elif source == "pjsek.ai":
                 jsonurl = aiBaseUrl + "startapp/scenario/special/" \
+                    "{}/{}.json".format(story["dirName"], story["fileName"])
+            elif source == "unipjsk.com":
+                jsonurl = uniBaseUrl + "startapp/scenario/special/" \
                     "{}/{}.json".format(story["dirName"], story["fileName"])
 
             preTitle = story["title"]
