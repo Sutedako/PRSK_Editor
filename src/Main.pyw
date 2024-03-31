@@ -14,7 +14,6 @@ from Editor import Editor
 from JsonLoader import JsonLoader
 from ListManager import ListManager
 from Dictionary import unitDict, sekaiDict, characterDict
-from TableArranger import arrangeTable, arrangeRow
 
 import json
 import logging
@@ -114,7 +113,8 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         self.pushButtonOpen.clicked.connect(self.openText)
         self.pushButtonSave.clicked.connect(self.saveText)
         self.pushButtonClear.clicked.connect(self.clearText)
-        self.pushButtonDebug.clicked.connect(self.alignRowsHeight)
+        # self.pushButtonDebug.clicked.connect(self.alignRowsHeight)
+        self.checkBoxSyncScroll.stateChanged.connect(self.toggleSyncedMode)
 
         self.lineEditTitle.textChanged.connect(self.changeTitle)
         self.pushButtonSpeaker.clicked.connect(self.setSpeaker)
@@ -550,6 +550,9 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             self.dstText.setFontSize(self.fontSize)
             self.setting['fontSize'] = self.fontSize
             save(self)
+
+            if self.checkBoxSyncScroll.isChecked():
+                self.alignRowsHeight()
         except BaseException:
             exc_type, exc_value, exc_traceback_obj = sys.exc_info()
             with open(loggingPath, 'a') as f:
@@ -710,10 +713,12 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
     def showDiff(self, state):
         try:
             self.dstText.showDiff(state)
-            self.alignRowsHeight()
 
-            # This won't work. Why?
-            self.moveScrollBars(self.tableWidgetSrcScroll.value(), 'source')
+            if self.checkBoxSyncScroll.isChecked():
+                self.alignRowsHeight()
+
+                # This won't work. Why?
+                self.moveScrollBars(self.tableWidgetSrcScroll.value(), 'source')
         except BaseException:
             exc_type, exc_value, exc_traceback_obj = sys.exc_info()
             with open(loggingPath, 'a') as f:
@@ -753,7 +758,6 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 self, "", u"trackSrc错误\n请将“setting\\log.txt发给弃子”")
 
     def alignRowHeight(self, srcIdx, dstRows):
-
         # Hypothesis: we always have sum(dstRow.height) > srcRow.height
         # Otherwise won't work
         
@@ -774,11 +778,8 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         # self.tableWidgetDst.setRowHeight(dstRows[-1], targetHeight - dstRowTotalHeight + dstRowHeights[-1])
 
     def alignWithDstRowChanged(self, dstRowIdx):
-
         dstRows = []
         srcIdx = self.dstText.talks[dstRowIdx]['idx']
-        print(dstRowIdx)
-        print(srcIdx)
 
         # before + id
         for row in range(dstRowIdx, -1, -1):
@@ -795,9 +796,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         self.alignRowHeight(srcIdx, dstRows)
 
     def alignRowsHeight(self):
-
-        print("Realign!")
-
+        if not self.checkBoxSyncScroll.isChecked(): return
         if len(self.dstText.talks) == 0: return
         assert self.tableWidgetSrc.rowCount() == self.dstText.talks[-1]['idx']
 
@@ -818,6 +817,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         return self.dstText.talks[self.srcScrollLinkedDstPositionPrev]['idx'] - 1
 
     def moveScrollBars(self, idx, bar, offset = 0):
+        if not self.checkBoxSyncScroll.isChecked(): return
 
         if bar is 'source':
 
@@ -861,6 +861,13 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 self.tableWidgetSrcScroll.setValue(self.dstText.talks[idx]['idx'] - 1)
             else:
                 self.tableWidgetSrcScroll.setValue(self.dstText.talks[self.dstText.decompressRowMap[idx]]['idx'] - 1)
+
+    def toggleSyncedMode(self, state):
+        if state:
+            self.alignRowsHeight()
+        else:
+            # This resets table row heights
+            self.setFontSize()
 
     def setComboBoxStoryType(self, isInt=False):
         if 'storyType' in self.setting:
