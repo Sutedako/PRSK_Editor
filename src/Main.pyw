@@ -875,7 +875,8 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         
         # If we had any problem syncing scroll bars, disable the sync
         except BaseException:
-            self.toggleSyncedMode()
+            self.checkBoxSyncScroll.setCheckState(0)
+            self.toggleSyncedMode(False)
 
     def toggleSyncedMode(self, state):
         if state:
