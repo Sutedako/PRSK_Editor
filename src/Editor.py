@@ -844,8 +844,8 @@ class Editor():
             self.decompressRowMap.append(idx)
             current += 1
 
-        print(self.compressRowMap)
-        print(self.decompressRowMap)
+        # print(self.compressRowMap)
+        # print(self.decompressRowMap)
 
         # Call main ui to re-align both editors
         if self.realignHook is not None:

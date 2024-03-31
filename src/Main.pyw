@@ -844,11 +844,11 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                     if self.prevSrcIdx() == idx:
                         break
                 else:
-                    print("??")
+                    # print("??")
                     return
 
             if self.prevSrcIdx() != idx:
-                print("??")
+                # print("??")
                 return
 
             if self.checkBoxShowDiff.isChecked():

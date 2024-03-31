@@ -119,7 +119,7 @@ class Ui_SekaiText(object):
         self.horizontalLayout_3.addWidget(self.pushButtonClear)
 
         self.checkBoxSyncScroll = QtWidgets.QCheckBox(self.centralwidget)
-        self.checkBoxSyncScroll.setFixedSize(QtCore.QSize(60, 30))
+        self.checkBoxSyncScroll.setFixedSize(QtCore.QSize(90, 30))
         self.checkBoxSyncScroll.setObjectName("checkBoxSyncScroll")
         self.horizontalLayout_3.addWidget(self.checkBoxSyncScroll)
         # self.pushButtonDebug = QtWidgets.QPushButton(self.centralwidget)
@@ -399,7 +399,7 @@ class Ui_SekaiText(object):
         self.pushButtonOpen.setText(_translate("SekaiText", u"打开"))
         self.pushButtonSave.setText(_translate("SekaiText", u"保存"))
         self.pushButtonClear.setText(_translate("SekaiText", u"清空"))
-        self.checkBoxSyncScroll.setText(_translate("SekaiText", u"同步"))
+        self.checkBoxSyncScroll.setText(_translate("SekaiText", u"同步滚动"))
         self.checkBoxShowDiff.setText(_translate("SekaiText", u"显示修改前内容"))
         self.radioButtonTranslate.setChecked(True)
         # self.pushButtonCheck_2.setText(_translate("SekaiText", u"名词表"))
