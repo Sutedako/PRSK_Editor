@@ -734,7 +734,6 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
     def trackSrc(self, currentRow, currentColumn, previousRow, previousColumn):
         try:
-            print("trackSrc")
             if currentColumn >= 3:
                 return
             srcrow = self.tableWidgetSrc.rowCount()
@@ -757,10 +756,10 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             qw.QMessageBox.warning(
                 self, "", u"trackSrc错误\n请将“setting\\log.txt发给弃子”")
 
+    # Align rowHeight for 1 srcRow (srcIdx) and corresponding set of all dstRows
+    # Assumes we always have sum(dstRow.height) > srcRow.height
+    # Otherwise won't work
     def alignRowHeight(self, srcIdx, dstRows):
-        # Hypothesis: we always have sum(dstRow.height) > srcRow.height
-        # Otherwise won't work
-        
         # Reset rows to their initial state
         # arrangeRow(self.tableWidgetSrc, srcRow, self.fontSize)
         # for dstRow in dstRows: arrangeRow(self.tableWidgetDst, dstRow, self.fontSize)
@@ -777,9 +776,14 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         self.tableWidgetSrc.setRowHeight(srcIdx - 1, dstRowTotalHeight)
         # self.tableWidgetDst.setRowHeight(dstRows[-1], targetHeight - dstRowTotalHeight + dstRowHeights[-1])
 
+    # Align rowHeight for specific dstRow
+    # Assumes dstRowIdx is the only modified row in the dst text
     def alignWithDstRowChanged(self, dstRowIdx):
         dstRows = []
         srcIdx = self.dstText.talks[dstRowIdx]['idx']
+
+        if srcIdx < 1 or srcIdx > self.tableWidgetSrc.rowCount():
+            return
 
         # before + id
         for row in range(dstRowIdx, -1, -1):
@@ -795,13 +799,16 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
         self.alignRowHeight(srcIdx, dstRows)
 
+    # Aligns rowHeight for all possible lines (that both exists in src & dst)
+    # Assumes src / dst text has continuous + monotone increasing line numbers
     def alignRowsHeight(self):
         if not self.checkBoxSyncScroll.isChecked(): return
         if len(self.dstText.talks) == 0: return
-        assert self.tableWidgetSrc.rowCount() == self.dstText.talks[-1]['idx']
+        
+        lineNum = min(self.tableWidgetSrc.rowCount(), self.dstText.talks[-1]['idx'])
 
         dstRowPtr = 0
-        for row in range(self.tableWidgetSrc.rowCount()):
+        for row in range(lineNum):
 
             dstRows = []
             srcIdx = row + 1
@@ -819,48 +826,56 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
     def moveScrollBars(self, idx, bar, offset = 0):
         if not self.checkBoxSyncScroll.isChecked(): return
 
-        if bar is 'source':
+        try:
+            if bar is 'source':
 
-            dirc = 0
-            if self.prevSrcIdx() == idx: return
-            elif self.prevSrcIdx() > idx: dirc = -1
-            elif self.prevSrcIdx() < idx: dirc = +1
+                dirc = 0
+                if self.prevSrcIdx() == idx: return
+                elif self.prevSrcIdx() > idx: dirc = -1
+                elif self.prevSrcIdx() < idx: dirc = +1
 
-            for _i in range(20):
-                
-                self.srcScrollLinkedDstPositionPrev += dirc
-                
-                if self.srcScrollLinkedDstPositionPrev <= 0: break
-                if self.srcScrollLinkedDstPositionPrev >= len(self.dstText.talks): break
+                for _i in range(20):
+                    
+                    self.srcScrollLinkedDstPositionPrev += dirc
+                    
+                    if self.srcScrollLinkedDstPositionPrev <= 0: break
+                    if self.srcScrollLinkedDstPositionPrev >= len(self.dstText.talks): break
 
-                if dirc < 0:
-                    # Backwards; Move to the last line of previous talk row
-                    if self.prevSrcIdx() < idx:
-                        # and move 1 row forward to get the correct position
-                        self.srcScrollLinkedDstPositionPrev += 1
-                        break
-                elif dirc > 0:
-                    # Forwards; Move to the first line of next talk row
-                    if self.prevSrcIdx() == idx:
-                        break
-                else:
+                    if dirc < 0:
+                        # Backwards; Move to the last line of previous talk row
+                        if self.prevSrcIdx() < idx:
+                            # and move 1 row forward to get the correct position
+                            self.srcScrollLinkedDstPositionPrev += 1
+                            break
+                    elif dirc > 0:
+                        # Forwards; Move to the first line of next talk row
+                        if self.prevSrcIdx() == idx:
+                            break
+                    else:
+                        # print("??")
+                        return
+
+                if self.prevSrcIdx() != idx:
                     # print("??")
                     return
 
-            if self.prevSrcIdx() != idx:
-                # print("??")
-                return
+                if self.checkBoxShowDiff.isChecked():
+                    self.tableWidgetDstScroll.setValue(self.srcScrollLinkedDstPositionPrev)
+                else:
+                    self.tableWidgetDstScroll.setValue(self.dstText.compressRowMap[self.srcScrollLinkedDstPositionPrev])
 
-            if self.checkBoxShowDiff.isChecked():
-                self.tableWidgetDstScroll.setValue(self.srcScrollLinkedDstPositionPrev)
-            else:
-                self.tableWidgetDstScroll.setValue(self.dstText.compressRowMap[self.srcScrollLinkedDstPositionPrev])
+            elif bar is 'destination':
 
-        elif bar is 'destination':
-            if self.checkBoxShowDiff.isChecked():
-                self.tableWidgetSrcScroll.setValue(self.dstText.talks[idx]['idx'] - 1)
-            else:
-                self.tableWidgetSrcScroll.setValue(self.dstText.talks[self.dstText.decompressRowMap[idx]]['idx'] - 1)
+                # TODO: Set dst scroll to next heading line to ensure sync?
+
+                if self.checkBoxShowDiff.isChecked():
+                    self.tableWidgetSrcScroll.setValue(self.dstText.talks[idx]['idx'] - 1)
+                else:
+                    self.tableWidgetSrcScroll.setValue(self.dstText.talks[self.dstText.decompressRowMap[idx]]['idx'] - 1)
+        
+        # If we had any problem syncing scroll bars, disable the sync
+        except BaseException:
+            self.toggleSyncedMode()
 
     def toggleSyncedMode(self, state):
         if state:
