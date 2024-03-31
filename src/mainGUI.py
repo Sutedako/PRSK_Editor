@@ -118,6 +118,11 @@ class Ui_SekaiText(object):
         self.pushButtonClear.setObjectName("pushButton")
         self.horizontalLayout_3.addWidget(self.pushButtonClear)
 
+        self.pushButtonDebug = QtWidgets.QPushButton(self.centralwidget)
+        self.pushButtonDebug.setFixedSize(QtCore.QSize(60, 30))
+        self.pushButtonDebug.setObjectName("pushButtonDebug")
+        self.horizontalLayout_3.addWidget(self.pushButtonDebug)
+
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setText("")
         self.label_3.setObjectName("label_3")
@@ -242,11 +247,12 @@ class Ui_SekaiText(object):
         self.tableWidgetSrc.setObjectName("tableWidgetSrc")
         self.tableWidgetSrc.setColumnCount(2)
         self.tableWidgetSrc.setRowCount(0)
-        self.tableWidgetSrc.horizontalHeader().hide()
+        # self.tableWidgetSrc.horizontalHeader().hide()
         self.tableWidgetSrc.horizontalHeader().resizeSection(0, 120)
         self.tableWidgetSrc.horizontalHeader().setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
         # self.tableWidgetSrc.horizontalHeader().resizeSection(2, 60)
         self.tableWidgetSrc.setIconSize(QtCore.QSize(48,48))
+        self.tableWidgetSrcScroll = self.tableWidgetSrc.verticalScrollBar()
         self.gridLayout.addWidget(self.tableWidgetSrc, 2, 0, 1, 1)
 
         self.tableWidgetDst = QtWidgets.QTableWidget(self.centralwidget)
@@ -269,6 +275,7 @@ class Ui_SekaiText(object):
         self.tableWidgetDst.horizontalHeader().setSectionResizeMode(2, QtWidgets.QHeaderView.Stretch)
         self.tableWidgetDst.horizontalHeader().resizeSection(3, 100)
         self.tableWidgetDst.verticalHeader().hide()
+        self.tableWidgetDstScroll = self.tableWidgetDst.verticalScrollBar()
         self.gridLayout.addWidget(self.tableWidgetDst, 2, 1, 1, 1)
 
         SekaiText.setCentralWidget(self.centralwidget)
@@ -388,6 +395,7 @@ class Ui_SekaiText(object):
         self.pushButtonOpen.setText(_translate("SekaiText", u"打开"))
         self.pushButtonSave.setText(_translate("SekaiText", u"保存"))
         self.pushButtonClear.setText(_translate("SekaiText", u"清空"))
+        self.pushButtonDebug.setText(_translate("SekaiText", u"测试"))
         self.checkBoxShowDiff.setText(_translate("SekaiText", u"显示修改前内容"))
         self.radioButtonTranslate.setChecked(True)
         # self.pushButtonCheck_2.setText(_translate("SekaiText", u"名词表"))

@@ -14,6 +14,7 @@ from Editor import Editor
 from JsonLoader import JsonLoader
 from ListManager import ListManager
 from Dictionary import unitDict, sekaiDict, characterDict
+from TableArranger import arrangeTable, arrangeRow
 
 import json
 import logging
@@ -54,7 +55,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         self.ListManager = ListManager(self.settingdir)
         self.ListManager.load()
         self.srcText = JsonLoader()
-        self.dstText = Editor()
+        self.dstText = Editor(realignHook = self.alignRowsHeight)
         self.preTitle = ""
         self.dstfilename = ""
         self.dstfilepath = ""
@@ -88,7 +89,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
         self.setupUi(self)
         self.spinBoxFontSize.setValue(self.fontSize)
-        self.dstText = Editor(self.tableWidgetDst, fontSize=self.fontSize)
+        self.dstText = Editor(self.tableWidgetDst, fontSize=self.fontSize, realignHook = self.alignRowsHeight)
         '''
         chrspath = osp.join(self.settingdir, "chr.json")
         if osp.exists(chrspath):
@@ -113,6 +114,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         self.pushButtonOpen.clicked.connect(self.openText)
         self.pushButtonSave.clicked.connect(self.saveText)
         self.pushButtonClear.clicked.connect(self.clearText)
+        self.pushButtonDebug.clicked.connect(self.alignRowsHeight)
 
         self.lineEditTitle.textChanged.connect(self.changeTitle)
         self.pushButtonSpeaker.clicked.connect(self.setSpeaker)
@@ -127,6 +129,13 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         self.tableWidgetDst.itemClicked.connect(self.editText)
         self.tableWidgetDst.itemDoubleClicked.connect(self.editText)
         self.tableWidgetDst.itemChanged.connect(self.changeText)
+
+        # Scroll link
+        self.srcScrollLinkedDstPositionPrev = 0
+        self.tableWidgetSrcScroll.valueChanged.connect(
+            lambda idx: self.moveScrollBars(idx, 'source'))
+        self.tableWidgetDstScroll.valueChanged.connect(
+            lambda idx: self.moveScrollBars(idx, 'destination'))
 
         qw.QShortcut(QKeySequence(self.tr("Ctrl+S")), self, self.saveText)
 
@@ -239,6 +248,8 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                     self.createText()
                 if relpy == qw.QMessageBox.No:
                     self.dstText.loadJson(self.editormode, self.srcText.talks)
+            
+            self.alignRowsHeight()
         except BaseException:
             exc_type, exc_value, exc_traceback_obj = sys.exc_info()
             with open(loggingPath, 'a') as f:
@@ -507,6 +518,8 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                         self.isNewFile = True
                         self.setWindowTitle(
                             "*{} Sekai Text".format(self.dstfilename))
+            
+            self.alignRowsHeight()
         except BaseException:
             exc_type, exc_value, exc_traceback_obj = sys.exc_info()
             with open(loggingPath, 'a') as f:
@@ -685,6 +698,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             self.saved = False
             self.setWindowTitle(u"*{} Sekai Text".format(self.dstfilename))
             self.dstText.saveFile(osp.join(osp.dirname(self.dstfilepath), "[AutoSave].txt"), self.saveN)
+            self.alignWithDstRowChanged(self.tableWidgetDst.currentRow() - 1)
         except BaseException:
             exc_type, exc_value, exc_traceback_obj = sys.exc_info()
             with open(loggingPath, 'a') as f:
@@ -696,6 +710,10 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
     def showDiff(self, state):
         try:
             self.dstText.showDiff(state)
+            self.alignRowsHeight()
+
+            # This won't work. Why?
+            self.moveScrollBars(self.tableWidgetSrcScroll.value(), 'source')
         except BaseException:
             exc_type, exc_value, exc_traceback_obj = sys.exc_info()
             with open(loggingPath, 'a') as f:
@@ -711,6 +729,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
     def trackSrc(self, currentRow, currentColumn, previousRow, previousColumn):
         try:
+            print("trackSrc")
             if currentColumn >= 3:
                 return
             srcrow = self.tableWidgetSrc.rowCount()
@@ -732,6 +751,116 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                     exc_type, exc_value, exc_traceback_obj, file=f)
             qw.QMessageBox.warning(
                 self, "", u"trackSrc错误\n请将“setting\\log.txt发给弃子”")
+
+    def alignRowHeight(self, srcIdx, dstRows):
+
+        # Hypothesis: we always have sum(dstRow.height) > srcRow.height
+        # Otherwise won't work
+        
+        # Reset rows to their initial state
+        # arrangeRow(self.tableWidgetSrc, srcRow, self.fontSize)
+        # for dstRow in dstRows: arrangeRow(self.tableWidgetDst, dstRow, self.fontSize)
+
+        # Compute dst row heights 
+        dstRowHeights = [self.tableWidgetDst.rowHeight(r) for r in dstRows]
+        dstRowTotalHeight = sum(dstRowHeights)
+
+        # targetHeight = max(
+        #     self.tableWidgetSrc.rowHeight(srcRow),
+        #     dstRowTotalHeight
+        # )
+
+        self.tableWidgetSrc.setRowHeight(srcIdx - 1, dstRowTotalHeight)
+        # self.tableWidgetDst.setRowHeight(dstRows[-1], targetHeight - dstRowTotalHeight + dstRowHeights[-1])
+
+    def alignWithDstRowChanged(self, dstRowIdx):
+
+        dstRows = []
+        srcIdx = self.dstText.talks[dstRowIdx]['idx']
+        print(dstRowIdx)
+        print(srcIdx)
+
+        # before + id
+        for row in range(dstRowIdx, -1, -1):
+            if self.dstText.talks[row]['idx'] != srcIdx:
+                break
+            dstRows.append(row) 
+
+        # after
+        for row in range(dstRowIdx + 1, len(self.dstText.talks), 1):
+            if self.dstText.talks[row]['idx'] != srcIdx:
+                break
+            dstRows.append(row) 
+
+        self.alignRowHeight(srcIdx, dstRows)
+
+    def alignRowsHeight(self):
+
+        print("Realign!")
+
+        if len(self.dstText.talks) == 0: return
+        assert self.tableWidgetSrc.rowCount() == self.dstText.talks[-1]['idx']
+
+        dstRowPtr = 0
+        for row in range(self.tableWidgetSrc.rowCount()):
+
+            dstRows = []
+            srcIdx = row + 1
+
+            # Collect all rows in the destination that connects to current source row
+            while dstRowPtr < len(self.dstText.talks) and self.dstText.talks[dstRowPtr]['idx'] == (srcIdx):
+                dstRows.append(dstRowPtr)
+                dstRowPtr += 1
+
+            self.alignRowHeight(srcIdx, dstRows)
+
+    def prevSrcIdx(self):
+        return self.dstText.talks[self.srcScrollLinkedDstPositionPrev]['idx'] - 1
+
+    def moveScrollBars(self, idx, bar, offset = 0):
+
+        if bar is 'source':
+
+            dirc = 0
+            if self.prevSrcIdx() == idx: return
+            elif self.prevSrcIdx() > idx: dirc = -1
+            elif self.prevSrcIdx() < idx: dirc = +1
+
+            for _i in range(20):
+                
+                self.srcScrollLinkedDstPositionPrev += dirc
+                
+                if self.srcScrollLinkedDstPositionPrev <= 0: break
+                if self.srcScrollLinkedDstPositionPrev >= len(self.dstText.talks): break
+
+                if dirc < 0:
+                    # Backwards; Move to the last line of previous talk row
+                    if self.prevSrcIdx() < idx:
+                        # and move 1 row forward to get the correct position
+                        self.srcScrollLinkedDstPositionPrev += 1
+                        break
+                elif dirc > 0:
+                    # Forwards; Move to the first line of next talk row
+                    if self.prevSrcIdx() == idx:
+                        break
+                else:
+                    print("??")
+                    return
+
+            if self.prevSrcIdx() != idx:
+                print("??")
+                return
+
+            if self.checkBoxShowDiff.isChecked():
+                self.tableWidgetDstScroll.setValue(self.srcScrollLinkedDstPositionPrev)
+            else:
+                self.tableWidgetDstScroll.setValue(self.dstText.compressRowMap[self.srcScrollLinkedDstPositionPrev])
+
+        elif bar is 'destination':
+            if self.checkBoxShowDiff.isChecked():
+                self.tableWidgetSrcScroll.setValue(self.dstText.talks[idx]['idx'] - 1)
+            else:
+                self.tableWidgetSrcScroll.setValue(self.dstText.talks[self.dstText.decompressRowMap[idx]]['idx'] - 1)
 
     def setComboBoxStoryType(self, isInt=False):
         if 'storyType' in self.setting:
