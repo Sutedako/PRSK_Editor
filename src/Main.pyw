@@ -826,8 +826,17 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
     def moveScrollBars(self, idx, bar, offset = 0):
         if not self.checkBoxSyncScroll.isChecked(): return
 
+        if idx < 0: return
+
         try:
             if bar is 'source':
+
+                # Special case - will be triggered on a complete reload etc.
+                # Simply set everything to 0
+                if idx == 0:
+                    self.srcScrollLinkedDstPositionPrev = 0
+                    self.tableWidgetDstScroll.setValue(0)
+                    return
 
                 dirc = 0
                 if self.prevSrcIdx() == idx: return
