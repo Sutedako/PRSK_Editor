@@ -802,23 +802,32 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
     # Aligns rowHeight for all possible lines (that both exists in src & dst)
     # Assumes src / dst text has continuous + monotone increasing line numbers
     def alignRowsHeight(self):
-        if not self.checkBoxSyncScroll.isChecked(): return
-        if len(self.dstText.talks) == 0: return
-        
-        lineNum = min(self.tableWidgetSrc.rowCount(), self.dstText.talks[-1]['idx'])
+        try:
+            if not self.checkBoxSyncScroll.isChecked(): return
+            if len(self.dstText.talks) == 0: return
+            
+            lineNum = min(self.tableWidgetSrc.rowCount(), self.dstText.talks[-1]['idx'])
 
-        dstRowPtr = 0
-        for row in range(lineNum):
+            dstRowPtr = 0
+            for row in range(lineNum):
 
-            dstRows = []
-            srcIdx = row + 1
+                dstRows = []
+                srcIdx = row + 1
 
-            # Collect all rows in the destination that connects to current source row
-            while dstRowPtr < len(self.dstText.talks) and self.dstText.talks[dstRowPtr]['idx'] == (srcIdx):
-                dstRows.append(dstRowPtr)
-                dstRowPtr += 1
+                # Collect all rows in the destination that connects to current source row
+                while dstRowPtr < len(self.dstText.talks) and self.dstText.talks[dstRowPtr]['idx'] == (srcIdx):
+                    dstRows.append(dstRowPtr)
+                    dstRowPtr += 1
 
-            self.alignRowHeight(srcIdx, dstRows)
+                self.alignRowHeight(srcIdx, dstRows)
+        except BaseException:
+            logging.error("Failed to align row heights. Sync disabled.")
+            exc_type, exc_value, exc_traceback_obj = sys.exc_info()
+            with open(loggingPath, 'a') as f:
+                traceback.print_exception(
+                    exc_type, exc_value, exc_traceback_obj, file=f)
+            self.toggleSyncedMode(False)
+            return
 
     def prevSrcIdx(self):
         return self.dstText.talks[self.srcScrollLinkedDstPositionPrev]['idx'] - 1
@@ -884,6 +893,13 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         
         # If we had any problem syncing scroll bars, disable the sync
         except BaseException:
+            
+            logging.error("Failed to sync scrollbars. Sync disabled.")
+            exc_type, exc_value, exc_traceback_obj = sys.exc_info()
+            with open(loggingPath, 'a') as f:
+                traceback.print_exception(
+                    exc_type, exc_value, exc_traceback_obj, file=f)
+
             self.checkBoxSyncScroll.setCheckState(0)
             self.toggleSyncedMode(False)
 
