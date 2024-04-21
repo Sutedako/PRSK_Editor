@@ -124,7 +124,9 @@ class JsonLoader():
         font = self.table.font()
         font.setPixelSize(self.fontSize)
         self.table.setFont(font)
-        self.table.horizontalHeader().resizeSection(0, self.fontSize * 7)
+
+        self.table.horizontalHeader().resizeSection(0, self.fontSize * 3)
+        self.table.horizontalHeader().resizeSection(1, self.fontSize * 7)
 
         for row in range(self.table.rowCount()):
             text = self.table.item(row, 1).text()

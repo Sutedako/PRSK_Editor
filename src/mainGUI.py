@@ -118,19 +118,15 @@ class Ui_SekaiText(object):
         self.pushButtonClear.setObjectName("pushButton")
         self.horizontalLayout_3.addWidget(self.pushButtonClear)
 
-        self.checkBoxSyncScroll = QtWidgets.QCheckBox(self.centralwidget)
-        self.checkBoxSyncScroll.setFixedSize(QtCore.QSize(90, 30))
-        self.checkBoxSyncScroll.setObjectName("checkBoxSyncScroll")
-        self.horizontalLayout_3.addWidget(self.checkBoxSyncScroll)
-        # self.pushButtonDebug = QtWidgets.QPushButton(self.centralwidget)
-        # self.pushButtonDebug.setFixedSize(QtCore.QSize(60, 30))
-        # self.pushButtonDebug.setObjectName("pushButtonDebug")
-        # self.horizontalLayout_3.addWidget(self.pushButtonDebug)
-
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setText("")
         self.label_3.setObjectName("label_3")
         self.horizontalLayout_3.addWidget(self.label_3)
+
+        self.checkBoxSyncScroll = QtWidgets.QCheckBox(self.centralwidget)
+        self.checkBoxSyncScroll.setFixedSize(QtCore.QSize(90, 30))
+        self.checkBoxSyncScroll.setObjectName("checkBoxSyncScroll")
+        self.horizontalLayout_3.addWidget(self.checkBoxSyncScroll)
 
         self.checkBoxShowDiff = QtWidgets.QCheckBox(self.centralwidget)
         self.checkBoxShowDiff.setFixedSize(QtCore.QSize(160, 30))
@@ -251,6 +247,10 @@ class Ui_SekaiText(object):
         self.tableWidgetSrc.setObjectName("tableWidgetSrc")
         self.tableWidgetSrc.setColumnCount(2)
         self.tableWidgetSrc.setRowCount(0)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidgetSrc.setHorizontalHeaderItem(0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidgetSrc.setHorizontalHeaderItem(1, item)
         # self.tableWidgetSrc.horizontalHeader().hide()
         self.tableWidgetSrc.horizontalHeader().resizeSection(0, 120)
         self.tableWidgetSrc.horizontalHeader().setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
@@ -417,6 +417,12 @@ class Ui_SekaiText(object):
         self.spinBoxFontSize.setSingleStep(2)
         self.checkBoxSaveN.setText(_translate("SekaiText", u"保存\\N"))
         self.checkBoxSaveN.setChecked(True)
+
+        item = self.tableWidgetSrc.horizontalHeaderItem(0)
+        item.setText(_translate("SekaiText", u""))
+        item = self.tableWidgetSrc.horizontalHeaderItem(1)
+        item.setText(_translate("SekaiText", u"原文"))
+
         item = self.tableWidgetDst.horizontalHeaderItem(0)
         item.setText(_translate("SekaiText", u"行号"))
         item = self.tableWidgetDst.horizontalHeaderItem(1)

@@ -846,7 +846,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 self.tableWidgetDstScroll.setValue(idx)
                 return
 
-            if bar is 'source':
+            if bar == 'source':
 
                 # Special case - will be triggered on a complete reload etc.
                 # Simply set everything to 0
@@ -890,7 +890,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 else:
                     self.tableWidgetDstScroll.setValue(self.dstText.compressRowMap[self.srcScrollLinkedDstPositionPrev])
 
-            elif bar is 'destination':
+            elif bar == 'destination':
 
                 # TODO: Set dst scroll to next heading line to ensure sync?
 
