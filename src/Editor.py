@@ -6,11 +6,11 @@ import copy
 from Dictionary import characterDict
 
 Color = {
-    'RED': QBrush(QColor(255, 192, 192)),
-    'YELLOW': QBrush(QColor(255, 255, 128)),
-    'GREEN': QBrush(QColor(128, 255, 128)),
-    'BLUE': QBrush(QColor(0, 128, 255)),
-    'WHITE': QBrush(QColor(255, 255, 255))
+    'RED': QBrush(QColor(255, 192, 192, 192)),
+    'YELLOW': QBrush(QColor(255, 255, 128, 192)),
+    'GREEN': QBrush(QColor(128, 255, 128, 192)),
+    'BLUE': QBrush(QColor(0, 128, 255, 192)),
+    'WHITE': QBrush(QColor(255, 255, 255, 0))
 }
 
 
