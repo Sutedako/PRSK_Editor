@@ -838,6 +838,14 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         if idx < 0: return
 
         try:
+
+            # Seems PyQt handles scrollbar indices differently in MacOS ...
+            if platform.system() == "Darwin":
+                
+                self.tableWidgetSrcScroll.setValue(idx)
+                self.tableWidgetDstScroll.setValue(idx)
+                return
+
             if bar is 'source':
 
                 # Special case - will be triggered on a complete reload etc.
