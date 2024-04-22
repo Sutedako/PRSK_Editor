@@ -917,6 +917,7 @@ class ListManager():
     def getJsonPath(self, storyType, sort, storyIdx, chapterIdx, source):
         jsonurl = ""
         bestBaseUrl = "https://minio.dnaroma.eu/sekai-assets/"
+        # bestBaseUrl = "https://storage.sekai.best/sekai-assets/"
         aiBaseUrl = "https://assets.pjsek.ai/file/pjsekai-assets/"
         uniBaseUrl = "https://assets.unipjsk.com/"
 

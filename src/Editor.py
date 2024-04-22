@@ -15,7 +15,7 @@ Color = {
 
 
 class Editor():
-    def __init__(self, table=None, srctalks=None, fontSize=18):
+    def __init__(self, table=None, srctalks=None, fontSize=18, realignHook = None):
         self.talks = []
 
         self.srctalks = []
@@ -27,6 +27,7 @@ class Editor():
         self.checkpath = ""
         self.isProofReading = False
         self.showDifference = False
+        self.realignHook = None
 
         self.table = table
         if(self.table):
@@ -35,6 +36,9 @@ class Editor():
             self.setFontSize(fontSize)
         if(srctalks):
             self.loadJson(0, srctalks)
+        
+        self.updateHiddenRowMap()
+        self.realignHook = realignHook
 
     def setFontSize(self, fontSize):
         self.fontSize = fontSize
@@ -71,6 +75,8 @@ class Editor():
             row = self.table.rowCount()
             self.table.setRowCount(row + 1)
             self.fillTableLine(row, talk)
+        
+        self.updateHiddenRowMap()
 
     # create new text from json
     def createFile(self, srctalks, jp=False):
@@ -117,6 +123,8 @@ class Editor():
             row = self.table.rowCount()
             self.table.setRowCount(row + 1)
             self.fillTableLine(row, talk)
+        
+        self.updateHiddenRowMap()
 
     def loadFile(self, editormode, filepath):
         srcfile = open(filepath, 'r', encoding='UTF-8')
@@ -713,6 +721,8 @@ class Editor():
             self.table.setCurrentItem(nextItem)
             self.table.editItem(nextItem)
 
+            self.updateHiddenRowMap()
+
     def removeLine(self):
         button = self.table.sender()
         if button:
@@ -738,6 +748,8 @@ class Editor():
             preItem = self.table.item(row - 1, 2)
             self.table.setCurrentItem(preItem)
             self.table.editItem(preItem)
+            
+            self.updateHiddenRowMap()
 
     def dstMenu(self, pos):
         row = -1
@@ -788,6 +800,8 @@ class Editor():
             row = self.table.rowCount()
             self.table.setRowCount(row + 1)
             self.fillTableLine(row, talk)
+        
+        self.updateHiddenRowMap()
 
     def repalceBrackets(self, row, brackets):
         text = self.table.item(row, 2).text()
@@ -815,3 +829,24 @@ class Editor():
             if self.table.item(row, column):
                 self.table.item(row, column).setBackground(color)
         self.table.blockSignals(False)
+
+    def updateHiddenRowMap(self):
+        
+        current = 0
+        self.compressRowMap = []
+        self.decompressRowMap = []
+
+        for idx, talk in enumerate(self.talks):
+            self.compressRowMap.append(current)
+            if 'proofread' in talk:
+                if not talk['proofread']:
+                    continue
+            self.decompressRowMap.append(idx)
+            current += 1
+
+        # print(self.compressRowMap)
+        # print(self.decompressRowMap)
+
+        # Call main ui to re-align both editors
+        if self.realignHook is not None:
+            self.realignHook()

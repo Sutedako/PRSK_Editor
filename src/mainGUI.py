@@ -123,6 +123,11 @@ class Ui_SekaiText(object):
         self.label_3.setObjectName("label_3")
         self.horizontalLayout_3.addWidget(self.label_3)
 
+        self.checkBoxSyncScroll = QtWidgets.QCheckBox(self.centralwidget)
+        self.checkBoxSyncScroll.setFixedSize(QtCore.QSize(90, 30))
+        self.checkBoxSyncScroll.setObjectName("checkBoxSyncScroll")
+        self.horizontalLayout_3.addWidget(self.checkBoxSyncScroll)
+
         self.checkBoxShowDiff = QtWidgets.QCheckBox(self.centralwidget)
         self.checkBoxShowDiff.setFixedSize(QtCore.QSize(160, 30))
         self.checkBoxShowDiff.setObjectName("checkBoxShowDiff")
@@ -242,11 +247,16 @@ class Ui_SekaiText(object):
         self.tableWidgetSrc.setObjectName("tableWidgetSrc")
         self.tableWidgetSrc.setColumnCount(2)
         self.tableWidgetSrc.setRowCount(0)
-        self.tableWidgetSrc.horizontalHeader().hide()
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidgetSrc.setHorizontalHeaderItem(0, item)
+        item = QtWidgets.QTableWidgetItem()
+        self.tableWidgetSrc.setHorizontalHeaderItem(1, item)
+        # self.tableWidgetSrc.horizontalHeader().hide()
         self.tableWidgetSrc.horizontalHeader().resizeSection(0, 120)
         self.tableWidgetSrc.horizontalHeader().setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
         # self.tableWidgetSrc.horizontalHeader().resizeSection(2, 60)
         self.tableWidgetSrc.setIconSize(QtCore.QSize(48,48))
+        self.tableWidgetSrcScroll = self.tableWidgetSrc.verticalScrollBar()
         self.gridLayout.addWidget(self.tableWidgetSrc, 2, 0, 1, 1)
 
         self.tableWidgetDst = QtWidgets.QTableWidget(self.centralwidget)
@@ -269,6 +279,7 @@ class Ui_SekaiText(object):
         self.tableWidgetDst.horizontalHeader().setSectionResizeMode(2, QtWidgets.QHeaderView.Stretch)
         self.tableWidgetDst.horizontalHeader().resizeSection(3, 100)
         self.tableWidgetDst.verticalHeader().hide()
+        self.tableWidgetDstScroll = self.tableWidgetDst.verticalScrollBar()
         self.gridLayout.addWidget(self.tableWidgetDst, 2, 1, 1, 1)
 
         SekaiText.setCentralWidget(self.centralwidget)
@@ -388,6 +399,7 @@ class Ui_SekaiText(object):
         self.pushButtonOpen.setText(_translate("SekaiText", u"打开"))
         self.pushButtonSave.setText(_translate("SekaiText", u"保存"))
         self.pushButtonClear.setText(_translate("SekaiText", u"清空"))
+        self.checkBoxSyncScroll.setText(_translate("SekaiText", u"同步滚动"))
         self.checkBoxShowDiff.setText(_translate("SekaiText", u"显示修改前内容"))
         self.radioButtonTranslate.setChecked(True)
         # self.pushButtonCheck_2.setText(_translate("SekaiText", u"名词表"))
@@ -405,6 +417,12 @@ class Ui_SekaiText(object):
         self.spinBoxFontSize.setSingleStep(2)
         self.checkBoxSaveN.setText(_translate("SekaiText", u"保存\\N"))
         self.checkBoxSaveN.setChecked(True)
+
+        item = self.tableWidgetSrc.horizontalHeaderItem(0)
+        item.setText(_translate("SekaiText", u""))
+        item = self.tableWidgetSrc.horizontalHeaderItem(1)
+        item.setText(_translate("SekaiText", u"原文"))
+
         item = self.tableWidgetDst.horizontalHeaderItem(0)
         item.setText(_translate("SekaiText", u"行号"))
         item = self.tableWidgetDst.horizontalHeaderItem(1)
