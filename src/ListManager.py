@@ -5,6 +5,7 @@ import logging
 import os.path as osp
 from os import environ
 import requests
+import time
 
 from Dictionary import unitDict, sekaiDict, characterDict, areaDict
 from Dictionary import greetDict_season, greetDict_celebrate, greetDict_holiday
@@ -64,17 +65,33 @@ class ListManager():
     def chooseSite(self):
         bestDBurl = "http://sekai-world.github.io/sekai-master-db-diff/{}.json"
         aiDBurl = "https://api.pjsek.ai/database/master/{}?$limit=9999&$skip=0&"
+        privateDBurl = "https://d6al5yone51fo.cloudfront.net/e858f346-077d-11ef-ac00-0050564d444f/master/{}.json"
+        
+        sites = [privateDBurl, bestDBurl, aiDBurl]
+        siteNames = ["personal", "best", "ai"]
+        minDownloadTime = 100000
+        maxEventsLength = 0
+        result = ""
 
-        bestUrl = bestDBurl.format("events")
-        bestData = json.loads(requests.get(bestUrl, headers=self.headers, proxies=localProxy).text)
+        for site, name in zip(sites, siteNames):
+            try:
+                startTime = time.time()
+                data = requests.get(site.format("events"), headers=self.headers, proxies=localProxy).text
+                endTime = time.time()
+                downloadTime = endTime - startTime
+                data = json.loads(data)
+                if name == "ai":
+                    data = data['data']
+            except:
+                data = []
+                downloadTime = 100000
 
-        aiUrl = aiDBurl.format("events")
-        aiData = json.loads(requests.get(aiUrl, headers=self.headers, proxies=localProxy).text)
-
-        if len(bestData) > len(aiData['data']):
-            self.DBurl = bestDBurl
-        else:
-            self.DBurl = aiDBurl
+            if len(data) >= maxEventsLength and downloadTime < minDownloadTime:
+                maxEventsLength = len(data)
+                minDownloadTime = downloadTime
+                self.DBurl = site
+                result = name
+        return result
 
     def updateEvents(self):
         url = self.DBurl.format("events")

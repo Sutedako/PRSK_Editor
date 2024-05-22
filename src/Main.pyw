@@ -1043,7 +1043,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         update = updateThread(self.settingdir)
         update.trigger.connect(self.checkUpdated)
 
-        self.tempWindow.setText(u"更新中...")
+        self.tempWindow.setText(u"选择源网站中...")
         self.tempWindow.open()
         self.downloadState = 0
 
@@ -1088,8 +1088,8 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             self.downloadState = 2
 
     def checkUpdated(self, output):
-        if type(output) == str:
-            self.tempWindow.setText(u"下载{}列表...   ".format(output))
+        if type(output) == list:
+            self.tempWindow.setText(u"使用{}网站<br>下载{}列表...   ".format(output[0], output[1]))
             return
         if type(output) == ListManager and output.events:
             self.ListManager = output
@@ -1143,20 +1143,20 @@ class updateThread(qc.QThread):
 
     def run(self):
         try:
-            self.ListManager.chooseSite()
-            self.trigger.emit("活动")
+            site = self.ListManager.chooseSite()
+            self.trigger.emit([site, "活动"])
             self.ListManager.updateEvents()
-            self.trigger.emit("卡面")
+            self.trigger.emit([site, "卡面"])
             self.ListManager.updateCards()
-            self.trigger.emit("特殊卡面")
+            self.trigger.emit([site, "特殊卡面"])
             self.ListManager.updateFestivals()
-            self.trigger.emit("主线")
+            self.trigger.emit([site, "主线"])
             self.ListManager.updateMainstory()
-            self.trigger.emit("地图对话")
+            self.trigger.emit([site, "地图对话"])
             self.ListManager.updateAreatalks()
-            self.trigger.emit("主界面语音")
+            self.trigger.emit([site, "主界面语音"])
             self.ListManager.updateGreets()
-            self.trigger.emit("特殊剧情")
+            self.trigger.emit([site, "特殊剧情"])
             self.ListManager.updateSpecials()
             self.trigger.emit(self.ListManager)
             logging.info("Chapter Information Update Successed.")
