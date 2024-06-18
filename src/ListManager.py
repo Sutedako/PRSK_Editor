@@ -28,7 +28,7 @@ class ListManager():
     specials = []
 
     settingDir = ""
-    DBUrl = ""
+    DBurl = ""
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36'}
 
     def __init__(self, settingDir):
@@ -65,7 +65,7 @@ class ListManager():
     def chooseSite(self):
         bestDBurl = "http://sekai-world.github.io/sekai-master-db-diff/{}.json"
         aiDBurl = "https://api.pjsek.ai/database/master/{}?$limit=9999&$skip=0&"
-        privateDBurl = "https://d6al5yone51fo.cloudfront.net/e858f346-077d-11ef-ac00-0050564d444f/master/{}.json"
+        privateDBurl = "https://raw.githubusercontent.com/MejiroRina/kng-sekai-master/main/master/{}.json"
         
         sites = [privateDBurl, bestDBurl, aiDBurl]
         siteNames = ["personal", "best", "ai"]
