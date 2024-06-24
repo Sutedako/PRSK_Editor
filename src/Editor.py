@@ -415,6 +415,8 @@ class Editor():
             self.table.setCurrentItem(nextItem)
             self.table.editItem(nextItem)
 
+        self.updateHiddenRowMap()
+
     def checkText(self, speaker, text):
         check = True
         if (speaker not in ["", u"场景", u"左上场景", u"选项"]) and (not text):
