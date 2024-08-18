@@ -72,11 +72,15 @@ class FlashbackAnalyzer:
         words = Words(clue.split('_'))
         first_indicator = words.pick(0)
 
+        # Skip 'sc' for 'sc_ev_xxxx'
+        if first_indicator == 'sc':
+            first_indicator = words.pick(0)
+
         hints = []
 
         if first_indicator == 'ev':
 
-            hints.append("活动剧情 - 格式通常为ev_[团队名]_[第X次]_话数。\n- X以活动种类（混合 or 各团团队活动等）分别计数。\n- X可能为空。")
+            hints.append("\n活动剧情 - 格式通常为ev_[活动种类]_[第X次]_话数。\n- X以活动种类（混合(shuffle) or 各团团队活动等）分别计数。\n- X可能为空（如第53期活动的X就为空）。")
             
             try:
                 ep = int(words.pick(-1))
@@ -93,16 +97,16 @@ class FlashbackAnalyzer:
             hints.append("主线剧情 - 序章")
         
         elif first_indicator == 'unit':
-            hints.append("推测为主线剧情VSinger部分 - 序号为话数，所有团一起计算话数")
+            hints.append("\n推测为主线剧情VSinger部分\n- 序号为话数，所有团一起计算话数")
         
         elif first_indicator == 'card':
-            hints.append("""卡面剧情 - 格式通常为card_[卡面所属活动/事件]_[角色ID]_[星数和前后篇]。
+            hints.append("""\n卡面剧情\n格式通常为card_[卡面所属活动/事件]_[角色ID]_[星数和前后篇]。
 - 所属活动/事件可能为空，此时推测为初始卡面；ev_开头为活动卡面，见下"关于活动ID"
 - 角色ID: 1-一歌 2-咲希 ... 5-实乃里 ... 9-心羽 ... 21-MIKU 22-RIN ...
 - 星数和前后篇：4a = 4星前篇, 2b = 2星后篇 etc.
-- 活动ID: 格式通常为ev_[团队名]_[第X次]_话数。
-  - X以活动种类（混合 or 各团团队活动等）分别计数。
-  - X可能为空。""")
+- 活动ID: 格式通常为ev_[活动种类]_[第X次]_话数。
+  - X以活动种类（混合(shuffle) or 各团团队活动等）分别计数。
+  - X可能为空（如第53期活动的X就为空）。""")
         
         return hints
 
