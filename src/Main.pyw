@@ -934,7 +934,11 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
     
     def toggleFlashback(self, state):
         if state:
-            self.srcText.showFlashback()
+            try:
+                self.srcText.showFlashback()
+            except BaseException:
+                self.checkBoxShowFlashback.setCheckState(0)
+                self.srcText.hideFlashback()
         else:
             self.srcText.hideFlashback()
 

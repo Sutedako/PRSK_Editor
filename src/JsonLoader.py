@@ -9,9 +9,8 @@ import os.path as osp
 import sys
 
 from Dictionary import characterDict
-import re
 from collections import Counter
-
+import Flashback as flashback
 
 class JsonLoader():
     if getattr(sys, 'frozen', False):
@@ -29,16 +28,14 @@ class JsonLoader():
         self.flashback_color = QColor(150, 255, 200, 100)
         self.normal_color = QColor(255, 255, 255)
 
+        self.fb = flashback.FlashbackAnalyzer()
+
         if not path:
             return
 
         self.talks = []
         self.table.setRowCount(0)
-        self.setFontSize(fontSize)
-        
-        # Flashback
-        pattern = r'voice_(.+)_\d+[a-z]?_\d+(?:_?.*)?$'
-        self.flashback_re = re.compile(pattern)
+        self.setFontSize(fontSize)        
 
         with open(path, 'r', encoding='UTF-8') as f:
             fulldata = json.load(f)
@@ -145,55 +142,18 @@ class JsonLoader():
         self.checkFlashback(self.talks)
         self.table.setCurrentCell(0, 0)
 
-    '''
-    Infer clue (some scenarioID) from voice id
-
-      VoiceId examples:                         Matched Clue:                   Interpretation:
-    - voice_op_band0_15_03                      op_band0                        Leo/Need opening
-    - voice_card_18_3a_27_18                    card_18_3a                      Card: (18)Mafuyu (3)3Star (a)Part1
-    - voice_ms_night13_28_18                    ms_night13                      (ms)Main Story - (night)Niigo - (13)Ep.13
-    - voice_ev_wl_band_01_05_28_03              ev_wl_band_01_05                (ev)Event Story - (wl)World Link - (band)Leo/Need - (01)1st World Link?? - (05)Ep.5
-    - voice_ev_street_18_06_98b_67              ev_street_18_06                 ev - (street)VIVID Bad SQUAD - (18)18th Unit Event (i.e., #135 OVER RAD SQUAD!!) - (06)Ep.6
-                                                                                (98b)Variation? of voice used in line 98 (this one is at line 383) - (67)Character ID = Ken Shiraishi
-    - voice_card_3rdaniv_20_2b_06_20            card_3rdaniv_20_2b              Card: (3rdaniv)Brand New Style - (20)Mizuki - (2)2Star (b)Part2
-    - voice_card_ev_wl_wonder_01_15_4a_20_15    card_ev_wl_wonder_01_15_4a      Card: (ev_wl_wonder_01)WxS 1st WL - (15)Nene - (4)4Star (a)Part1
-    - voice_ev_night__06_20_19                  ev_night__06                    (ev_night)Niigo event - *appearently two underscores* - (06)Ep.6 (Event ID MISSING, this is from #53)
-    - voice_sc_ev_shuffle_10_01_14_03           sc_ev_shuffle_10_01             (sc)?? - (ev)Event - (shuffle)Mixed Event - (10)#10 Mixed (#30 - The BEST Summer Ever!) - (01)Ep.1
-    - areatalk_ev_band_02_004_006
-    - 3rd_anniversary_login_band_05_01
-    - partvoice_28_021_band                     True (Ignored)                  (partvoice)General short voice for VSingers - (28)Voice No.28? - (021)MIKU - (band)Sub-unit: Leo/Need
-
-    returns: clue
-    - None: No idea
-    - True: Should be ignored
-    - str : clue string, usually indicates scenarioID (for flashbacks, this will refer previous scenarioID)
-    '''
-    def getClueFromVoiceID(self, voiceId):
-        
-        #    partvoice - general partial voices (mainly vsinger in card stories etc.)
-        if 'partvoice' in voiceId:
-            return True
-
-        match = self.flashback_re.search(voiceId)
-        if match:
-            scenarioId = match.group(1)
-            clue = scenarioId
-            return clue
-        else:
-            return None # No idea what is this
-
     def checkFlashback(self, talkdata):
 
         # Collect all clues
         clues = []
         for talk in talkdata:
             if 'voices' in talk:
-                talk_clues = []
+                talk_clues = {}
                 for voiceId in talk['voices']:
-                    clue = self.getClueFromVoiceID(voiceId)
-                    talk_clues.append(clue)
-                talk['clues'] = talk_clues
-                clues += filter(lambda x : x is not True, talk_clues)
+                    clue = self.fb.getClueFromVoiceID(voiceId)
+                    talk_clues[clue] = ''
+                talk['clues'] = list(talk_clues.keys())
+                clues += filter(lambda x : x is not True, talk['clues'])
         
         # Get the most common clue
         # This result is not guranteed reliable but should work at most times
@@ -225,11 +185,16 @@ class JsonLoader():
                         is_flashback = True
                         
                 textItem = QTableWidgetItem(talk['text'])
+                hints = ""
                 if is_flashback:
                     textItem.setBackground(self.flashback_color)
+                    for clue in talk['clues']:
+                        hints += '\n'.join(self.fb.getClueHints(clue))
+                    if hints != "":
+                        hints = "\n" + hints
                     # textItem.setToolTip("major clue: %s\nthis sentence: %s" % (self.major_clue, str(talk['clues'])))
                 # else:
-                textItem.setToolTip("%s\n\nInferred major clue: %s\nvoice ids: %s" % (str(talk['clues']), self.major_clue, str(talk['voices'])))
+                textItem.setToolTip("%s%s\n\nInferred major clue: %s\nvoice ids: %s" % (str(talk['clues']), hints, self.major_clue, str(talk['voices'])))
                 self.table.setItem(rowi, 1, textItem)
     
     def hideFlashback(self):
