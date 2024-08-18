@@ -115,6 +115,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         self.pushButtonClear.clicked.connect(self.clearText)
         # self.pushButtonDebug.clicked.connect(self.alignRowsHeight)
         self.checkBoxSyncScroll.stateChanged.connect(self.toggleSyncedMode)
+        self.checkBoxShowFlashback.stateChanged.connect(self.toggleFlashback)
 
         self.lineEditTitle.textChanged.connect(self.changeTitle)
         self.pushButtonSpeaker.clicked.connect(self.setSpeaker)
@@ -201,7 +202,8 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             if not jsonpath:
                 return
             try:
-                self.srcText = JsonLoader(jsonpath, self.tableWidgetSrc, fontSize=self.fontSize)
+                self.srcText = JsonLoader(jsonpath, self.tableWidgetSrc, fontSize=self.fontSize, listManager=self.ListManager)
+                self.toggleFlashback(self.checkBoxShowFlashback.isChecked())
                 logging.info("Json File Loaded: " + jsonpath)
             except BaseException:
                 logging.error("Fail to Load Json File: " + jsonpath)
@@ -929,6 +931,12 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         else:
             # This resets table row heights
             self.setFontSize()
+    
+    def toggleFlashback(self, state):
+        if state:
+            self.srcText.showFlashback()
+        else:
+            self.srcText.hideFlashback()
 
     def setComboBoxStoryType(self, isInt=False):
         if 'storyType' in self.setting:

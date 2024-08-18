@@ -8,6 +8,8 @@ import os.path as osp
 import sys
 
 from Dictionary import characterDict
+import re
+from collections import Counter
 
 
 class JsonLoader():
@@ -17,19 +19,31 @@ class JsonLoader():
         root, _ = osp.split(osp.abspath(sys.argv[0]))
         root = osp.join(root, "../")
 
-    def __init__(self, path="", table=None, fontSize=18):
+    def __init__(self, path="", table=None, fontSize=18, listManager=None):
+
         self.talks = []
         self.table = table
+
+        self.major_clue = None
+        self.flashback_color = QColor(220, 255, 240)
+        self.normal_color = QColor(255, 255, 255)
+
         if not path:
             return
+
         self.talks = []
         self.table.setRowCount(0)
         self.setFontSize(fontSize)
+        
+        # Flashback
+        pattern = r'voice_(.+)_\d+[a-z]?_\d+(?:_?.*)?$'
+        self.flashback_re = re.compile(pattern)
 
         with open(path, 'r', encoding='UTF-8') as f:
             fulldata = json.load(f)
         
-        scenario_id = fulldata['ScenarioId']
+        self.scenario_id = fulldata['ScenarioId']
+        self.listManager = listManager # Not used, but perhaps keep here for future use?
 
         for snippet in fulldata['Snippets']:
             # TalkData
@@ -38,24 +52,20 @@ class JsonLoader():
                 speaker = talkdata['WindowDisplayName'].split("_")[0]
                 text = talkdata['Body']
                 voices = []
+                flashback_clue = []
                 is_in_event = True
 
                 for voice in talkdata['Voices']:
 
                     # TODO download voice file and play
-                    voices.append(voice['VoiceId'])
-
-                    # Check if flashback
-                    if scenario_id not in voice['VoiceId']:
-                        is_in_event = False
-
+                    voices.append(voice['VoiceId']) 
+                
                 close = talkdata['WhenFinishCloseWindow']
 
                 self.talks.append({
                     'speaker': speaker,
                     'text': text.rstrip(),
                     'voices': voices,
-                    'flashback': not is_in_event
                 })
 
                 row = self.table.rowCount()
@@ -74,9 +84,6 @@ class JsonLoader():
                     self.table.setItem(row, 0, QTableWidgetItem(speaker))
                 
                 textItem = QTableWidgetItem(text)
-                if not is_in_event:
-                    textItem.setBackground(QColor(220, 255, 240))
-                    textItem.setToolTip(str(voices))
                 self.table.setItem(row, 1, textItem)
 
                 # buttonPlay = QPushButton("")
@@ -133,7 +140,92 @@ class JsonLoader():
         if self.talks[-1]["speaker"] == '':
             self.talks.pop()
             self.table.removeRow(self.table.rowCount() - 1)
+        
+        self.checkFlashback(self.talks)
         self.table.setCurrentCell(0, 0)
+
+    '''
+    Checks if a talkdata contains flashback by voice id
+    VoiceId examples: 
+    - voice_op_band0_15_03
+    - voice_card_18_3a_27_18
+    - voice_ms_night13_28_18
+
+    returns: clue
+    - None: No idea
+    - True: Should be ignored
+    - str : clue string, usually indicates scenarioID (for flashbacks, this will refer previous scenarioID)
+    '''
+    def getClueFromVoiceID(self, voiceId):
+        
+        #    partvoice - general partial voices (mainly vsinger in card stories etc.)
+        if 'partvoice' in voiceId:
+            return True
+
+        match = self.flashback_re.search(voiceId)
+        if match:
+            scenarioId = match.group(1)
+            clue = scenarioId
+            return clue
+        else:
+            return None # No idea what is this
+
+    def checkFlashback(self, talkdata):
+
+        # Collect all clues
+        clues = []
+        for talk in talkdata:
+            if 'voices' in talk:
+                talk_clues = []
+                for voiceId in talk['voices']:
+                    clue = self.getClueFromVoiceID(voiceId)
+                    talk_clues.append(clue)
+                talk['clues'] = talk_clues
+                clues += filter(lambda x : x is not True, talk_clues)
+        
+        # Get the most common clue
+        # This result is not guranteed reliable but should work at most times
+        interpreted_scenario_voice_id = Counter(clues).most_common(1)
+        if len(interpreted_scenario_voice_id) >= 1:
+            interpreted_scenario_voice_id = interpreted_scenario_voice_id[0][0]
+        else:
+            interpreted_scenario_voice_id = None
+        
+        self.major_clue = interpreted_scenario_voice_id
+    
+    def showFlashback(self):
+
+        if self.major_clue is None:
+            for rowi, talk in enumerate(self.talks):
+                if 'clues' in talk:
+                    textItem = self.table.item(rowi, 1)
+                    textItem.setToolTip("%s\n\nNo idea about scenarioID.\nvoice ids: %s" % (str(talk['clues']), str(talk['voices'])))
+            return
+
+        for rowi, talk in enumerate(self.talks):
+
+            is_flashback = False
+
+            if 'clues' in talk:
+
+                for clue in talk['clues']:
+                    if clue is not True and clue != self.major_clue:
+                        is_flashback = True
+                        
+                textItem = QTableWidgetItem(talk['text'])
+                if is_flashback:
+                    textItem.setBackground(self.flashback_color)
+                    # textItem.setToolTip("major clue: %s\nthis sentence: %s" % (self.major_clue, str(talk['clues'])))
+                # else:
+                textItem.setToolTip("%s\n\nInferred major clue: %s\nvoice ids: %s" % (str(talk['clues']), self.major_clue, str(talk['voices'])))
+                self.table.setItem(rowi, 1, textItem)
+    
+    def hideFlashback(self):
+        for rowi, talk in enumerate(self.talks):
+            textItem = self.table.item(rowi, 1)
+            textItem.setBackground(self.normal_color)
+            textItem.setToolTip(None)
+            # self.table.setItem(rowi, 1, textItem)
 
     def setFontSize(self, fontSize):
         self.fontSize = fontSize

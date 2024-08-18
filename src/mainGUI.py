@@ -123,6 +123,11 @@ class Ui_SekaiText(object):
         self.label_3.setObjectName("label_3")
         self.horizontalLayout_3.addWidget(self.label_3)
 
+        self.checkBoxShowFlashback = QtWidgets.QCheckBox(self.centralwidget)
+        self.checkBoxShowFlashback.setFixedSize(QtCore.QSize(90, 30))
+        self.checkBoxShowFlashback.setObjectName("checkBoxShowFlashback")
+        self.horizontalLayout_3.addWidget(self.checkBoxShowFlashback)
+
         self.checkBoxSyncScroll = QtWidgets.QCheckBox(self.centralwidget)
         self.checkBoxSyncScroll.setFixedSize(QtCore.QSize(90, 30))
         self.checkBoxSyncScroll.setObjectName("checkBoxSyncScroll")
@@ -399,6 +404,8 @@ class Ui_SekaiText(object):
         self.pushButtonOpen.setText(_translate("SekaiText", u"打开"))
         self.pushButtonSave.setText(_translate("SekaiText", u"保存"))
         self.pushButtonClear.setText(_translate("SekaiText", u"清空"))
+        self.checkBoxShowFlashback.setText(_translate("SekaiText", u"标记闪回"))
+        self.checkBoxShowFlashback.setChecked(True)
         self.checkBoxSyncScroll.setText(_translate("SekaiText", u"同步滚动"))
         self.checkBoxShowDiff.setText(_translate("SekaiText", u"显示修改前内容"))
         self.radioButtonTranslate.setChecked(True)
