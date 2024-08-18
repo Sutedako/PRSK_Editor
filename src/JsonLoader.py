@@ -145,11 +145,22 @@ class JsonLoader():
         self.table.setCurrentCell(0, 0)
 
     '''
-    Checks if a talkdata contains flashback by voice id
-    VoiceId examples: 
-    - voice_op_band0_15_03
-    - voice_card_18_3a_27_18
-    - voice_ms_night13_28_18
+    Infer clue (some scenarioID) from voice id
+
+      VoiceId examples:                         Matched Clue:                   Interpretation:
+    - voice_op_band0_15_03                      op_band0                        Leo/Need opening
+    - voice_card_18_3a_27_18                    card_18_3a                      Card: (18)Mafuyu (3)3Star (a)Part1
+    - voice_ms_night13_28_18                    ms_night13                      (ms)Main Story - (night)Niigo - (13)Ep.13
+    - voice_ev_wl_band_01_05_28_03              ev_wl_band_01_05                (ev)Event Story - (wl)World Link - (band)Leo/Need - (01)1st World Link?? - (05)Ep.5
+    - voice_ev_street_18_06_98b_67              ev_street_18_06                 ev - (street)VIVID Bad SQUAD - (18)18th Unit Event (i.e., #135 OVER RAD SQUAD!!) - (06)Ep.6
+                                                                                (98b)Variation? of voice used in line 98 (this one is at line 383) - (67)Character ID = Ken Shiraishi
+    - voice_card_3rdaniv_20_2b_06_20            card_3rdaniv_20_2b              Card: (3rdaniv)Brand New Style - (20)Mizuki - (2)2Star (b)Part2
+    - voice_card_ev_wl_wonder_01_15_4a_20_15    card_ev_wl_wonder_01_15_4a      Card: (ev_wl_wonder_01)WxS 1st WL - (15)Nene - (4)4Star (a)Part1
+    - voice_ev_night__06_20_19                  ev_night__06                    (ev_night)Niigo event - *appearently two underscores* - (06)Ep.6 (Event ID MISSING, this is from #53)
+    - voice_sc_ev_shuffle_10_01_14_03           sc_ev_shuffle_10_01             (sc)?? - (ev)Event - (shuffle)Mixed Event - (10)#10 Mixed (#30 - The BEST Summer Ever!) - (01)Ep.1
+    - areatalk_ev_band_02_004_006
+    - 3rd_anniversary_login_band_05_01
+    - partvoice_28_021_band                     True (Ignored)                  (partvoice)General short voice for VSingers - (28)Voice No.28? - (021)MIKU - (band)Sub-unit: Leo/Need
 
     returns: clue
     - None: No idea
