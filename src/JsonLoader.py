@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import QTableWidgetItem, QPushButton
 from PyQt5.QtGui import QIcon, QColor
 import PyQt5.QtMultimedia as media
 from PyQt5.QtCore import QUrl
+from PyQt5 import QtCore
 
 import json
 import os.path as osp
@@ -25,7 +26,7 @@ class JsonLoader():
         self.table = table
 
         self.major_clue = None
-        self.flashback_color = QColor(220, 255, 240)
+        self.flashback_color = QColor(150, 255, 200, 100)
         self.normal_color = QColor(255, 255, 255)
 
         if not path:
@@ -234,7 +235,8 @@ class JsonLoader():
     def hideFlashback(self):
         for rowi, talk in enumerate(self.talks):
             textItem = self.table.item(rowi, 1)
-            textItem.setBackground(self.normal_color)
+            # textItem.setBackground(self.normal_color)
+            textItem.setData(QtCore.Qt.BackgroundRole, None)
             textItem.setToolTip(None)
             # self.table.setItem(rowi, 1, textItem)
 
