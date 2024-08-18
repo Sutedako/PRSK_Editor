@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QTableWidgetItem, QPushButton
-from PyQt5.QtGui import QIcon
+from PyQt5.QtGui import QIcon, QColor
 import PyQt5.QtMultimedia as media
 from PyQt5.QtCore import QUrl
 
@@ -28,6 +28,8 @@ class JsonLoader():
 
         with open(path, 'r', encoding='UTF-8') as f:
             fulldata = json.load(f)
+        
+        scenario_id = fulldata['ScenarioId']
 
         for snippet in fulldata['Snippets']:
             # TalkData
@@ -36,14 +38,24 @@ class JsonLoader():
                 speaker = talkdata['WindowDisplayName'].split("_")[0]
                 text = talkdata['Body']
                 voices = []
+                is_in_event = True
+
                 for voice in talkdata['Voices']:
+
                     # TODO download voice file and play
                     voices.append(voice['VoiceId'])
+
+                    # Check if flashback
+                    if scenario_id not in voice['VoiceId']:
+                        is_in_event = False
+
                 close = talkdata['WhenFinishCloseWindow']
 
                 self.talks.append({
                     'speaker': speaker,
-                    'text': text.rstrip()
+                    'text': text.rstrip(),
+                    'voices': voices,
+                    'flashback': not is_in_event
                 })
 
                 row = self.table.rowCount()
@@ -60,7 +72,13 @@ class JsonLoader():
                     self.table.setItem(row, 0, icon)
                 else:
                     self.table.setItem(row, 0, QTableWidgetItem(speaker))
-                self.table.setItem(row, 1, QTableWidgetItem(text))
+                
+                textItem = QTableWidgetItem(text)
+                if not is_in_event:
+                    textItem.setBackground(QColor(220, 255, 240))
+                    textItem.setToolTip(str(voices))
+                self.table.setItem(row, 1, textItem)
+
                 # buttonPlay = QPushButton("")
                 # buttonPlay.clicked.connect(self.play)
                 # self.table.setCellWidget(row, 2, buttonPlay)
@@ -70,7 +88,7 @@ class JsonLoader():
                 if close:
                     self.talks.append({
                         'speaker': '',
-                        'text': ''
+                        'text': '',
                     })
 
                     row = self.table.rowCount()
@@ -93,7 +111,7 @@ class JsonLoader():
                     
                     self.talks.append({
                         'speaker': speaker,
-                        'text': text
+                        'text': text,
                     })
 
                     row = self.table.rowCount()
@@ -103,7 +121,7 @@ class JsonLoader():
 
                     self.talks.append({
                         'speaker': '',
-                        'text': ''
+                        'text': '',
                     })
 
                     row = self.table.rowCount()
