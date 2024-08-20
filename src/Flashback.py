@@ -43,8 +43,14 @@ class FlashbackAnalyzer:
 
         self.listManager = listManager
 
+        # "night_15" -> events.json objects (from self.events)
+        # "wl_band_01" -> events.json objects
         self.clue_dict = {}
+        
+        # "band" -> mainStory.json objects
         self.mainstory = {}
+        
+        # eventId: int -> events.json objects (necessary info only)
         self.events = {}
 
         self.noClue = {
@@ -79,7 +85,7 @@ class FlashbackAnalyzer:
                 event_desc = {
                     'id': event['id'],
                     'title': event['title'],
-                    'choffset': 0,
+                    'choffset': 0, # Some event stories start from Ep. "00" instead of "01", e.g., #9
                     'chapters': [],
                 }
                 self.events[event['id']] = event_desc
@@ -111,10 +117,15 @@ class FlashbackAnalyzer:
                         event_clue = "wl_" + event_clue
                     
                     add_to_dict = False
+
                     if event_clue in self.clue_dict:
+
                         prev_id = self.clue_dict[event_clue]['id']
+
+                        # Use the earliest event
                         if prev_id >= 0 and prev_id > areatalk['addEventId']:
                             add_to_dict = True
+
                     else:
                         add_to_dict = True
 

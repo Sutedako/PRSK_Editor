@@ -938,7 +938,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 self.srcText.showFlashback()
             except BaseException:
 
-                logging.error("Failed to sync scrollbars. Sync disabled.")
+                logging.error("Failed to check flashbacks. Feature disabled.")
                 exc_type, exc_value, exc_traceback_obj = sys.exc_info()
                 with open(loggingPath, 'a') as f:
                     traceback.print_exception(
