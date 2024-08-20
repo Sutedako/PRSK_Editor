@@ -1,3 +1,4 @@
+from Dictionary import *
 import re
 
 class Words:
@@ -12,19 +13,118 @@ class Words:
         except IndexError:
             return ''
 
+    def insert(self, id, word):
+        self.words.insert(id, word)
+
     def __getitem__(self, id):
         return self.words[id]
 
     def __len__(self):
         return len(self.words)
+    
+    def __str__(self) -> str:
+        return '_'.join(self.words)
 
 class FlashbackAnalyzer:
 
-    def __init__(self):
+    def __init__(self, listManager = None):
 
         # Flashback
         pattern = r'voice_(.+)_\d+[a-z]?_\d+(?:_?.*)?$'
         self.flashback_re = re.compile(pattern)
+
+        # Areatalk match string; used for extract event ids
+        pattern = r'areatalk_(ev|wl)_(.+)_\d+$'
+        self.areatalk_re = re.compile(pattern)
+
+        # Matcher for mainstory etc.
+        self.mainstory_ep_re = re.compile(r'(.*?)(\d+)$')
+        self.cardrarityep_re = re.compile(r'(\d+)(.*?)$')
+
+        self.listManager = listManager
+
+        self.clue_dict = {}
+        self.mainstory = {}
+        self.events = {}
+
+        self.noClue = {
+            'id': -1,
+            'title': u"未知剧情",
+            'choffset': 0,
+            'chapters': [],
+        }
+
+        self.voice_ms_to_mainstory_id = {
+            'band': 'light_sound',
+            'idol': 'idol',
+            'street': 'street',
+            'wonder': 'theme_park',
+            'night': 'school_refusal',
+            'piapro': 'piapro'
+        }
+
+        if self.listManager:
+
+            for ms in self.listManager.mainstory:
+                self.mainstory[ms['unit']] = ms
+
+            for event in self.listManager.events:
+
+                if 'id' not in event:
+                    continue
+                
+                if 'title' not in event:
+                    continue
+
+                event_desc = {
+                    'id': event['id'],
+                    'title': event['title'],
+                    'choffset': 0,
+                    'chapters': [],
+                }
+                self.events[event['id']] = event_desc
+
+                if 'chapters' not in event:
+                    continue
+
+                event_desc['chapters'] = [c['title'] for c in event['chapters']]
+                self.events[event['id']] = event_desc
+
+            # Hard-coded event properties
+            self.events[9]['choffset'] = 1
+
+            # Obtain event id clue from areatalks
+            for areatalk in self.listManager.areatalks:
+                
+                if 'scenarioId' not in areatalk:
+                    continue
+
+                if 'addEventId' not in areatalk:
+                    continue
+
+                match = self.areatalk_re.search(areatalk['scenarioId'])
+                if match:
+                    event_type = match.group(1)
+                    event_clue = match.group(2)
+
+                    if event_type == 'wl':
+                        event_clue = "wl_" + event_clue
+                    
+                    add_to_dict = False
+                    if event_clue in self.clue_dict:
+                        prev_id = self.clue_dict[event_clue]['id']
+                        if prev_id >= 0 and prev_id > areatalk['addEventId']:
+                            add_to_dict = True
+                    else:
+                        add_to_dict = True
+
+                    if add_to_dict:
+                        self.clue_dict[event_clue] = self.events.get(areatalk['addEventId'], self.noClue)
+            
+            # Hard-coded patterns
+            self.clue_dict['band_01'] = self.events.get(1, self.noClue)
+            self.clue_dict['night__'] = self.events.get(53, self.noClue)
+            self.clue_dict['shuffle_03'] = self.events.get(9, self.noClue)
 
     '''
     Infer clue (some scenarioID) from voice id
@@ -77,58 +177,130 @@ class FlashbackAnalyzer:
             first_indicator = words.pick(0)
 
         hints = []
+        
+        # Sometimes cards will be labeled "ev_xxxxxxxxx_chID_rarityEp", without "card"
+        if first_indicator == 'ev' and (words[-1][-1] == 'a' or words[-1][-1] == 'b'):
+            first_indicator = 'card'
 
+        # Event Story
         if first_indicator == 'ev':
 
-            hints.append("\n活动剧情 - 格式通常为ev_[活动种类]_[第X次]_话数。\n- X以活动种类（混合(shuffle) or 各团团队活动等）分别计数。\n- X可能为空（如第53期活动的X就为空）。")
+            # hints.append("\n活动剧情 - 格式通常为ev_[活动种类]_[第X次]_话数。\n- X以活动种类（混合(shuffle) or 各团团队活动等）分别计数。\n- X可能为空（如第53期活动的X就为空）。")
             
+            ep = -1
             try:
                 ep = int(words.pick(-1))
-                hints.append("第%02d话" % ep)
+                # hints.append("第%02d话" % ep)
             except ValueError:
                 pass
 
-            # hints += self.getClueHintsFromEvent(words, lang)
+            eventInfo = self.getEventInfo(words)
+            if ep >= 0:
+                ep += eventInfo['choffset']
 
-        elif first_indicator == 'ms':
-            hints.append("主线剧情")
+            hints.append("%d-%02d" % (eventInfo['id'], ep))
+            hints.append("%s" % (eventInfo['title']))
+            epName = eventInfo['chapters'][ep-1] if (ep > 0 and ep <= len(eventInfo['chapters'])) else u"未知章节"
+            hints.append("%s" % (epName))
+
+        # Main Story
+        elif first_indicator == 'ms' or first_indicator == 'op' or first_indicator == 'unit':
+
+            w = words.pick(0) # Something like "band0"
+            match = self.mainstory_ep_re.search(w)
+
+            if match:
+
+                team, ep = match.groups() # team = "band", ep = "0"
+                try:
+                    ep = int(ep)
+                except ValueError:
+                    ep = -1
+
+                if team in self.voice_ms_to_mainstory_id:
+                    hints.append(u"%s 主线剧情 - %02d话" % (unitDict[self.voice_ms_to_mainstory_id[team]], ep))
+                    listmgr_team = self.voice_ms_to_mainstory_id[team] # "light_sound"
+                    chapters = self.mainstory[listmgr_team]['chapters']
+
+                    # No openings for 'piapro'
+                    if first_indicator == 'unit':
+                        if (ep > 0 and ep <= len(chapters)):
+                            epHint = ['ln', 'mmj', 'vbs', 'ws', u"25时"][(ep-1) // 4] + '-%d' % (((ep-1) % 4) + 1)
+                            epName = ("(%s) " % epHint) + chapters[ep-1]['title']
+                        else:
+                            epName = u"未知章节"
+                    else:
+                        epName = chapters[ep]['title'] if (ep >= 0 and ep < len(chapters)) else u"未知章节"
+
+                    hints.append(epName)
+                else:
+                    hints.append(u"未知主线剧情")
+
+            else:
+                hints.append(u"未知主线剧情")
         
-        elif first_indicator == 'op':
-            hints.append("主线剧情 - 序章")
+        # Opening
+        # elif first_indicator == 'op':
+        #     hints.append("主线剧情 - 序章")
         
-        elif first_indicator == 'unit':
-            hints.append("\n推测为主线剧情VSinger部分\n- 序号为话数，所有团一起计算话数")
+        # elif first_indicator == 'unit':
+        #     hints.append("\n推测为主线剧情VSinger部分\n- 序号为话数，所有团一起计算话数")
         
         elif first_indicator == 'card':
-            hints.append("""\n卡面剧情\n格式通常为card_[卡面所属活动/事件]_[角色ID]_[星数和前后篇]。
-- 所属活动/事件可能为空，此时推测为初始卡面；ev_开头为活动卡面，见下"关于活动ID"
-- 角色ID: 1-一歌 2-咲希 ... 5-实乃里 ... 9-心羽 ... 21-MIKU 22-RIN ...
-- 星数和前后篇：4a = 4星前篇, 2b = 2星后篇 etc.
-- 活动ID: 格式通常为ev_[活动种类]_[第X次]_话数。
-  - X以活动种类（混合(shuffle) or 各团团队活动等）分别计数。
-  - X可能为空（如第53期活动的X就为空）。""")
+            
+            starsep = words.pick(-1)
+            stars = "?"
+            ep = u"未知章节"
+            match = self.cardrarityep_re.search(starsep)
+            if match:
+                try:
+                    stars = int(match.group(1))
+                except:
+                    pass
+                ep = match.group(2)
+            
+            if ep == 'a':
+                ep = u"前篇"
+            elif ep == 'b':
+                ep = u"后篇"
+            
+            character_id = words.pick(-1)
+            try:
+                character_name = characterDict[int(character_id)-1]['name_j']
+            except:
+                character_name = character_id
+
+            event_id = str(words)
+
+            event_hints = u"卡面来自：%s" % event_id
+            if event_id == '':
+                event_hints = u"初期卡面"
+            else:
+                event_info = self.getEventInfo(words)
+                if event_info['id'] > 0:
+                    event_hints = "%s - %s" % (event_info['id'], event_info['title'])
+            
+            hints.append(event_hints)
+            hints.append("%s ☆%s %s" % (character_name, stars, ep))
+
+#             hints.append("""\n卡面剧情\n格式通常为card_[卡面所属活动/事件]_[角色ID]_[星数和前后篇]。
+# - 所属活动/事件可能为空，此时推测为初始卡面；ev_开头为活动卡面，见下"关于活动ID"
+# - 角色ID: 1-一歌 2-咲希 ... 5-实乃里 ... 9-心羽 ... 21-MIKU 22-RIN ...
+# - 星数和前后篇：4a = 4星前篇, 2b = 2星后篇 etc.
+# - 活动ID: 格式通常为ev_[活动种类]_[第X次]_话数。
+#   - X以活动种类（混合(shuffle) or 各团团队活动等）分别计数。
+#   - X可能为空（如第53期活动的X就为空）。""")
         
         return hints
 
-    # Too hard
-    def getClueHintsFromEvent(self, words, lang = 'zh-cn'):
+    def getEventInfo(self, words):
 
-        if lang != 'zh-cn':
-            raise NotImplementedError
-        
-        hints = []
+        # Skip "sc"
+        if words[0] == 'sc':
+            words.pick(0)
 
-        w = words.pick(0)
-        if w == 'wl':
-            hints.append("World Link活动")
-            w = words.pick(0)
-        
-        teams = {
-            'band': "Leo/Need 团队活动",
-            'idol': "MORE MORE JUMP! 团队活动",
-            'street': "Vivid BAD SQUAD 团队活动",
-            'wonder': "Wonderlands x Showtime 团队活动",
-            'night': "25时，在nightcord 团队活动",
-            'piapro': "VIRTUAL SINGER 团队活动",
-            'shuffle': "混合活动"
-        }
+        # Skip "ev"
+        if words[0] == 'ev':
+            words.pick(0)
+
+        return self.clue_dict.get(str(words), self.noClue)

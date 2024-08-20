@@ -937,6 +937,13 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             try:
                 self.srcText.showFlashback()
             except BaseException:
+
+                logging.error("Failed to sync scrollbars. Sync disabled.")
+                exc_type, exc_value, exc_traceback_obj = sys.exc_info()
+                with open(loggingPath, 'a') as f:
+                    traceback.print_exception(
+                        exc_type, exc_value, exc_traceback_obj, file=f)
+
                 self.checkBoxShowFlashback.setCheckState(0)
                 self.srcText.hideFlashback()
         else:

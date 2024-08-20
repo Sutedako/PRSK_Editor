@@ -28,7 +28,7 @@ class JsonLoader():
         self.flashback_color = QColor(150, 255, 200, 100)
         self.normal_color = QColor(255, 255, 255)
 
-        self.fb = flashback.FlashbackAnalyzer()
+        self.fb = flashback.FlashbackAnalyzer(listManager = listManager)
 
         if not path:
             return
@@ -173,6 +173,9 @@ class JsonLoader():
                     textItem = self.table.item(rowi, 1)
                     textItem.setToolTip("%s\n\nNo idea about scenarioID.\nvoice ids: %s" % (str(talk['clues']), str(talk['voices'])))
             return
+        
+        # debug 
+        # self.major_clue = "no"
 
         for rowi, talk in enumerate(self.talks):
 
@@ -190,11 +193,11 @@ class JsonLoader():
                     textItem.setBackground(self.flashback_color)
                     for clue in talk['clues']:
                         hints += '\n'.join(self.fb.getClueHints(clue))
-                    if hints != "":
-                        hints = "\n" + hints
+                    # if hints != "":
+                    #     hints = "\n" + hints
                     # textItem.setToolTip("major clue: %s\nthis sentence: %s" % (self.major_clue, str(talk['clues'])))
                 # else:
-                textItem.setToolTip("%s%s\n\nInferred major clue: %s\nvoice ids: %s" % (str(talk['clues']), hints, self.major_clue, str(talk['voices'])))
+                textItem.setToolTip("%s\n\n%s\nInferred major clue: %s\nvoice ids: %s" % (hints, str(talk['clues']), self.major_clue, str(talk['voices'])))
                 self.table.setItem(rowi, 1, textItem)
     
     def hideFlashback(self):
