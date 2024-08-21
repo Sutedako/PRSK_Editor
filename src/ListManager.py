@@ -31,6 +31,16 @@ class ListManager():
     DBurl = ""
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36'}
 
+    urls = {
+        'bestDBurl' : "http://sekai-world.github.io/sekai-master-db-diff/{}.json",
+        'aiDBurl' : "https://api.pjsek.ai/database/master/{}?$limit=9999&$skip=0&",
+        'privateDBurl' : "https://raw.githubusercontent.com/MejiroRina/kng-sekai-master/main/master/{}.json",
+
+        'bestBaseUrl' : "https://minio.dnaroma.eu/sekai-assets/",
+        'aiBaseUrl' : "https://assets.pjsek.ai/file/pjsekai-assets/",
+        'uniBaseUrl' : "https://assets.unipjsk.com/",
+    }
+
     def __init__(self, settingDir):
         self.settingDir = settingDir
 
@@ -43,8 +53,13 @@ class ListManager():
         self.greets = self.loadFile("greets.json", "Greets")
         self.specials = self.loadFile("specials.json", "Specials")
 
-    def loadFile(self, fileName: str, content: str):
-        data = []
+        self.urls = self.loadFile("urls.json", "DB URLs", self.urls)
+        self.storeURLs()
+
+    def loadFile(self, fileName: str, content: str, default: object = None):
+        if default is None:
+            default = []
+        data = default
         path = osp.join(self.settingDir, fileName)
         if osp.exists(path):
             with open(path, 'r', encoding='utf-8') as f:
@@ -61,11 +76,17 @@ class ListManager():
         self.updateAreatalks()
         self.updateGreets()
         self.updateSpecials()
+    
+    def storeURLs(self):
+        urlsPath = osp.join(self.settingDir, "urls.json")
+        with open(urlsPath, 'w', encoding='ascii') as f:
+            json.dump(self.urls, f, indent=2)
+        logging.info("URLs stored")
 
     def chooseSite(self):
-        bestDBurl = "http://sekai-world.github.io/sekai-master-db-diff/{}.json"
-        aiDBurl = "https://api.pjsek.ai/database/master/{}?$limit=9999&$skip=0&"
-        privateDBurl = "https://raw.githubusercontent.com/MejiroRina/kng-sekai-master/main/master/{}.json"
+        bestDBurl = self.urls['bestDBurl']
+        aiDBurl = self.urls['aiDBurl']
+        privateDBurl = self.urls['privateDBurl']
         
         sites = [privateDBurl, bestDBurl, aiDBurl]
         siteNames = ["personal", "best", "ai"]
@@ -933,10 +954,10 @@ class ListManager():
 
     def getJsonPath(self, storyType, sort, storyIdx, chapterIdx, source):
         jsonurl = ""
-        bestBaseUrl = "https://minio.dnaroma.eu/sekai-assets/"
+        bestBaseUrl = self.urls['bestBaseUrl']
         # bestBaseUrl = "https://storage.sekai.best/sekai-jp-assets/"
-        aiBaseUrl = "https://assets.pjsek.ai/file/pjsekai-assets/"
-        uniBaseUrl = "https://assets.unipjsk.com/"
+        aiBaseUrl = self.urls['aiBaseUrl']
+        uniBaseUrl = self.urls['uniBaseUrl']
 
         if storyType == u"主线剧情":
             unitIdx = storyIdx

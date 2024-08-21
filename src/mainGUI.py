@@ -405,7 +405,7 @@ class Ui_SekaiText(object):
         self.pushButtonSave.setText(_translate("SekaiText", u"保存"))
         self.pushButtonClear.setText(_translate("SekaiText", u"清空"))
         self.checkBoxShowFlashback.setText(_translate("SekaiText", u"标记闪回"))
-        self.checkBoxShowFlashback.setChecked(True)
+        # self.checkBoxShowFlashback.setChecked(True)
         self.checkBoxSyncScroll.setText(_translate("SekaiText", u"同步滚动"))
         self.checkBoxShowDiff.setText(_translate("SekaiText", u"显示修改前内容"))
         self.radioButtonTranslate.setChecked(True)

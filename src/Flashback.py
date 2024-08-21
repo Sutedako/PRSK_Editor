@@ -96,8 +96,11 @@ class FlashbackAnalyzer:
                 event_desc['chapters'] = [c['title'] for c in event['chapters']]
                 self.events[event['id']] = event_desc
 
-            # Hard-coded event properties
-            self.events[9]['choffset'] = 1
+            try:
+                # Hard-coded event properties
+                self.events[9]['choffset'] = 1
+            except:
+                pass
 
             # Obtain event id clue from areatalks
             for areatalk in self.listManager.areatalks:

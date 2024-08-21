@@ -10,7 +10,6 @@ import sys
 
 from Dictionary import characterDict
 from collections import Counter
-import Flashback as flashback
 
 class JsonLoader():
     if getattr(sys, 'frozen', False):
@@ -19,7 +18,7 @@ class JsonLoader():
         root, _ = osp.split(osp.abspath(sys.argv[0]))
         root = osp.join(root, "../")
 
-    def __init__(self, path="", table=None, fontSize=18, listManager=None):
+    def __init__(self, path="", table=None, fontSize=18, flashbackAnalyzer=None):
 
         self.talks = []
         self.table = table
@@ -28,7 +27,7 @@ class JsonLoader():
         self.flashback_color = QColor(150, 255, 200, 100)
         self.normal_color = QColor(255, 255, 255)
 
-        self.fb = flashback.FlashbackAnalyzer(listManager = listManager)
+        self.fb = flashbackAnalyzer
 
         if not path:
             return
@@ -41,7 +40,6 @@ class JsonLoader():
             fulldata = json.load(f)
         
         self.scenario_id = fulldata['ScenarioId']
-        self.listManager = listManager # Not used, but perhaps keep here for future use?
 
         for snippet in fulldata['Snippets']:
             # TalkData
@@ -197,7 +195,9 @@ class JsonLoader():
                     #     hints = "\n" + hints
                     # textItem.setToolTip("major clue: %s\nthis sentence: %s" % (self.major_clue, str(talk['clues'])))
                 # else:
-                textItem.setToolTip("%s\n\n%s\nInferred major clue: %s\nvoice ids: %s" % (hints, str(talk['clues']), self.major_clue, str(talk['voices'])))
+                    textItem.setToolTip(u"闪回：%s\n\n%s\nInferred major clue: %s\nvoice ids: %s" % (hints, str(talk['clues']), self.major_clue, str(talk['voices'])))
+                else:
+                    textItem.setToolTip(u"%s\nInferred major clue: %s\nvoice ids: %s" % (str(talk['clues']), self.major_clue, str(talk['voices'])))
                 self.table.setItem(rowi, 1, textItem)
     
     def hideFlashback(self):

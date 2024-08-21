@@ -22,6 +22,7 @@ from os import environ, mkdir, _exit, remove
 import platform
 import requests
 from urllib import request
+import Flashback as flashback
 
 EditorMode = [u'翻译', u'校对', u'合意', u'审核']
 
@@ -72,6 +73,10 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             logging.warning("Setting File not Exists: {}".format(settingpath))
         if 'textdir' not in self.setting:
             self.setting['textdir'] = self.datadir
+        if 'syncScroll' not in self.setting:
+            self.setting['syncScroll'] = False
+        if 'showFlashback' not in self.setting:
+            self.setting['showFlashback'] = True
         logging.info("Text Folder Path: {}".format(self.setting['textdir']))
         self.fontSize = self.setting['fontSize'] if 'fontSize' in self.setting else 18
 
@@ -85,6 +90,8 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         if osp.exists(titleIcon):
             self.setWindowIcon(QIcon(titleIcon))
             logging.info("Icon Loaded")
+        
+        self.flashback = flashback.FlashbackAnalyzer(listManager = self.ListManager)
 
         self.setupUi(self)
         self.spinBoxFontSize.setValue(self.fontSize)
@@ -139,6 +146,9 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             lambda idx: self.moveScrollBars(idx, 'destination'))
 
         qw.QShortcut(QKeySequence(self.tr("Ctrl+S")), self, self.saveText)
+
+        self.checkBoxShowFlashback.setChecked(self.setting['showFlashback'])
+        self.checkBoxSyncScroll.setChecked(self.setting['syncScroll'])
 
         self.tempWindow = qw.QMessageBox(self)
         self.tempWindow.setStandardButtons(qw.QMessageBox.No)
@@ -202,7 +212,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             if not jsonpath:
                 return
             try:
-                self.srcText = JsonLoader(jsonpath, self.tableWidgetSrc, fontSize=self.fontSize, listManager=self.ListManager)
+                self.srcText = JsonLoader(jsonpath, self.tableWidgetSrc, fontSize=self.fontSize, flashbackAnalyzer=self.flashback)
                 self.toggleFlashback(self.checkBoxShowFlashback.isChecked())
                 logging.info("Json File Loaded: " + jsonpath)
             except BaseException:
@@ -926,6 +936,11 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             self.toggleSyncedMode(False)
 
     def toggleSyncedMode(self, state):
+
+        if state != self.setting['syncScroll']:
+            self.setting['syncScroll'] = state
+            save(self)
+
         if state:
             self.alignRowsHeight()
         else:
@@ -933,6 +948,11 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             self.setFontSize()
     
     def toggleFlashback(self, state):
+
+        if state != self.setting['showFlashback']:
+            self.setting['showFlashback'] = state
+            save(self)
+
         if state:
             try:
                 self.srcText.showFlashback()
@@ -945,6 +965,8 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                         exc_type, exc_value, exc_traceback_obj, file=f)
 
                 self.checkBoxShowFlashback.setCheckState(0)
+                self.setting['showFlashback'] = False
+                save(self)
                 self.srcText.hideFlashback()
         else:
             self.srcText.hideFlashback()
@@ -1075,6 +1097,16 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
         logging.info("Story List Updated")
         self.setComboBoxStoryIndex()
+
+        try:
+            self.flashback = flashback.FlashbackAnalyzer(listManager = self.ListManager)
+        except BaseException:
+            logging.error("Fail to update flashback info from updated chapter infomation.")
+            exc_type, exc_value, exc_traceback_obj = sys.exc_info()
+            with open(loggingPath, 'a') as f:
+                traceback.print_exception(
+                    exc_type, exc_value, exc_traceback_obj, file=f)
+
         return True
 
     def translateMode(self):
@@ -1179,6 +1211,7 @@ class updateThread(qc.QThread):
             self.ListManager.updateSpecials()
             self.trigger.emit(self.ListManager)
             logging.info("Chapter Information Update Successed.")
+
         except BaseException:
             logging.error("Fail to Download Settingg File from best.")
             exc_type, exc_value, exc_traceback_obj = sys.exc_info()
