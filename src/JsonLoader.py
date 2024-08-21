@@ -169,7 +169,7 @@ class JsonLoader():
             for rowi, talk in enumerate(self.talks):
                 if 'clues' in talk:
                     textItem = self.table.item(rowi, 1)
-                    textItem.setToolTip("%s\n\nNo idea about scenarioID.\nvoice ids: %s" % (str(talk['clues']), str(talk['voices'])))
+                    textItem.setToolTip(u"无法判断是否为闪回。\n%s\n\nNo idea about scenarioID.\nvoice ids: %s" % (str(talk['clues']), str(talk['voices'])))
             return
         
         # debug 

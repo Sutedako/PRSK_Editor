@@ -286,7 +286,7 @@ class FlashbackAnalyzer:
 
             event_id = str(words)
 
-            event_hints = u"卡面来自：%s" % event_id
+            event_hints = u"卡面来自 %s" % event_id
             if event_id == '':
                 event_hints = u"初期卡面"
             else:
@@ -304,6 +304,9 @@ class FlashbackAnalyzer:
 # - 活动ID: 格式通常为ev_[活动种类]_[第X次]_话数。
 #   - X以活动种类（混合(shuffle) or 各团团队活动等）分别计数。
 #   - X可能为空（如第53期活动的X就为空）。""")
+
+        else:
+            hints.append(u"闪回：未知来源")
         
         return hints
 
