@@ -952,10 +952,25 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         if state != self.setting['showFlashback']:
             self.setting['showFlashback'] = state
             save(self)
-
+        
         if state:
             try:
                 self.srcText.showFlashback()
+
+                # Show partial check mark when failed to analyze
+                if self.srcText.major_clue is None:
+                    self.checkBoxShowFlashback.blockSignals(True)
+                    self.checkBoxShowFlashback.setEnabled(False)
+                    self.checkBoxShowFlashback.setCheckState(1)
+                    self.checkBoxShowFlashback.blockSignals(False)
+                    self.checkBoxShowFlashback.setToolTip(u"无法判断本话是否包含闪回。")
+                else:
+                    self.checkBoxShowFlashback.blockSignals(True)
+                    self.checkBoxShowFlashback.setEnabled(True)
+                    self.checkBoxShowFlashback.setCheckState(2)
+                    self.checkBoxShowFlashback.blockSignals(False)
+                    self.checkBoxShowFlashback.setToolTip(u"推测的剧情id: %s" % self.srcText.major_clue)
+
             except BaseException:
 
                 logging.error("Failed to check flashbacks. Feature disabled.")

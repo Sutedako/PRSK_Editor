@@ -166,10 +166,11 @@ class JsonLoader():
     def showFlashback(self):
 
         if self.major_clue is None:
-            for rowi, talk in enumerate(self.talks):
-                if 'clues' in talk:
-                    textItem = self.table.item(rowi, 1)
-                    textItem.setToolTip(u"无法判断是否为闪回。\n%s\n\nNo idea about scenarioID.\nvoice ids: %s" % (str(talk['clues']), str(talk['voices'])))
+            # for rowi, talk in enumerate(self.talks):
+            #     if 'clues' in talk:
+            #         textItem = self.table.item(rowi, 1)
+            #         textItem.setToolTip(u"无法判断是否为闪回。\n%s\n\nNo idea about scenarioID.\nvoice ids: %s" % (str(talk['clues']), str(talk['voices'])))
+            self.hideFlashback()
             return
         
         # debug 
@@ -195,9 +196,11 @@ class JsonLoader():
                     #     hints = "\n" + hints
                     # textItem.setToolTip("major clue: %s\nthis sentence: %s" % (self.major_clue, str(talk['clues'])))
                 # else:
-                    textItem.setToolTip(u"闪回：%s\n\n%s\nInferred major clue: %s\nvoice ids: %s" % (hints, str(talk['clues']), self.major_clue, str(talk['voices'])))
+                    textItem.setToolTip(u"闪回：%s\n\n%s" % (hints, str(talk['voices'])))
+                    # textItem.setToolTip(u"闪回：%s\n\n%s\nInferred major clue: %s\nvoice ids: %s" % (hints, str(talk['clues']), self.major_clue, str(talk['voices'])))
                 else:
-                    textItem.setToolTip(u"%s\nInferred major clue: %s\nvoice ids: %s" % (str(talk['clues']), self.major_clue, str(talk['voices'])))
+                    textItem.setToolTip(None)
+                    # textItem.setToolTip(u"%s\nInferred major clue: %s\nvoice ids: %s" % (str(talk['clues']), self.major_clue, str(talk['voices'])))
                 self.table.setItem(rowi, 1, textItem)
     
     def hideFlashback(self):
