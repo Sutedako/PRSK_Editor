@@ -36,7 +36,7 @@ class ListManager():
         'aiDBurl' : "https://api.pjsek.ai/database/master/{}?$limit=9999&$skip=0&",
         'privateDBurl' : "https://raw.githubusercontent.com/MejiroRina/kng-sekai-master/main/master/{}.json",
 
-        'bestBaseUrl' : "https://minio.dnaroma.eu/sekai-assets/",
+        'bestBaseUrl' : "https://minio.dnaroma.eu/sekai-jp-assets/",
         'aiBaseUrl' : "https://assets.pjsek.ai/file/pjsekai-assets/",
         'uniBaseUrl' : "https://assets.unipjsk.com/",
     }
