@@ -56,8 +56,11 @@ class FlashbackAnalyzer:
         self.noClue = {
             'id': -1,
             'title': u"未知剧情",
-            'choffset': 0,
             'chapters': [],
+            'inferredVoiceIDs': {
+                'prefix': "BAD_STR",
+                'choffset': 0,
+            }
         }
 
         self.voice_ms_to_mainstory_id = {
@@ -69,76 +72,17 @@ class FlashbackAnalyzer:
             'piapro': 'piapro'
         }
 
+        self.clue_dict = None
+        self.updateClues()
+
+    def updateClues(self):
+
         if self.listManager:
 
             for ms in self.listManager.mainstory:
                 self.mainstory[ms['unit']] = ms
-
-            for event in self.listManager.events:
-
-                if 'id' not in event:
-                    continue
-                
-                if 'title' not in event:
-                    continue
-
-                event_desc = {
-                    'id': event['id'],
-                    'title': event['title'],
-                    'choffset': 0, # Some event stories start from Ep. "00" instead of "01", e.g., #9
-                    'chapters': [],
-                }
-                self.events[event['id']] = event_desc
-
-                if 'chapters' not in event:
-                    continue
-
-                event_desc['chapters'] = [c['title'] for c in event['chapters']]
-                self.events[event['id']] = event_desc
-
-            try:
-                # Hard-coded event properties
-                self.events[9]['choffset'] = 1
-            except:
-                pass
-
-            # Obtain event id clue from areatalks
-            for areatalk in self.listManager.areatalks:
-                
-                if 'scenarioId' not in areatalk:
-                    continue
-
-                if 'addEventId' not in areatalk:
-                    continue
-
-                match = self.areatalk_re.search(areatalk['scenarioId'])
-                if match:
-                    event_type = match.group(1)
-                    event_clue = match.group(2)
-
-                    if event_type == 'wl':
-                        event_clue = "wl_" + event_clue
-                    
-                    add_to_dict = False
-
-                    if event_clue in self.clue_dict:
-
-                        prev_id = self.clue_dict[event_clue]['id']
-
-                        # Use the earliest event
-                        if prev_id >= 0 and prev_id > areatalk['addEventId']:
-                            add_to_dict = True
-
-                    else:
-                        add_to_dict = True
-
-                    if add_to_dict:
-                        self.clue_dict[event_clue] = self.events.get(areatalk['addEventId'], self.noClue)
             
-            # Hard-coded patterns
-            self.clue_dict['band_01'] = self.events.get(1, self.noClue)
-            self.clue_dict['night__'] = self.events.get(53, self.noClue)
-            self.clue_dict['shuffle_03'] = self.events.get(9, self.noClue)
+            self.clue_dict = self.listManager.voiceClues
 
     '''
     Infer clue (some scenarioID) from voice id
@@ -210,11 +154,11 @@ class FlashbackAnalyzer:
 
             eventInfo = self.getEventInfo(words)
             if ep >= 0:
-                ep += eventInfo['choffset']
+                ep += eventInfo['inferredVoiceIDs']['choffset']
 
             hints.append("%d-%02d" % (eventInfo['id'], ep))
             hints.append("%s" % (eventInfo['title']))
-            epName = eventInfo['chapters'][ep-1] if (ep > 0 and ep <= len(eventInfo['chapters'])) else u"未知章节"
+            epName = eventInfo['chapters'][ep-1]['title'] if (ep > 0 and ep <= len(eventInfo['chapters'])) else u"未知章节"
             hints.append("%s" % (epName))
 
         # Main Story
@@ -319,5 +263,13 @@ class FlashbackAnalyzer:
         # Skip "ev"
         if words[0] == 'ev':
             words.pick(0)
+
+        # Try update clues first
+        if self.clue_dict is None:
+            self.updateClues()
+
+        # If still no clue_dict, return noClue.
+        if self.clue_dict is None:
+            return self.noClue
 
         return self.clue_dict.get(str(words), self.noClue)

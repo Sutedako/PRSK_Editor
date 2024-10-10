@@ -1224,6 +1224,8 @@ class updateThread(qc.QThread):
             self.ListManager.updateGreets()
             self.trigger.emit([site, "特殊剧情"])
             self.ListManager.updateSpecials()
+            self.trigger.emit([site, "推断语音ID"])
+            self.ListManager.inferVoiceEventID()
             self.trigger.emit(self.ListManager)
             logging.info("Chapter Information Update Successed.")
 

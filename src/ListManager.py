@@ -11,6 +11,7 @@ from Dictionary import unitDict, sekaiDict, characterDict, areaDict
 from Dictionary import greetDict_season, greetDict_celebrate, greetDict_holiday
 
 from urllib import request
+import re
 
 localProxy = request.getproxies()
 
@@ -54,6 +55,7 @@ class ListManager():
         self.specials = self.loadFile("specials.json", "Specials")
 
         self.urls = self.loadFile("../urls.json", "DB URLs", self.urls)
+        self.voiceClues = self.buildVoiceIDClues()
 
     def loadFile(self, fileName: str, content: str, default: object = None):
         if default is None:
@@ -75,6 +77,8 @@ class ListManager():
         self.updateAreatalks()
         self.updateGreets()
         self.updateSpecials()
+
+        self.inferVoiceEventID()
 
     def chooseSite(self):
         bestDBurl = self.urls['bestDBurl']
@@ -525,6 +529,107 @@ class ListManager():
         with open(specialsPath, 'w', encoding='utf-8') as f:
             json.dump(self.specials, f, indent=2, ensure_ascii=False)
         logging.info("Specials Updated")
+    
+    # Infer voice eventID (clue) from areatalks then store them into events.json
+    def inferVoiceEventID(self):
+
+        events_dict = {}
+        clues = {}
+
+        # Areatalk match string; used for extract event ids
+        pattern = r'areatalk_(ev|wl)_(.+)_\d+$'
+        self.areatalk_re = re.compile(pattern)
+
+        # Event basic info etc.
+        for ei, event in enumerate(self.events):
+
+            if 'id' not in event:
+                continue
+            
+            if 'title' not in event:
+                continue
+
+            event_desc = {
+                'array_index': ei,
+                'id': event['id'],
+                'choffset': 0, # Some event stories start from Ep. "00" instead of "01", e.g., #9
+            }
+            events_dict[event['id']] = event_desc
+
+        try:
+            # Hard-coded event properties
+            events_dict[9]['choffset'] = 1
+        except:
+            pass
+
+        # Obtain event id clue from areatalks
+        for areatalk in self.areatalks:
+            
+            if 'scenarioId' not in areatalk:
+                continue
+
+            if 'addEventId' not in areatalk:
+                continue
+
+            match = self.areatalk_re.search(areatalk['scenarioId'])
+            if match:
+                event_type = match.group(1)
+                event_clue = match.group(2)
+
+                if event_type == 'wl':
+                    event_clue = "wl_" + event_clue
+                
+                add_to_dict = False
+
+                if event_clue in clues:
+
+                    prev_id = clues[event_clue]['id']
+
+                    # Use the earliest event
+                    if prev_id >= 0 and prev_id > areatalk['addEventId']:
+                        add_to_dict = True
+
+                else:
+                    add_to_dict = True
+
+                if add_to_dict:
+                    clues[event_clue] = events_dict.get(areatalk['addEventId'], None)
+        
+        # Hard-coded patterns as the inference is not perfect
+        clues['band_01'] = events_dict.get(1, None)
+        clues['night__'] = events_dict.get(53, None)
+        clues['shuffle_03'] = events_dict.get(9, None)
+
+        # Store info into self.events
+        for clue in clues:
+
+            if clues[clue] == None:
+                continue
+
+            event_desc = clues[clue]
+            self.events[event_desc['array_index']]['inferredVoiceIDs'] = {
+                'prefix': clue,
+                'choffset': event_desc['choffset']
+            }
+        
+        # Store to file
+        eventsPath = osp.join(self.settingDir, "events.json")
+        with open(eventsPath, 'w', encoding='utf-8') as f:
+            json.dump(self.events, f, indent=2, ensure_ascii=False)
+        logging.info("Events Updated with VoiceID Information")
+
+        self.voiceClues = self.buildVoiceIDClues()
+    
+    def buildVoiceIDClues(self):
+
+        voiceClues = {}
+
+        for event in self.events:
+            if 'inferredVoiceIDs' in event:
+                ev_clue_info = event['inferredVoiceIDs']
+                voiceClues[ev_clue_info['prefix']] = event
+        
+        return voiceClues
 
     def getStoryIndexList(self, storyType: str, sort: str):
         storyIndex = []
