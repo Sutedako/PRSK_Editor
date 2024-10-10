@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import QWidget, QTableWidget, QTableWidgetItem, QPushButton
 from PyQt5.QtGui import QBrush, QColor
 from PyQt5.QtCore import Qt, QSize
 import copy
+import math
 
 from Dictionary import characterDict
 
@@ -417,6 +418,16 @@ class Editor():
 
         self.updateHiddenRowMap()
 
+    # Half-width for ascii characters
+    def lineLength(self, s):
+        count = 0
+        for char in s:
+            if ord(char) <= 127:
+                count += 0.5
+            else:
+                count += 1
+        return math.ceil(count)
+
     def checkText(self, speaker, text):
         check = True
         if (speaker not in ["", u"场景", u"左上场景", u"选项"]) and (not text):
@@ -443,9 +454,10 @@ class Editor():
         text = text.replace(',', '，')
         text = text.replace('?', '？')
         text = text.replace('!', '！')
+        text = text.replace('~', '～')
         text = text.replace('欸', '诶')
 
-        normalend = ['、', '，', '。', '？', '！', '~', '♪', '☆', '.', '—']
+        normalend = ['、', '，', '。', '？', '！', '～', '♪', '☆', '.', '—']
         unusualend = ['）', '」', '』', '”']
         if text[-1] in normalend:
             if '.，' in text or '.。' in text:
@@ -464,7 +476,8 @@ class Editor():
                 text += "\n【破折号用双破折——，或者视情况删掉】"
                 check = False
 
-        if len(text.split("\n")[0].replace('...', '…')) >= 30:
+        # if len(text.split("\n")[0].replace('...', '…')) >= 30:
+        if self.lineLength(text.split("\n")[0].replace('...', '…')) >= 30:
             text += "\n【单行过长，请删减或换行】"
             check = False
 
