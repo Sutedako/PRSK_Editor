@@ -857,6 +857,12 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         return self.dstText.talks[self.srcScrollLinkedDstPositionPrev]['idx'] - 1
 
     def moveScrollBars(self, idx, bar, offset = 0):
+
+        # print("%s current: %d" % (bar, idx))
+        # print("Src maximum: %d" % self.tableWidgetSrcScroll.maximum())
+        # print("Dst maximum: %d" % self.tableWidgetDstScroll.maximum())
+        # return
+        
         if not self.checkBoxSyncScroll.isChecked(): return
 
         if idx < 0: return
@@ -877,6 +883,12 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 if idx == 0:
                     self.srcScrollLinkedDstPositionPrev = 0
                     self.tableWidgetDstScroll.setValue(0)
+                    return
+                
+                # We get to the bottom
+                if idx == self.tableWidgetSrcScroll.maximum():
+                    self.srcScrollLinkedDstPositionPrev = self.tableWidgetDstScroll.maximum()
+                    self.tableWidgetDstScroll.setValue(self.tableWidgetDstScroll.maximum())
                     return
 
                 dirc = 0
@@ -916,11 +928,18 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
             elif bar == 'destination':
 
+                # We get to the bottom
+                if idx == self.tableWidgetDstScroll.maximum():
+                    self.tableWidgetSrcScroll.setValue(self.tableWidgetSrcScroll.maximum())
+                    return
+
                 # TODO: Set dst scroll to next heading line to ensure sync?
 
                 if self.checkBoxShowDiff.isChecked():
+                    # print("Attempt to set src -> %d" % (self.dstText.talks[idx]['idx'] - 1))
                     self.tableWidgetSrcScroll.setValue(self.dstText.talks[idx]['idx'] - 1)
                 else:
+                    # print("Attempt to set src -> %d" % (self.dstText.talks[self.dstText.decompressRowMap[idx]]['idx'] - 1))
                     self.tableWidgetSrcScroll.setValue(self.dstText.talks[self.dstText.decompressRowMap[idx]]['idx'] - 1)
         
         # If we had any problem syncing scroll bars, disable the sync
