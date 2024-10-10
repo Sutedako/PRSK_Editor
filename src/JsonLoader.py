@@ -34,7 +34,7 @@ class JsonLoader():
 
         self.talks = []
         self.table.setRowCount(0)
-        self.setFontSize(fontSize)        
+        self.setFontSize(fontSize)
 
         with open(path, 'r', encoding='UTF-8') as f:
             fulldata = json.load(f)
