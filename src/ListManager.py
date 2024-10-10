@@ -53,8 +53,7 @@ class ListManager():
         self.greets = self.loadFile("greets.json", "Greets")
         self.specials = self.loadFile("specials.json", "Specials")
 
-        self.urls = self.loadFile("urls.json", "DB URLs", self.urls)
-        self.storeURLs()
+        self.urls = self.loadFile("../urls.json", "DB URLs", self.urls)
 
     def loadFile(self, fileName: str, content: str, default: object = None):
         if default is None:
@@ -76,12 +75,6 @@ class ListManager():
         self.updateAreatalks()
         self.updateGreets()
         self.updateSpecials()
-    
-    def storeURLs(self):
-        urlsPath = osp.join(self.settingDir, "urls.json")
-        with open(urlsPath, 'w', encoding='ascii') as f:
-            json.dump(self.urls, f, indent=2)
-        logging.info("URLs stored")
 
     def chooseSite(self):
         bestDBurl = self.urls['bestDBurl']
