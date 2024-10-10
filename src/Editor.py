@@ -454,9 +454,10 @@ class Editor():
         text = text.replace(',', '，')
         text = text.replace('?', '？')
         text = text.replace('!', '！')
+        text = text.replace('~', '～')
         text = text.replace('欸', '诶')
 
-        normalend = ['、', '，', '。', '？', '！', '~', '～', '♪', '☆', '.', '—']
+        normalend = ['、', '，', '。', '？', '！', '～', '♪', '☆', '.', '—']
         unusualend = ['）', '」', '』', '”']
         if text[-1] in normalend:
             if '.，' in text or '.。' in text:
