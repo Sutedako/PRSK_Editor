@@ -1079,7 +1079,8 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         if storyType != u"主界面语音":
             if storyType != u"自定义":
                 self.comboBoxDataSource.addItem(u"sekai.best")
-                self.comboBoxDataSource.addItem(u"pjsek.ai")
+                # self.comboBoxDataSource.addItem(u"pjsek.ai")
+                self.comboBoxDataSource.addItem(u"haruki")
                 self.comboBoxDataSource.addItem(u"unipjsk.com")
             self.comboBoxDataSource.addItem(u"本地文件")
             self.comboBoxDataSource.setCurrentText(u"本地文件")
@@ -1266,6 +1267,15 @@ def save(self):
 
 
 if __name__ == '__main__':
+
+    # if hasattr(qc.Qt, 'AA_EnableHighDpiScaling'):
+    #     qw.QApplication.setAttribute(qc.Qt.AA_EnableHighDpiScaling, True)
+    # if hasattr(qc.Qt, 'AA_UseHighDpiPixmaps'):
+    #     qw.QApplication.setAttribute(qc.Qt.AA_UseHighDpiPixmaps, True)
+    # environ["QT_ENABLE_HIGHDPI_SCALING"]   = "1"
+    # environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
+    # environ["QT_SCALE_FACTOR"]             = "1"
+
     app = qw.QApplication(sys.argv)
 
     root, _ = osp.split(osp.abspath(sys.argv[0]))

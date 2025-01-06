@@ -33,13 +33,15 @@ class ListManager():
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36'}
 
     urls = {
-        'bestDBurl' : "http://sekai-world.github.io/sekai-master-db-diff/{}.json",
+        'bestDBurl' : "https://raw.githubusercontent.com/Sekai-World/sekai-master-db-diff/main/{}.json",
         'aiDBurl' : "https://api.pjsek.ai/database/master/{}?$limit=9999&$skip=0&",
-        'privateDBurl' : "https://raw.githubusercontent.com/MejiroRina/kng-sekai-master/main/master/{}.json",
+        'harukiDBurl' : "https://storage.haruki.wacca.cn/master-jp/{}.json?t=0",
 
         'bestBaseUrl' : "https://minio.dnaroma.eu/sekai-jp-assets/",
-        'aiBaseUrl' : "https://assets.pjsek.ai/file/pjsekai-assets/",
+        # 'bestBaseUrl' : "https://storage.sekai.best/sekai-jp-assets/",
+        # 'aiBaseUrl' : "https://assets.pjsek.ai/file/pjsekai-assets/",
         'uniBaseUrl' : "https://assets.unipjsk.com/",
+        'harukiBaseUrl' : "https://storage.haruki.wacca.cn/assets/",
     }
 
     def __init__(self, settingDir):
@@ -83,10 +85,10 @@ class ListManager():
     def chooseSite(self):
         bestDBurl = self.urls['bestDBurl']
         aiDBurl = self.urls['aiDBurl']
-        privateDBurl = self.urls['privateDBurl']
+        harukiDBurl = self.urls['harukiDBurl'] + str(int(time.time()))
         
-        sites = [privateDBurl, bestDBurl, aiDBurl]
-        siteNames = ["personal", "best", "ai"]
+        sites = [harukiDBurl, bestDBurl, aiDBurl]
+        siteNames = ["Haruki", "best", "ai"]
         minDownloadTime = 100000
         maxEventsLength = 0
         result = ""
@@ -109,6 +111,7 @@ class ListManager():
                 minDownloadTime = downloadTime
                 self.DBurl = site
                 result = name
+        logging.info("[ListManager] self.DBurl = %s" % (self.DBurl))
         return result
 
     def updateEvents(self):
@@ -1054,7 +1057,7 @@ class ListManager():
         jsonurl = ""
         bestBaseUrl = self.urls['bestBaseUrl']
         # bestBaseUrl = "https://storage.sekai.best/sekai-jp-assets/"
-        aiBaseUrl = self.urls['aiBaseUrl']
+        harukiBaseUrl = self.urls['harukiBaseUrl']
         uniBaseUrl = self.urls['uniBaseUrl']
 
         if storyType == u"主线剧情":
@@ -1068,8 +1071,8 @@ class ListManager():
             if source == "sekai.best":
                 jsonurl = bestBaseUrl + "scenario/unitstory/" \
                     "{}_rip/{}.asset".format(unit, chapter)
-            elif source == "pjsek.ai":
-                jsonurl = aiBaseUrl + "startapp/scenario/unitstory/" \
+            elif source == "haruki":
+                jsonurl = harukiBaseUrl + "startapp/scenario/unitstory/" \
                     "{}/{}.json".format(unit, chapter)
             elif source == "unipjsk.com":
                 jsonurl = uniBaseUrl + "startapp/scenario/unitstory/" \
@@ -1088,8 +1091,8 @@ class ListManager():
             if source == "sekai.best":
                 jsonurl = bestBaseUrl + "event_story/" \
                     "{}/scenario_rip/{}.asset".format(event, chapter)
-            elif source == "pjsek.ai":
-                jsonurl = aiBaseUrl + "ondemand/event_story/" \
+            elif source == "haruki":
+                jsonurl = harukiBaseUrl + "ondemand/event_story/" \
                     "{}/scenario/{}.json".format(event, chapter)
             elif source == "unipjsk.com":
                 jsonurl = uniBaseUrl + "ondemand/event_story/" \
@@ -1113,8 +1116,8 @@ class ListManager():
                 jsonurl = bestBaseUrl + "character/member/" \
                     "res{}_no{}_rip/{}{}_{}{}.asset".format(
                         charId, cardNo, charId, cardNo, charname, chapter)
-            elif source == "pjsek.ai":
-                jsonurl = aiBaseUrl + "startapp/character/member/" \
+            elif source == "haruki":
+                jsonurl = harukiBaseUrl + "startapp/character/member/" \
                     "res{}_no{}/{}{}_{}{}.json".format(
                         charId, cardNo, charId, cardNo, charname, chapter)
             elif source == "unipjsk.com":
@@ -1139,8 +1142,8 @@ class ListManager():
                 jsonurl = bestBaseUrl + "character/member/" \
                     "res{}_no{}_rip/{}{}_{}{}.asset".format(
                         charId, cardNo, charId, cardNo, charname, chapter)
-            elif source == "pjsek.ai":
-                jsonurl = aiBaseUrl + "startapp/character/member/" \
+            elif source == "haruki":
+                jsonurl = harukiBaseUrl + "startapp/character/member/" \
                     "res{}_no{}/{}{}_{}{}.json".format(
                         charId, cardNo, charId, cardNo, charname, chapter)
             elif source == "unipjsk.com":
@@ -1186,8 +1189,8 @@ class ListManager():
                 jsonurl = bestBaseUrl + "character/member/" \
                     "res{}_no{}_rip/{}{}_{}{}.asset".format(
                         charId, rarity, charId, rarity, charname, chapter)
-            elif source == "pjsek.ai":
-                jsonurl = aiBaseUrl + "startapp/character/member/" \
+            elif source == "haruki":
+                jsonurl = harukiBaseUrl + "startapp/character/member/" \
                     "res{}_no{}/{}{}_{}{}.json".format(
                         charId, rarity, charId, rarity, charname, chapter)
             elif source == "unipjsk.com":
@@ -1237,8 +1240,8 @@ class ListManager():
                 jsonurl = bestBaseUrl + "character/member/" \
                     "res{}_no{}_rip/{}{}_{}{}.asset".format(
                         charId, cardNo, charId, cardNo, charname, chapter)
-            elif source == "pjsek.ai":
-                jsonurl = aiBaseUrl + "startapp/character/member/" \
+            elif source == "haruki":
+                jsonurl = harukiBaseUrl + "startapp/character/member/" \
                     "res{}_no{}/{}{}_{}{}.json".format(
                         charId, cardNo, charId, cardNo, charname, chapter)
             elif source == "unipjsk.com":
@@ -1257,8 +1260,8 @@ class ListManager():
             if source == "sekai.best":
                 jsonurl = bestBaseUrl + "scenario/actionset/" \
                     "group{}_rip/{}.asset".format(group, jsonname)
-            elif source == "pjsek.ai":
-                jsonurl = aiBaseUrl + "startapp/scenario/actionset/" \
+            elif source == "haruki":
+                jsonurl = harukiBaseUrl + "startapp/scenario/actionset/" \
                     "group{}/{}.json".format(group, jsonname)
             elif source == "unipjsk.com":
                 jsonurl = uniBaseUrl + "startapp/scenario/actionset/" \
@@ -1294,8 +1297,8 @@ class ListManager():
             if source == "sekai.best":
                 jsonurl = bestBaseUrl + "scenario/special/" \
                     "{}_rip/{}.asset".format(story["dirName"], story["fileName"])
-            elif source == "pjsek.ai":
-                jsonurl = aiBaseUrl + "startapp/scenario/special/" \
+            elif source == "haruki":
+                jsonurl = harukiBaseUrl + "startapp/scenario/special/" \
                     "{}/{}.json".format(story["dirName"], story["fileName"])
             elif source == "unipjsk.com":
                 jsonurl = uniBaseUrl + "startapp/scenario/special/" \
