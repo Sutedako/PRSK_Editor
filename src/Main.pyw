@@ -1005,14 +1005,14 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         else:
             self.srcText.hideFlashback()
 
-    def setComboBoxStoryType(self, isInt=False):
+    def setComboBoxStoryType(self, isInit=False):
         if 'storyType' in self.setting:
             self.comboBoxStoryType.setCurrentIndex(self.setting['storyType'])
 
         if self.ListManager.events == []:
             return
 
-        self.setComboBoxStoryTypeSort(isInt)
+        self.setComboBoxStoryTypeSort(isInit)
 
     def setComboBoxStoryTypeSort(self, isInit=False):
         storyType = self.comboBoxStoryType.currentText()
@@ -1101,7 +1101,18 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             self.comboBoxStoryChapter.setVisible(True)
 
         self.comboBoxStoryChapter.clear()
-        storyChapterList = self.ListManager.getStoryChapterList(storyType, sort, storyIndex)
+        try:
+            storyChapterList = self.ListManager.getStoryChapterList(storyType, sort, storyIndex)
+        except BaseException:
+            dataOutOfDateWindow = qw.QMessageBox()
+            dataOutOfDateWindow.setText(u"数据已过期或尚未初始化\n自动更新数据...")
+            continueButton = dataOutOfDateWindow.addButton(u"继续", qw.QMessageBox.AcceptRole)
+            
+            dataOutOfDateWindow.exec()
+            if dataOutOfDateWindow.clickedButton() == continueButton:
+                self.updateComboBox()
+                storyChapterList = self.ListManager.getStoryChapterList(storyType, sort, storyIndex)
+            
         for idx, sc in enumerate(storyChapterList):
             if sc == "-":
                 self.comboBoxStoryChapter.insertSeparator(idx)
@@ -1293,24 +1304,24 @@ if __name__ == '__main__':
                         filename=loggingPath,
                         filemode='w')
     try:
-        modeSelectWinodw = qw.QMessageBox()
-        modeSelectWinodw.setWindowTitle("Sekai Text")
-        modeSelectWinodw.setText("校对与合意时\n强烈建议在有音画对照的条件下进行\n如看游戏内，或者对照录制视频")
+        modeSelectWindow = qw.QMessageBox()
+        modeSelectWindow.setWindowTitle("Sekai Text")
+        modeSelectWindow.setText("校对与合意时\n强烈建议在有音画对照的条件下进行\n如看游戏内，或者对照录制视频")
         if platform.system() == "Darwin":
-            checkButton = modeSelectWinodw.addButton(u"合意", 2)
-            proofreadButton = modeSelectWinodw.addButton(u"校对", 2)
-            translateButton = modeSelectWinodw.addButton(u"翻译", 2)
+            checkButton = modeSelectWindow.addButton(u"合意", 2)
+            proofreadButton = modeSelectWindow.addButton(u"校对", 2)
+            translateButton = modeSelectWindow.addButton(u"翻译", 2)
         else:
-            translateButton = modeSelectWinodw.addButton(u"翻译", 2)
-            proofreadButton = modeSelectWinodw.addButton(u"校对", 2)
-            checkButton = modeSelectWinodw.addButton(u"合意", 2)
+            translateButton = modeSelectWindow.addButton(u"翻译", 2)
+            proofreadButton = modeSelectWindow.addButton(u"校对", 2)
+            checkButton = modeSelectWindow.addButton(u"合意", 2)
 
         mainform = mainForm(root)
         translateButton.clicked.connect(mainform.translateMode)
         proofreadButton.clicked.connect(mainform.proofreadMode)
         checkButton.clicked.connect(mainform.checkMode)
 
-        modeSelectWinodw.exec_()
+        modeSelectWindow.exec_()
         mainform.show()
         atexit.register(save, mainform)
         app.exec_()
