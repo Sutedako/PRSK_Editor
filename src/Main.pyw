@@ -180,7 +180,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
         for file in requiredFiles:
             if not osp.exists(osp.join(root, "setting", file)):
-                print(osp.join(root, "setting", file))
+                # print(osp.join(root, "setting", file))
                 return False
         return True
 
@@ -1130,20 +1130,8 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             self.comboBoxStoryChapter.setVisible(True)
 
         self.comboBoxStoryChapter.clear()
-        try:
-            storyChapterList = self.ListManager.getStoryChapterList(storyType, sort, storyIndex)
-        except BaseException:
-            dataOutOfDateWindow = qw.QMessageBox(self)
-            dataOutOfDateWindow.setText(u"数据已过期或尚未初始化\n自动更新数据...")
-            continueButton = dataOutOfDateWindow.addButton(u"继续", qw.QMessageBox.AcceptRole)
-            
-            dataOutOfDateWindow.exec()
-            if dataOutOfDateWindow.clickedButton() == continueButton:
-                result = self.updateComboBox()
-                if not result:
-                    return
-                storyChapterList = self.ListManager.getStoryChapterList(storyType, sort, storyIndex)
-            
+        storyChapterList = self.ListManager.getStoryChapterList(storyType, sort, storyIndex)
+
         for idx, sc in enumerate(storyChapterList):
             if sc == "-":
                 self.comboBoxStoryChapter.insertSeparator(idx)
@@ -1226,7 +1214,8 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             networkErrorWindow = qw.QMessageBox(self)
             networkErrorWindow.setWindowTitle(u"SeKai Text")
             networkErrorWindow.setText(u"更新失败\n请确认能正常访问sekai.best，且关闭代理与VPN\n"
-                                       u"随后检查是否能Ping通此网址:\nraw.githubusercontent.com")
+                                       u"随后检查是否能Ping通此网址:\nraw.githubusercontent.com\n"
+                                       u"若反复尝试仍无法更新，请试试重启Sekai Text")
             confirmButton = networkErrorWindow.addButton(u"确认", qw.QMessageBox.AcceptRole)
             networkErrorWindow.exec()
             if networkErrorWindow.clickedButton() == confirmButton:
@@ -1280,36 +1269,45 @@ class updateThread(qc.QThread):
         self.ListManager = ListManager(settingpath)
 
     def run(self):
-        site = self.ListManager.chooseSite()
-        print(site)
-        if site == "":  # No site selected
-            print("No site selected")
-            logging.error("Fail to Download Settingg File from best.")
+        try:
+            site = self.ListManager.chooseSite()
+            # print(site)
+            if site == "":  # No site selected
+                # print("No site selected")
+                logging.error("Fail to Download Settingg File from best.")
+                exc_type, exc_value, exc_traceback_obj = sys.exc_info()
+                with open(loggingPath, 'a') as f:
+                    traceback.print_exception(
+                        exc_type, exc_value, exc_traceback_obj, file=f)
+                self.trigger.emit("No site selected")
+                return
+                
+            self.trigger.emit([site, "活动"])
+            self.ListManager.updateEvents()
+            self.trigger.emit([site, "卡面"])
+            self.ListManager.updateCards()
+            self.trigger.emit([site, "特殊卡面"])
+            self.ListManager.updateFestivals()
+            self.trigger.emit([site, "主线"])
+            self.ListManager.updateMainstory()
+            self.trigger.emit([site, "地图对话"])
+            self.ListManager.updateAreatalks()
+            self.trigger.emit([site, "主界面语音"])
+            self.ListManager.updateGreets()
+            self.trigger.emit([site, "特殊剧情"])
+            self.ListManager.updateSpecials()
+            self.trigger.emit([site, "推断语音ID"])
+            self.ListManager.inferVoiceEventID()
+            self.trigger.emit(self.ListManager)
+            logging.info("Chapter Information Update Successed.")
+        except BaseException:
+            logging.error("Fail to Update Chapter Information.")
             exc_type, exc_value, exc_traceback_obj = sys.exc_info()
             with open(loggingPath, 'a') as f:
                 traceback.print_exception(
                     exc_type, exc_value, exc_traceback_obj, file=f)
             self.trigger.emit("No site selected")
             return
-            
-        self.trigger.emit([site, "活动"])
-        self.ListManager.updateEvents()
-        self.trigger.emit([site, "卡面"])
-        self.ListManager.updateCards()
-        self.trigger.emit([site, "特殊卡面"])
-        self.ListManager.updateFestivals()
-        self.trigger.emit([site, "主线"])
-        self.ListManager.updateMainstory()
-        self.trigger.emit([site, "地图对话"])
-        self.ListManager.updateAreatalks()
-        self.trigger.emit([site, "主界面语音"])
-        self.ListManager.updateGreets()
-        self.trigger.emit([site, "特殊剧情"])
-        self.ListManager.updateSpecials()
-        self.trigger.emit([site, "推断语音ID"])
-        self.ListManager.inferVoiceEventID()
-        self.trigger.emit(self.ListManager)
-        logging.info("Chapter Information Update Successed.")
 
 
 def save(self):
