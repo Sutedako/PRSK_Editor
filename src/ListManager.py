@@ -102,7 +102,7 @@ class ListManager():
                 data = json.loads(data)
                 if name == "ai":
                     data = data['data']
-            except:
+            except BaseException as e:
                 data = []
                 downloadTime = 100000
 
@@ -111,6 +111,7 @@ class ListManager():
                 minDownloadTime = downloadTime
                 self.DBurl = site
                 result = name
+
         logging.info("[ListManager] self.DBurl = %s" % (self.DBurl))
         return result
 
