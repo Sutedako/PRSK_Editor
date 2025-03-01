@@ -180,7 +180,9 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
         for file in requiredFiles:
             if not osp.exists(osp.join(root, "setting", file)):
+                print(osp.join(root, "setting", file))
                 return False
+        return True
 
 
     def downloadJson(self, jsonname, jsonurl):
