@@ -156,6 +156,33 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         self.tempWindow.button(qw.QMessageBox.No).setText("取消")
         self.tempWindow.buttonClicked.connect(self.downloadFailed)
 
+        if not self.checkIfSettingFileExists(root):
+            settingFilesMissingWindow = qw.QMessageBox(self)
+            settingFilesMissingWindow.setWindowTitle("Sekai Text")
+            settingFilesMissingWindow.setText(u"检查到setting文件夹中缺少必要文件\n自动更新...")
+            confirmButton = settingFilesMissingWindow.addButton("确认", qw.QMessageBox.AcceptRole)
+            settingFilesMissingWindow.exec_()
+            if settingFilesMissingWindow.clickedButton() == confirmButton:
+                self.updateComboBox()
+
+
+    def checkIfSettingFileExists(self, root):
+        requiredFiles = [
+            "setting.json",
+            "areatalks.json",
+            "cards.json",
+            "events.json",
+            "festivals.json",
+            "greets.json",
+            "mainStory.json",
+            "specials.json"
+        ]
+
+        for file in requiredFiles:
+            if not osp.exists(osp.join(root, "setting", file)):
+                return False
+
+
     def downloadJson(self, jsonname, jsonurl):
         jsonpath = osp.join(self.datadir, jsonname)
         download = downloadThread(jsonpath, jsonurl)
