@@ -6,6 +6,7 @@ import os.path as osp
 from os import environ
 import requests
 import time
+import math
 
 from Dictionary import unitDict, sekaiDict, characterDict, areaDict
 from Dictionary import greetDict_season, greetDict_celebrate, greetDict_holiday
@@ -96,21 +97,22 @@ class ListManager():
         for site, name in zip(sites, siteNames):
             try:
                 startTime = time.time()
-                data = requests.get(site.format("events"), headers=self.headers, proxies=localProxy).text
+                data = requests.get(site.format("events"), headers=self.headers, proxies=localProxy, timeout=minDownloadTime).text
                 endTime = time.time()
                 downloadTime = endTime - startTime
                 data = json.loads(data)
                 if name == "ai":
                     data = data['data']
-            except:
+            except BaseException as e:
                 data = []
-                downloadTime = 100000
+                downloadTime = math.inf
 
             if len(data) >= maxEventsLength and downloadTime < minDownloadTime:
                 maxEventsLength = len(data)
                 minDownloadTime = downloadTime
                 self.DBurl = site
                 result = name
+
         logging.info("[ListManager] self.DBurl = %s" % (self.DBurl))
         return result
 

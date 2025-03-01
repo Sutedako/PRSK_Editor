@@ -156,6 +156,35 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         self.tempWindow.button(qw.QMessageBox.No).setText("取消")
         self.tempWindow.buttonClicked.connect(self.downloadFailed)
 
+        if not self.checkIfSettingFileExists(root):
+            settingFilesMissingWindow = qw.QMessageBox(self)
+            settingFilesMissingWindow.setWindowTitle("Sekai Text")
+            settingFilesMissingWindow.setText(u"检查到setting文件夹中缺少必要文件\n自动更新...")
+            confirmButton = settingFilesMissingWindow.addButton("确认", qw.QMessageBox.AcceptRole)
+            settingFilesMissingWindow.exec_()
+            if settingFilesMissingWindow.clickedButton() == confirmButton:
+                self.updateComboBox()
+
+
+    def checkIfSettingFileExists(self, root):
+        requiredFiles = [
+            "setting.json",
+            "areatalks.json",
+            "cards.json",
+            "events.json",
+            "festivals.json",
+            "greets.json",
+            "mainStory.json",
+            "specials.json"
+        ]
+
+        for file in requiredFiles:
+            if not osp.exists(osp.join(root, "setting", file)):
+                # print(osp.join(root, "setting", file))
+                return False
+        return True
+
+
     def downloadJson(self, jsonname, jsonurl):
         jsonpath = osp.join(self.datadir, jsonname)
         download = downloadThread(jsonpath, jsonurl)
@@ -1005,14 +1034,14 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         else:
             self.srcText.hideFlashback()
 
-    def setComboBoxStoryType(self, isInt=False):
+    def setComboBoxStoryType(self, isInit=False):
         if 'storyType' in self.setting:
             self.comboBoxStoryType.setCurrentIndex(self.setting['storyType'])
 
         if self.ListManager.events == []:
             return
 
-        self.setComboBoxStoryTypeSort(isInt)
+        self.setComboBoxStoryTypeSort(isInit)
 
     def setComboBoxStoryTypeSort(self, isInit=False):
         storyType = self.comboBoxStoryType.currentText()
@@ -1102,6 +1131,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
         self.comboBoxStoryChapter.clear()
         storyChapterList = self.ListManager.getStoryChapterList(storyType, sort, storyIndex)
+
         for idx, sc in enumerate(storyChapterList):
             if sc == "-":
                 self.comboBoxStoryChapter.insertSeparator(idx)
@@ -1118,7 +1148,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
     def updateComboBox(self):
         update = updateThread(self.settingdir)
         update.trigger.connect(self.checkUpdated)
-
+        self.tempWindow.setWindowTitle(u"SeKai Text")
         self.tempWindow.setText(u"选择源网站中...")
         self.tempWindow.open()
         self.downloadState = 0
@@ -1180,6 +1210,17 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         if type(output) == ListManager and output.events:
             self.ListManager = output
             self.downloadState = 1
+        if type(output) == str and output == "No site selected":
+            networkErrorWindow = qw.QMessageBox(self)
+            networkErrorWindow.setWindowTitle(u"SeKai Text")
+            networkErrorWindow.setText(u"更新失败\n请确认能正常访问sekai.best，且关闭代理与VPN\n"
+                                       u"随后检查是否能Ping通此网址:\nraw.githubusercontent.com\n"
+                                       u"若反复尝试仍无法更新，请试试重启Sekai Text")
+            confirmButton = networkErrorWindow.addButton(u"确认", qw.QMessageBox.AcceptRole)
+            networkErrorWindow.exec()
+            if networkErrorWindow.clickedButton() == confirmButton:
+                self.tempWindow.close()
+                self.downloadState = 2
         else:
             self.downloadState = 2
         self.tempWindow.close()
@@ -1230,6 +1271,17 @@ class updateThread(qc.QThread):
     def run(self):
         try:
             site = self.ListManager.chooseSite()
+            # print(site)
+            if site == "":  # No site selected
+                # print("No site selected")
+                logging.error("Fail to Download Settingg File from best.")
+                exc_type, exc_value, exc_traceback_obj = sys.exc_info()
+                with open(loggingPath, 'a') as f:
+                    traceback.print_exception(
+                        exc_type, exc_value, exc_traceback_obj, file=f)
+                self.trigger.emit("No site selected")
+                return
+                
             self.trigger.emit([site, "活动"])
             self.ListManager.updateEvents()
             self.trigger.emit([site, "卡面"])
@@ -1248,16 +1300,14 @@ class updateThread(qc.QThread):
             self.ListManager.inferVoiceEventID()
             self.trigger.emit(self.ListManager)
             logging.info("Chapter Information Update Successed.")
-
         except BaseException:
-            logging.error("Fail to Download Settingg File from best.")
+            logging.error("Fail to Update Chapter Information.")
             exc_type, exc_value, exc_traceback_obj = sys.exc_info()
             with open(loggingPath, 'a') as f:
                 traceback.print_exception(
                     exc_type, exc_value, exc_traceback_obj, file=f)
-            qw.QMessageBox.warning(
-                self, "", u"更新失败\n请确认能正常访问sekai.best，且关闭代理与VPN")
-            self.trigger.emit([], [], [], [])
+            self.trigger.emit("No site selected")
+            return
 
 
 def save(self):
@@ -1293,24 +1343,24 @@ if __name__ == '__main__':
                         filename=loggingPath,
                         filemode='w')
     try:
-        modeSelectWinodw = qw.QMessageBox()
-        modeSelectWinodw.setWindowTitle("Sekai Text")
-        modeSelectWinodw.setText("校对与合意时\n强烈建议在有音画对照的条件下进行\n如看游戏内，或者对照录制视频")
+        modeSelectWindow = qw.QMessageBox()
+        modeSelectWindow.setWindowTitle("Sekai Text")
+        modeSelectWindow.setText("校对与合意时\n强烈建议在有音画对照的条件下进行\n如看游戏内，或者对照录制视频")
         if platform.system() == "Darwin":
-            checkButton = modeSelectWinodw.addButton(u"合意", 2)
-            proofreadButton = modeSelectWinodw.addButton(u"校对", 2)
-            translateButton = modeSelectWinodw.addButton(u"翻译", 2)
+            checkButton = modeSelectWindow.addButton(u"合意", 2)
+            proofreadButton = modeSelectWindow.addButton(u"校对", 2)
+            translateButton = modeSelectWindow.addButton(u"翻译", 2)
         else:
-            translateButton = modeSelectWinodw.addButton(u"翻译", 2)
-            proofreadButton = modeSelectWinodw.addButton(u"校对", 2)
-            checkButton = modeSelectWinodw.addButton(u"合意", 2)
+            translateButton = modeSelectWindow.addButton(u"翻译", 2)
+            proofreadButton = modeSelectWindow.addButton(u"校对", 2)
+            checkButton = modeSelectWindow.addButton(u"合意", 2)
 
         mainform = mainForm(root)
         translateButton.clicked.connect(mainform.translateMode)
         proofreadButton.clicked.connect(mainform.proofreadMode)
         checkButton.clicked.connect(mainform.checkMode)
 
-        modeSelectWinodw.exec_()
+        modeSelectWindow.exec_()
         mainform.show()
         atexit.register(save, mainform)
         app.exec_()
