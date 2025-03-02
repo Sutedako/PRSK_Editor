@@ -592,7 +592,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
         title = osp.basename(textpath).split(".")[0]
         title = title[title.find(" ") + 1:]
-        if title and title != "[AutoSave]":
+        if title and title != "AutoSave":
             self.lineEditTitle.setText(title)
         return True
 
@@ -753,7 +753,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 self.dstText.changeText(item, self.editormode)
             self.saved = False
             self.setWindowTitle(u"*{} Sekai Text".format(self.dstfilename))
-            self.dstText.saveFile(osp.join(osp.dirname(self.dstfilepath), "[AutoSave].txt"), self.saveN)
+            self.dstText.saveFile(osp.join(osp.dirname(self.dstfilepath), "AutoSave.txt"), self.saveN)
             self.alignWithDstRowChanged(self.tableWidgetDst.currentRow() - 1)
         except BaseException:
             exc_type, exc_value, exc_traceback_obj = sys.exc_info()
