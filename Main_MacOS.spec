@@ -40,6 +40,6 @@ exe = EXE(pyz,
           codesign_identity=None,
           entitlements_file=None )
 app = BUNDLE(exe,
-             name='Sekai Text.app',
+             name='Sekai Text(MacOS).app',
              icon='image/icon/256.icns',
              bundle_identifier=None)
