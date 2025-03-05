@@ -1079,7 +1079,7 @@ class ListManager():
             elif source == "unipjsk.com":
                 jsonurl = uniBaseUrl + "startapp/scenario/unitstory/" \
                     "{}/{}.json".format(unit, chapter)
-            print(jsonurl)
+            # print(jsonurl)
 
             preTitle = chapter.replace("_", "-")
             jsonname = "mainStory_{}.json".format(chapter)
