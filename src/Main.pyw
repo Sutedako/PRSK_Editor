@@ -303,6 +303,9 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             self.setFontSize()
 
             self.alignRowsHeight()
+
+            self.dstText.dsttalks = self.dstText.checkLines(self.dstText.loadtalks)
+            self.dstText.resetTalk(self.editormode, self.dstText.dsttalks)
         except BaseException:
             exc_type, exc_value, exc_traceback_obj = sys.exc_info()
             with open(loggingPath, 'a') as f:

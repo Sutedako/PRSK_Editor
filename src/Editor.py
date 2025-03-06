@@ -22,6 +22,7 @@ class Editor():
         self.srctalks = []
         self.refertalks = []
         self.dsttalks = []
+        self.loadtalks = [] # for reset use
 
         self.translatepath = ""
         self.proofreadpath = ""
@@ -171,6 +172,7 @@ class Editor():
         if preblank:
             loadtalks.pop()
 
+        self.loadtalks = loadtalks
         self.resetTalk(editormode, loadtalks)
 
     def saveFile(self, filepath, saveN):
