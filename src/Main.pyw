@@ -9,27 +9,28 @@ import PyQt5.QtCore as qc
 import PyQt5.QtWidgets as qw
 from mainGUI import Ui_SekaiText
 from PyQt5.QtGui import QKeySequence, QIcon, QBrush, QColor
+from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
 
 from Editor import Editor
 from JsonLoader import JsonLoader
 from ListManager import ListManager
 from Dictionary import unitDict, sekaiDict, characterDict
+import Flashback as flashback
 
 import json
 import logging
 import os.path as osp
-from os import environ, mkdir, _exit, remove
+from os import environ, mkdir, _exit, remove, listdir
 import platform
-import requests
 from urllib import request
-import Flashback as flashback
+from enum import Enum
+
+import requests
 
 EditorMode = [u'翻译', u'校对', u'合意', u'审核']
 
 loggingPath = ""
-
-localProxy = request.getproxies()
-
+configPath = ""
 
 class mainForm(qw.QMainWindow, Ui_SekaiText):
     def __init__(self, root):
@@ -62,7 +63,20 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
         self.setting = {}
 
-        self.downloadState = 1
+        self.downloadState = DownloadState.NOT_STARTED
+
+        self.tempVoicePath = osp.join(root, "temp")
+        if not osp.exists(self.tempVoicePath):
+            mkdir(self.tempVoicePath)
+
+        for file in listdir(self.tempVoicePath):
+            remove(osp.join(self.tempVoicePath, file))
+
+        self.headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36'}
+        self.voiceUrls = {
+            "bestVoice" : "https://storage.sekai.best/sekai-jp-assets/sound/scenario/voice/{}.mp3",
+        }
+        self.mediaPlayer = QMediaPlayer()
 
         settingpath = osp.join(self.settingdir, "setting.json")
         if osp.exists(settingpath):
@@ -152,9 +166,16 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
         self.tempWindow = qw.QMessageBox(self)
         self.tempWindow.setStandardButtons(qw.QMessageBox.No)
-        self.tempWindow.setWindowTitle("")
+        self.tempWindow.setWindowTitle("Sekai Text")
         self.tempWindow.button(qw.QMessageBox.No).setText("取消")
         self.tempWindow.buttonClicked.connect(self.downloadFailed)
+
+        self.isFirstUseVoice = True
+        self.voiceDownloadingWindow = qw.QMessageBox(self)
+        self.voiceDownloadingWindow.setWindowTitle("Sekai Text")
+        self.voiceDownloadingWindow.setStandardButtons(qw.QMessageBox.No)
+        self.voiceDownloadingWindow.button(qw.QMessageBox.No).setText("取消")
+        self.voiceDownloadingWindow.buttonClicked.connect(self.downloadFailed)
 
         if not self.checkIfSettingFileExists(root):
             settingFilesMissingWindow = qw.QMessageBox(self)
@@ -164,7 +185,51 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             settingFilesMissingWindow.exec_()
             if settingFilesMissingWindow.clickedButton() == confirmButton:
                 self.updateComboBox()
+    
+    def playVoice(self, voice, volume, scenario_id):
+        if self.isFirstUseVoice:
+            voiceNotionWindow = qw.QMessageBox(self)
+            voiceNotionWindow.setWindowTitle("Sekai Text")
+            voiceNotionWindow.setText(u"原则上，翻译，校对与合意时\n应在有音画对照的条件下进行\n如看游戏内，或者对照录制视频\n播放语音的功能只是为了方便\n请勿依赖语音进行翻译")
+            voiceNotionWindow.setStandardButtons(qw.QMessageBox.Ok)
+            voiceNotionWindow.button(qw.QMessageBox.Ok).setText("好的")
+            voiceNotionWindow.exec_()
+            self.isFirstUseVoice = False
 
+        voiceUrl = self.voiceUrls["bestVoice"].format(scenario_id + "_rip/" + voice[0])
+        voicePath = osp.join(self.tempVoicePath, voice[0] + ".mp3")
+
+        if not osp.exists(voicePath):
+            downloadVoiceTask = downloadVoiceThread(
+                voiceUrl = voiceUrl,
+                voicePath = voicePath,
+                header = self.headers
+            )
+            downloadVoiceTask.trigger.connect(self.checkVoiceDownload)
+            self.downloadState = DownloadState.DOWNLOADING
+            downloadVoiceTask.start()
+
+            self.voiceDownloadingWindow.setText(u"语音下载中...")
+            self.voiceDownloadingWindow.show()
+
+            while self.downloadState == DownloadState.DOWNLOADING:
+                time.sleep(0.1)
+                qw.QApplication.processEvents()
+
+            if self.downloadState == DownloadState.FAILED:
+                self.downloadState = DownloadState.NOT_STARTED
+                if osp.exists(voicePath):
+                    remove(voicePath)
+                return
+
+            self.downloadState = DownloadState.NOT_STARTED
+                
+        if self.mediaPlayer is None:
+            self.mediaPlayer = QMediaPlayer()
+
+        self.mediaPlayer.setVolume(volume[0] * 100)
+        self.mediaPlayer.setMedia(QMediaContent(qc.QUrl.fromLocalFile(voicePath)))
+        self.mediaPlayer.play()
 
     def checkIfSettingFileExists(self, root):
         requiredFiles = [
@@ -187,7 +252,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
     def downloadJson(self, jsonname, jsonurl):
         jsonpath = osp.join(self.datadir, jsonname)
-        download = downloadThread(jsonpath, jsonurl)
+        download = downloadJsonThread(jsonpath, jsonurl)
         download.trigger.connect(self.checkDownload)
 
         urlText = u"下载中...<br>若耗时过长可自行前往下方地址下载" + \
@@ -199,14 +264,17 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
         self.tempWindow.setText(urlText)
         self.tempWindow.open()
-        self.downloadState = 0
 
+        self.downloadState = DownloadState.DOWNLOADING
         download.start()
-        while not self.downloadState:
+        while self.downloadState == DownloadState.DOWNLOADING:
             time.sleep(0.1)
             qw.QApplication.processEvents()
-        if self.downloadState == 2:
+        if self.downloadState == DownloadState.FAILED:
+            self.downloadState = DownloadState.NOT_STARTED
             return False
+        
+        self.downloadState = DownloadState.NOT_STARTED
         return True
 
     def loadJson(self):
@@ -241,7 +309,13 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             if not jsonpath:
                 return
             try:
-                self.srcText = JsonLoader(jsonpath, self.tableWidgetSrc, fontSize=self.fontSize, flashbackAnalyzer=self.flashback)
+                self.srcText = JsonLoader(
+                    jsonpath, 
+                    self.tableWidgetSrc, 
+                    fontSize=self.fontSize, 
+                    flashbackAnalyzer=self.flashback, 
+                    playVoiceCallback=self.playVoice
+                )
                 self.toggleFlashback(self.checkBoxShowFlashback.isChecked())
                 logging.info("Json File Loaded: " + jsonpath)
             except BaseException:
@@ -1154,14 +1228,17 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         self.tempWindow.setWindowTitle(u"SeKai Text")
         self.tempWindow.setText(u"选择源网站中...")
         self.tempWindow.open()
-        self.downloadState = 0
+        self.downloadState = DownloadState.DOWNLOADING
 
         update.start()
-        while not self.downloadState:
+        while self.downloadState == DownloadState.DOWNLOADING:
             time.sleep(0.1)
             qw.QApplication.processEvents()
-        if self.downloadState == 2:
+        if self.downloadState == DownloadState.FAILED:
+            self.downloadState = DownloadState.NOT_STARTED
             return False
+        
+        self.downloadState = DownloadState.NOT_STARTED
 
         logging.info("Story List Updated")
         self.setComboBoxStoryIndex()
@@ -1195,7 +1272,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
     def checkDownload(self, successed):
         if successed:
             self.tempWindow.close()
-            self.downloadState = 1
+            self.downloadState = DownloadState.SUCCESSED
         else:
             urlText = self.tempWindow.text().replace(
                 "下载中...<br>若耗时过长",
@@ -1204,7 +1281,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             self.tempWindow.setText(urlText)
             self.tempWindow.close()
             self.tempWindow.exec()
-            self.downloadState = 2
+            self.downloadState = DownloadState.FAILED
 
     def checkUpdated(self, output):
         if type(output) == list:
@@ -1212,7 +1289,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             return
         if type(output) == ListManager and output.events:
             self.ListManager = output
-            self.downloadState = 1
+            self.downloadState = DownloadState.SUCCESSED
         if type(output) == str and output == "No site selected":
             networkErrorWindow = qw.QMessageBox(self)
             networkErrorWindow.setWindowTitle(u"SeKai Text")
@@ -1223,28 +1300,40 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             networkErrorWindow.exec()
             if networkErrorWindow.clickedButton() == confirmButton:
                 self.tempWindow.close()
-                self.downloadState = 2
+                self.downloadState = DownloadState.FAILED
         else:
-            self.downloadState = 2
+            self.downloadState = DownloadState.FAILED
         self.tempWindow.close()
 
+    def checkVoiceDownload(self, successed):
+        if successed:
+            self.voiceDownloadingWindow.close()
+            self.downloadState = DownloadState.SUCCESSED
+        else:
+            self.voiceDownloadingWindow.close()
+            self.voiceDownloadingWindow.setText(u"语音下载失败\n请确认代理与VPN关闭\n如仍无法下载，请试一试重启Sekai Text")
+            self.voiceDownloadingWindow.setStandardButtons(qw.QMessageBox.Ok)
+            self.voiceDownloadingWindow.button(qw.QMessageBox.Ok).setText(u"确认")
+            self.voiceDownloadingWindow.exec()
+            self.downloadState = DownloadState.FAILED
+
     def downloadFailed(self):
-        self.downloadState = 2
+        self.downloadState = DownloadState.FAILED
 
 
-class downloadThread(qc.QThread):
+class downloadJsonThread(qc.QThread):
     trigger = qc.pyqtSignal(bool)
     path = ""
     url = ""
 
     def __init__(self, jsonpath, jsonurl):
-        super(downloadThread, self).__init__()
+        super(downloadJsonThread, self).__init__()
         self.path = jsonpath
         self.url = jsonurl
 
     def run(self):
         try:
-            r = requests.get(self.url, stream=True, timeout=5, proxies=localProxy)
+            r = requests.get(self.url, stream=True, timeout=5, proxies=request.getproxies())
             r.encoding = 'utf-8'
             jsondata = json.loads(r.text)
 
@@ -1261,6 +1350,38 @@ class downloadThread(qc.QThread):
         except BaseException:
             logging.error("Fail to Download Json File.")
             self.trigger.emit(False)
+
+
+class downloadVoiceThread(qc.QThread):
+    trigger = qc.pyqtSignal(bool)
+    path = ""
+    url = ""
+
+    def __init__(self, voicePath, voiceUrl, header):
+        super(downloadVoiceThread, self).__init__()
+        self.path = voicePath
+        self.url = voiceUrl
+        self.header = header
+
+    def run(self):
+        try:
+            r = requests.get(
+                self.url, 
+                headers=self.header,
+                proxies=request.getproxies()
+            )
+            with open(self.path, 'wb') as f:
+                f.write(r.content)
+            logging.info("Voice File Saved: " + self.path)
+            self.trigger.emit(True)
+        except BaseException:
+            logging.error("Fail to Download Voice File.")
+            exc_type, exc_value, exc_traceback_obj = sys.exc_info()
+            with open(loggingPath, 'a') as f:
+                traceback.print_exception(
+                    exc_type, exc_value, exc_traceback_obj, file=f)
+            self.trigger.emit(False)
+            return
 
 
 class updateThread(qc.QThread):
@@ -1313,6 +1434,13 @@ class updateThread(qc.QThread):
             return
 
 
+class DownloadState(Enum):
+    DOWNLOADING = 0
+    SUCCESSED = 1
+    FAILED = 2
+    NOT_STARTED = 3
+
+
 def save(self):
     settingpath = osp.join(self.settingdir, "setting.json")
     with open(settingpath, 'w', encoding='utf-8') as f:
@@ -1345,6 +1473,7 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO,
                         filename=loggingPath,
                         filemode='w')
+
     try:
         modeSelectWindow = qw.QMessageBox()
         modeSelectWindow.setWindowTitle("Sekai Text")

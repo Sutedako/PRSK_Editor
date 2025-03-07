@@ -136,3 +136,4 @@ dmypy.json
 \[AutoSave\].txt
 urls.json
 .idea/
+temp/

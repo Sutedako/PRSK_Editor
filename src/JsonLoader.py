@@ -18,7 +18,7 @@ class JsonLoader():
         root, _ = osp.split(osp.abspath(sys.argv[0]))
         root = osp.join(root, "../")
 
-    def __init__(self, path="", table=None, fontSize=18, flashbackAnalyzer=None):
+    def __init__(self, path="", table=None, fontSize=18, flashbackAnalyzer=None, playVoiceCallback=None):
 
         self.talks = []
         self.table = table
@@ -41,6 +41,8 @@ class JsonLoader():
         
         self.scenario_id = fulldata['ScenarioId']
 
+        self.playVoice = playVoiceCallback
+
         for snippet in fulldata['Snippets']:
             # TalkData
             if snippet['Action'] == 1:
@@ -48,13 +50,13 @@ class JsonLoader():
                 speaker = talkdata['WindowDisplayName'].split("_")[0]
                 text = talkdata['Body']
                 voices = []
+                volume = []
                 flashback_clue = []
                 is_in_event = True
 
                 for voice in talkdata['Voices']:
-
-                    # TODO download voice file and play
-                    voices.append(voice['VoiceId']) 
+                    voices.append(voice['VoiceId'])
+                    volume.append(voice['Volume'])
                 
                 close = talkdata['WhenFinishCloseWindow']
 
@@ -62,6 +64,7 @@ class JsonLoader():
                     'speaker': speaker,
                     'text': text.rstrip(),
                     'voices': voices,
+                    'volume': volume,
                 })
 
                 row = self.table.rowCount()
@@ -81,6 +84,14 @@ class JsonLoader():
                 
                 textItem = QTableWidgetItem(text)
                 self.table.setItem(row, 1, textItem)
+
+                if voices:
+                    buttonPlay = QPushButton("播放")
+                    buttonPlay.clicked.connect(lambda checked=False, v=voices, vol=volume, sid=self.scenario_id: 
+                          self.playVoice(voice=v, volume=vol, scenario_id=sid))
+                    self.table.setCellWidget(row, 2, buttonPlay)
+                else:
+                    self.table.setItem(row, 2, QTableWidgetItem(""))
 
                 # buttonPlay = QPushButton("")
                 # buttonPlay.clicked.connect(self.play)
@@ -120,6 +131,7 @@ class JsonLoader():
                     row = self.table.rowCount()
                     self.table.setRowCount(row + 1)
                     self.table.setItem(row, 1, QTableWidgetItem(text))
+                    self.table.setItem(row, 2, QTableWidgetItem(""))
                     self.table.setRowHeight(row, 20 + (15 + self.fontSize))
 
                     self.talks.append({
