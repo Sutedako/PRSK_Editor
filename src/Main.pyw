@@ -65,13 +65,6 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
         self.downloadState = DownloadState.NOT_STARTED
 
-        self.tempVoicePath = osp.join(root, "temp")
-        if not osp.exists(self.tempVoicePath):
-            mkdir(self.tempVoicePath)
-
-        for file in listdir(self.tempVoicePath):
-            remove(osp.join(self.tempVoicePath, file))
-
         self.headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36'}
         self.voiceUrls = {
             "bestVoice" : "https://storage.sekai.best/sekai-jp-assets/sound/scenario/voice/{}.mp3",
@@ -91,6 +84,17 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             self.setting['syncScroll'] = False
         if 'showFlashback' not in self.setting:
             self.setting['showFlashback'] = True
+        if 'saveVoice' not in self.setting:
+            self.setting['saveVoice'] = False
+
+        self.tempVoicePath = osp.join(root, "temp")
+        if not osp.exists(self.tempVoicePath):
+            mkdir(self.tempVoicePath)
+
+        if not self.setting['saveVoice']:
+            for file in listdir(self.tempVoicePath):
+                remove(osp.join(self.tempVoicePath, file))
+
         logging.info("Text Folder Path: {}".format(self.setting['textdir']))
         self.fontSize = self.setting['fontSize'] if 'fontSize' in self.setting else 18
 
