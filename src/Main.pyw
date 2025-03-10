@@ -30,7 +30,7 @@ import requests
 EditorMode = [u'翻译', u'校对', u'合意', u'审核']
 
 loggingPath = ""
-configPath = ""
+settings = None
 
 class mainForm(qw.QMainWindow, Ui_SekaiText):
     def __init__(self, root):
@@ -125,6 +125,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         self.pushButtonRefresh.clicked.connect(self.updateComboBox)
 
         self.pushButtonLoad.clicked.connect(self.loadJson)
+        self.voiceEnableButton.clicked.connect(self.enableVoice)
         self.pushButtonCount.clicked.connect(self.countSpeaker)
 
         self.radioButtonTranslate.clicked.connect(self.translateMode)
@@ -387,6 +388,12 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                     exc_type, exc_value, exc_traceback_obj, file=f)
             qw.QMessageBox.warning(
                 self, "", u"loadJson错误\n请将“setting\\log.txt发给弃子”")
+
+    def enableVoice(self):
+        if not self.voiceEnableButton.isChecked():
+            self.tableWidgetSrc.hideColumn(2)
+        else:
+            self.tableWidgetSrc.showColumn(2)
 
     def countSpeaker(self):
         try:
@@ -1448,7 +1455,6 @@ def save(self):
 
 
 if __name__ == '__main__':
-
     # if hasattr(qc.Qt, 'AA_EnableHighDpiScaling'):
     #     qw.QApplication.setAttribute(qc.Qt.AA_EnableHighDpiScaling, True)
     # if hasattr(qc.Qt, 'AA_UseHighDpiPixmaps'):
@@ -1473,7 +1479,6 @@ if __name__ == '__main__':
     logging.basicConfig(level=logging.INFO,
                         filename=loggingPath,
                         filemode='w')
-
     try:
         modeSelectWindow = qw.QMessageBox()
         modeSelectWindow.setWindowTitle("Sekai Text")

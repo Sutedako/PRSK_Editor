@@ -169,6 +169,12 @@ class Ui_SekaiText(object):
         self.label_2.setObjectName("label_2")
         self.horizontalLayout_2.addWidget(self.label_2)
 
+        self.voiceEnableButton = QtWidgets.QPushButton(self.centralwidget)
+        self.voiceEnableButton.setFixedSize(QtCore.QSize(100, 30))
+        self.voiceEnableButton.setObjectName("voiceEnableButton")
+        self.voiceEnableButton.setCheckable(True)
+        self.horizontalLayout_2.addWidget(self.voiceEnableButton)
+
         self.pushButtonCount = QtWidgets.QPushButton(self.centralwidget)
         self.pushButtonCount.setFixedSize(QtCore.QSize(100, 30))
         self.pushButtonCount.setObjectName("pushButtonCount")
@@ -258,6 +264,7 @@ class Ui_SekaiText(object):
         self.tableWidgetSrc.setHorizontalHeaderItem(1, item)
         item = QtWidgets.QTableWidgetItem()
         self.tableWidgetSrc.setHorizontalHeaderItem(2, item)
+        self.tableWidgetSrc.hideColumn(2)
         # self.tableWidgetSrc.horizontalHeader().hide()
         self.tableWidgetSrc.horizontalHeader().resizeSection(0, 120)
         self.tableWidgetSrc.horizontalHeader().setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
@@ -326,6 +333,7 @@ class Ui_SekaiText(object):
         self.labelDataSrc.setText(_translate("SekaiText", u"数据来源："))
         self.pushButtonLoad.setText(_translate("SekaiText", u"载入"))
         self.checkBoxJapanese.setText(_translate("SekaiText", u"生成日文"))
+        self.voiceEnableButton.setText(_translate("SekaiText", u"语音开关"))
         self.pushButtonCount.setText(_translate("SekaiText", u"统计说话人"))
         self.checkBoxAll.setText(_translate("SekaiText", u"全部章节"))
         self.labelTitle.setText(_translate("SekaiText", u"标题："))
