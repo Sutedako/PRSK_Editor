@@ -232,7 +232,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         if self.mediaPlayer is None:
             self.mediaPlayer = QMediaPlayer()
 
-        self.mediaPlayer.setVolume(volume[0] * 100)
+        self.mediaPlayer.setVolume(int(volume[0] * 100))
         self.mediaPlayer.setMedia(QMediaContent(qc.QUrl.fromLocalFile(voicePath)))
         self.mediaPlayer.play()
 
