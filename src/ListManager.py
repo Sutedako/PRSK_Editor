@@ -96,16 +96,18 @@ class ListManager():
 
         for site, name in zip(sites, siteNames):
             try:
+                logging.info("[ListManager] Trying to connect to %s" % (name))
                 startTime = time.time()
-                data = requests.get(site.format("events"), headers=self.headers, proxies=localProxy, timeout=minDownloadTime).text
+                data = requests.get(site.format("events"), headers=self.headers, timeout=minDownloadTime, verify=False).text
                 endTime = time.time()
                 downloadTime = endTime - startTime
                 data = json.loads(data)
                 if name == "ai":
                     data = data['data']
             except BaseException as e:
+                logging.warning("[ListManager] Failed to connect to %s cause %s" % (name, e))
                 data = []
-                downloadTime = math.inf
+                downloadTime = math.inf             
 
             if len(data) >= maxEventsLength and downloadTime < minDownloadTime:
                 maxEventsLength = len(data)
@@ -118,18 +120,18 @@ class ListManager():
 
     def updateEvents(self):
         url = self.DBurl.format("events")
-        events = json.loads(requests.get(url, headers=self.headers, proxies=localProxy).text)
+        events = json.loads(requests.get(url, headers=self.headers, proxies=localProxy, verify=False).text)
         if("data" in events):
             events = events["data"]
         cardIdx = 0
 
         url = self.DBurl.format("eventStories")
-        stories = json.loads(requests.get(url, headers=self.headers, proxies=localProxy).text)
+        stories = json.loads(requests.get(url, headers=self.headers, proxies=localProxy, verify=False).text)
         if("data" in stories):
             stories = stories["data"]
 
         url = self.DBurl.format("eventCards")
-        cards = json.loads(requests.get(url, headers=self.headers, proxies=localProxy).text)
+        cards = json.loads(requests.get(url, headers=self.headers, proxies=localProxy, verify=False).text)
         if("data" in cards):
             cards = cards["data"]
 
@@ -158,7 +160,7 @@ class ListManager():
 
     def updateCards(self):
         url = self.DBurl.format("cards")
-        cards = json.loads(requests.get(url, headers=self.headers, proxies=localProxy).text)
+        cards = json.loads(requests.get(url, headers=self.headers, proxies=localProxy, verify=False).text)
         if("data" in cards):
             cards = cards["data"]
 
@@ -268,7 +270,7 @@ class ListManager():
             return
         self.mainstory = []
         url = self.DBurl.format("unitStories")
-        story = json.loads(requests.get(url, headers=self.headers, proxies=localProxy).text)
+        story = json.loads(requests.get(url, headers=self.headers, proxies=localProxy, verify=False).text)
         if("data" in story):
             story = story["data"]
         story = sorted(story, key=lambda x: x['seq'])
@@ -286,7 +288,7 @@ class ListManager():
 
     def updateCharacter2ds(self):
         url = self.DBurl.format("character2ds")
-        char2ds = json.loads(requests.get(url, headers=self.headers, proxies=localProxy).text)
+        char2ds = json.loads(requests.get(url, headers=self.headers, proxies=localProxy, verify=False).text)
         if("data" in char2ds):
             char2ds = char2ds["data"]
 
@@ -307,7 +309,7 @@ class ListManager():
 
     def updateAreatalks(self):
         url = self.DBurl.format("actionSets")
-        actions = json.loads(requests.get(url, headers=self.headers, proxies=localProxy).text)
+        actions = json.loads(requests.get(url, headers=self.headers, proxies=localProxy, verify=False).text)
         if("data" in actions):
             actions = actions["data"]
 
@@ -400,7 +402,7 @@ class ListManager():
             return content
 
         url = self.DBurl.format("systemLive2ds")
-        greets = json.loads(requests.get(url, headers=self.headers, proxies=localProxy).text)
+        greets = json.loads(requests.get(url, headers=self.headers, proxies=localProxy, verify=False).text)
         if("data" in greets):
             greets = greets["data"]
 
@@ -517,7 +519,7 @@ class ListManager():
 
     def updateSpecials(self):
         url = self.DBurl.format("specialStories")
-        stories = json.loads(requests.get(url, headers=self.headers, proxies=localProxy).text)
+        stories = json.loads(requests.get(url, headers=self.headers, proxies=localProxy, verify=False).text)
         if("data" in stories):
             stories = stories["data"]
 
