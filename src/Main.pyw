@@ -86,6 +86,12 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             self.setting['showFlashback'] = True
         if 'saveVoice' not in self.setting:
             self.setting['saveVoice'] = False
+        if 'disabelSSLcheck' not in self.setting:
+            self.setting['disabelSSLcheck'] = False
+        if 'download_target' not in self.setting:
+            self.setting['download_target'] = "Hakuri"
+
+        save(self)
 
         self.tempVoicePath = osp.join(root, "temp")
         if not osp.exists(self.tempVoicePath):
@@ -1305,7 +1311,6 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             networkErrorWindow = qw.QMessageBox(self)
             networkErrorWindow.setWindowTitle(u"SeKai Text")
             networkErrorWindow.setText(u"更新失败\n请确认能正常访问sekai.best，且关闭代理与VPN\n"
-                                       u"随后检查是否能Ping通此网址:\nraw.githubusercontent.com\n"
                                        u"若反复尝试仍无法更新，请试试重启Sekai Text")
             confirmButton = networkErrorWindow.addButton(u"确认", qw.QMessageBox.AcceptRole)
             networkErrorWindow.exec()
@@ -1406,10 +1411,9 @@ class updateThread(qc.QThread):
     def run(self):
         try:
             site = self.ListManager.chooseSite()
-            # print(site)
             if site == "":  # No site selected
                 # print("No site selected")
-                logging.error("Fail to Download Settingg File from best.")
+                logging.error("Fail to Download Setting File from best.")
                 exc_type, exc_value, exc_traceback_obj = sys.exc_info()
                 with open(loggingPath, 'a') as f:
                     traceback.print_exception(
