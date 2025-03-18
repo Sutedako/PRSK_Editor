@@ -372,8 +372,12 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                     qw.QMessageBox.No)
                 if relpy == qw.QMessageBox.Yes:
                     self.createText()
+                    self.dstText.loadedtalks = []
                 if relpy == qw.QMessageBox.No:
                     self.dstText.loadJson(self.editormode, self.srcText.talks)
+
+                    self.dstText.dsttalks = self.dstText.checkLines(self.dstText.loadedtalks)
+                    self.dstText.resetTalk(self.editormode, self.dstText.dsttalks)
             
             # Not sure why when calling setFontSize() to resize tables,
             # only a different fontSize will properly resize table headers ...
@@ -388,9 +392,6 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             self.setFontSize()
 
             self.alignRowsHeight()
-
-            self.dstText.dsttalks = self.dstText.checkLines(self.dstText.loadtalks)
-            self.dstText.resetTalk(self.editormode, self.dstText.dsttalks)
         except BaseException:
             exc_type, exc_value, exc_traceback_obj = sys.exc_info()
             with open(loggingPath, 'a') as f:
