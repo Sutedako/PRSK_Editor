@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QTableWidgetItem, QPushButton
+from PyQt5.QtWidgets import QTableWidgetItem, QPushButton, QApplication, QStyle, QHBoxLayout, QWidget
 from PyQt5.QtGui import QIcon, QColor
 import PyQt5.QtMultimedia as media
 from PyQt5.QtCore import QUrl
@@ -86,10 +86,41 @@ class JsonLoader():
                 self.table.setItem(row, 1, textItem)
 
                 if voices:
-                    buttonPlay = QPushButton("播放")
+                    buttonPlay = QPushButton()
+                    buttonPlay.setFixedSize(40, 40)  # 调整按钮大小
+                    
+                    # 使用 Qt 内置的播放图标
+                    play_icon = QApplication.style().standardIcon(QStyle.SP_MediaPlay)
+                    buttonPlay.setIcon(play_icon)
+                    buttonPlay.setIconSize(QtCore.QSize(24, 24))  # 设置图标大小
+                    
+                    buttonPlay.setText("")
+                    buttonPlay.setToolTip("播放语音")
+                    # 设置样式表使按钮更圆润
+                    buttonPlay.setStyleSheet("""
+                        QPushButton {
+                            border: 2px solid #8f8f91;
+                            border-radius: 20px;
+                            background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                                        stop: 0 #f6f7fa, stop: 1 #dadbde);
+                        }
+                        QPushButton:pressed {
+                            background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                                                        stop: 0 #dadbde, stop: 1 #f6f7fa);
+                        }
+                    """)
                     buttonPlay.clicked.connect(lambda checked=False, v=voices, vol=volume, sid=self.scenario_id: 
-                          self.playVoice(voice=v, volume=vol, scenario_id=sid))
-                    self.table.setCellWidget(row, 2, buttonPlay)
+                        self.playVoice(voice=v, volume=vol, scenario_id=sid))
+                    
+                    # 创建一个容器和布局来居中按钮
+                    container = QWidget()
+                    layout = QHBoxLayout(container)
+                    layout.addWidget(buttonPlay)
+                    layout.setAlignment(QtCore.Qt.AlignCenter)  # 设置居中对齐
+                    layout.setContentsMargins(0, 0, 0, 0)  # 移除边距
+                    
+                    # 将容器添加到表格单元格
+                    self.table.setCellWidget(row, 2, container)
                 else:
                     self.table.setItem(row, 2, QTableWidgetItem(""))
 

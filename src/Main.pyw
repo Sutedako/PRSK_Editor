@@ -69,6 +69,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         self.voiceUrls = {
             "bestVoice" : "https://storage.sekai.best/sekai-jp-assets/sound/scenario/voice/{}.mp3",
         }
+        self.nowDownloadVoiceURL = ""
         self.mediaPlayer = QMediaPlayer()
 
         settingpath = osp.join(self.settingdir, "setting.json")
@@ -198,16 +199,8 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 self.updateComboBox()
     
     def playVoice(self, voice, volume, scenario_id):
-        if self.isFirstUseVoice:
-            voiceNotionWindow = qw.QMessageBox(self)
-            voiceNotionWindow.setWindowTitle("Sekai Text")
-            voiceNotionWindow.setText(u"原则上，翻译，校对与合意时\n应在有音画对照的条件下进行\n如看游戏内，或者对照录制视频\n播放语音的功能只是为了方便\n请勿依赖语音进行翻译")
-            voiceNotionWindow.setStandardButtons(qw.QMessageBox.Ok)
-            voiceNotionWindow.button(qw.QMessageBox.Ok).setText("好的")
-            voiceNotionWindow.exec_()
-            self.isFirstUseVoice = False
-
         voiceUrl = self.voiceUrls["bestVoice"].format(scenario_id + "_rip/" + voice[0])
+        self.nowDownloadVoiceURL = voiceUrl
         voicePath = osp.join(self.tempVoicePath, voice[0] + ".mp3")
 
         if not osp.exists(voicePath):
@@ -401,6 +394,15 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 self, "", u"loadJson错误\n请将“setting\\log.txt发给弃子”")
 
     def enableVoice(self):
+        if self.isFirstUseVoice:
+            voiceNotionWindow = qw.QMessageBox(self)
+            voiceNotionWindow.setWindowTitle("Sekai Text")
+            voiceNotionWindow.setText(u"原则上，翻译，校对与合意时\n应在有音画对照的条件下进行\n如看游戏内，或者对照录制视频\n播放语音的功能只是为了方便\n请勿依赖语音进行翻译")
+            voiceNotionWindow.setStandardButtons(qw.QMessageBox.Ok)
+            voiceNotionWindow.button(qw.QMessageBox.Ok).setText("好的")
+            voiceNotionWindow.exec_()
+            self.isFirstUseVoice = False
+
         if not self.voiceEnableButton.isChecked():
             self.tableWidgetSrc.hideColumn(2)
         else:
@@ -687,7 +689,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
         title = osp.basename(textpath).split(".")[0]
         title = title[title.find(" ") + 1:]
-        if title and title != "AutoSave":
+        if title and title != "[AutoSave]":
             self.lineEditTitle.setText(title)
         return True
 
@@ -848,7 +850,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 self.dstText.changeText(item, self.editormode)
             self.saved = False
             self.setWindowTitle(u"*{} Sekai Text".format(self.dstfilename))
-            self.dstText.saveFile(osp.join(osp.dirname(self.dstfilepath), "AutoSave.txt"), self.saveN)
+            self.dstText.saveFile(osp.join(osp.dirname(self.dstfilepath), "[AutoSave].txt"), self.saveN)
             self.alignWithDstRowChanged(self.tableWidgetDst.currentRow() - 1)
         except BaseException:
             exc_type, exc_value, exc_traceback_obj = sys.exc_info()
@@ -1327,11 +1329,27 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             self.voiceDownloadingWindow.close()
             self.downloadState = DownloadState.SUCCESSED
         else:
+            msgBox = qw.QMessageBox(self)
+            msgBox.setWindowTitle("Sekai Text")
+            
+            label = qw.QLabel(
+                u"语音下载失败<br>请确认代理与VPN关闭<br>"
+                "如仍无法下载，请到以下网址自行查看：<br>"
+                "<a href=\"" + self.nowDownloadVoiceURL + "\">" + "请点这里" + "</a>"
+            )
+            label.setTextFormat(qc.Qt.RichText)
+            label.setTextInteractionFlags(qc.Qt.TextBrowserInteraction)
+            label.setOpenExternalLinks(True)
+            
+            layout = msgBox.layout()
+            layout.addWidget(label, 0, 0, 1, layout.columnCount(), qc.Qt.AlignCenter)
+            
+            msgBox.setStandardButtons(qw.QMessageBox.Ok)
+            msgBox.button(qw.QMessageBox.Ok).setText(u"确认")
+            
+            msgBox.exec()
             self.voiceDownloadingWindow.close()
-            self.voiceDownloadingWindow.setText(u"语音下载失败\n请确认代理与VPN关闭\n如仍无法下载，请试一试重启Sekai Text")
-            self.voiceDownloadingWindow.setStandardButtons(qw.QMessageBox.Ok)
-            self.voiceDownloadingWindow.button(qw.QMessageBox.Ok).setText(u"确认")
-            self.voiceDownloadingWindow.exec()
+
             self.downloadState = DownloadState.FAILED
 
     def downloadFailed(self):
