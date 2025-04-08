@@ -37,10 +37,8 @@ class ListManager():
         'harukiDBurl' : "https://storage.haruki.wacca.cn/master-jp/{}.json?t=0",
 
         'bestBaseUrl' : "https://minio.dnaroma.eu/sekai-jp-assets/",
-        # 'bestBaseUrl' : "https://storage.sekai.best/sekai-jp-assets/",
-        # 'aiBaseUrl' : "https://assets.pjsek.ai/file/pjsekai-assets/",
         'uniBaseUrl' : "https://assets.unipjsk.com/",
-        'harukiBaseUrl' : "https://storage.haruki.wacca.cn/assets/",
+        'harukiBaseUrl' : "https://sekai-assets-bdf29c81.seiunx.net/jp-assets/",
     }
 
     def __init__(self, settingDir):

@@ -68,6 +68,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         self.headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36'}
         self.voiceUrls = {
             "bestVoice" : "https://storage.sekai.best/sekai-jp-assets/sound/scenario/voice/{}.mp3",
+            "harukiVoice": "https://sekai-assets-bdf29c81.seiunx.net/jp-assets/ondemand/sound/scenario/voice/{}.mp3",
         }
         self.nowDownloadVoiceURL = ""
         self.mediaPlayer = QMediaPlayer()
@@ -300,6 +301,11 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         downloadSourceLayout.addWidget(self.comboDownloadTarget)
         downloadSourceLayout.addStretch(1)
         networkLayout.addLayout(downloadSourceLayout)
+
+        labelVoiceDownloadTooltipL1 = qw.QLabel("🛈 语音将仅从best源（选择best项时）")
+        labelVoiceDownloadTooltipL2 = qw.QLabel("　 或Haruki源（选择其它选项时）下载")
+        networkLayout.addWidget(labelVoiceDownloadTooltipL1)
+        networkLayout.addWidget(labelVoiceDownloadTooltipL2)
         
         networkGroup.setLayout(networkLayout)
         
@@ -336,7 +342,12 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         save(self)
     
     def playVoice(self, voice, volume, scenario_id):
-        voiceUrl = self.voiceUrls["bestVoice"].format(scenario_id + "_rip/" + voice[0])
+
+        if self.setting['downloadTarget'] == "best":
+            voiceUrl = self.voiceUrls["bestVoice"].format(scenario_id + "_rip/" + voice[0])
+        else:
+            voiceUrl = self.voiceUrls["harukiVoice"].format(scenario_id + "/" + voice[0])
+
         self.nowDownloadVoiceURL = voiceUrl
         voicePath = osp.join(self.tempVoicePath, voice[0] + ".mp3")
 
@@ -371,6 +382,10 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         self.mediaPlayer.setVolume(int(volume[0] * 100))
         self.mediaPlayer.setMedia(QMediaContent(qc.QUrl.fromLocalFile(voicePath)))
         self.mediaPlayer.play()
+
+        if self.mediaPlayer.error() != QMediaPlayer.Error.NoError:
+            if osp.exists(voicePath):
+                remove(voicePath)
 
     def checkIfSettingFileExists(self, root):
         requiredFiles = [
