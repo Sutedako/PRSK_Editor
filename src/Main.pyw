@@ -1669,7 +1669,7 @@ if __name__ == '__main__':
 
     root, _ = osp.split(osp.abspath(sys.argv[0]))
     if not getattr(sys, 'frozen', False):
-        root = osp.join(root, "..\\")
+        root = osp.join(root, "../")
 
     elif platform.system() == "Darwin":
         root = osp.join(root, '../../../')
