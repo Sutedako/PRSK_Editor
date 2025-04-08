@@ -27,6 +27,8 @@ from enum import Enum
 
 import requests
 
+from playsound import playsound
+
 EditorMode = [u'翻译', u'校对', u'合意', u'审核']
 
 loggingPath = ""
@@ -375,17 +377,23 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 return
 
             self.downloadState = DownloadState.NOT_STARTED
-                
-        if self.mediaPlayer is None:
-            self.mediaPlayer = QMediaPlayer()
 
-        self.mediaPlayer.setVolume(int(volume[0] * 100))
-        self.mediaPlayer.setMedia(QMediaContent(qc.QUrl.fromLocalFile(voicePath)))
-        self.mediaPlayer.play()
-
-        if self.mediaPlayer.error() != QMediaPlayer.Error.NoError:
+        try:
+            playsound(voicePath, False)
+        except:
             if osp.exists(voicePath):
                 remove(voicePath)
+
+        # if self.mediaPlayer is None:
+        #     self.mediaPlayer = QMediaPlayer()
+
+        # self.mediaPlayer.setVolume(int(volume[0] * 100))
+        # self.mediaPlayer.setMedia(QMediaContent(qc.QUrl.fromLocalFile(voicePath)))
+        # self.mediaPlayer.play()
+
+        # if self.mediaPlayer.error() != QMediaPlayer.Error.NoError:
+        #     if osp.exists(voicePath):
+        #         remove(voicePath)
 
     def checkIfSettingFileExists(self, root):
         requiredFiles = [
