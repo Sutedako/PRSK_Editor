@@ -22,6 +22,7 @@ class Editor():
         self.srctalks = []
         self.refertalks = []
         self.dsttalks = []
+        self.loadedtalks = [] # for reset use
 
         self.translatepath = ""
         self.proofreadpath = ""
@@ -131,8 +132,8 @@ class Editor():
         srcfile = open(filepath, 'r', encoding='UTF-8')
         lines = srcfile.readlines()
 
-        loadtalks = []
         preblank = False
+        _loadedtalks = []
         for idx, line in enumerate(lines):
             line = line.replace(":", "：")
             if "：" in line:
@@ -165,13 +166,14 @@ class Editor():
                     'checked': check,
                     'save': True
                 }
-                loadtalks.append(talk)
-            loadtalks[-1]['end'] = True
+                _loadedtalks.append(talk)
+            _loadedtalks[-1]['end'] = True
 
         if preblank:
-            loadtalks.pop()
+            _loadedtalks.pop()
 
-        self.resetTalk(editormode, loadtalks)
+        self.loadedtalks = _loadedtalks
+        self.resetTalk(editormode, _loadedtalks)
 
     def saveFile(self, filepath, saveN):
         outTalk = ''

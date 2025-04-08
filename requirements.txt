@@ -1,2 +1,3 @@
 pyqt5~=5.15.10
-requests~=2.31.0
+requests~=2.32.0
+pyopenssl~=25.0.0

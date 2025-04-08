@@ -9,27 +9,28 @@ import PyQt5.QtCore as qc
 import PyQt5.QtWidgets as qw
 from mainGUI import Ui_SekaiText
 from PyQt5.QtGui import QKeySequence, QIcon, QBrush, QColor
+from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
 
 from Editor import Editor
 from JsonLoader import JsonLoader
 from ListManager import ListManager
 from Dictionary import unitDict, sekaiDict, characterDict
+import Flashback as flashback
 
 import json
 import logging
 import os.path as osp
-from os import environ, mkdir, _exit, remove
+from os import environ, mkdir, _exit, remove, listdir
 import platform
-import requests
 from urllib import request
-import Flashback as flashback
+from enum import Enum
+
+import requests
 
 EditorMode = [u'翻译', u'校对', u'合意', u'审核']
 
 loggingPath = ""
-
-localProxy = request.getproxies()
-
+settings = None
 
 class mainForm(qw.QMainWindow, Ui_SekaiText):
     def __init__(self, root):
@@ -62,7 +63,14 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
         self.setting = {}
 
-        self.downloadState = 1
+        self.downloadState = DownloadState.NOT_STARTED
+
+        self.headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36'}
+        self.voiceUrls = {
+            "bestVoice" : "https://storage.sekai.best/sekai-jp-assets/sound/scenario/voice/{}.mp3",
+        }
+        self.nowDownloadVoiceURL = ""
+        self.mediaPlayer = QMediaPlayer()
 
         settingpath = osp.join(self.settingdir, "setting.json")
         if osp.exists(settingpath):
@@ -77,8 +85,29 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             self.setting['syncScroll'] = False
         if 'showFlashback' not in self.setting:
             self.setting['showFlashback'] = True
+        if 'saveVoice' not in self.setting:
+            self.setting['saveVoice'] = False
+        if 'disabelSSLcheck' not in self.setting:
+            self.setting['disabelSSLcheck'] = False
+        if 'downloadTarget' not in self.setting:
+            self.setting['downloadTarget'] = "Hakuri"
+        if 'fontSize' not in self.setting:
+            self.setting['fontSize'] = 18
+
+        save(self)
+
+        self.tempVoicePath = osp.join(root, "temp")
+        if not osp.exists(self.tempVoicePath):
+            mkdir(self.tempVoicePath)
+
+        if not self.setting['saveVoice']:
+            for file in listdir(self.tempVoicePath):
+                remove(osp.join(self.tempVoicePath, file))
+
         logging.info("Text Folder Path: {}".format(self.setting['textdir']))
-        self.fontSize = self.setting['fontSize'] if 'fontSize' in self.setting else 18
+        self.fontSize = self.setting['fontSize']
+
+        self.createSettingWindow()
 
         self.iconpath = "image/icon"
         if getattr(sys, 'frozen', False):
@@ -111,6 +140,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         self.pushButtonRefresh.clicked.connect(self.updateComboBox)
 
         self.pushButtonLoad.clicked.connect(self.loadJson)
+        self.voiceEnableButton.clicked.connect(self.enableVoice)
         self.pushButtonCount.clicked.connect(self.countSpeaker)
 
         self.radioButtonTranslate.clicked.connect(self.translateMode)
@@ -127,10 +157,12 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         self.lineEditTitle.textChanged.connect(self.changeTitle)
         self.pushButtonSpeaker.clicked.connect(self.setSpeaker)
         self.pushButtonCheck.clicked.connect(self.checkLines)
-        self.spinBoxFontSize.valueChanged.connect(self.setFontSize)
+        # self.spinBoxFontSize.valueChanged.connect(self.setFontSize)
 
         self.checkBoxShowDiff.stateChanged.connect(self.showDiff)
-        self.checkBoxSaveN.stateChanged.connect(self.saveN)
+        # self.checkBoxSaveN.stateChanged.connect(self.saveN)
+
+        self.settingButton.clicked.connect(self.openSettingWindow)
 
         self.tableWidgetDst.currentCellChanged.connect(self.trackSrc)
         self.tableWidgetDst.itemActivated.connect(self.editText)
@@ -152,9 +184,16 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
         self.tempWindow = qw.QMessageBox(self)
         self.tempWindow.setStandardButtons(qw.QMessageBox.No)
-        self.tempWindow.setWindowTitle("")
+        self.tempWindow.setWindowTitle("Sekai Text")
         self.tempWindow.button(qw.QMessageBox.No).setText("取消")
         self.tempWindow.buttonClicked.connect(self.downloadFailed)
+
+        self.isFirstUseVoice = True
+        self.voiceDownloadingWindow = qw.QMessageBox(self)
+        self.voiceDownloadingWindow.setWindowTitle("Sekai Text")
+        self.voiceDownloadingWindow.setStandardButtons(qw.QMessageBox.No)
+        self.voiceDownloadingWindow.button(qw.QMessageBox.No).setText("取消")
+        self.voiceDownloadingWindow.buttonClicked.connect(self.downloadFailed)
 
         if not self.checkIfSettingFileExists(root):
             settingFilesMissingWindow = qw.QMessageBox(self)
@@ -165,6 +204,173 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             if settingFilesMissingWindow.clickedButton() == confirmButton:
                 self.updateComboBox()
 
+    def openSettingWindow(self):
+        if self.settingDialog.isVisible():
+            self.settingDialog.close()
+        else:
+            self.settingDialog.open()
+
+    def createSettingWindow(self):
+        self.settingDialog = qw.QDialog(self)
+        self.settingDialog.setWindowTitle("设置")
+        self.settingDialog.setMinimumSize(400, 300)
+        
+        # Main layout
+        mainLayout = qw.QVBoxLayout()
+        mainLayout.setSpacing(10)
+        
+        # Display settings group
+        displayGroup = qw.QGroupBox("显示设置")
+        displayLayout = qw.QVBoxLayout()
+        
+        # Font size setting
+        fontSizeLayout = qw.QHBoxLayout()
+        labelFontSize = qw.QLabel("字号：")
+        labelFontSize.setFixedWidth(80)
+        
+        self.spinBoxFontSize = qw.QSpinBox()
+        self.spinBoxFontSize.setMinimum(12)
+        self.spinBoxFontSize.setMaximum(30)
+        self.spinBoxFontSize.setSingleStep(2)
+        self.spinBoxFontSize.setValue(self.fontSize)
+        self.spinBoxFontSize.valueChanged.connect(self.setFontSize)
+        
+        fontSizeLayout.addWidget(labelFontSize)
+        fontSizeLayout.addWidget(self.spinBoxFontSize)
+        fontSizeLayout.addStretch(1)
+        displayLayout.addLayout(fontSizeLayout)
+        
+        displayGroup.setLayout(displayLayout)
+        
+        # Text settings group
+        textGroup = qw.QGroupBox("文本设置")
+        textLayout = qw.QVBoxLayout()
+        
+        # Save linebreak setting
+        saveNLayout = qw.QHBoxLayout()
+        self.checkBoxSaveN = qw.QCheckBox("保存\\N")
+        self.checkBoxSaveN.setChecked(True)
+        self.checkBoxSaveN.stateChanged.connect(self.saveN)
+        self.checkBoxSaveN.setToolTip("启用时，保存文件时会保留\\N换行符")
+        
+        saveNLayout.addWidget(self.checkBoxSaveN)
+        saveNLayout.addStretch(1)
+        textLayout.addLayout(saveNLayout)
+        
+        textGroup.setLayout(textLayout)
+        
+        # Network settings group
+        networkGroup = qw.QGroupBox("网络设置")
+        networkLayout = qw.QVBoxLayout()
+        
+        # Save voice setting
+        saveVoiceLayout = qw.QHBoxLayout()
+        self.settingSaveVoice = qw.QCheckBox("保存语音文件")
+        self.settingSaveVoice.setChecked(self.setting.get('saveVoice', False))
+        self.settingSaveVoice.stateChanged.connect(lambda state: self.updateSaveVoiceSetting(state))
+        self.settingSaveVoice.setToolTip("启用时，下载的语音文件将被保存")
+        
+        saveVoiceLayout.addWidget(self.settingSaveVoice)
+        saveVoiceLayout.addStretch(1)
+        networkLayout.addLayout(saveVoiceLayout)
+        
+        # SSL check setting
+        sslCheckLayout = qw.QHBoxLayout()
+        self.settingDisableSSL = qw.QCheckBox("禁用SSL验证")
+        self.settingDisableSSL.setChecked(self.setting.get('disabelSSLcheck', False))
+        self.settingDisableSSL.stateChanged.connect(lambda state: self.updateSSLSetting(state))
+        self.settingDisableSSL.setToolTip("如果持续链接失败，请尝试启用此选项")
+        
+        sslCheckLayout.addWidget(self.settingDisableSSL)
+        sslCheckLayout.addStretch(1)
+        networkLayout.addLayout(sslCheckLayout)
+        
+        # Download source selection
+        downloadSourceLayout = qw.QHBoxLayout()
+        labelDownloadSource = qw.QLabel("下载源：")
+        labelDownloadSource.setFixedWidth(80)
+        
+        self.comboDownloadTarget = qw.QComboBox()
+        self.comboDownloadTarget.addItems(["Hakuri", "best", "ai", "Auto"])
+        current_target = self.setting.get('downloadTarget', "Hakuri")
+        self.comboDownloadTarget.setCurrentText(current_target)
+        self.comboDownloadTarget.currentTextChanged.connect(self.updateDownloadTarget)
+        
+        downloadSourceLayout.addWidget(labelDownloadSource)
+        downloadSourceLayout.addWidget(self.comboDownloadTarget)
+        downloadSourceLayout.addStretch(1)
+        networkLayout.addLayout(downloadSourceLayout)
+        
+        networkGroup.setLayout(networkLayout)
+        
+        # Add groups to main layout
+        mainLayout.addWidget(displayGroup)
+        mainLayout.addWidget(textGroup)
+        mainLayout.addWidget(networkGroup)
+        mainLayout.addStretch(1)
+        
+        # Buttons
+        buttonLayout = qw.QHBoxLayout()
+        okButton = qw.QPushButton("确定")
+        okButton.clicked.connect(self.settingDialog.accept)
+        
+        buttonLayout.addStretch(1)
+        buttonLayout.addWidget(okButton)
+        
+        mainLayout.addLayout(buttonLayout)
+        
+        self.settingDialog.setLayout(mainLayout)
+        
+        self.settingDialog.close()
+
+    def updateSaveVoiceSetting(self, state):
+        self.setting['saveVoice'] = bool(state)
+        save(self)
+
+    def updateSSLSetting(self, state):
+        self.setting['disabelSSLcheck'] = bool(state)
+        save(self)
+        
+    def updateDownloadTarget(self, target):
+        self.setting['downloadTarget'] = target
+        save(self)
+    
+    def playVoice(self, voice, volume, scenario_id):
+        voiceUrl = self.voiceUrls["bestVoice"].format(scenario_id + "_rip/" + voice[0])
+        self.nowDownloadVoiceURL = voiceUrl
+        voicePath = osp.join(self.tempVoicePath, voice[0] + ".mp3")
+
+        if not osp.exists(voicePath):
+            downloadVoiceTask = downloadVoiceThread(
+                voiceUrl = voiceUrl,
+                voicePath = voicePath,
+                header = self.headers
+            )
+            downloadVoiceTask.trigger.connect(self.checkVoiceDownload)
+            self.downloadState = DownloadState.DOWNLOADING
+            downloadVoiceTask.start()
+
+            self.voiceDownloadingWindow.setText(u"语音下载中...")
+            self.voiceDownloadingWindow.show()
+
+            while self.downloadState == DownloadState.DOWNLOADING:
+                time.sleep(0.1)
+                qw.QApplication.processEvents()
+
+            if self.downloadState == DownloadState.FAILED:
+                self.downloadState = DownloadState.NOT_STARTED
+                if osp.exists(voicePath):
+                    remove(voicePath)
+                return
+
+            self.downloadState = DownloadState.NOT_STARTED
+                
+        if self.mediaPlayer is None:
+            self.mediaPlayer = QMediaPlayer()
+
+        self.mediaPlayer.setVolume(int(volume[0] * 100))
+        self.mediaPlayer.setMedia(QMediaContent(qc.QUrl.fromLocalFile(voicePath)))
+        self.mediaPlayer.play()
 
     def checkIfSettingFileExists(self, root):
         requiredFiles = [
@@ -187,7 +393,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
     def downloadJson(self, jsonname, jsonurl):
         jsonpath = osp.join(self.datadir, jsonname)
-        download = downloadThread(jsonpath, jsonurl)
+        download = downloadJsonThread(jsonpath, jsonurl)
         download.trigger.connect(self.checkDownload)
 
         urlText = u"下载中...<br>若耗时过长可自行前往下方地址下载" + \
@@ -199,14 +405,17 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
         self.tempWindow.setText(urlText)
         self.tempWindow.open()
-        self.downloadState = 0
 
+        self.downloadState = DownloadState.DOWNLOADING
         download.start()
-        while not self.downloadState:
+        while self.downloadState == DownloadState.DOWNLOADING:
             time.sleep(0.1)
             qw.QApplication.processEvents()
-        if self.downloadState == 2:
+        if self.downloadState == DownloadState.FAILED:
+            self.downloadState = DownloadState.NOT_STARTED
             return False
+        
+        self.downloadState = DownloadState.NOT_STARTED
         return True
 
     def loadJson(self):
@@ -241,7 +450,13 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             if not jsonpath:
                 return
             try:
-                self.srcText = JsonLoader(jsonpath, self.tableWidgetSrc, fontSize=self.fontSize, flashbackAnalyzer=self.flashback)
+                self.srcText = JsonLoader(
+                    jsonpath, 
+                    self.tableWidgetSrc, 
+                    fontSize=self.fontSize, 
+                    flashbackAnalyzer=self.flashback, 
+                    playVoiceCallback=self.playVoice
+                )
                 self.toggleFlashback(self.checkBoxShowFlashback.isChecked())
                 logging.info("Json File Loaded: " + jsonpath)
             except BaseException:
@@ -281,14 +496,20 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             if not self.dstText.talks:
                 self.createText()
             else:
+                self.checkSave()
+                
                 relpy = qw.QMessageBox.question(
                     self, "", u"是否清除现有翻译内容？",
                     qw.QMessageBox.Yes | qw.QMessageBox.No | qw.QMessageBox.Cancel,
                     qw.QMessageBox.No)
                 if relpy == qw.QMessageBox.Yes:
                     self.createText()
+                    self.dstText.loadedtalks = []
                 if relpy == qw.QMessageBox.No:
                     self.dstText.loadJson(self.editormode, self.srcText.talks)
+
+                    self.dstText.dsttalks = self.dstText.checkLines(self.dstText.loadedtalks)
+                    self.dstText.resetTalk(self.editormode, self.dstText.dsttalks)
             
             # Not sure why when calling setFontSize() to resize tables,
             # only a different fontSize will properly resize table headers ...
@@ -310,6 +531,21 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                     exc_type, exc_value, exc_traceback_obj, file=f)
             qw.QMessageBox.warning(
                 self, "", u"loadJson错误\n请将“setting\\log.txt发给弃子”")
+
+    def enableVoice(self):
+        if self.isFirstUseVoice:
+            voiceNotionWindow = qw.QMessageBox(self)
+            voiceNotionWindow.setWindowTitle("Sekai Text")
+            voiceNotionWindow.setText(u"原则上，翻译，校对与合意时\n应在有音画对照的条件下进行\n如看游戏内，或者对照录制视频\n播放语音的功能只是为了方便\n请勿依赖语音进行翻译")
+            voiceNotionWindow.setStandardButtons(qw.QMessageBox.Ok)
+            voiceNotionWindow.button(qw.QMessageBox.Ok).setText("好的")
+            voiceNotionWindow.exec_()
+            self.isFirstUseVoice = False
+
+        if not self.voiceEnableButton.isChecked():
+            self.tableWidgetSrc.hideColumn(2)
+        else:
+            self.tableWidgetSrc.showColumn(2)
 
     def countSpeaker(self):
         try:
@@ -1151,14 +1387,17 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         self.tempWindow.setWindowTitle(u"SeKai Text")
         self.tempWindow.setText(u"选择源网站中...")
         self.tempWindow.open()
-        self.downloadState = 0
+        self.downloadState = DownloadState.DOWNLOADING
 
         update.start()
-        while not self.downloadState:
+        while self.downloadState == DownloadState.DOWNLOADING:
             time.sleep(0.1)
             qw.QApplication.processEvents()
-        if self.downloadState == 2:
+        if self.downloadState == DownloadState.FAILED:
+            self.downloadState = DownloadState.NOT_STARTED
             return False
+        
+        self.downloadState = DownloadState.NOT_STARTED
 
         logging.info("Story List Updated")
         self.setComboBoxStoryIndex()
@@ -1192,7 +1431,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
     def checkDownload(self, successed):
         if successed:
             self.tempWindow.close()
-            self.downloadState = 1
+            self.downloadState = DownloadState.SUCCESSED
         else:
             urlText = self.tempWindow.text().replace(
                 "下载中...<br>若耗时过长",
@@ -1201,7 +1440,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             self.tempWindow.setText(urlText)
             self.tempWindow.close()
             self.tempWindow.exec()
-            self.downloadState = 2
+            self.downloadState = DownloadState.FAILED
 
     def checkUpdated(self, output):
         if type(output) == list:
@@ -1209,39 +1448,66 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             return
         if type(output) == ListManager and output.events:
             self.ListManager = output
-            self.downloadState = 1
+            self.downloadState = DownloadState.SUCCESSED
         if type(output) == str and output == "No site selected":
             networkErrorWindow = qw.QMessageBox(self)
             networkErrorWindow.setWindowTitle(u"SeKai Text")
             networkErrorWindow.setText(u"更新失败\n请确认能正常访问sekai.best，且关闭代理与VPN\n"
-                                       u"随后检查是否能Ping通此网址:\nraw.githubusercontent.com\n"
                                        u"若反复尝试仍无法更新，请试试重启Sekai Text")
             confirmButton = networkErrorWindow.addButton(u"确认", qw.QMessageBox.AcceptRole)
             networkErrorWindow.exec()
             if networkErrorWindow.clickedButton() == confirmButton:
                 self.tempWindow.close()
-                self.downloadState = 2
+                self.downloadState = DownloadState.FAILED
         else:
-            self.downloadState = 2
+            self.downloadState = DownloadState.FAILED
         self.tempWindow.close()
 
+    def checkVoiceDownload(self, successed):
+        if successed:
+            self.voiceDownloadingWindow.close()
+            self.downloadState = DownloadState.SUCCESSED
+        else:
+            msgBox = qw.QMessageBox(self)
+            msgBox.setWindowTitle("Sekai Text")
+            
+            label = qw.QLabel(
+                u"语音下载失败<br>请确认代理与VPN关闭<br>"
+                "如仍无法下载，请到以下网址自行查看：<br>"
+                "<a href=\"" + self.nowDownloadVoiceURL + "\">" + "请点这里" + "</a>"
+            )
+            label.setTextFormat(qc.Qt.RichText)
+            label.setTextInteractionFlags(qc.Qt.TextBrowserInteraction)
+            label.setOpenExternalLinks(True)
+            
+            layout = msgBox.layout()
+            layout.addWidget(label, 0, 0, 1, layout.columnCount(), qc.Qt.AlignCenter)
+            
+            msgBox.setStandardButtons(qw.QMessageBox.Ok)
+            msgBox.button(qw.QMessageBox.Ok).setText(u"确认")
+            
+            msgBox.exec()
+            self.voiceDownloadingWindow.close()
+
+            self.downloadState = DownloadState.FAILED
+
     def downloadFailed(self):
-        self.downloadState = 2
+        self.downloadState = DownloadState.FAILED
 
 
-class downloadThread(qc.QThread):
+class downloadJsonThread(qc.QThread):
     trigger = qc.pyqtSignal(bool)
     path = ""
     url = ""
 
     def __init__(self, jsonpath, jsonurl):
-        super(downloadThread, self).__init__()
+        super(downloadJsonThread, self).__init__()
         self.path = jsonpath
         self.url = jsonurl
 
     def run(self):
         try:
-            r = requests.get(self.url, stream=True, timeout=5, proxies=localProxy)
+            r = requests.get(self.url, stream=True, timeout=5, proxies=request.getproxies())
             r.encoding = 'utf-8'
             jsondata = json.loads(r.text)
 
@@ -1260,6 +1526,38 @@ class downloadThread(qc.QThread):
             self.trigger.emit(False)
 
 
+class downloadVoiceThread(qc.QThread):
+    trigger = qc.pyqtSignal(bool)
+    path = ""
+    url = ""
+
+    def __init__(self, voicePath, voiceUrl, header):
+        super(downloadVoiceThread, self).__init__()
+        self.path = voicePath
+        self.url = voiceUrl
+        self.header = header
+
+    def run(self):
+        try:
+            r = requests.get(
+                self.url, 
+                headers=self.header,
+                proxies=request.getproxies()
+            )
+            with open(self.path, 'wb') as f:
+                f.write(r.content)
+            logging.info("Voice File Saved: " + self.path)
+            self.trigger.emit(True)
+        except BaseException:
+            logging.error("Fail to Download Voice File.")
+            exc_type, exc_value, exc_traceback_obj = sys.exc_info()
+            with open(loggingPath, 'a') as f:
+                traceback.print_exception(
+                    exc_type, exc_value, exc_traceback_obj, file=f)
+            self.trigger.emit(False)
+            return
+
+
 class updateThread(qc.QThread):
     trigger = qc.pyqtSignal(object)
     path = ""
@@ -1271,10 +1569,9 @@ class updateThread(qc.QThread):
     def run(self):
         try:
             site = self.ListManager.chooseSite()
-            # print(site)
             if site == "":  # No site selected
                 # print("No site selected")
-                logging.error("Fail to Download Settingg File from best.")
+                logging.error("Fail to Download Setting File from best.")
                 exc_type, exc_value, exc_traceback_obj = sys.exc_info()
                 with open(loggingPath, 'a') as f:
                     traceback.print_exception(
@@ -1310,6 +1607,13 @@ class updateThread(qc.QThread):
             return
 
 
+class DownloadState(Enum):
+    DOWNLOADING = 0
+    SUCCESSED = 1
+    FAILED = 2
+    NOT_STARTED = 3
+
+
 def save(self):
     settingpath = osp.join(self.settingdir, "setting.json")
     with open(settingpath, 'w', encoding='utf-8') as f:
@@ -1317,7 +1621,6 @@ def save(self):
 
 
 if __name__ == '__main__':
-
     # if hasattr(qc.Qt, 'AA_EnableHighDpiScaling'):
     #     qw.QApplication.setAttribute(qc.Qt.AA_EnableHighDpiScaling, True)
     # if hasattr(qc.Qt, 'AA_UseHighDpiPixmaps'):
