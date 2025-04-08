@@ -89,8 +89,10 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             self.setting['saveVoice'] = False
         if 'disabelSSLcheck' not in self.setting:
             self.setting['disabelSSLcheck'] = False
-        if 'download_target' not in self.setting:
-            self.setting['download_target'] = "Hakuri"
+        if 'downloadTarget' not in self.setting:
+            self.setting['downloadTarget'] = "Hakuri"
+        if 'fontSize' not in self.setting:
+            self.setting['fontSize'] = 18
 
         save(self)
 
@@ -103,7 +105,9 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 remove(osp.join(self.tempVoicePath, file))
 
         logging.info("Text Folder Path: {}".format(self.setting['textdir']))
-        self.fontSize = self.setting['fontSize'] if 'fontSize' in self.setting else 18
+        self.fontSize = self.setting['fontSize']
+
+        self.createSettingWindow()
 
         self.iconpath = "image/icon"
         if getattr(sys, 'frozen', False):
@@ -153,10 +157,12 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         self.lineEditTitle.textChanged.connect(self.changeTitle)
         self.pushButtonSpeaker.clicked.connect(self.setSpeaker)
         self.pushButtonCheck.clicked.connect(self.checkLines)
-        self.spinBoxFontSize.valueChanged.connect(self.setFontSize)
+        # self.spinBoxFontSize.valueChanged.connect(self.setFontSize)
 
         self.checkBoxShowDiff.stateChanged.connect(self.showDiff)
-        self.checkBoxSaveN.stateChanged.connect(self.saveN)
+        # self.checkBoxSaveN.stateChanged.connect(self.saveN)
+
+        self.settingButton.clicked.connect(self.openSettingWindow)
 
         self.tableWidgetDst.currentCellChanged.connect(self.trackSrc)
         self.tableWidgetDst.itemActivated.connect(self.editText)
@@ -197,6 +203,137 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             settingFilesMissingWindow.exec_()
             if settingFilesMissingWindow.clickedButton() == confirmButton:
                 self.updateComboBox()
+
+    def openSettingWindow(self):
+        if self.settingDialog.isVisible():
+            self.settingDialog.close()
+        else:
+            self.settingDialog.open()
+
+    def createSettingWindow(self):
+        self.settingDialog = qw.QDialog(self)
+        self.settingDialog.setWindowTitle("设置")
+        self.settingDialog.setMinimumSize(400, 300)
+        
+        # Main layout
+        mainLayout = qw.QVBoxLayout()
+        mainLayout.setSpacing(10)
+        
+        # Display settings group
+        displayGroup = qw.QGroupBox("显示设置")
+        displayLayout = qw.QVBoxLayout()
+        
+        # Font size setting
+        fontSizeLayout = qw.QHBoxLayout()
+        labelFontSize = qw.QLabel("字号：")
+        labelFontSize.setFixedWidth(80)
+        
+        self.spinBoxFontSize = qw.QSpinBox()
+        self.spinBoxFontSize.setMinimum(12)
+        self.spinBoxFontSize.setMaximum(30)
+        self.spinBoxFontSize.setSingleStep(2)
+        self.spinBoxFontSize.setValue(self.fontSize)
+        self.spinBoxFontSize.valueChanged.connect(self.setFontSize)
+        
+        fontSizeLayout.addWidget(labelFontSize)
+        fontSizeLayout.addWidget(self.spinBoxFontSize)
+        fontSizeLayout.addStretch(1)
+        displayLayout.addLayout(fontSizeLayout)
+        
+        displayGroup.setLayout(displayLayout)
+        
+        # Text settings group
+        textGroup = qw.QGroupBox("文本设置")
+        textLayout = qw.QVBoxLayout()
+        
+        # Save linebreak setting
+        saveNLayout = qw.QHBoxLayout()
+        self.checkBoxSaveN = qw.QCheckBox("保存\\N")
+        self.checkBoxSaveN.setChecked(True)
+        self.checkBoxSaveN.stateChanged.connect(self.saveN)
+        self.checkBoxSaveN.setToolTip("启用时，保存文件时会保留\\N换行符")
+        
+        saveNLayout.addWidget(self.checkBoxSaveN)
+        saveNLayout.addStretch(1)
+        textLayout.addLayout(saveNLayout)
+        
+        textGroup.setLayout(textLayout)
+        
+        # Network settings group
+        networkGroup = qw.QGroupBox("网络设置")
+        networkLayout = qw.QVBoxLayout()
+        
+        # Save voice setting
+        saveVoiceLayout = qw.QHBoxLayout()
+        self.settingSaveVoice = qw.QCheckBox("保存语音文件")
+        self.settingSaveVoice.setChecked(self.setting.get('saveVoice', False))
+        self.settingSaveVoice.stateChanged.connect(lambda state: self.updateSaveVoiceSetting(state))
+        self.settingSaveVoice.setToolTip("启用时，下载的语音文件将被保存")
+        
+        saveVoiceLayout.addWidget(self.settingSaveVoice)
+        saveVoiceLayout.addStretch(1)
+        networkLayout.addLayout(saveVoiceLayout)
+        
+        # SSL check setting
+        sslCheckLayout = qw.QHBoxLayout()
+        self.settingDisableSSL = qw.QCheckBox("禁用SSL验证")
+        self.settingDisableSSL.setChecked(self.setting.get('disabelSSLcheck', False))
+        self.settingDisableSSL.stateChanged.connect(lambda state: self.updateSSLSetting(state))
+        self.settingDisableSSL.setToolTip("如果持续链接失败，请尝试启用此选项")
+        
+        sslCheckLayout.addWidget(self.settingDisableSSL)
+        sslCheckLayout.addStretch(1)
+        networkLayout.addLayout(sslCheckLayout)
+        
+        # Download source selection
+        downloadSourceLayout = qw.QHBoxLayout()
+        labelDownloadSource = qw.QLabel("下载源：")
+        labelDownloadSource.setFixedWidth(80)
+        
+        self.comboDownloadTarget = qw.QComboBox()
+        self.comboDownloadTarget.addItems(["Hakuri", "best", "ai", "Auto"])
+        current_target = self.setting.get('downloadTarget', "Hakuri")
+        self.comboDownloadTarget.setCurrentText(current_target)
+        self.comboDownloadTarget.currentTextChanged.connect(self.updateDownloadTarget)
+        
+        downloadSourceLayout.addWidget(labelDownloadSource)
+        downloadSourceLayout.addWidget(self.comboDownloadTarget)
+        downloadSourceLayout.addStretch(1)
+        networkLayout.addLayout(downloadSourceLayout)
+        
+        networkGroup.setLayout(networkLayout)
+        
+        # Add groups to main layout
+        mainLayout.addWidget(displayGroup)
+        mainLayout.addWidget(textGroup)
+        mainLayout.addWidget(networkGroup)
+        mainLayout.addStretch(1)
+        
+        # Buttons
+        buttonLayout = qw.QHBoxLayout()
+        okButton = qw.QPushButton("确定")
+        okButton.clicked.connect(self.settingDialog.accept)
+        
+        buttonLayout.addStretch(1)
+        buttonLayout.addWidget(okButton)
+        
+        mainLayout.addLayout(buttonLayout)
+        
+        self.settingDialog.setLayout(mainLayout)
+        
+        self.settingDialog.close()
+
+    def updateSaveVoiceSetting(self, state):
+        self.setting['saveVoice'] = bool(state)
+        save(self)
+
+    def updateSSLSetting(self, state):
+        self.setting['disabelSSLcheck'] = bool(state)
+        save(self)
+        
+    def updateDownloadTarget(self, target):
+        self.setting['downloadTarget'] = target
+        save(self)
     
     def playVoice(self, voice, volume, scenario_id):
         voiceUrl = self.voiceUrls["bestVoice"].format(scenario_id + "_rip/" + voice[0])
@@ -359,6 +496,8 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             if not self.dstText.talks:
                 self.createText()
             else:
+                self.checkSave()
+                
                 relpy = qw.QMessageBox.question(
                     self, "", u"是否清除现有翻译内容？",
                     qw.QMessageBox.Yes | qw.QMessageBox.No | qw.QMessageBox.Cancel,

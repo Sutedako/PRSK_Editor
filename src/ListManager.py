@@ -14,9 +14,6 @@ from Dictionary import greetDict_season, greetDict_celebrate, greetDict_holiday
 from urllib import request
 import re
 
-localProxy = request.getproxies()
-
-
 class ListManager():
 
     mainstory = []
@@ -103,9 +100,9 @@ class ListManager():
         maxEventsLength = 0
         result = ""
 
-        target = self.setting["download_target"]
+        target = self.setting["downloadTarget"]
 
-        if target is not None:
+        if target is not None and target is not "Auto":
             if target not in sites:
                 logging.warning(f"Invalid target {target}, force using Haruki")
                 target = "Haruki"
@@ -147,18 +144,18 @@ class ListManager():
 
     def updateEvents(self):
         url = self.DBurl.format("events")
-        events = json.loads(requests.get(url, headers=self.headers, proxies=localProxy, verify=not self.setting["disabelSSLcheck"]).text)
+        events = json.loads(requests.get(url, headers=self.headers, proxies=request.getproxies(), verify=not self.setting["disabelSSLcheck"]).text)
         if("data" in events):
             events = events["data"]
         cardIdx = 0
 
         url = self.DBurl.format("eventStories")
-        stories = json.loads(requests.get(url, headers=self.headers, proxies=localProxy, verify=not self.setting["disabelSSLcheck"]).text)
+        stories = json.loads(requests.get(url, headers=self.headers, proxies=request.getproxies(), verify=not self.setting["disabelSSLcheck"]).text)
         if("data" in stories):
             stories = stories["data"]
 
         url = self.DBurl.format("eventCards")
-        cards = json.loads(requests.get(url, headers=self.headers, proxies=localProxy, verify=not self.setting["disabelSSLcheck"]).text)
+        cards = json.loads(requests.get(url, headers=self.headers, proxies=request.getproxies(), verify=not self.setting["disabelSSLcheck"]).text)
         if("data" in cards):
             cards = cards["data"]
 
@@ -187,7 +184,7 @@ class ListManager():
 
     def updateCards(self):
         url = self.DBurl.format("cards")
-        cards = json.loads(requests.get(url, headers=self.headers, proxies=localProxy, verify=not self.setting["disabelSSLcheck"]).text)
+        cards = json.loads(requests.get(url, headers=self.headers, proxies=request.getproxies(), verify=not self.setting["disabelSSLcheck"]).text)
         if("data" in cards):
             cards = cards["data"]
 
@@ -297,7 +294,7 @@ class ListManager():
             return
         self.mainstory = []
         url = self.DBurl.format("unitStories")
-        story = json.loads(requests.get(url, headers=self.headers, proxies=localProxy, verify=not self.setting["disabelSSLcheck"]).text)
+        story = json.loads(requests.get(url, headers=self.headers, proxies=request.getproxies(), verify=not self.setting["disabelSSLcheck"]).text)
         if("data" in story):
             story = story["data"]
         story = sorted(story, key=lambda x: x['seq'])
@@ -315,7 +312,7 @@ class ListManager():
 
     def updateCharacter2ds(self):
         url = self.DBurl.format("character2ds")
-        char2ds = json.loads(requests.get(url, headers=self.headers, proxies=localProxy, verify=not self.setting["disabelSSLcheck"]).text)
+        char2ds = json.loads(requests.get(url, headers=self.headers, proxies=request.getproxies(), verify=not self.setting["disabelSSLcheck"]).text)
         if("data" in char2ds):
             char2ds = char2ds["data"]
 
@@ -336,7 +333,7 @@ class ListManager():
 
     def updateAreatalks(self):
         url = self.DBurl.format("actionSets")
-        actions = json.loads(requests.get(url, headers=self.headers, proxies=localProxy, verify=not self.setting["disabelSSLcheck"]).text)
+        actions = json.loads(requests.get(url, headers=self.headers, proxies=request.getproxies(), verify=not self.setting["disabelSSLcheck"]).text)
         if("data" in actions):
             actions = actions["data"]
 
@@ -429,7 +426,7 @@ class ListManager():
             return content
 
         url = self.DBurl.format("systemLive2ds")
-        greets = json.loads(requests.get(url, headers=self.headers, proxies=localProxy, verify=not self.setting["disabelSSLcheck"]).text)
+        greets = json.loads(requests.get(url, headers=self.headers, proxies=request.getproxies(), verify=not self.setting["disabelSSLcheck"]).text)
         if("data" in greets):
             greets = greets["data"]
 
@@ -546,7 +543,7 @@ class ListManager():
 
     def updateSpecials(self):
         url = self.DBurl.format("specialStories")
-        stories = json.loads(requests.get(url, headers=self.headers, proxies=localProxy, verify=not self.setting["disabelSSLcheck"]).text)
+        stories = json.loads(requests.get(url, headers=self.headers, proxies=request.getproxies(), verify=not self.setting["disabelSSLcheck"]).text)
         if("data" in stories):
             stories = stories["data"]
 
