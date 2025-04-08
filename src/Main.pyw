@@ -378,22 +378,35 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
             self.downloadState = DownloadState.NOT_STARTED
 
-        try:
-            playsound(voicePath, False)
-        except:
-            if osp.exists(voicePath):
-                remove(voicePath)
+        # Qt's mediaPlayer requires GStreamer plugins to work here on my MacOS
+        # It's way too complicated so use playsound instead
+        if platform.system() == "Darwin":
+            try:
+                playsound(voicePath, False)
+            except Exception as e:
+                logging.error("Fail to Load Audio File: " + voicePath)
+                exc_type, exc_value, exc_traceback_obj = sys.exc_info()
+                with open(loggingPath, 'a') as f:
+                    traceback.print_exception(
+                        exc_type, exc_value, exc_traceback_obj, file=f)
 
-        # if self.mediaPlayer is None:
-        #     self.mediaPlayer = QMediaPlayer()
+                # Download seems invalid so remove it to avoid caching
+                if osp.exists(voicePath):
+                    remove(voicePath)
 
-        # self.mediaPlayer.setVolume(int(volume[0] * 100))
-        # self.mediaPlayer.setMedia(QMediaContent(qc.QUrl.fromLocalFile(voicePath)))
-        # self.mediaPlayer.play()
+        # Unfortunately, despite playsound claims itself being cross-platform, I never get it work on my Windows PC.
+        # I have no idea what is going on after investigation and installing a fork named playsound3 ...
+        # So we shall just use Qt here for platforms other than Darwin I guess ...
+        # However I am not sure how do we detect errors when the download is invalid and audio cannot be played.
+        # Qt's functions (e.g., self.mediaPlayer.error()) seems no use here.
+        # - sad yktr
+        else:
+            if self.mediaPlayer is None:
+                self.mediaPlayer = QMediaPlayer()
 
-        # if self.mediaPlayer.error() != QMediaPlayer.Error.NoError:
-        #     if osp.exists(voicePath):
-        #         remove(voicePath)
+            self.mediaPlayer.setVolume(int(volume[0] * 100))
+            self.mediaPlayer.setMedia(QMediaContent(qc.QUrl.fromLocalFile(voicePath)))
+            self.mediaPlayer.play()
 
     def checkIfSettingFileExists(self, root):
         requiredFiles = [
@@ -1656,7 +1669,7 @@ if __name__ == '__main__':
 
     root, _ = osp.split(osp.abspath(sys.argv[0]))
     if not getattr(sys, 'frozen', False):
-        root = osp.join(root, "../")
+        root = osp.join(root, "..\\")
 
     elif platform.system() == "Darwin":
         root = osp.join(root, '../../../')
