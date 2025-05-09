@@ -100,7 +100,7 @@ class ListManager():
 
         target = self.setting["downloadTarget"]
 
-        if target is not None and target is not "Auto":
+        if target is not None and target != "Auto":
             if target not in sites:
                 logging.warning(f"Invalid target {target}, force using Haruki")
                 target = "Haruki"
@@ -116,7 +116,7 @@ class ListManager():
                 data = []
                 downloadTime = math.inf
         else:
-            for site, name in sites.items():
+            for name, site in sites.items():
                 try:
                     logging.info("[ListManager] Trying to connect to %s" % (name))
                     startTime = time.time()
@@ -158,8 +158,11 @@ class ListManager():
             cards = cards["data"]
 
         self.events = []
-        for e, es in zip(events, stories):
-            assert e['id'] == es['id']
+        _events_list = {e['id'] : e for e in events}
+
+        for es in stories:
+            assert es['id'] in _events_list
+            e = _events_list[es['id']]
             eventId = e['id']
             eventCards = []
             while cardIdx < len(cards) and cards[cardIdx]["eventId"] < eventId:

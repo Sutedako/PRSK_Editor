@@ -93,7 +93,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         if 'disabelSSLcheck' not in self.setting:
             self.setting['disabelSSLcheck'] = False
         if 'downloadTarget' not in self.setting:
-            self.setting['downloadTarget'] = "Hakuri"
+            self.setting['downloadTarget'] = "Haruki"
         if 'fontSize' not in self.setting:
             self.setting['fontSize'] = 18
 
@@ -294,8 +294,8 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         labelDownloadSource.setFixedWidth(80)
         
         self.comboDownloadTarget = qw.QComboBox()
-        self.comboDownloadTarget.addItems(["Hakuri", "best", "ai", "Auto"])
-        current_target = self.setting.get('downloadTarget', "Hakuri")
+        self.comboDownloadTarget.addItems(["Haruki", "best", "ai", "Auto"])
+        current_target = self.setting.get('downloadTarget', "Haruki")
         self.comboDownloadTarget.setCurrentText(current_target)
         self.comboDownloadTarget.currentTextChanged.connect(self.updateDownloadTarget)
         
