@@ -1381,7 +1381,8 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             if storyType != u"自定义":
                 self.comboBoxDataSource.addItem(u"sekai.best")
                 # self.comboBoxDataSource.addItem(u"pjsek.ai")
-                self.comboBoxDataSource.addItem(u"haruki")
+                self.comboBoxDataSource.addItem(u"haruki (CN)")
+                self.comboBoxDataSource.addItem(u"haruki (JP)")
                 self.comboBoxDataSource.addItem(u"unipjsk.com")
             self.comboBoxDataSource.addItem(u"本地文件")
             self.comboBoxDataSource.setCurrentText(u"本地文件")
