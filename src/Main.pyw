@@ -103,10 +103,6 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         if not osp.exists(self.tempVoicePath):
             mkdir(self.tempVoicePath)
 
-        if not self.setting['saveVoice']:
-            for file in listdir(self.tempVoicePath):
-                remove(osp.join(self.tempVoicePath, file))
-
         logging.info("Text Folder Path: {}".format(self.setting['textdir']))
         self.fontSize = self.setting['fontSize']
 
@@ -1001,7 +997,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
     def closeEvent(self, event):
         if not self.checkSave():
             event.ignore()
-        _exit(0)
+        event.accept()
 
     def editText(self, item):
         try:
@@ -1651,6 +1647,14 @@ class DownloadState(Enum):
     NOT_STARTED = 3
 
 
+def onExit():
+    if not mainform.setting['saveVoice']:
+        for file in listdir(mainform.tempVoicePath):
+            remove(osp.join(mainform.tempVoicePath, file))
+
+    save(mainform)
+
+
 def save(self):
     settingpath = osp.join(self.settingdir, "setting.json")
     with open(settingpath, 'w', encoding='utf-8') as f:
@@ -1702,7 +1706,7 @@ if __name__ == '__main__':
 
         modeSelectWindow.exec_()
         mainform.show()
-        atexit.register(save, mainform)
+        atexit.register(onExit)
         app.exec_()
     except BaseException:
         exc_type, exc_value, exc_traceback_obj = sys.exc_info()
