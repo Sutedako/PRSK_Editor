@@ -868,7 +868,10 @@ class ListManager():
                 storyChapter.append(char['name_j'] + u" 前篇")
                 storyChapter.append(char['name_j'] + u" 后篇")
                 storyChapter.append("-")
-            storyChapter.pop()
+            try:
+                storyChapter.pop()
+            except IndexError:
+                pass
 
         elif storyType == u"初始卡面":
             storyChapter.append(u"一星 前篇")
