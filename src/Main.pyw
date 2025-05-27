@@ -1,38 +1,36 @@
 from __future__ import unicode_literals
 
 import atexit
-import sys
-import time
-import traceback
-
-import PyQt5.QtCore as qc
-import PyQt5.QtWidgets as qw
-from mainGUI import Ui_SekaiText
-from PyQt5.QtGui import QKeySequence, QIcon, QBrush, QColor
-from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
-
-from Editor import Editor
-from JsonLoader import JsonLoader
-from ListManager import ListManager
-from Dictionary import unitDict, sekaiDict, characterDict
-import Flashback as flashback
-
 import json
 import logging
 import os.path as osp
-from os import environ, mkdir, _exit, remove, listdir
 import platform
-from urllib import request
+import sys
+import time
+import traceback
 from enum import Enum
+from os import mkdir, remove, listdir
+from urllib import request
 
+import PyQt5.QtCore as qc
+import PyQt5.QtWidgets as qw
 import requests
-
+from PyQt5.QtGui import QKeySequence, QIcon, QBrush, QColor
+from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
 from playsound import playsound
+
+import Flashback as flashback
+from Dictionary import characterDict
+from Editor import Editor
+from JsonLoader import JsonLoader
+from ListManager import ListManager
+from mainGUI import Ui_SekaiText
 
 EditorMode = [u'翻译', u'校对', u'合意', u'审核']
 
 loggingPath = ""
 settings = None
+
 
 class mainForm(qw.QMainWindow, Ui_SekaiText):
     def __init__(self, root):
@@ -58,7 +56,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         self.ListManager = ListManager(self.settingdir)
         self.ListManager.load()
         self.srcText = JsonLoader()
-        self.dstText = Editor(realignHook = self.alignRowsHeight)
+        self.dstText = Editor(realignHook=self.alignRowsHeight)
         self.preTitle = ""
         self.dstfilename = ""
         self.dstfilepath = ""
@@ -67,9 +65,10 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
         self.downloadState = DownloadState.NOT_STARTED
 
-        self.headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36'}
+        self.headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36'}
         self.voiceUrls = {
-            "bestVoice" : "https://storage.sekai.best/sekai-jp-assets/sound/scenario/voice/{}.mp3",
+            "bestVoice": "https://storage.sekai.best/sekai-jp-assets/sound/scenario/voice/{}.mp3",
             "harukiVoice": "https://sekai-assets-bdf29c81.seiunx.net/jp-assets/ondemand/sound/scenario/voice/{}.mp3",
         }
         self.nowDownloadVoiceURL = ""
@@ -118,12 +117,12 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         if osp.exists(titleIcon):
             self.setWindowIcon(QIcon(titleIcon))
             logging.info("Icon Loaded")
-        
-        self.flashback = flashback.FlashbackAnalyzer(listManager = self.ListManager)
+
+        self.flashback = flashback.FlashbackAnalyzer(listManager=self.ListManager)
 
         self.setupUi(self)
         self.spinBoxFontSize.setValue(self.fontSize)
-        self.dstText = Editor(self.tableWidgetDst, fontSize=self.fontSize, realignHook = self.alignRowsHeight)
+        self.dstText = Editor(self.tableWidgetDst, fontSize=self.fontSize, realignHook=self.alignRowsHeight)
         '''
         chrspath = osp.join(self.settingdir, "chr.json")
         if osp.exists(chrspath):
@@ -213,88 +212,88 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         self.settingDialog = qw.QDialog(self)
         self.settingDialog.setWindowTitle("设置")
         self.settingDialog.setMinimumSize(400, 300)
-        
+
         # Main layout
         mainLayout = qw.QVBoxLayout()
         mainLayout.setSpacing(10)
-        
+
         # Display settings group
         displayGroup = qw.QGroupBox("显示设置")
         displayLayout = qw.QVBoxLayout()
-        
+
         # Font size setting
         fontSizeLayout = qw.QHBoxLayout()
         labelFontSize = qw.QLabel("字号：")
         labelFontSize.setFixedWidth(80)
-        
+
         self.spinBoxFontSize = qw.QSpinBox()
         self.spinBoxFontSize.setMinimum(12)
         self.spinBoxFontSize.setMaximum(30)
         self.spinBoxFontSize.setSingleStep(2)
         self.spinBoxFontSize.setValue(self.fontSize)
         self.spinBoxFontSize.valueChanged.connect(self.setFontSize)
-        
+
         fontSizeLayout.addWidget(labelFontSize)
         fontSizeLayout.addWidget(self.spinBoxFontSize)
         fontSizeLayout.addStretch(1)
         displayLayout.addLayout(fontSizeLayout)
-        
+
         displayGroup.setLayout(displayLayout)
-        
+
         # Text settings group
         textGroup = qw.QGroupBox("文本设置")
         textLayout = qw.QVBoxLayout()
-        
+
         # Save linebreak setting
         saveNLayout = qw.QHBoxLayout()
         self.checkBoxSaveN = qw.QCheckBox("保存\\N")
         self.checkBoxSaveN.setChecked(True)
         self.checkBoxSaveN.stateChanged.connect(self.saveN)
         self.checkBoxSaveN.setToolTip("启用时，保存文件时会保留\\N换行符")
-        
+
         saveNLayout.addWidget(self.checkBoxSaveN)
         saveNLayout.addStretch(1)
         textLayout.addLayout(saveNLayout)
-        
+
         textGroup.setLayout(textLayout)
-        
+
         # Network settings group
         networkGroup = qw.QGroupBox("网络设置")
         networkLayout = qw.QVBoxLayout()
-        
+
         # Save voice setting
         saveVoiceLayout = qw.QHBoxLayout()
         self.settingSaveVoice = qw.QCheckBox("保存语音文件")
         self.settingSaveVoice.setChecked(self.setting.get('saveVoice', False))
         self.settingSaveVoice.stateChanged.connect(lambda state: self.updateSaveVoiceSetting(state))
         self.settingSaveVoice.setToolTip("启用时，下载的语音文件将被保存")
-        
+
         saveVoiceLayout.addWidget(self.settingSaveVoice)
         saveVoiceLayout.addStretch(1)
         networkLayout.addLayout(saveVoiceLayout)
-        
+
         # SSL check setting
         sslCheckLayout = qw.QHBoxLayout()
         self.settingDisableSSL = qw.QCheckBox("禁用SSL验证")
         self.settingDisableSSL.setChecked(self.setting.get('disabelSSLcheck', False))
         self.settingDisableSSL.stateChanged.connect(lambda state: self.updateSSLSetting(state))
         self.settingDisableSSL.setToolTip("如果持续链接失败，请尝试启用此选项")
-        
+
         sslCheckLayout.addWidget(self.settingDisableSSL)
         sslCheckLayout.addStretch(1)
         networkLayout.addLayout(sslCheckLayout)
-        
+
         # Download source selection
         downloadSourceLayout = qw.QHBoxLayout()
         labelDownloadSource = qw.QLabel("下载源：")
         labelDownloadSource.setFixedWidth(80)
-        
+
         self.comboDownloadTarget = qw.QComboBox()
         self.comboDownloadTarget.addItems(["Haruki", "best", "ai", "Auto"])
         current_target = self.setting.get('downloadTarget', "Haruki")
         self.comboDownloadTarget.setCurrentText(current_target)
         self.comboDownloadTarget.currentTextChanged.connect(self.updateDownloadTarget)
-        
+
         downloadSourceLayout.addWidget(labelDownloadSource)
         downloadSourceLayout.addWidget(self.comboDownloadTarget)
         downloadSourceLayout.addStretch(1)
@@ -304,27 +303,27 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         labelVoiceDownloadTooltipL2 = qw.QLabel("　 或Haruki源（选择其它选项时）下载")
         networkLayout.addWidget(labelVoiceDownloadTooltipL1)
         networkLayout.addWidget(labelVoiceDownloadTooltipL2)
-        
+
         networkGroup.setLayout(networkLayout)
-        
+
         # Add groups to main layout
         mainLayout.addWidget(displayGroup)
         mainLayout.addWidget(textGroup)
         mainLayout.addWidget(networkGroup)
         mainLayout.addStretch(1)
-        
+
         # Buttons
         buttonLayout = qw.QHBoxLayout()
         okButton = qw.QPushButton("确定")
         okButton.clicked.connect(self.settingDialog.accept)
-        
+
         buttonLayout.addStretch(1)
         buttonLayout.addWidget(okButton)
-        
+
         mainLayout.addLayout(buttonLayout)
-        
+
         self.settingDialog.setLayout(mainLayout)
-        
+
         self.settingDialog.close()
 
     def updateSaveVoiceSetting(self, state):
@@ -334,11 +333,11 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
     def updateSSLSetting(self, state):
         self.setting['disabelSSLcheck'] = bool(state)
         save(self)
-        
+
     def updateDownloadTarget(self, target):
         self.setting['downloadTarget'] = target
         save(self)
-    
+
     def playVoice(self, voice, volume, scenario_id):
 
         if self.setting['downloadTarget'] == "best":
@@ -351,9 +350,9 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
         if not osp.exists(voicePath):
             downloadVoiceTask = downloadVoiceThread(
-                voiceUrl = voiceUrl,
-                voicePath = voicePath,
-                header = self.headers
+                voiceUrl=voiceUrl,
+                voicePath=voicePath,
+                header=self.headers
             )
             downloadVoiceTask.trigger.connect(self.checkVoiceDownload)
             self.downloadState = DownloadState.DOWNLOADING
@@ -422,18 +421,17 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 return False
         return True
 
-
     def downloadJson(self, jsonname, jsonurl):
         jsonpath = osp.join(self.datadir, jsonname)
         download = downloadJsonThread(jsonpath, jsonurl)
         download.trigger.connect(self.checkDownload)
 
         urlText = u"下载中...<br>若耗时过长可自行前往下方地址下载" + \
-            "<br><a href=\"{}\">{}</a>".format(jsonurl, jsonname) + \
-            "<br><br>下载时将文件名命名为{}，替换SekaiText同目录的data文件夹中的同名文件".format(jsonname) + \
-            "<br><br>若没有自动开始下载，则将打开的网页中的内容全部复制(Ctrl+A全选，Ctrl+C复制)，" + \
-            "替换data文件夹中{}的内容(替换时用记事本打开即可)".format(jsonname) +\
-            "<br><br>轴机用json请从pjsek.ai复制"
+                  "<br><a href=\"{}\">{}</a>".format(jsonurl, jsonname) + \
+                  "<br><br>下载时将文件名命名为{}，替换SekaiText同目录的data文件夹中的同名文件".format(jsonname) + \
+                  "<br><br>若没有自动开始下载，则将打开的网页中的内容全部复制(Ctrl+A全选，Ctrl+C复制)，" + \
+                  "替换data文件夹中{}的内容(替换时用记事本打开即可)".format(jsonname) + \
+                  "<br><br>轴机用json请从pjsek.ai复制"
 
         self.tempWindow.setText(urlText)
         self.tempWindow.open()
@@ -446,7 +444,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         if self.downloadState == DownloadState.FAILED:
             self.downloadState = DownloadState.NOT_STARTED
             return False
-        
+
         self.downloadState = DownloadState.NOT_STARTED
         return True
 
@@ -483,10 +481,10 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 return
             try:
                 self.srcText = JsonLoader(
-                    jsonpath, 
-                    self.tableWidgetSrc, 
-                    fontSize=self.fontSize, 
-                    flashbackAnalyzer=self.flashback, 
+                    jsonpath,
+                    self.tableWidgetSrc,
+                    fontSize=self.fontSize,
+                    flashbackAnalyzer=self.flashback,
                     playVoiceCallback=self.playVoice
                 )
                 self.toggleFlashback(self.checkBoxShowFlashback.isChecked())
@@ -529,7 +527,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 self.createText()
             else:
                 self.checkSave()
-                
+
                 relpy = qw.QMessageBox.question(
                     self, "", u"是否清除现有翻译内容？",
                     qw.QMessageBox.Yes | qw.QMessageBox.No | qw.QMessageBox.Cancel,
@@ -542,7 +540,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
                     self.dstText.dsttalks = self.dstText.checkLines(self.dstText.loadedtalks)
                     self.dstText.resetTalk(self.editormode, self.dstText.dsttalks)
-            
+
             # Not sure why when calling setFontSize() to resize tables,
             # only a different fontSize will properly resize table headers ...
             v = self.spinBoxFontSize.value()
@@ -568,7 +566,8 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         if self.isFirstUseVoice:
             voiceNotionWindow = qw.QMessageBox(self)
             voiceNotionWindow.setWindowTitle("Sekai Text")
-            voiceNotionWindow.setText(u"原则上，翻译，校对与合意时\n应在有音画对照的条件下进行\n如看游戏内，或者对照录制视频\n播放语音的功能只是为了方便\n请勿依赖语音进行翻译")
+            voiceNotionWindow.setText(
+                u"原则上，翻译，校对与合意时\n应在有音画对照的条件下进行\n如看游戏内，或者对照录制视频\n播放语音的功能只是为了方便\n请勿依赖语音进行翻译")
             voiceNotionWindow.setStandardButtons(qw.QMessageBox.Ok)
             voiceNotionWindow.button(qw.QMessageBox.Ok).setText("好的")
             voiceNotionWindow.exec_()
@@ -591,7 +590,8 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                     if self.comboBoxStoryChapter.itemText(idx):
                         chapterList.append(idx)
 
-            countList = [{'name': self.chars[i]["name_j"], "count": [0 for i in range(len(chapterList) + 1)]} for i in range(26)]
+            countList = [{'name': self.chars[i]["name_j"], "count": [0 for i in range(len(chapterList) + 1)]} for i in
+                         range(26)]
             storyType = self.comboBoxStoryType.currentText()
             storyTypesort = self.comboBoxStoryTypeSort.currentText()
             storyIdx = self.comboBoxStoryIndex.currentIndex()
@@ -839,7 +839,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                         self.isNewFile = True
                         self.setWindowTitle(
                             "*{} Sekai Text".format(self.dstfilename))
-            
+
             self.alignRowsHeight()
         except BaseException:
             exc_type, exc_value, exc_traceback_obj = sys.exc_info()
@@ -1015,9 +1015,9 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
     def changeText(self, item):
         try:
-            if(item.column() == 1):
+            if (item.column() == 1):
                 self.dstText.changeSpeaker(item, self.editormode)
-            elif(item.column() == 2):
+            elif (item.column() == 2):
                 self.dstText.changeText(item, self.editormode)
             self.saved = False
             self.setWindowTitle(u"*{} Sekai Text".format(self.dstfilename))
@@ -1110,13 +1110,13 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         for row in range(dstRowIdx, -1, -1):
             if self.dstText.talks[row]['idx'] != srcIdx:
                 break
-            dstRows.append(row) 
+            dstRows.append(row)
 
-        # after
+            # after
         for row in range(dstRowIdx + 1, len(self.dstText.talks), 1):
             if self.dstText.talks[row]['idx'] != srcIdx:
                 break
-            dstRows.append(row) 
+            dstRows.append(row)
 
         self.alignRowHeight(srcIdx, dstRows)
 
@@ -1126,7 +1126,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         try:
             if not self.checkBoxSyncScroll.isChecked(): return
             if len(self.dstText.talks) == 0: return
-            
+
             lineNum = min(self.tableWidgetSrc.rowCount(), self.dstText.talks[-1]['idx'])
 
             dstRowPtr = 0
@@ -1153,13 +1153,13 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
     def prevSrcIdx(self):
         return self.dstText.talks[self.srcScrollLinkedDstPositionPrev]['idx'] - 1
 
-    def moveScrollBars(self, idx, bar, offset = 0):
+    def moveScrollBars(self, idx, bar, offset=0):
 
         # print("%s current: %d" % (bar, idx))
         # print("Src maximum: %d" % self.tableWidgetSrcScroll.maximum())
         # print("Dst maximum: %d" % self.tableWidgetDstScroll.maximum())
         # return
-        
+
         if not self.checkBoxSyncScroll.isChecked(): return
 
         if idx < 0: return
@@ -1168,7 +1168,6 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
             # Seems PyQt handles scrollbar indices differently in MacOS ...
             if platform.system() == "Darwin":
-                
                 self.tableWidgetSrcScroll.setValue(idx)
                 self.tableWidgetDstScroll.setValue(idx)
                 return
@@ -1181,7 +1180,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                     self.srcScrollLinkedDstPositionPrev = 0
                     self.tableWidgetDstScroll.setValue(0)
                     return
-                
+
                 # We get to the bottom
                 if idx == self.tableWidgetSrcScroll.maximum():
                     self.srcScrollLinkedDstPositionPrev = self.tableWidgetDstScroll.maximum()
@@ -1189,14 +1188,17 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                     return
 
                 dirc = 0
-                if self.prevSrcIdx() == idx: return
-                elif self.prevSrcIdx() > idx: dirc = -1
-                elif self.prevSrcIdx() < idx: dirc = +1
+                if self.prevSrcIdx() == idx:
+                    return
+                elif self.prevSrcIdx() > idx:
+                    dirc = -1
+                elif self.prevSrcIdx() < idx:
+                    dirc = +1
 
                 for _i in range(20):
-                    
+
                     self.srcScrollLinkedDstPositionPrev += dirc
-                    
+
                     if self.srcScrollLinkedDstPositionPrev <= 0: break
                     if self.srcScrollLinkedDstPositionPrev >= len(self.dstText.talks): break
 
@@ -1237,11 +1239,12 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                     self.tableWidgetSrcScroll.setValue(self.dstText.talks[idx]['idx'] - 1)
                 else:
                     # print("Attempt to set src -> %d" % (self.dstText.talks[self.dstText.decompressRowMap[idx]]['idx'] - 1))
-                    self.tableWidgetSrcScroll.setValue(self.dstText.talks[self.dstText.decompressRowMap[idx]]['idx'] - 1)
-        
+                    self.tableWidgetSrcScroll.setValue(
+                        self.dstText.talks[self.dstText.decompressRowMap[idx]]['idx'] - 1)
+
         # If we had any problem syncing scroll bars, disable the sync
         except BaseException:
-            
+
             logging.error("Failed to sync scrollbars. Sync disabled.")
             exc_type, exc_value, exc_traceback_obj = sys.exc_info()
             with open(loggingPath, 'a') as f:
@@ -1262,13 +1265,13 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         else:
             # This resets table row heights
             self.setFontSize()
-    
+
     def toggleFlashback(self, state):
 
         if state != self.setting['showFlashback']:
             self.setting['showFlashback'] = state
             save(self)
-        
+
         if state:
             try:
                 self.srcText.showFlashback()
@@ -1429,14 +1432,14 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         if self.downloadState == DownloadState.FAILED:
             self.downloadState = DownloadState.NOT_STARTED
             return False
-        
+
         self.downloadState = DownloadState.NOT_STARTED
 
         logging.info("Story List Updated")
         self.setComboBoxStoryIndex()
 
         try:
-            self.flashback = flashback.FlashbackAnalyzer(listManager = self.ListManager)
+            self.flashback = flashback.FlashbackAnalyzer(listManager=self.ListManager)
         except BaseException:
             logging.error("Fail to update flashback info from updated chapter infomation.")
             exc_type, exc_value, exc_traceback_obj = sys.exc_info()
@@ -1503,7 +1506,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         else:
             msgBox = qw.QMessageBox(self)
             msgBox.setWindowTitle("Sekai Text")
-            
+
             label = qw.QLabel(
                 u"语音下载失败<br>请确认代理与VPN关闭<br>"
                 "如仍无法下载，请到以下网址自行查看：<br>"
@@ -1512,13 +1515,13 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             label.setTextFormat(qc.Qt.RichText)
             label.setTextInteractionFlags(qc.Qt.TextBrowserInteraction)
             label.setOpenExternalLinks(True)
-            
+
             layout = msgBox.layout()
             layout.addWidget(label, 0, 0, 1, layout.columnCount(), qc.Qt.AlignCenter)
-            
+
             msgBox.setStandardButtons(qw.QMessageBox.Ok)
             msgBox.button(qw.QMessageBox.Ok).setText(u"确认")
-            
+
             msgBox.exec()
             self.voiceDownloadingWindow.close()
 
@@ -1573,7 +1576,7 @@ class downloadVoiceThread(qc.QThread):
     def run(self):
         try:
             r = requests.get(
-                self.url, 
+                self.url,
                 headers=self.header,
                 proxies=request.getproxies()
             )
@@ -1611,7 +1614,7 @@ class updateThread(qc.QThread):
                         exc_type, exc_value, exc_traceback_obj, file=f)
                 self.trigger.emit("No site selected")
                 return
-                
+
             self.trigger.emit([site, "活动"])
             self.ListManager.updateEvents()
             self.trigger.emit([site, "卡面"])
@@ -1669,6 +1672,16 @@ if __name__ == '__main__':
     # environ["QT_ENABLE_HIGHDPI_SCALING"]   = "1"
     # environ["QT_AUTO_SCREEN_SCALE_FACTOR"] = "1"
     # environ["QT_SCALE_FACTOR"]             = "1"
+    guiapp = qw.QApplication(sys.argv)
+    dpi = (guiapp.screens()[0]).logicalDotsPerInch()
+    print("screen logicalDpi:%f" % dpi)
+
+    if dpi == 96.0:
+        qw.QApplication.setAttribute(qc.Qt.AA_EnableHighDpiScaling, False)
+        qw.QApplication.setAttribute(qc.Qt.AA_UseHighDpiPixmaps, False)
+    else:
+        qw.QApplication.setAttribute(qc.Qt.AA_EnableHighDpiScaling, True)
+        qw.QApplication.setAttribute(qc.Qt.AA_UseHighDpiPixmaps, True)
 
     app = qw.QApplication(sys.argv)
 
