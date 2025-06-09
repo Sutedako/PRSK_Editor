@@ -456,6 +456,14 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             storyType = self.comboBoxStoryType.currentText()
             storyTypesort = self.comboBoxStoryTypeSort.currentText()
             storyIdx = self.comboBoxStoryIndex.currentIndex()
+
+            if storyType == u"活动剧情" or storyType == u"活动卡面":
+                newestStory = self.ListManager.events[-1]
+                storyIndex = self.comboBoxStoryIndex.currentIndex()
+                currentStory = self.ListManager.events[storyIndex - 1]
+                storyIdx = storyIdx + (newestStory['offset'] - currentStory['offset'])
+                print("Story Index: {}".format(storyIdx))
+
             chapterIdx = self.comboBoxStoryChapter.currentIndex()
             source = self.comboBoxDataSource.currentText()
             jsonpath = ""
@@ -501,8 +509,8 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
 
             self.setting['storyType'] = self.comboBoxStoryType.currentIndex()
             self.setting['storyTypeSort'] = self.comboBoxStoryTypeSort.currentIndex()
-            self.setting['storyIdx'] = self.comboBoxStoryIndex.currentIndex()
-            self.setting['storyChapter'] = self.comboBoxStoryChapter.currentIndex()
+            self.setting['storyIdx'] = storyIdx
+            self.setting['storyChapter'] = chapterIdx
             save(self)
 
             if storyType[-2:] == u"剧情" and storyType != u"特殊剧情":
@@ -1411,6 +1419,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
                 self.comboBoxStoryChapter.addItem(sc)
 
         if isInit and 'storyChapter' in self.setting:
+            logging.info("Setting storyChapter: {}".format(self.setting['storyChapter']))
             self.comboBoxStoryChapter.setCurrentIndex(self.setting['storyChapter'])
 
         logging.info("Choose Story {} {}".format(storyType, self.comboBoxStoryIndex.currentText()))
@@ -1434,6 +1443,8 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
             return False
 
         self.downloadState = DownloadState.NOT_STARTED
+
+        self.setComboBoxStoryChapter(isInit=True)
 
         logging.info("Story List Updated")
         self.setComboBoxStoryIndex()
@@ -1674,7 +1685,6 @@ if __name__ == '__main__':
     # environ["QT_SCALE_FACTOR"]             = "1"
     guiapp = qw.QApplication(sys.argv)
     dpi = (guiapp.screens()[0]).logicalDotsPerInch()
-    print("screen logicalDpi:%f" % dpi)
 
     if dpi == 96.0:
         qw.QApplication.setAttribute(qc.Qt.AA_EnableHighDpiScaling, False)

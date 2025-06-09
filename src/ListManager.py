@@ -159,30 +159,40 @@ class ListManager():
             cards = cards["data"]
 
         self.events = []
+ 
+        # eventStory's index will always behind events' index
+        offset = 0
+        for index in range(len(events)):
+            event = events[index]
+            eventStory = stories[index - offset]
 
-        for e in events:
-            eventId = e['id']
             eventCards = []
-            while cardIdx < len(cards) and cards[cardIdx]["eventId"] < eventId:
+            while cardIdx < len(cards) and cards[cardIdx]["eventId"] < event['id']:
                 cardIdx += 1
-            while cardIdx < len(cards) and cards[cardIdx]["eventId"] == eventId:
+            while cardIdx < len(cards) and cards[cardIdx]["eventId"] == event['id']:
                 eventCards.append(cards[cardIdx]["cardId"])
                 cardIdx += 1
-            self.events.append({
-                'id': e['id'],
-                'title': e['name'],
-                'name': e['assetbundleName'],
+
+            _event = {
+                'id': event['id'],
+                'nameId': event['id'] - offset,
+                'title': event['name'],
+                'name': event['assetbundleName'],
                 'chapters': [],
-                'cards': eventCards
-            })
-
-
-        for es in stories:
-            assert es['id'] <= len(self.events)
-            e = self.events[es['id'] - 1]
-            eventId = e['id']
-            self.events[es['id'] - 1]['chapters'] =\
-                [{'title': ep['title'], 'assetName': ep['scenarioId']} for ep in es["eventStoryEpisodes"]]
+                'cards': eventCards,
+                'offset': offset
+            }
+            
+            if event['id'] != eventStory['id']: # skip the event that has no story
+                # print(f"{event['id']} has no story, offset = {offset}")
+                _event['nameId'] = 'specialEvent'
+                _event['chapters'] = [{'title': 'specialEvent', 'assetName': 'specialEvent'}]
+                _event['offset'] = offset
+                offset += 1
+                self.events.append(_event)
+            else:
+                _event['chapters'] = [{'title': ep['title'], 'assetName': ep['scenarioId']} for ep in eventStory["eventStoryEpisodes"]]
+                self.events.append(_event)
 
         eventsPath = osp.join(self.settingDir, "events.json")
         with open(eventsPath, 'w', encoding='utf-8') as f:
@@ -677,10 +687,13 @@ class ListManager():
                 storyIndex.append(unitDict[unit["unit"]])
 
         elif storyType in [u"活动剧情", u"活动卡面"]:
-            eventSum = len(self.events)
-            for idx, event in enumerate(self.events[::-1]):
-                storyIndex.append(" ".join(
-                    [str(eventSum - idx), event['title']]))
+            for idx, event in enumerate(self.events):
+                if self.events[idx]['nameId'] != "specialEvent":
+                    storyIndex.append(
+                        " ".join([str(self.events[idx]['nameId']), event['title']])
+                    )
+            
+            storyIndex.reverse()
 
         elif storyType == u"特殊卡面":
             for f in self.festivals[::-1]:
@@ -781,7 +794,8 @@ class ListManager():
                         eventId = areatalk["addEventId"]
                         if eventId != preAddId:
                             eventTitle = self.events[eventId - 1]["title"]
-                            storyIndex.append(u"{} {}".format(eventId, eventTitle))
+                            eventDisplayId = self.events[eventId - 1]["nameId"]
+                            storyIndex.append(u"{} {}".format(eventDisplayId, eventTitle))
                             self.areaTalkByTime.append({
                                 "addEventId": areatalk["addEventId"],
                                 "releaseEventId": areatalk["releaseEventId"],
@@ -799,7 +813,8 @@ class ListManager():
                                     storyIndex.append(u"【追加】初始")
                             elif eventId > 1:
                                 eventTitle = self.events[eventId - 1]["title"]
-                                storyIndex.append(u"【追加】{} {}".format(eventId, eventTitle))
+                                eventDisplayId = self.events[eventId - 1]["nameId"]
+                                storyIndex.append(u"【追加】{} {}".format(eventDisplayId, eventTitle))
                             self.areaTalkByTime.append({
                                 "addEventId": areatalk["addEventId"],
                                 "releaseEventId": areatalk["releaseEventId"],
@@ -851,7 +866,9 @@ class ListManager():
                 storyChapter.pop()
 
         elif storyType == u"活动剧情":
+            newestEvent = self.events[-1]
             eventId = len(self.events) - max(storyIndex, 0)
+            eventId -= newestEvent['offset'] - self.events[eventId - 1]['offset']
             for idx, chapter in enumerate(self.events[eventId - 1]['chapters']):
                 storyChapter.append(str(idx + 1) + " " + chapter['title'])
 
@@ -862,7 +879,9 @@ class ListManager():
             elif storyType == u"特殊卡面":
                 content = self.festivals
 
-            contentId = len(content) - max(storyIndex, 0)
+            newestEvent = self.events[-1]
+            eventId = len(self.events) - max(storyIndex, 0)
+            contentId = eventId - (newestEvent['offset'] - self.events[eventId - 1]['offset'])
             for cardId in content[contentId - 1]['cards']:
                 char = characterDict[self.cards[cardId - 1]['characterId'] - 1]
                 storyChapter.append(char['name_j'] + u" 前篇")
@@ -1143,8 +1162,17 @@ class ListManager():
                 jsonurl = baseUrl + "ondemand/event_story/" \
                     "{}/scenario/{}.json".format(event, chapter)
 
-            preTitle = "-".join(chapter.split("_")[1:])
-            jsonname = chapter + ".json"
+            nameId = self.events[eventId - 1]['nameId']
+
+            # preTitle format: 167-01
+            # chapter format: event_167_01
+            # print(chapter, nameId)
+
+            preTitle = "{}-{}".format(
+                str(nameId), chapter.split("_")[2])
+            jsonname = "{}_{}_{}.json".format(
+                chapter.split("_")[0], str(nameId), chapter.split("_")[2])
+            # jsonname = chapter + ".json"
 
         elif storyType == u"活动卡面":
             eventId = len(self.events) - storyIdx
