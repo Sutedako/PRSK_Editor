@@ -794,7 +794,8 @@ class ListManager():
                         eventId = areatalk["addEventId"]
                         if eventId != preAddId:
                             eventTitle = self.events[eventId - 1]["title"]
-                            storyIndex.append(u"{} {}".format(eventId, eventTitle))
+                            eventDisplayId = self.events[eventId - 1]["nameId"]
+                            storyIndex.append(u"{} {}".format(eventDisplayId, eventTitle))
                             self.areaTalkByTime.append({
                                 "addEventId": areatalk["addEventId"],
                                 "releaseEventId": areatalk["releaseEventId"],
@@ -812,7 +813,8 @@ class ListManager():
                                     storyIndex.append(u"【追加】初始")
                             elif eventId > 1:
                                 eventTitle = self.events[eventId - 1]["title"]
-                                storyIndex.append(u"【追加】{} {}".format(eventId, eventTitle))
+                                eventDisplayId = self.events[eventId - 1]["nameId"]
+                                storyIndex.append(u"【追加】{} {}".format(eventDisplayId, eventTitle))
                             self.areaTalkByTime.append({
                                 "addEventId": areatalk["addEventId"],
                                 "releaseEventId": areatalk["releaseEventId"],
