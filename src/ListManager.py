@@ -158,6 +158,7 @@ class ListManager():
         if("data" in cards):
             cards = cards["data"]
 
+        self.all_events = {}
         self.events = []
 
         for e in events:
@@ -168,21 +169,30 @@ class ListManager():
             while cardIdx < len(cards) and cards[cardIdx]["eventId"] == eventId:
                 eventCards.append(cards[cardIdx]["cardId"])
                 cardIdx += 1
-            self.events.append({
-                'id': e['id'],
+            self.all_events[e['id']] = {
+                'kdyicr_id': e['id'],
+                'id': -1,
                 'title': e['name'],
                 'name': e['assetbundleName'],
                 'chapters': [],
                 'cards': eventCards
-            })
+            }
 
 
         for es in stories:
-            assert es['id'] <= len(self.events)
-            e = self.events[es['id'] - 1]
-            eventId = e['id']
-            self.events[es['id'] - 1]['chapters'] =\
+            assert es['id'] <= len(self.all_events)
+            e = self.all_events[es['id']]
+            self.all_events[es['id']]['chapters'] =\
                 [{'title': ep['title'], 'assetName': ep['scenarioId']} for ep in es["eventStoryEpisodes"]]
+        
+        # Make events entry
+        sorted_all_events = sorted(self.all_events.values(), key = lambda e: e['kdyicr_id'])
+        for e in sorted_all_events:
+            if len(e['chapters']) == 0:
+                continue
+            e['id'] = len(self.events) + 1
+            self.all_events[e['kdyicr_id']]['id'] = e['id']
+            self.events.append(e)
 
         eventsPath = osp.join(self.settingDir, "events.json")
         with open(eventsPath, 'w', encoding='utf-8') as f:
@@ -371,6 +381,8 @@ class ListManager():
                 releaseEventId = int((releaseEventId % 100000) / 100) + 1
             if releaseEventId > 1000:
                 releaseEventId = -1
+            if releaseEventId in self.all_events:
+                releaseEventId = self.all_events[releaseEventId]['id'] # Map kdyicr_id to PJSId
             if action['id'] == 618:
                 releaseEventId = 1
             if releaseEventId > addEventId:
@@ -590,6 +602,7 @@ class ListManager():
             event_desc = {
                 'array_index': ei,
                 'id': event['id'],
+                'kdyicr_id': event['kdyicr_id'],
                 'choffset': 0, # Some event stories start from Ep. "00" instead of "01", e.g., #9
             }
             events_dict[event['id']] = event_desc
@@ -1155,7 +1168,7 @@ class ListManager():
 
             cardNo = self.cards[cardId - 1]["cardNo"]
             chapter = str(chapterIdx % 3 + 1).zfill(2)
-            eventId = str(self.events[eventId - 1]['nameId']).zfill(3)
+            eventId = str(self.events[eventId - 1]['id']).zfill(3)
             charname = characterDict[charId - 1]['name']
             charId = str(charId).zfill(3)
 
