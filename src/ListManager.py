@@ -34,12 +34,12 @@ class ListManager():
     urls = {
         'bestDBurl' : "https://raw.githubusercontent.com/Sekai-World/sekai-master-db-diff/main/{}.json",
         'aiDBurl' : "https://api.pjsek.ai/database/master/{}?$limit=9999&$skip=0&",
-        'harukiDBurl' : "https://storage.haruki.wacca.cn/master-jp/{}.json?t=0",
+        'harukiDBurl' : "https://bot-assets.haruki.seiunx.com/master-jp/{}.json?t=0",
 
         'bestBaseUrl' : "https://minio.dnaroma.eu/sekai-jp-assets/",
         'uniBaseUrl' : "https://assets.unipjsk.com/",
         'harukiJPBaseUrl' : "https://sekai-assets-bdf29c81.seiunx.net/jp-assets/",
-        'harukiCNBaseUrl' : "https://storage.haruki.wacca.cn/assets/",
+        'harukiCNBaseUrl' : "https://bot-assets.haruki.seiunx.com/assets/",
     }
 
     def __init__(self, settingDir):
@@ -158,6 +158,7 @@ class ListManager():
         if("data" in cards):
             cards = cards["data"]
 
+        self.all_events = {}
         self.events = []
 
         for e in events:
@@ -168,21 +169,30 @@ class ListManager():
             while cardIdx < len(cards) and cards[cardIdx]["eventId"] == eventId:
                 eventCards.append(cards[cardIdx]["cardId"])
                 cardIdx += 1
-            self.events.append({
-                'id': e['id'],
+            self.all_events[e['id']] = {
+                'kdyicr_id': e['id'],
+                'id': -1,
                 'title': e['name'],
                 'name': e['assetbundleName'],
                 'chapters': [],
                 'cards': eventCards
-            })
+            }
 
 
         for es in stories:
-            assert es['id'] <= len(self.events)
-            e = self.events[es['id'] - 1]
-            eventId = e['id']
-            self.events[es['id'] - 1]['chapters'] =\
+            assert es['id'] <= len(self.all_events)
+            e = self.all_events[es['id']]
+            self.all_events[es['id']]['chapters'] =\
                 [{'title': ep['title'], 'assetName': ep['scenarioId']} for ep in es["eventStoryEpisodes"]]
+        
+        # Make events entry
+        sorted_all_events = sorted(self.all_events.values(), key = lambda e: e['kdyicr_id'])
+        for e in sorted_all_events:
+            if len(e['chapters']) == 0:
+                continue
+            e['id'] = len(self.events) + 1
+            self.all_events[e['kdyicr_id']]['id'] = e['id']
+            self.events.append(e)
 
         eventsPath = osp.join(self.settingDir, "events.json")
         with open(eventsPath, 'w', encoding='utf-8') as f:
@@ -371,6 +381,8 @@ class ListManager():
                 releaseEventId = int((releaseEventId % 100000) / 100) + 1
             if releaseEventId > 1000:
                 releaseEventId = -1
+            if releaseEventId in self.all_events:
+                releaseEventId = self.all_events[releaseEventId]['id'] # Map kdyicr_id to PJSId
             if action['id'] == 618:
                 releaseEventId = 1
             if releaseEventId > addEventId:
@@ -590,6 +602,7 @@ class ListManager():
             event_desc = {
                 'array_index': ei,
                 'id': event['id'],
+                'kdyicr_id': event['kdyicr_id'],
                 'choffset': 0, # Some event stories start from Ep. "00" instead of "01", e.g., #9
             }
             events_dict[event['id']] = event_desc
@@ -1094,6 +1107,7 @@ class ListManager():
     def getJsonPath(self, storyType, sort, storyIdx, chapterIdx, source):
         jsonurl = ""
         
+        extension = "asset"
         format = 'uni'
         if source == "sekai.best":
             format = 'best'
@@ -1101,12 +1115,13 @@ class ListManager():
         baseUrl = None
         if source == "sekai.best":
             baseUrl = self.urls['bestBaseUrl']
-        elif source == "haruki (CN)":
+        elif source == "haruki (CN) 无小对话":
             baseUrl = self.urls['harukiCNBaseUrl']
         elif source == "haruki (JP)":
             baseUrl = self.urls['harukiJPBaseUrl']
         elif source == "unipjsk.com":
             baseUrl = self.urls['uniBaseUrl']
+            extension = "json"
         else:
             logging.error("Unknown source. Using sekai.best instead.")
             baseUrl = self.urls['bestBaseUrl']
@@ -1121,10 +1136,10 @@ class ListManager():
 
             if format == "best":
                 jsonurl = baseUrl + "scenario/unitstory/" \
-                    "{}_rip/{}.asset".format(unit, chapter)
+                    "{}_rip/{}.{}".format(unit, chapter, extension)
             if format == "uni":
                 jsonurl = baseUrl + "startapp/scenario/unitstory/" \
-                    "{}/{}.json".format(unit, chapter)
+                    "{}/{}.{}".format(unit, chapter, extension)
             # print(jsonurl)
 
             preTitle = chapter.replace("_", "-")
@@ -1138,10 +1153,10 @@ class ListManager():
 
             if format == "best":
                 jsonurl = baseUrl + "event_story/" \
-                    "{}/scenario_rip/{}.asset".format(event, chapter)
+                    "{}/scenario_rip/{}.{}".format(event, chapter, extension)
             if format == "uni":
                 jsonurl = baseUrl + "ondemand/event_story/" \
-                    "{}/scenario/{}.json".format(event, chapter)
+                    "{}/scenario/{}.{}".format(event, chapter, extension)
 
             preTitle = "-".join(chapter.split("_")[1:])
             jsonname = chapter + ".json"
@@ -1153,18 +1168,18 @@ class ListManager():
 
             cardNo = self.cards[cardId - 1]["cardNo"]
             chapter = str(chapterIdx % 3 + 1).zfill(2)
-            eventId = str(eventId).zfill(3)
+            eventId = str(self.events[eventId - 1]['id']).zfill(3)
             charname = characterDict[charId - 1]['name']
             charId = str(charId).zfill(3)
 
             if format == "best":
                 jsonurl = baseUrl + "character/member/" \
-                    "res{}_no{}_rip/{}{}_{}{}.asset".format(
-                        charId, cardNo, charId, cardNo, charname, chapter)
+                    "res{}_no{}_rip/{}{}_{}{}.{}".format(
+                        charId, cardNo, charId, cardNo, charname, chapter, extension)
             elif format == "uni":
                 jsonurl = baseUrl + "startapp/character/member/" \
-                    "res{}_no{}/{}{}_{}{}.json".format(
-                        charId, cardNo, charId, cardNo, charname, chapter) 
+                    "res{}_no{}/{}{}_{}{}.{}".format(
+                        charId, cardNo, charId, cardNo, charname, chapter, extension) 
 
             preTitle = "event{}-{}-{}".format(eventId, charname, chapter)
             jsonname = preTitle.replace("-", "_") + ".json"
@@ -1181,12 +1196,12 @@ class ListManager():
 
             if format == "best":
                 jsonurl = baseUrl + "character/member/" \
-                    "res{}_no{}_rip/{}{}_{}{}.asset".format(
-                        charId, cardNo, charId, cardNo, charname, chapter)
+                    "res{}_no{}_rip/{}{}_{}{}.{}".format(
+                        charId, cardNo, charId, cardNo, charname, chapter, extension)
             elif format == "uni":
                 jsonurl = baseUrl + "startapp/character/member/" \
-                    "res{}_no{}/{}{}_{}{}.json".format(
-                        charId, cardNo, charId, cardNo, charname, chapter)
+                    "res{}_no{}/{}{}_{}{}.{}".format(
+                        charId, cardNo, charId, cardNo, charname, chapter, extension)
 
             idx = self.festivals[fesId - 1]['id']
             if 'collaboration' in self.festivals[fesId - 1]:
@@ -1224,12 +1239,12 @@ class ListManager():
 
             if format == "best":
                 jsonurl = baseUrl + "character/member/" \
-                    "res{}_no{}_rip/{}{}_{}{}.asset".format(
-                        charId, rarity, charId, rarity, charname, chapter)
+                    "res{}_no{}_rip/{}{}_{}{}.{}".format(
+                        charId, rarity, charId, rarity, charname, chapter, extension)
             elif format == "uni":
                 jsonurl = baseUrl + "startapp/character/member/" \
-                    "res{}_no{}/{}{}_{}{}.json".format(
-                        charId, rarity, charId, rarity, charname, chapter)
+                    "res{}_no{}/{}{}_{}{}.{}".format(
+                        charId, rarity, charId, rarity, charname, chapter, extension)
 
             if charname == "miku" and realRarity == "02":
                 preTitle = "release-miku-{}-02-{}".format(unit, chapter)
@@ -1271,12 +1286,12 @@ class ListManager():
 
             if format == "best":
                 jsonurl = baseUrl + "character/member/" \
-                    "res{}_no{}_rip/{}{}_{}{}.asset".format(
-                        charId, cardNo, charId, cardNo, charname, chapter)
+                    "res{}_no{}_rip/{}{}_{}{}.{}".format(
+                        charId, cardNo, charId, cardNo, charname, chapter, extension)
             elif format == "uni":
                 jsonurl = baseUrl + "startapp/character/member/" \
-                    "res{}_no{}/{}{}_{}{}.json".format(
-                        charId, cardNo, charId, cardNo, charname, chapter)
+                    "res{}_no{}/{}{}_{}{}.{}".format(
+                        charId, cardNo, charId, cardNo, charname, chapter, extension)
             
             preTitle = "lvelup2023-{}-{}".format(charname, chapter)
             jsonname = preTitle.replace("-", "_") + ".json"
@@ -1288,10 +1303,10 @@ class ListManager():
 
             if format == "best":
                 jsonurl = baseUrl + "scenario/actionset/" \
-                    "group{}_rip/{}.asset".format(group, jsonname)
+                    "group{}_rip/{}.{}".format(group, jsonname, extension)
             elif format == "uni":
                 jsonurl = baseUrl + "startapp/scenario/actionset/" \
-                    "group{}/{}.json".format(group, jsonname)
+                    "group{}/{}.{}".format(group, jsonname, extension)
 
             preTitle = "areatalk-" + self.chapterScenario[chapterIdx][2]
             jsonname = self.chapterScenario[chapterIdx][2] + "_" + jsonname + ".json"
@@ -1322,10 +1337,10 @@ class ListManager():
 
             if format == "best":
                 jsonurl = baseUrl + "scenario/special/" \
-                    "{}_rip/{}.asset".format(story["dirName"], story["fileName"])
+                    "{}_rip/{}.{}".format(story["dirName"], story["fileName"], extension)
             elif format == "uni":
                 jsonurl = baseUrl + "startapp/scenario/special/" \
-                    "{}/{}.json".format(story["dirName"], story["fileName"])
+                    "{}/{}.{}".format(story["dirName"], story["fileName"], extension)
 
             preTitle = story["title"]
             jsonname = story["fileName"] + ".json"
