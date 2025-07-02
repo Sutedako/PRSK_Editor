@@ -9,8 +9,9 @@ import sys
 import time
 import traceback
 from enum import Enum
-from os import mkdir, remove, listdir
+from os import mkdir, remove, listdir, makedirs
 from urllib import request
+from platformdirs import user_data_dir
 
 import PyQt5.QtCore as qc
 import PyQt5.QtWidgets as qw
@@ -1686,11 +1687,12 @@ if __name__ == '__main__':
     app = qw.QApplication(sys.argv)
 
     root, _ = osp.split(osp.abspath(sys.argv[0]))
-    if not getattr(sys, 'frozen', False):
+    
+    if platform.system() == "Darwin":
+        root = user_data_dir("Sekai Text", None)
+        makedirs(root, exist_ok=True)
+    elif not getattr(sys, 'frozen', False):
         root = osp.join(root, "../")
-
-    elif platform.system() == "Darwin":
-        root = osp.join(root, '../../../')
 
     loggingPath = osp.join(root, "setting", "log.txt")
     if not osp.exists(osp.join(root, "setting")):
