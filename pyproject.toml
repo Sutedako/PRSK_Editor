@@ -1,0 +1,14 @@
+[project]
+name = "sekai-text"
+version = "1.0.0"
+description = "A desktop translate tool."
+requires-python = ">=3.10"
+dependencies = [
+    "pyqt5~=5.15.10",
+    "requests~=2.32.5",
+    "pyopenssl~=25.3.0",
+    "playsound3~=3.3.0",
+    "platformdirs",
+    "pyinstaller>=6.16.0",
+    "pip-system-certs>=5.3",
+]

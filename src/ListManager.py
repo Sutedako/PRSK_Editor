@@ -35,8 +35,9 @@ class ListManager():
         'bestDBurl' : "https://raw.githubusercontent.com/Sekai-World/sekai-master-db-diff/main/{}.json",
         'aiDBurl' : "https://api.pjsek.ai/database/master/{}?$limit=9999&$skip=0&",
         'harukiDBurl' : "https://bot-assets.haruki.seiunx.com/master-jp/{}.json?t=0",
+        'harukiDBGHurl': "https://raw.githubusercontent.com/Team-Haruki/haruki-sekai-master/refs/heads/main/master/{}.json",
 
-        'bestBaseUrl' : "https://minio.dnaroma.eu/sekai-jp-assets/",
+        'bestBaseUrl' : "https://storage.sekai.best/sekai-jp-assets/",
         'uniBaseUrl' : "https://assets.unipjsk.com/",
         'harukiJPBaseUrl' : "https://sekai-assets-bdf29c81.seiunx.net/jp-assets/",
         'harukiCNBaseUrl' : "https://bot-assets.haruki.seiunx.com/assets/",
@@ -88,9 +89,11 @@ class ListManager():
         bestDBurl = self.urls['bestDBurl']
         aiDBurl = self.urls['aiDBurl']
         harukiDBurl = self.urls['harukiDBurl'] + str(int(time.time()))
+        harukiDBGHurl = self.urls['harukiDBGHurl']
         
         sites = {
-            "Haruki": harukiDBurl,
+            "HarukiCN": harukiDBurl,
+            "HarukiGH": harukiDBGHurl,
             "best": bestDBurl,
             "ai": aiDBurl
         }
@@ -1127,8 +1130,10 @@ class ListManager():
             baseUrl = self.urls['bestBaseUrl']
         elif source == "haruki (CN) 无小对话":
             baseUrl = self.urls['harukiCNBaseUrl']
+            extension = "json"
         elif source == "haruki (JP)":
             baseUrl = self.urls['harukiJPBaseUrl']
+            extension = "json"
         elif source == "unipjsk.com":
             baseUrl = self.urls['uniBaseUrl']
             extension = "json"
@@ -1146,7 +1151,7 @@ class ListManager():
 
             if format == "best":
                 jsonurl = baseUrl + "scenario/unitstory/" \
-                    "{}_rip/{}.{}".format(unit, chapter, extension)
+                    "{}/{}.{}".format(unit, chapter, extension)
             if format == "uni":
                 jsonurl = baseUrl + "startapp/scenario/unitstory/" \
                     "{}/{}.{}".format(unit, chapter, extension)
@@ -1163,7 +1168,7 @@ class ListManager():
 
             if format == "best":
                 jsonurl = baseUrl + "event_story/" \
-                    "{}/scenario_rip/{}.{}".format(event, chapter, extension)
+                    "{}/scenario/{}.{}".format(event, chapter, extension)
             if format == "uni":
                 jsonurl = baseUrl + "ondemand/event_story/" \
                     "{}/scenario/{}.{}".format(event, chapter, extension)
@@ -1185,7 +1190,7 @@ class ListManager():
 
             if format == "best":
                 jsonurl = baseUrl + "character/member/" \
-                    "res{}_no{}_rip/{}{}_{}{}.{}".format(
+                    "res{}_no{}/{}{}_{}{}.{}".format(
                         charId, cardNo, charId, cardNo, charname, chapter, extension)
             elif format == "uni":
                 jsonurl = baseUrl + "startapp/character/member/" \
@@ -1207,7 +1212,7 @@ class ListManager():
 
             if format == "best":
                 jsonurl = baseUrl + "character/member/" \
-                    "res{}_no{}_rip/{}{}_{}{}.{}".format(
+                    "res{}_no{}/{}{}_{}{}.{}".format(
                         charId, cardNo, charId, cardNo, charname, chapter, extension)
             elif format == "uni":
                 jsonurl = baseUrl + "startapp/character/member/" \
@@ -1250,7 +1255,7 @@ class ListManager():
 
             if format == "best":
                 jsonurl = baseUrl + "character/member/" \
-                    "res{}_no{}_rip/{}{}_{}{}.{}".format(
+                    "res{}_no{}/{}{}_{}{}.{}".format(
                         charId, rarity, charId, rarity, charname, chapter, extension)
             elif format == "uni":
                 jsonurl = baseUrl + "startapp/character/member/" \
@@ -1297,7 +1302,7 @@ class ListManager():
 
             if format == "best":
                 jsonurl = baseUrl + "character/member/" \
-                    "res{}_no{}_rip/{}{}_{}{}.{}".format(
+                    "res{}_no{}/{}{}_{}{}.{}".format(
                         charId, cardNo, charId, cardNo, charname, chapter, extension)
             elif format == "uni":
                 jsonurl = baseUrl + "startapp/character/member/" \
@@ -1314,7 +1319,7 @@ class ListManager():
 
             if format == "best":
                 jsonurl = baseUrl + "scenario/actionset/" \
-                    "group{}_rip/{}.{}".format(group, jsonname, extension)
+                    "group{}/{}.{}".format(group, jsonname, extension)
             elif format == "uni":
                 jsonurl = baseUrl + "startapp/scenario/actionset/" \
                     "group{}/{}.{}".format(group, jsonname, extension)
@@ -1348,7 +1353,7 @@ class ListManager():
 
             if format == "best":
                 jsonurl = baseUrl + "scenario/special/" \
-                    "{}_rip/{}.{}".format(story["dirName"], story["fileName"], extension)
+                    "{}/{}.{}".format(story["dirName"], story["fileName"], extension)
             elif format == "uni":
                 jsonurl = baseUrl + "startapp/scenario/special/" \
                     "{}/{}.{}".format(story["dirName"], story["fileName"], extension)

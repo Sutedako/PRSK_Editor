@@ -1,5 +1,6 @@
 pyqt5~=5.15.10
 requests~=2.32.0
 pyopenssl~=25.0.0
-playsound
+playsound3~=3.3.0
 platformdirs
+pyinstaller>=6.16.0

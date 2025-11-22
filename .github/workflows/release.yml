@@ -1,0 +1,135 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version tag (e.g., v1.0.0)'
+        required: false
+        default: ''
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          uv pip install --system -r requirements.txt
+
+      - name: Build with PyInstaller
+        run: |
+          pyinstaller Main.spec
+
+      - name: Create archive
+        run: |
+          cd dist
+          Compress-Archive -Path "Sekai Text.exe" -DestinationPath "../Sekai-Text-Windows-x64.zip"
+          cd ..
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-x64
+          path: Sekai-Text-Windows-x64.zip
+
+  build-macos:
+    strategy:
+      matrix:
+        include:
+          - arch: arm64
+            runner: macos-15  # Apple Silicon
+          - arch: x64
+            runner: macos-15  # Intel
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: |
+          uv sync --no-dev
+        env:
+          UV_RESOLUTION: highest
+
+      - name: Build with PyInstaller
+        run: |
+          uv run pyinstaller Main_MacOS.spec
+
+      - name: Create archive
+        run: |
+          cd dist
+          zip -r "../Sekai-Text-macOS-${{ matrix.arch }}.zip" "Sekai Text.app"
+          cd ..
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-${{ matrix.arch }}
+          path: Sekai-Text-macOS-${{ matrix.arch }}.zip
+
+  create-release:
+    needs: [build-windows, build-macos]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Display structure of downloaded files
+        run: ls -R artifacts
+
+      - name: Get version
+        id: get_version
+        run: |
+          if [ "${{ github.event_name }}" == "workflow_dispatch" ] && [ -n "${{ github.event.inputs.version }}" ]; then
+            echo "version=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
+          else
+            echo "version=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.get_version.outputs.version }}
+          name: Release ${{ steps.get_version.outputs.version }}
+          draft: false
+          prerelease: false
+          files: |
+            artifacts/windows-x64/Sekai-Text-Windows-x64.zip
+            artifacts/macos-arm64/Sekai-Text-macOS-arm64.zip
+            artifacts/macos-x64/Sekai-Text-macOS-x64.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+

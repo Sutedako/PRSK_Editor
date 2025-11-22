@@ -18,7 +18,7 @@ import PyQt5.QtWidgets as qw
 import requests
 from PyQt5.QtGui import QKeySequence, QIcon, QBrush, QColor
 from PyQt5.QtMultimedia import QMediaPlayer, QMediaContent
-from playsound import playsound
+from playsound3 import playsound
 
 import Flashback as flashback
 from Dictionary import characterDict
@@ -93,7 +93,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         if 'disabelSSLcheck' not in self.setting:
             self.setting['disabelSSLcheck'] = False
         if 'downloadTarget' not in self.setting:
-            self.setting['downloadTarget'] = "Haruki"
+            self.setting['downloadTarget'] = "HarukiCN"
         if 'fontSize' not in self.setting:
             self.setting['fontSize'] = 18
 
@@ -290,8 +290,8 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         labelDownloadSource.setFixedWidth(80)
 
         self.comboDownloadTarget = qw.QComboBox()
-        self.comboDownloadTarget.addItems(["Haruki", "best", "ai", "Auto"])
-        current_target = self.setting.get('downloadTarget', "Haruki")
+        self.comboDownloadTarget.addItems(["HarukiCN", "HarukiGH", "best", "ai", "Auto"])
+        current_target = self.setting.get('downloadTarget', "HarukiCN")
         self.comboDownloadTarget.setCurrentText(current_target)
         self.comboDownloadTarget.currentTextChanged.connect(self.updateDownloadTarget)
 
@@ -1586,6 +1586,7 @@ class downloadVoiceThread(qc.QThread):
             logging.info("Voice File Saved: " + self.path)
             self.trigger.emit(True)
         except BaseException:
+            traceback.print_exc()
             logging.error("Fail to Download Voice File.")
             exc_type, exc_value, exc_traceback_obj = sys.exc_info()
             with open(loggingPath, 'a') as f:
