@@ -36,6 +36,7 @@ class ListManager():
         'aiDBurl' : "https://api.pjsek.ai/database/master/{}?$limit=9999&$skip=0&",
         'harukiDBurl' : "https://bot-assets.haruki.seiunx.com/master-jp/{}.json?t=0",
         'harukiDBGHurl': "https://raw.githubusercontent.com/Team-Haruki/haruki-sekai-master/refs/heads/main/master/{}.json",
+        'harukineoDBurl': "https://sekai-master-direct.haruki.seiunx.com/haruki-sekai-master/master/{}.json",
 
         'bestBaseUrl' : "https://storage.sekai.best/sekai-jp-assets/",
         'uniBaseUrl' : "https://assets.unipjsk.com/",
@@ -90,8 +91,10 @@ class ListManager():
         aiDBurl = self.urls['aiDBurl']
         harukiDBurl = self.urls['harukiDBurl'] + str(int(time.time()))
         harukiDBGHurl = self.urls['harukiDBGHurl']
-        
+        harukineoDBurl = self.urls['harukineoDBurl']
+
         sites = {
+            "HarukiNeo": harukineoDBurl,
             "HarukiCN": harukiDBurl,
             "HarukiGH": harukiDBGHurl,
             "best": bestDBurl,

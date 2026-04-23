@@ -93,7 +93,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         if 'disabelSSLcheck' not in self.setting:
             self.setting['disabelSSLcheck'] = False
         if 'downloadTarget' not in self.setting:
-            self.setting['downloadTarget'] = "HarukiCN"
+            self.setting['downloadTarget'] = "HarukiNeo"
         if 'fontSize' not in self.setting:
             self.setting['fontSize'] = 18
 
@@ -290,7 +290,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         labelDownloadSource.setFixedWidth(80)
 
         self.comboDownloadTarget = qw.QComboBox()
-        self.comboDownloadTarget.addItems(["HarukiCN", "HarukiGH", "best", "ai", "Auto"])
+        self.comboDownloadTarget.addItems(["HarukiNeo", "HarukiCN", "HarukiGH", "best", "ai", "Auto"])
         current_target = self.setting.get('downloadTarget', "HarukiCN")
         self.comboDownloadTarget.setCurrentText(current_target)
         self.comboDownloadTarget.currentTextChanged.connect(self.updateDownloadTarget)
@@ -1486,7 +1486,7 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         if type(output) == ListManager and output.events:
             self.ListManager = output
             self.downloadState = DownloadState.SUCCESSED
-        if type(output) == str and output == "No site selected":
+        elif type(output) == str and output == "No site selected":
             networkErrorWindow = qw.QMessageBox(self)
             networkErrorWindow.setWindowTitle(u"SeKai Text")
             networkErrorWindow.setText(u"更新失败\n请确认能正常访问sekai.best，且关闭代理与VPN\n"
