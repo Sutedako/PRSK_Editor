@@ -12,3 +12,8 @@ dependencies = [
     "pyinstaller>=6.16.0",
     "pip-system-certs>=5.3",
 ]
+
+[tool.uv]
+required-environments = [
+    "sys_platform == 'win32' and platform_machine == 'AMD64'",
+]
