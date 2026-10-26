@@ -62,6 +62,8 @@ class JsonLoader():
 
                 self.talks.append({
                     'speaker': speaker,
+                    'translation_key': ('dialog', snippet['ReferenceIndex'] + 1),
+                    'scenario_id': self.scenario_id,
                     'text': text.rstrip(),
                     'voices': voices,
                     'volume': volume,
@@ -158,6 +160,11 @@ class JsonLoader():
                         'speaker': speaker,
                         'text': text,
                     })
+                    if effectdata['EffectType'] in [8, 18]:
+                        self.talks[-1]['translation_key'] = (
+                            'banner' if effectdata['EffectType'] == 8 else 'marker',
+                            snippet['ReferenceIndex'] + 1)
+                        self.talks[-1]['scenario_id'] = self.scenario_id
 
                     row = self.table.rowCount()
                     self.table.setRowCount(row + 1)
@@ -176,7 +183,7 @@ class JsonLoader():
                     self.table.setItem(row, 1, QTableWidgetItem(splitstr))
                     self.table.setRowHeight(row, 20 + (15 + self.fontSize))
 
-        if self.talks[-1]["speaker"] == '':
+        if self.talks and self.talks[-1]["speaker"] == '' and self.talks[-1]["text"] == '':
             self.talks.pop()
             self.table.removeRow(self.table.rowCount() - 1)
         

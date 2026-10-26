@@ -5,6 +5,7 @@ import copy
 import math
 
 from Dictionary import characterDict
+from TranslationFormat import is_v2, parse_v2
 
 Color = {
     'RED': QBrush(QColor(255, 192, 192, 192)),
@@ -129,8 +130,16 @@ class Editor():
         self.updateHiddenRowMap()
 
     def loadFile(self, editormode, filepath):
-        srcfile = open(filepath, 'r', encoding='UTF-8')
-        lines = srcfile.readlines()
+        with open(filepath, 'r', encoding='utf-8-sig') as srcfile:
+            content = srcfile.read()
+        if is_v2(content):
+            scenario_id = next((talk.get('scenario_id') for talk in self.srctalks
+                                if talk.get('scenario_id')), None)
+            loaded = parse_v2(content, scenario_id, self.srctalks)
+            self.resetTalk(editormode, loaded)
+            self.loadedtalks = loaded
+            return
+        lines = content.splitlines(keepends=True)
 
         preblank = False
         _loadedtalks = []
@@ -147,7 +156,7 @@ class Editor():
                 fulltext = line
 
             # skip continuous balnk line
-            if speaker == "":
+            if speaker == "" and not fulltext.strip():
                 if preblank:
                     continue
                 preblank = True
@@ -178,7 +187,7 @@ class Editor():
     def saveFile(self, filepath, saveN):
         outTalk = ''
         for talk in self.dsttalks:
-            if talk['speaker'] in [u'场景', u'左上场景', u'选项', '']:
+            if talk['speaker'] in [u'场景', u'左上场景', u'选项'] or self.isSeparator(talk):
                 if talk['speaker'] in [u'场景', u'左上场景'] and talk['text'] == '':
                     talk['text'] = u'场景'
                 elif talk['speaker'] == u'选项' and '/' not in talk['text']:
@@ -197,6 +206,10 @@ class Editor():
         with open(filepath, 'w', encoding='UTF-8') as f:
             f.write(outTalk)
             f.close()
+
+    def isSeparator(self, talk):
+        source = self.srctalks[talk['idx'] - 1]
+        return source['speaker'] == '' and source['text'] == ''
 
     def fillTableLine(self, row, talk):
         self.table.blockSignals(True)
@@ -241,7 +254,7 @@ class Editor():
         self.table.setRowHeight(row, 20 + (15 + self.fontSize) * height)
 
         for column in range(self.table.columnCount()):
-            if self.table.item(row, column) and (talk['speaker'] == "" or not(column == 2 or (column == 1 and talk['start']))):
+            if self.table.item(row, column) and (self.isSeparator(talk) or not(column == 2 or (column == 1 and talk['start']))):
                 self.table.item(row, column).setFlags(Qt.NoItemFlags)
 
         if 'proofread' in talk:
@@ -364,7 +377,7 @@ class Editor():
         if len(text.split("\n")) > 1:
             check = False
 
-        if not speaker:
+        if self.isSeparator(self.talks[row]):
             self.table.item(row, column).setText("")
             return
 
@@ -486,17 +499,19 @@ class Editor():
         return text, check
 
     def checkLines(self, loadtalks):
+        if loadtalks and all(talk.get('format_v2') for talk in loadtalks):
+            return copy.deepcopy(loadtalks)
         srcCount = 0
         for srctalk in self.srctalks:
             if srctalk['speaker'] in [u"场景", u"左上场景", u"选项"]:
                 srcCount += 1
-            elif srctalk['speaker'] != "":
+            elif srctalk['speaker'] != "" or srctalk['text']:
                 break
         Count = 0
         for talk in loadtalks:
             if talk['speaker'] in [u"场景", u"左上场景", u"选项"]:
                 Count += 1
-            elif talk['speaker'] != "":
+            elif talk['speaker'] != "" or talk['text']:
                 break
         if Count > srcCount:
             for i in range(Count - srcCount):
