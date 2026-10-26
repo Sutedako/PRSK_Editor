@@ -176,7 +176,7 @@ class JsonLoader():
                     self.table.setItem(row, 1, QTableWidgetItem(splitstr))
                     self.table.setRowHeight(row, 20 + (15 + self.fontSize))
 
-        if self.talks[-1]["speaker"] == '':
+        if self.talks and self.talks[-1]["speaker"] == '' and self.talks[-1]["text"] == '':
             self.talks.pop()
             self.table.removeRow(self.table.rowCount() - 1)
         
