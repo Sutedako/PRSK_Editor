@@ -5,6 +5,7 @@ import copy
 import math
 
 from Dictionary import characterDict
+from TranslationFormat import is_v2, parse_v2
 
 Color = {
     'RED': QBrush(QColor(255, 192, 192, 192)),
@@ -129,8 +130,16 @@ class Editor():
         self.updateHiddenRowMap()
 
     def loadFile(self, editormode, filepath):
-        srcfile = open(filepath, 'r', encoding='UTF-8')
-        lines = srcfile.readlines()
+        with open(filepath, 'r', encoding='utf-8-sig') as srcfile:
+            content = srcfile.read()
+        if is_v2(content):
+            scenario_id = next((talk.get('scenario_id') for talk in self.srctalks
+                                if talk.get('scenario_id')), None)
+            loaded = parse_v2(content, scenario_id, self.srctalks)
+            self.resetTalk(editormode, loaded)
+            self.loadedtalks = loaded
+            return
+        lines = content.splitlines(keepends=True)
 
         preblank = False
         _loadedtalks = []
@@ -490,6 +499,8 @@ class Editor():
         return text, check
 
     def checkLines(self, loadtalks):
+        if loadtalks and all(talk.get('format_v2') for talk in loadtalks):
+            return copy.deepcopy(loadtalks)
         srcCount = 0
         for srctalk in self.srctalks:
             if srctalk['speaker'] in [u"场景", u"左上场景", u"选项"]:

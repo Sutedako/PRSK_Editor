@@ -856,7 +856,11 @@ class mainForm(qw.QMainWindow, Ui_SekaiText):
         self.setting['textdir'] = osp.dirname(textpath)
         save(self)
 
-        self.dstText.loadFile(editormode, textpath)
+        try:
+            self.dstText.loadFile(editormode, textpath)
+        except ValueError as error:
+            qw.QMessageBox.warning(self, '读取翻译失败', str(error))
+            return False
         self.dstText.showDiff(self.checkBoxShowDiff.isChecked())
 
         title = osp.basename(textpath).split(".")[0]
